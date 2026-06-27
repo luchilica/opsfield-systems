@@ -1,6 +1,6 @@
-// Stage 2 — 11 top-level landing sections (placeholders).
-// Section IDs and order are fixed by docs/sitemap.md → "Section IDs" / "MVP rule".
-// Real content arrives in Stage 3; the form arrives in Stage 4.
+// 11 top-level landing sections in the order fixed by docs/sitemap.md.
+// Section 9 (Business & IT Diagnostic) holds the nested #diagnostic-request-form;
+// the form body itself arrives in the next Stage 4 prompt.
 
 import Hero from "@/components/sections/Hero";
 import ProblemSection from "@/components/sections/ProblemSection";
@@ -12,8 +12,7 @@ import WhyOpsfield from "@/components/sections/WhyOpsfield";
 import DeliveryModel from "@/components/sections/DeliveryModel";
 import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
-
-const PLACEHOLDER = "Section content — Stage 3";
+import BusinessITDiagnostic from "@/components/sections/BusinessITDiagnostic";
 
 export default function Home() {
   return (
@@ -60,13 +59,7 @@ export default function Home() {
 
       {/* 9 — composite conversion section; form is a nested target */}
       <section id="business-it-diagnostic" className="section">
-        <div className="container">
-          <h2>Business &amp; IT Diagnostic</h2>
-          <p>{PLACEHOLDER}</p>
-          <div id="diagnostic-request-form">
-            <p>{PLACEHOLDER}</p>
-          </div>
-        </div>
+        <BusinessITDiagnostic />
       </section>
 
       {/* 10 */}

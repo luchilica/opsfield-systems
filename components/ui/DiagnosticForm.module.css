@@ -1,0 +1,187 @@
+/* DiagnosticForm — diagnostic request form.
+   Specs: docs/design.md → "Forms", "Progressive Disclosure Control", "Form Panel";
+   docs/optimization.md → "Forms and Conversion". No Tailwind. */
+
+.microcopy {
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  max-width: var(--text-max);
+}
+
+/* Form panel — radius 24, padding 24 mobile / 32 desktop. */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--bg-subtle);
+  border-radius: 24px;
+  padding: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .form {
+    padding: var(--space-4);
+  }
+}
+
+/* Required + optional fields wrapper — dimmed and locked while submitting. */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.fieldsLoading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1); /* label → input: 8px */
+}
+
+.label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.req {
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 16px; /* ≥16px avoids iOS zoom */
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+}
+
+.textarea {
+  min-height: 144px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.input:hover,
+.textarea:hover,
+.select:hover {
+  border-color: var(--text-muted);
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.inputError {
+  border-color: var(--state-error);
+}
+
+.error {
+  color: var(--state-error);
+}
+
+.counter {
+  align-self: flex-end;
+  color: var(--text-secondary);
+}
+
+/* ----- Progressive disclosure ----- */
+.disclosure {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  align-self: flex-start;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.disclosure:hover {
+  text-decoration: underline;
+}
+
+.optional {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  animation: revealOptional var(--transition-normal);
+}
+
+@keyframes revealOptional {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ----- Honeypot — visually removed but NOT display:none ----- */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+/* ----- Privacy + submit ----- */
+.privacy {
+  color: var(--text-secondary);
+}
+
+.submitRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.processing {
+  color: var(--text-secondary);
+}
+
+/* ----- Success / error states ----- */
+.success,
+.formError {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.successTitle {
+  margin: 0;
+}
+
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--accent);
+}

@@ -1,0 +1,135 @@
+/* Business & IT Diagnostic — one composite conversion section.
+   Four sub-blocks (Offer → Before You Commit → Post-Submit Steps → Form) share
+   ONE panel surface. Specs: docs/design.md → "Diagnostic Offer Card",
+   "Risk-Reduction Panel", "Step Card". Copy from docs/texts.md. No Tailwind. */
+
+/* Shared surface for all sub-blocks — white panel with accent border
+   (docs/design.md → Diagnostic Offer Card: "white with accent border"). */
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--accent);
+  border-radius: 24px;
+  padding: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .panel {
+    padding: var(--space-6);
+  }
+}
+
+.subblock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Divider between sub-blocks (whitespace + a hairline). */
+.divided {
+  border-top: 1px solid var(--border-default);
+  padding-top: var(--space-5);
+}
+
+.lead {
+  color: var(--text-secondary);
+  max-width: var(--text-max);
+}
+
+/* ----- Offer output list ----- */
+.outputLabel {
+  font-weight: 600;
+}
+
+.outputList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.outputItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+}
+
+.outputIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--accent);
+}
+
+.cta {
+  margin-top: var(--space-2);
+}
+
+/* ----- Before You Commit (Risk-Reduction Panel) — calm, not warning-red ----- */
+.riskRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.riskIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--accent);
+}
+
+.riskLabel {
+  font-weight: 600;
+}
+
+.riskText {
+  color: var(--text-secondary);
+}
+
+.privacy {
+  color: var(--text-secondary);
+  margin-top: var(--space-1);
+}
+
+/* ----- Post-submit steps (Step Card) ----- */
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 1024px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: var(--bg-subtle);
+  border-radius: 16px;
+  padding: var(--space-3);
+}
+
+.stepNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 99px;
+  background: var(--accent-light);
+  color: var(--accent-hover);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.stepText {
+  color: var(--text-secondary);
+}
