@@ -1,0 +1,56 @@
+/* Button — shared base for both <button> and <a> renderings.
+   Tokens from docs/design.md → "Buttons and CTA". No Tailwind. */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px; /* required touch target — accessibility */
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Primary */
+.primary {
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border: none;
+  transition: background var(--transition-fast);
+}
+
+.primary:hover {
+  background: var(--accent-hover);
+}
+
+/* Secondary */
+.secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  transition: border-color var(--transition-fast);
+}
+
+.secondary:hover {
+  border-color: var(--accent);
+}
+
+/* Keep the trailing icon visually aligned and non-shrinking */
+.icon {
+  flex-shrink: 0;
+}
+
+/* Disabled (both variants) */
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Focus ring is inherited from the global :focus-visible rule in globals.css */

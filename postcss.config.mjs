@@ -1,7 +1,6 @@
+// Tailwind removed — project uses plain CSS + CSS Custom Properties (see app/globals.css).
 const config = {
-  plugins: {
-    "@tailwindcss/postcss": {},
-  },
+  plugins: {},
 };
 
 export default config;

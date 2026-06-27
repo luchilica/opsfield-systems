@@ -1,0 +1,24 @@
+/* Card — surface container.
+   Tokens from docs/design.md → "Radii and Borders", "Тени", "Edge Padding".
+   No Tailwind. */
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  padding: 24px; /* mobile */
+  overflow: hidden;
+  transition: box-shadow var(--transition-fast);
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: 32px;
+  }
+}
+
+/* Hover: change shadow only — no transform/lift (Shadow Rules). */
+.hover:hover {
+  box-shadow: var(--shadow-md);
+}
