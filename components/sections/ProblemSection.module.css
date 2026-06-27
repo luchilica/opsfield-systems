@@ -1,0 +1,26 @@
+/* Problem Section — constrained text block. Copy from docs/texts.md. No Tailwind. */
+
+.block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: var(--text-max);
+}
+
+.text {
+  color: var(--text-secondary);
+}
+
+/* Proof line — restrained emphasis with an accent rule (not warning-styled). */
+.proof {
+  border-left: 4px solid var(--accent);
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-subtle);
+  border-radius: 0 12px 12px 0;
+  color: var(--text-primary);
+}
+
+.cta {
+  margin-top: var(--space-2);
+}

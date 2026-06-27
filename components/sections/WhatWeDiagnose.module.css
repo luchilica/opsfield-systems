@@ -1,0 +1,78 @@
+/* What We Diagnose — service cards + shared output. Copy from docs/texts.md.
+   Grid: 1 col mobile / 2 tablet / 3 desktop. No Tailwind. */
+
+.intro {
+  max-width: var(--text-max);
+  margin-bottom: var(--space-5);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Service card inner layout */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: 100%;
+}
+
+.cardIcon {
+  color: var(--accent);
+}
+
+.cardTitle {
+  margin: 0;
+}
+
+.cardDesc {
+  color: var(--text-secondary);
+}
+
+/* Shared output block (one deliverable list for the whole section). */
+.output {
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  background: var(--accent-light);
+  border-radius: 16px;
+  color: var(--text-primary);
+}
+
+.outputLabel {
+  font-weight: 600;
+}
+
+/* Text-link CTA (per texts.md the CTA is a text link, not a button). */
+.cta {
+  margin-top: var(--space-4);
+}
+
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.textLink:hover,
+.textLink:focus-visible {
+  text-decoration: underline;
+}

@@ -1,0 +1,79 @@
+/* Why Opsfield Systems — paired comparison cards. Copy from docs/texts.md.
+   Paired cards on mobile (NOT a horizontally scrolling table); halves sit
+   side-by-side on desktop. Spec: docs/design.md → "Mobile comparison layout".
+   No Tailwind. */
+
+.intro {
+  max-width: var(--text-max);
+  margin-bottom: var(--space-2);
+}
+
+.text {
+  max-width: var(--text-max);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+}
+
+.pairs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* One comparison pair → a card with two halves. */
+.pair {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.half {
+  padding: 16px;
+}
+
+.others {
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.opsfield {
+  background: var(--accent-light);
+}
+
+.othersLabel {
+  display: block;
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.opsfieldLabel {
+  display: block;
+  color: var(--accent-hover);
+  margin-bottom: var(--space-1);
+}
+
+.cellText {
+  color: var(--text-primary);
+}
+
+/* Desktop: halves side-by-side. */
+@media (min-width: 768px) {
+  .pair {
+    flex-direction: row;
+  }
+
+  .half {
+    flex: 1;
+  }
+
+  .others {
+    border-bottom: none;
+    border-right: 1px solid var(--border-default);
+  }
+}
+
+.cta {
+  margin-top: var(--space-5);
+}

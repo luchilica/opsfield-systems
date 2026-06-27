@@ -1,0 +1,68 @@
+/* Diagnostic Scenarios — anonymized, illustrative. Stacked single column.
+   NOT styled as verified metric tiles or case studies. Copy from docs/texts.md.
+   No Tailwind. */
+
+.intro {
+  max-width: var(--text-max);
+  margin-bottom: var(--space-5);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Scenario card — accent left rule per design.md Scenario / Proof Card. */
+.scenario {
+  border-left: 4px solid var(--accent);
+}
+
+.scenarioInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Client type — supporting label, not a verified metric tile. */
+.clientType {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.row {
+  margin: 0;
+}
+
+.label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.value {
+  color: var(--text-secondary);
+}
+
+.note {
+  margin-top: var(--space-4);
+  color: var(--text-secondary);
+}
+
+.cta {
+  margin-top: var(--space-3);
+}
+
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.textLink:hover,
+.textLink:focus-visible {
+  text-decoration: underline;
+}

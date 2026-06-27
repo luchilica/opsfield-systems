@@ -1,0 +1,57 @@
+/* AI & Process Automation — restrained accent, no AI-hype. Copy from docs/texts.md.
+   No Tailwind. */
+
+.block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+/* Bot icon allowed ONLY in this section — used as a restrained lead mark. */
+.icon {
+  color: var(--accent);
+}
+
+.heading {
+  max-width: var(--text-max);
+}
+
+.text {
+  max-width: var(--text-max);
+  color: var(--text-secondary);
+}
+
+.scopeLabel {
+  font-weight: 600;
+  margin-top: var(--space-2);
+}
+
+.scope {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  list-style: none;
+  padding: 0;
+}
+
+.scopeItem {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+/* Principle — restrained emphasis, not a banner. */
+.principle {
+  border-left: 4px solid var(--accent);
+  padding: var(--space-2) var(--space-3);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.cta {
+  margin-top: var(--space-2);
+}

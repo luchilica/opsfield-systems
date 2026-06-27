@@ -1,0 +1,49 @@
+/* How the Diagnostic Works — 3-step numbered sequence. Copy from docs/texts.md.
+   Horizontal on desktop, vertical stepper on mobile. No Tailwind. */
+
+.intro {
+  max-width: var(--text-max);
+  margin-bottom: var(--space-5);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 1024px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: 100%;
+}
+
+/* Prominent accent step number. */
+.number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 99px;
+  background: var(--accent-light);
+  color: var(--accent-hover);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.stepText {
+  color: var(--text-secondary);
+}
+
+.cta {
+  margin-top: var(--space-5);
+}

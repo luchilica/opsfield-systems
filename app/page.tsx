@@ -2,6 +2,17 @@
 // Section IDs and order are fixed by docs/sitemap.md → "Section IDs" / "MVP rule".
 // Real content arrives in Stage 3; the form arrives in Stage 4.
 
+import Hero from "@/components/sections/Hero";
+import ProblemSection from "@/components/sections/ProblemSection";
+import WhatWeDiagnose from "@/components/sections/WhatWeDiagnose";
+import AIProcessAutomation from "@/components/sections/AIProcessAutomation";
+import HowDiagnosticWorks from "@/components/sections/HowDiagnosticWorks";
+import DiagnosticScenarios from "@/components/sections/DiagnosticScenarios";
+import WhyOpsfield from "@/components/sections/WhyOpsfield";
+import DeliveryModel from "@/components/sections/DeliveryModel";
+import FAQ from "@/components/sections/FAQ";
+import FinalCTA from "@/components/sections/FinalCTA";
+
 const PLACEHOLDER = "Section content — Stage 3";
 
 export default function Home() {
@@ -9,66 +20,42 @@ export default function Home() {
     <>
       {/* 1 */}
       <section id="hero" className="section">
-        <div className="container">
-          <h1>Diagnostic-First IT &amp; Business Consulting</h1>
-          <p>{PLACEHOLDER}</p>
-        </div>
+        <Hero />
       </section>
 
       {/* 2 */}
       <section id="problem-section" className="section">
-        <div className="container">
-          <h2>Problem Section</h2>
-          <p>{PLACEHOLDER}</p>
-        </div>
+        <ProblemSection />
       </section>
 
       {/* 3 */}
       <section id="what-we-diagnose" className="section">
-        <div className="container">
-          <h2>What We Diagnose</h2>
-          <p>{PLACEHOLDER}</p>
-        </div>
+        <WhatWeDiagnose />
       </section>
 
       {/* 4 */}
       <section id="ai-process-automation" className="section">
-        <div className="container">
-          <h2>AI &amp; Process Automation</h2>
-          <p>{PLACEHOLDER}</p>
-        </div>
+        <AIProcessAutomation />
       </section>
 
       {/* 5 */}
       <section id="how-the-diagnostic-works" className="section">
-        <div className="container">
-          <h2>How the Diagnostic Works</h2>
-          <p>{PLACEHOLDER}</p>
-        </div>
+        <HowDiagnosticWorks />
       </section>
 
       {/* 6 */}
       <section id="proof-examples" className="section">
-        <div className="container">
-          <h2>Diagnostic Scenarios</h2>
-          <p>{PLACEHOLDER}</p>
-        </div>
+        <DiagnosticScenarios />
       </section>
 
       {/* 7 */}
       <section id="why-opsfield-systems" className="section">
-        <div className="container">
-          <h2>Why Opsfield Systems</h2>
-          <p>{PLACEHOLDER}</p>
-        </div>
+        <WhyOpsfield />
       </section>
 
       {/* 8 */}
       <section id="delivery-model" className="section">
-        <div className="container">
-          <h2>Delivery Model</h2>
-          <p>{PLACEHOLDER}</p>
-        </div>
+        <DeliveryModel />
       </section>
 
       {/* 9 — composite conversion section; form is a nested target */}
@@ -84,18 +71,12 @@ export default function Home() {
 
       {/* 10 */}
       <section id="faq" className="section">
-        <div className="container">
-          <h2>FAQ</h2>
-          <p>{PLACEHOLDER}</p>
-        </div>
+        <FAQ />
       </section>
 
       {/* 11 */}
       <section id="final-cta" className="section">
-        <div className="container">
-          <h2>Final CTA</h2>
-          <p>{PLACEHOLDER}</p>
-        </div>
+        <FinalCTA />
       </section>
     </>
   );

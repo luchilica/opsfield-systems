@@ -1,0 +1,70 @@
+/* Delivery Model — two senior role cards (no photos, no invented names).
+   Copy from docs/texts.md. No Tailwind. */
+
+.intro {
+  max-width: var(--text-max);
+}
+
+.text {
+  max-width: var(--text-max);
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.roles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .roles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.role {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: 100%;
+}
+
+.roleTitle {
+  margin: 0;
+}
+
+.roleText {
+  color: var(--text-secondary);
+}
+
+/* Relevant environments — text names, never tool logos. */
+.environments {
+  margin-top: var(--space-4);
+  color: var(--text-secondary);
+}
+
+.environmentsLabel {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cta {
+  margin-top: var(--space-4);
+}
+
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.textLink:hover,
+.textLink:focus-visible {
+  text-decoration: underline;
+}

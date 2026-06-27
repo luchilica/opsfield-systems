@@ -1,0 +1,95 @@
+/* FAQ — accessible accordion. Answers always present in HTML (SEO).
+   Spec: docs/design.md → "FAQ Item"; docs/optimization.md → accordion a11y.
+   No Tailwind. */
+
+.intro {
+  margin-bottom: var(--space-4);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border-default);
+  max-width: 820px;
+}
+
+.item {
+  border-bottom: 1px solid var(--border-default);
+}
+
+/* Trigger heading carries no margin; the button fills the row. */
+.heading {
+  margin: 0;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 44px;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-primary);
+}
+
+.trigger:hover {
+  color: var(--accent);
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  transition: transform var(--transition-normal);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.panel {
+  padding: 0 0 20px;
+  color: var(--text-secondary);
+  max-width: var(--text-max);
+}
+
+.answer {
+  margin: 0;
+}
+
+/* Fit / Not Fit semantic lists — meaning carried by text, not colour alone. */
+.criteria {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+}
+
+.criterion {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+  color: var(--text-primary);
+}
+
+.fitIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--state-success);
+}
+
+.notFitIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--state-error);
+}
+
+.closing {
+  margin-top: var(--space-2);
+}

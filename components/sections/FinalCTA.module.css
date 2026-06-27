@@ -1,0 +1,72 @@
+/* Final CTA — strong accent panel with primary + secondary action.
+   Spec: docs/design.md → "Section background rhythm" (Final CTA may use accent)
+   + "Section-Level Visual Map" (strong CTA panel). Copy from docs/texts.md.
+   Does not repeat the Hero positioning. No Tailwind. */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border-radius: 24px;
+  padding: var(--space-4) var(--space-3);
+}
+
+@media (min-width: 1024px) {
+  .panel {
+    padding: var(--space-6) var(--space-5);
+  }
+}
+
+.heading {
+  color: var(--text-on-accent);
+  max-width: var(--text-max);
+}
+
+.text {
+  color: var(--text-on-accent);
+  max-width: var(--text-max);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-2);
+  width: 100%;
+  margin-top: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .actions {
+    flex-direction: row;
+    justify-content: center;
+    width: auto;
+  }
+}
+
+/* Contrast overrides on the accent background.
+   `.panel .xBtn` (specificity 0,2,0) reliably beats Button's own `.primary`
+   / `.secondary` (0,1,0) regardless of stylesheet order. */
+.panel .primaryBtn {
+  background: var(--text-on-accent);
+  color: var(--accent);
+}
+
+.panel .primaryBtn:hover {
+  background: var(--bg-subtle);
+}
+
+.panel .secondaryBtn {
+  background: transparent;
+  color: var(--text-on-accent);
+  border-color: var(--text-on-accent);
+}
+
+.panel .secondaryBtn:hover {
+  border-color: var(--text-on-accent);
+  background: rgba(255, 255, 255, 0.12);
+}
