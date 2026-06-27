@@ -97,6 +97,10 @@ body {
   background-color: var(--bg-page);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevents horizontal scroll from the off-canvas mobile drawer.
+     `clip` (not `hidden`) does not create a scroll container, so the
+     sticky header keeps working. */
+  overflow-x: clip;
 }
 
 img,
@@ -207,6 +211,26 @@ h4 {
 .section {
   /* Section spacing: --space-6 on mobile, --space-7 on desktop */
   padding-block: var(--space-6);
+}
+
+/* --------------------------------------------------------------------------
+   Anchor scroll offset — compensates the sticky header (≈80px + 16px gap)
+   so anchored content is not hidden behind it. Works without JavaScript.
+   -------------------------------------------------------------------------- */
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+#diagnostic-request-form {
+  scroll-margin-top: 96px;
+}
+
+/* --------------------------------------------------------------------------
+   Section background rhythm (docs/design.md) — default --bg-page;
+   even sections use --bg-subtle for visual rhythm. Applied consistently.
+   -------------------------------------------------------------------------- */
+main > section:nth-child(even) {
+  background: var(--bg-subtle);
 }
 
 /* --------------------------------------------------------------------------

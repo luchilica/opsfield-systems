@@ -1,0 +1,22 @@
+/* SkipLink — first focusable element. Hidden until keyboard focus.
+   Spec: docs/design.md → "Skip Link". No Tailwind. */
+
+.skipLink {
+  position: absolute;
+  top: -100px;
+  left: 8px;
+  z-index: 9999;
+  padding: 12px 20px;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skipLink:focus-visible {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+}

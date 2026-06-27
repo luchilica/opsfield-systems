@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Inter_Tight } from "next/font/google";
 import "./globals.css";
+import SkipLink from "@/components/layout/SkipLink";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 // Body + H4 — Inter. Weights 400 (body/lead/small) and 600 (H4).
 // Exposed as --font-body; overrides the fallback stack declared in :root.
@@ -33,7 +36,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${interTight.variable} ${inter.variable}`}>
-        {children}
+        <SkipLink />
+        <Header />
+        <main id="main-content">{children}</main>
+        <Footer />
       </body>
     </html>
   );

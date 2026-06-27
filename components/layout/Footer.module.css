@@ -1,0 +1,113 @@
+/* Footer — dark surface. Palette from docs/design.md → "Footer dark surface".
+   These colors are scoped to .footer only and do not affect the global theme.
+   No Tailwind. */
+
+.footer {
+  --footer-bg: #0B1220;
+  --footer-text: #F8FAFC;
+  --footer-link: #93C5FD;
+  --footer-link-hover: #BFDBFE;
+  --footer-muted: #94A3B8;
+  --footer-divider: rgba(248, 250, 252, 0.12);
+
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+.inner {
+  padding-block: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    padding-block: var(--space-7);
+  }
+}
+
+/* ----- CTA panel (full width, above links) ----- */
+.ctaPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--footer-divider);
+}
+
+.ctaText {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--footer-text);
+  max-width: var(--text-max);
+}
+
+@media (min-width: 768px) {
+  .ctaPanel {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+}
+
+/* ----- Positioning line ----- */
+.positioning {
+  margin-top: var(--space-5);
+  max-width: var(--text-max);
+  color: var(--footer-muted);
+}
+
+/* ----- Link groups ----- */
+.columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .columns {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+.groupTitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--footer-muted);
+  margin-bottom: var(--space-1);
+}
+
+.linkList {
+  list-style: none;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* touch target */
+  color: var(--footer-link);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--footer-link-hover);
+  text-decoration: underline;
+}
+
+/* ----- Bottom / copyright ----- */
+.bottom {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--footer-divider);
+}
+
+.copyright {
+  color: var(--footer-muted);
+  font-size: 14px;
+}

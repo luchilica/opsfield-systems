@@ -1,48 +1,102 @@
-import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
+// Stage 2 — 11 top-level landing sections (placeholders).
+// Section IDs and order are fixed by docs/sitemap.md → "Section IDs" / "MVP rule".
+// Real content arrives in Stage 3; the form arrives in Stage 4.
 
-// Temporary design-system check page (Stage 1). Replaced in Stage 2.
+const PLACEHOLDER = "Section content — Stage 3";
+
 export default function Home() {
-  const block = { marginBottom: "var(--space-6)" } as const;
-  const row = {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "var(--space-3)",
-  } as const;
-
   return (
-    <main className="container section">
-      {/* Headings */}
-      <section style={block}>
-        <h1>Heading 1</h1>
-        <h2>Heading 2</h2>
-        <h3>Heading 3</h3>
-        <h4>Heading 4</h4>
-      </section>
-
-      {/* Text styles */}
-      <section style={block}>
-        <p className="lead">Lead paragraph</p>
-        <p>Body paragraph</p>
-        <p className="small">Small text</p>
-        <p className="xsmall">Extra small text</p>
-      </section>
-
-      {/* Buttons */}
-      <section style={block}>
-        <div style={row}>
-          <Button>Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button icon>With Icon</Button>
+    <>
+      {/* 1 */}
+      <section id="hero" className="section">
+        <div className="container">
+          <h1>Diagnostic-First IT &amp; Business Consulting</h1>
+          <p>{PLACEHOLDER}</p>
         </div>
       </section>
 
-      {/* Cards */}
-      <section style={{ ...row, marginBottom: 0 }}>
-        <Card>Basic card with content</Card>
-        <Card as="article">Article card</Card>
-        <Card hover={false}>Card without hover</Card>
+      {/* 2 */}
+      <section id="problem-section" className="section">
+        <div className="container">
+          <h2>Problem Section</h2>
+          <p>{PLACEHOLDER}</p>
+        </div>
       </section>
-    </main>
+
+      {/* 3 */}
+      <section id="what-we-diagnose" className="section">
+        <div className="container">
+          <h2>What We Diagnose</h2>
+          <p>{PLACEHOLDER}</p>
+        </div>
+      </section>
+
+      {/* 4 */}
+      <section id="ai-process-automation" className="section">
+        <div className="container">
+          <h2>AI &amp; Process Automation</h2>
+          <p>{PLACEHOLDER}</p>
+        </div>
+      </section>
+
+      {/* 5 */}
+      <section id="how-the-diagnostic-works" className="section">
+        <div className="container">
+          <h2>How the Diagnostic Works</h2>
+          <p>{PLACEHOLDER}</p>
+        </div>
+      </section>
+
+      {/* 6 */}
+      <section id="proof-examples" className="section">
+        <div className="container">
+          <h2>Diagnostic Scenarios</h2>
+          <p>{PLACEHOLDER}</p>
+        </div>
+      </section>
+
+      {/* 7 */}
+      <section id="why-opsfield-systems" className="section">
+        <div className="container">
+          <h2>Why Opsfield Systems</h2>
+          <p>{PLACEHOLDER}</p>
+        </div>
+      </section>
+
+      {/* 8 */}
+      <section id="delivery-model" className="section">
+        <div className="container">
+          <h2>Delivery Model</h2>
+          <p>{PLACEHOLDER}</p>
+        </div>
+      </section>
+
+      {/* 9 — composite conversion section; form is a nested target */}
+      <section id="business-it-diagnostic" className="section">
+        <div className="container">
+          <h2>Business &amp; IT Diagnostic</h2>
+          <p>{PLACEHOLDER}</p>
+          <div id="diagnostic-request-form">
+            <p>{PLACEHOLDER}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 10 */}
+      <section id="faq" className="section">
+        <div className="container">
+          <h2>FAQ</h2>
+          <p>{PLACEHOLDER}</p>
+        </div>
+      </section>
+
+      {/* 11 */}
+      <section id="final-cta" className="section">
+        <div className="container">
+          <h2>Final CTA</h2>
+          <p>{PLACEHOLDER}</p>
+        </div>
+      </section>
+    </>
   );
 }

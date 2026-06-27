@@ -1,0 +1,208 @@
+/* Header — sticky site header with desktop nav and mobile drawer.
+   Tokens from globals.css. Breakpoint: 768px splits mobile drawer / desktop nav.
+   No Tailwind. */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-page);
+  border-bottom: 1px solid transparent;
+  transition: box-shadow var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+/* Elevated state once the page is scrolled. */
+.scrolled {
+  box-shadow: var(--shadow-lg);
+  border-bottom-color: var(--border-default);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 72px;
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    min-height: 80px;
+  }
+}
+
+/* Logo wordmark — text only, editable until trademark clearance. */
+.logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.1;
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.logo:hover,
+.logo:focus-visible {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+/* ----- Desktop navigation ----- */
+.desktopNav {
+  display: none;
+}
+
+.desktopCta {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktopNav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-left: auto;
+  }
+
+  .desktopCta {
+    display: inline-flex;
+  }
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  list-style: none;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ----- Mobile menu button ----- */
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.menuButton:hover {
+  color: var(--accent);
+}
+
+@media (min-width: 768px) {
+  .menuButton {
+    display: none;
+  }
+}
+
+/* ----- Mobile drawer ----- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(11, 18, 32, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-slow),
+    visibility var(--transition-slow);
+}
+
+.overlayOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 210;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: min(320px, 85vw);
+  height: 100dvh;
+  padding: var(--space-4) var(--space-3);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(100%);
+  /* Hidden when closed so its links are not keyboard-focusable. */
+  visibility: hidden;
+  transition: transform var(--transition-slow),
+    visibility var(--transition-slow);
+  overflow-y: auto;
+}
+
+.drawerOpen {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+@media (min-width: 768px) {
+  .overlay,
+  .drawer {
+    display: none;
+  }
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* CTA appears near the top of the drawer. */
+.drawerCta {
+  display: inline-flex;
+  width: 100%;
+}
+
+.drawerNavList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.drawerLink {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--space-1);
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-default);
+  transition: color var(--transition-fast);
+}
+
+.drawerLink:hover,
+.drawerLink:focus-visible {
+  color: var(--accent);
+  text-decoration: none;
+}
