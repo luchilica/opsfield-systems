@@ -38,6 +38,15 @@
 
 .cardTitle {
   margin: 0;
+  /* A-004: <h3> for correct heading order; visual size preserved as h4. */
+  font-family: var(--font-body);
+  font-size: 18px;
+}
+
+@media (min-width: 1024px) {
+  .cardTitle {
+    font-size: 22px;
+  }
 }
 
 .cardDesc {

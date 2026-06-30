@@ -70,3 +70,10 @@
   border-color: var(--text-on-accent);
   background: rgba(255, 255, 255, 0.12);
 }
+
+/* A-001: keep the focus ring visible on the accent panel. The global blue
+   :focus-visible outline (--border-focus) is invisible against this background.
+   docs/optimization.md → focus must be visible on light AND dark surfaces. */
+.panel :focus-visible {
+  outline-color: var(--text-on-accent);
+}

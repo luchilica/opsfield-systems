@@ -25,7 +25,7 @@ export default function FAQ() {
 
           return (
             <div key={i} className={styles.item}>
-              <h4 className={styles.heading}>
+              <h3 className={styles.heading}>
                 <button
                   type="button"
                   id={triggerId}
@@ -43,7 +43,7 @@ export default function FAQ() {
                     }`}
                   />
                 </button>
-              </h4>
+              </h3>
 
               <div
                 id={panelId}

@@ -44,7 +44,10 @@
 
 .othersLabel {
   display: block;
-  color: var(--text-muted);
+  /* A-003: --text-muted (#94A3B8) is ~2.5:1 on the card — fails WCAG 1.4.3.
+     --text-secondary keeps the label subdued vs the accent "Opsfield" label
+     while meeting 4.5:1. */
+  color: var(--text-secondary);
   margin-bottom: var(--space-1);
 }
 

@@ -30,7 +30,7 @@ export default function DeliveryModel() {
         {ROLES.map((role) => (
           <Card key={role.title}>
             <div className={styles.role}>
-              <h4 className={styles.roleTitle}>{role.title}</h4>
+              <h3 className={styles.roleTitle}>{role.title}</h3>
               <p className={styles.roleText}>{role.responsibilities}</p>
             </div>
           </Card>

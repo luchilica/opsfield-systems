@@ -33,7 +33,7 @@ export default function WhatWeDiagnose() {
           <Card key={title}>
             <div className={styles.card}>
               <Icon size={24} className={styles.cardIcon} aria-hidden="true" />
-              <h4 className={styles.cardTitle}>{title}</h4>
+              <h3 className={styles.cardTitle}>{title}</h3>
               <p className={styles.cardDesc}>{description}</p>
             </div>
           </Card>

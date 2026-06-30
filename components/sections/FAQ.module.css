@@ -17,9 +17,20 @@
   border-bottom: 1px solid var(--border-default);
 }
 
-/* Trigger heading carries no margin; the button fills the row. */
+/* Trigger heading carries no margin; the button fills the row.
+   A-004: rendered as <h3> for correct heading order (section h2 → h3); the
+   button inherits these props so the visual stays at the original h4 size. */
 .heading {
   margin: 0;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media (min-width: 1024px) {
+  .heading {
+    font-size: 22px;
+  }
 }
 
 .trigger {

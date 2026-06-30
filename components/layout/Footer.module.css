@@ -100,6 +100,13 @@
   text-decoration: underline;
 }
 
+/* A-002: focus ring visible on the dark footer. The global blue outline
+   (--border-focus, ~2.8:1 on #0B1220) is too low-contrast; use the light
+   footer-link token. docs/optimization.md → visible on light AND dark. */
+.footer :focus-visible {
+  outline-color: var(--footer-link);
+}
+
 /* ----- Bottom / copyright ----- */
 .bottom {
   margin-top: var(--space-5);
