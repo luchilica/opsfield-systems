@@ -5,6 +5,7 @@ import SkipLink from "@/components/layout/SkipLink";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/analytics/CookieConsent";
+import { siteConfig } from "@/lib/site-config";
 
 // Body + H4 — Inter. Weights 400 (body/lead/small) and 600 (H4).
 // Exposed as --font-body; overrides the fallback stack declared in :root.
@@ -24,7 +25,11 @@ const interTight = Inter_Tight({
   display: "swap",
 });
 
+// metadataBase lets relative OG/Twitter images and canonical URLs resolve to
+// absolute HTTPS URLs. Page-level metadata (homepage, legal pages) overrides
+// these defaults.
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: "Opsfield Systems",
   description: "Diagnostic-first IT & business consulting.",
 };

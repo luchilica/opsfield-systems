@@ -2,6 +2,9 @@
 // Section 9 (Business & IT Diagnostic) holds the nested #diagnostic-request-form;
 // the form body itself arrives in the next Stage 4 prompt.
 
+import type { Metadata } from "next";
+import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
+import JsonLd from "@/components/seo/JsonLd";
 import Hero from "@/components/sections/Hero";
 import ProblemSection from "@/components/sections/ProblemSection";
 import WhatWeDiagnose from "@/components/sections/WhatWeDiagnose";
@@ -14,9 +17,40 @@ import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
 import BusinessITDiagnostic from "@/components/sections/BusinessITDiagnostic";
 
+// Homepage metadata. Title + description are verbatim from docs/texts.md →
+// "Page: Diagnostic-First IT & Business Consulting". OG/Twitter image tags are
+// supplied by app/opengraph-image.tsx + app/twitter-image.tsx (file convention).
+const TITLE = "Diagnostic-First IT & Business Consulting | Opsfield Systems";
+const DESCRIPTION =
+  "B2B companies with 50–250 employees use Opsfield Systems to diagnose process, CRM, data, and IT bottlenecks before committing to tools, hires, or implementation.";
+
+export const metadata: Metadata = {
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: getCanonicalUrl("/") },
+  robots: siteConfig.isPreview
+    ? { index: false, follow: false }
+    : { index: true, follow: true },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: getCanonicalUrl("/"),
+    type: "website",
+    siteName: siteConfig.name,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+};
+
 export default function Home() {
   return (
     <>
+      <JsonLd />
+
       {/* 1 */}
       <section id="hero" className="section">
         <Hero />
