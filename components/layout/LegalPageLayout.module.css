@@ -1,0 +1,70 @@
+/* Legal page shell. Source: docs/design.md (typography, spacing, 720px text
+   column). Section spacing var(--space-5); paragraph spacing var(--space-3). */
+
+.wrapper {
+  max-width: var(--text-max); /* 720px */
+  margin-inline: auto;
+  padding-block: var(--space-6);
+  background: var(--bg-page);
+  scroll-margin-top: 96px; /* matches sticky-header offset in globals.css */
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    padding-block: var(--space-7);
+  }
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px; /* touch target */
+  font-weight: 600;
+}
+
+.header {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.updated {
+  margin-top: var(--space-1);
+  color: var(--text-secondary);
+}
+
+/* Content rhythm — margin-top only (avoids margin-collapse surprises).
+   h2 → section gap; h3 → subsection gap; p/ul/ol → paragraph gap. */
+.content > :first-child {
+  margin-top: 0;
+}
+
+.content h2 {
+  margin-top: var(--space-5);
+}
+
+.content h3 {
+  margin-top: var(--space-4);
+}
+
+.content p,
+.content ul,
+.content ol {
+  margin-top: var(--space-3);
+}
+
+.content ul,
+.content ol {
+  padding-left: var(--space-3);
+}
+
+.content li {
+  margin-top: var(--space-1);
+}
+
+.content code {
+  padding: 2px 6px;
+  background: var(--bg-subtle);
+  border-radius: 4px;
+  font-size: 0.9em;
+}

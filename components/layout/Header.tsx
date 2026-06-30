@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import styles from "./Header.module.css";
@@ -96,9 +97,9 @@ export default function Header() {
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={`container ${styles.inner}`}>
-        <a href="/" className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           Opsfield Systems
-        </a>
+        </Link>
 
         {/* Desktop navigation */}
         <nav className={styles.desktopNav} aria-label="Primary">

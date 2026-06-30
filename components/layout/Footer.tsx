@@ -1,4 +1,6 @@
+import type { ReactNode } from "react";
 import Button from "@/components/ui/Button";
+import CookieConsentReopener from "@/components/analytics/CookieConsentReopener";
 import styles from "./Footer.module.css";
 
 // Copy, labels and targets from docs/texts.md + docs/sitemap.md → "Footer".
@@ -26,9 +28,11 @@ const LEGAL_LINKS = [
 function LinkGroup({
   title,
   links,
+  extra,
 }: {
   title: string;
   links: { label: string; href: string }[];
+  extra?: ReactNode;
 }) {
   return (
     <div>
@@ -41,6 +45,7 @@ function LinkGroup({
             </a>
           </li>
         ))}
+        {extra && <li>{extra}</li>}
       </ul>
     </div>
   );
@@ -74,7 +79,11 @@ export default function Footer() {
         <div className={styles.columns}>
           <LinkGroup title="Company" links={COMPANY_LINKS} />
           <LinkGroup title="Get Started" links={GET_STARTED_LINKS} />
-          <LinkGroup title="Legal" links={LEGAL_LINKS} />
+          <LinkGroup
+            title="Legal"
+            links={LEGAL_LINKS}
+            extra={<CookieConsentReopener className={styles.link} />}
+          />
         </div>
 
         {/* Copyright */}

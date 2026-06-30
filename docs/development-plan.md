@@ -1,1178 +1,1525 @@
 # Development Plan — Opsfield Systems MVP
 
-## Source of Truth
+## Status
 
-Этот файл — план реализации. Он описывает **как** строить сайт и в каком порядке. Что строить — определяют четыре основных файла проекта в порядке приоритета:
+**Architecture decision:** сохранить существующую реализацию на **Next.js App Router + React + TypeScript + Vercel Preview + Resend**. Миграция на Astro отменена.
 
-1. `sitemap.md` — структура, секции, URL, anchors, internal links.
-2. `texts.md` — тексты, CTA, metadata, form copy, legal pages.
-3. `design.md` — визуальные токены, компоненты, responsive.
-4. `optimization.md` — SEO, accessibility, performance, технические правила.
+**Причина:** четыре первых этапа предыдущего Next.js-плана уже выполнены. Переписывание рабочего frontend на Astro не создаёт сопоставимой бизнес-ценности, но увеличивает срок запуска, риск регрессий и расход Claude Code.
 
-При конфликте между этим планом и основными файлами — приоритет у основных файлов.
+**Режим проекта:** zero-budget pre-launch.
+
+**Разработка:** владелец проекта с помощью Claude Code. Других разработчиков, AI-сервисов и платных инструментов нет.
+
+### Подтверждённо выполнено
+
+Выполнены ровно четыре первых этапа предыдущего Next.js-плана:
+
+| Этап | Статус | Что считается готовым |
+|---:|---|---|
+| 0 | Completed | Локальное окружение, GitHub repository, Next.js project, Vercel connection |
+| 1 | Completed | Design foundation: CSS Custom Properties, typography, spacing, Button/Card, fonts |
+| 2 | Completed | Layout shell: SkipLink, Header, Footer, mobile navigation, 11 section containers |
+| 3 | Completed | Контентные секции 1–8, 10–11 |
+
+### Не считать выполненным
+
+Следующие части не выполнены, даже если в repository существуют частичные файлы или placeholders:
+
+- Business & IT Diagnostic conversion section;
+- Diagnostic Request Form;
+- server-side form processing;
+- Resend owner notification и visitor auto-reply;
+- legal pages и privacy behavior;
+- cookie consent;
+- production metadata, canonical, structured data, sitemap и robots logic;
+- accessibility/performance release audit;
+- contract/E2E tests и CI;
+- GA4;
+- production deployment и monitoring.
+
+**Текущий следующий этап:** этап 4 — синхронизация документации и Claude Code governance. После него этап 5 проверяет готовые этапы 0–3 без переписывания.
 
 ---
 
-## Решения владельца проекта
+## Business Decision
+
+### Почему сохраняется Next.js
+
+- Уже созданный код является активом проекта.
+- Для MVP главный риск — не framework, а оффер, доверие, форма, lead routing, legal readiness и качество первого трафика.
+- Next.js позволяет закончить MVP без смены языка, component model и repository structure.
+- Миграция сейчас не улучшит конверсию пропорционально затраченному времени.
+- При необходимости hosting можно сменить без переписывания frontend.
+
+### Принятый технический долг
+
+Next.js тяжелее Astro для статической landing page. Vercel также создаёт platform coupling для Route Handler и deployment. Этот долг принимается до появления одного из триггеров:
+
+- hosting cost становится экономически невыгодной;
+- platform restriction блокирует production;
+- performance не проходит release thresholds после нормальной оптимизации;
+- появляются несколько языков, регулярный content publishing или значительно больше страниц;
+- form backend становится ненадёжным;
+- отдельный ADR доказывает положительный ROI миграции.
+
+Framework preference без измеримой проблемы не является основанием для миграции.
+
+---
+
+## Hosting and Funding Decision
+
+### Development / preview
+
+- Vercel Hobby используется только для development, Deploy Preview и закрытого pre-launch review.
+- Preview всегда `noindex,nofollow`.
+- Preview не используется как публичный коммерческий B2B lead-generation сайт.
+- Claude Code не выполняет production deploy.
+
+### Commercial production при бюджете $0
+
+**Основной zero-budget production path:** сохранить Next.js codebase и развернуть тот же проект на Netlify Free через поддерживаемый Next.js adapter.
+
+Это не Astro migration и не переписывание framework. Меняются только deployment configuration, environment variables и platform-specific проверки.
+
+### Commercial production после появления бюджета
+
+Альтернатива — Vercel Pro без смены hosting architecture.
+
+### Минимальный неизбежный расход
+
+Полноценный production launch остаётся заблокирован до регистрации собственного домена и подтверждения legal operator / DBA. Без собственного домена:
+
+- нет стабильного production canonical;
+- невозможно нормально подтвердить branded sender в Resend;
+- visitor auto-reply нельзя считать production-ready;
+- доверие к B2B consulting site существенно ниже.
+
+До появления бюджета проект доводится до полностью готового pre-launch состояния.
+
+---
+
+## Source of Truth
+
+Активные файлы проекта:
+
+1. `sitemap.md` — страницы, секции, URL, anchors, internal links.
+2. `texts.md` — approved copy, CTA, metadata, form copy, legal drafts.
+3. `design.md` — visual tokens, component rules, responsive behavior.
+4. `optimization.md` — SEO, accessibility, performance, analytics, privacy.
+5. `vibe-coding-stack.md` — текущий stack и Claude Code workflow после синхронизации.
+6. `multilingual.md` — deferred multilingual strategy и launch criteria.
+7. `development-plan.md` — порядок реализации и статусы.
+
+### Priority hierarchy
+
+При конфликте content/structure:
+
+```text
+sitemap.md → texts.md → design.md → optimization.md
+```
+
+При конфликте implementation:
+
+```text
+development-plan.md → актуальный vibe-coding-stack.md
+```
+
+Для multilingual scope:
+
+```text
+multilingual.md
+```
+
+Но multilingual-файл не может автоматически запускать framework migration или создание localized routes в English-only MVP.
+
+### Read-only rule
+
+Файлы в `docs/source-of-truth/` read-only для обычных code tasks. Их изменение выполняется только отдельной documentation task по прямому решению владельца.
+
+---
+
+## Decisions of the Owner
 
 | Вопрос | Решение |
 |---|---|
-| Кто разрабатывает | Владелец с помощью Claude |
-| Хостинг | Vercel (бесплатный тарифный план) |
-| Домен | Без покупки; Vercel subdomain (`project.vercel.app`) |
-| Фреймворк | Next.js (App Router) |
-| Обработка формы | Vercel API Route (серверная функция) |
-| Auto-reply | Vercel Serverless Function + Resend (бесплатный тарифный план) |
-| Почтовый сервис | Не требуется для учебного проекта; email из `texts.md` вставляется в код as-is |
-| DNS | Не требуется (нет домена) |
-| Юридические тексты | Draft-тексты из `texts.md`; обновление после counsel review |
-| GA4 | Будет создан бесплатно |
-| Trademark | В процессе, ожидание 2–3 недели |
-| Hero-диаграмма | По спецификации из `design.md` |
-| Бюджет | $0 |
-| Node.js | v24, установлен в VS Code |
+| Кто разрабатывает | Владелец с помощью Claude Code |
+| Бюджет до production readiness | $0 |
+| Framework | Существующий Next.js App Router |
+| React | Существующая совместимая версия; без необязательного major upgrade |
+| TypeScript | Strict |
+| Styling | Существующие CSS Modules / CSS Custom Properties |
+| Icons | `lucide-react`, только если уже установлен и используется единообразно |
+| Development hosting | Vercel Hobby Preview |
+| Zero-budget commercial production | Netlify Free с тем же Next.js codebase |
+| Paid production alternative | Vercel Pro |
+| Form UI | Native semantic HTML, enhanced by React |
+| Form backend | Next.js Route Handler / API Route |
+| Email | Resend; test mode до verified domain |
+| CMS | Нет |
+| Database | Нет |
+| Authentication | Нет |
+| Analytics | GA4 только после consent и production activation |
+| Search Console | После production domain |
+| Uptime service | Не добавлять до launch; использовать platform monitoring и ручные проверки |
+| Git branches | `main` + short-lived `feature/*` |
+| Staging branch | Не использовать |
+| CI | Lightweight GitHub Actions + release checks locally |
+| Languages MVP | Только English (`en-US`) |
+| i18n routes | Не создавать до выполнения business launch criteria |
+| Production actions | Только вручную владельцем |
 
 ---
 
-## Отклонения от основной документации
+## Zero-Budget Rules
 
-Основная документация (`optimization.md`) предусматривает стек Netlify + Cloudflare. Данный проект использует Vercel. Ниже зафиксированы все отличия, чтобы при переходе на production их можно было пересмотреть.
+### Разрешено
 
-| Компонент | Документация (`optimization.md`) | Этот проект |
-|---|---|---|
-| Хостинг | Netlify | Vercel (free tier) |
-| Форма | Netlify Forms | Vercel API Route |
-| Серверные функции | Netlify Functions | Vercel Serverless Functions |
-| Auto-reply | Netlify Functions + email service | Vercel Serverless + Resend |
-| DNS | Cloudflare | Не требуется |
-| Домен | Production domain | Vercel subdomain |
-| Email | Google Workspace / Zoho | Не требуется; email из `texts.md` в коде |
-| SSL | Автоматический через Netlify | Автоматический через Vercel |
-| Деплой | Git → Netlify auto-deploy | Git → Vercel auto-deploy |
-| Конфигурация headers | `netlify.toml` или Netlify dashboard | `next.config.js` или `vercel.json` |
-| 404 | `/404.html` | `app/not-found.tsx` (Next.js convention) |
+- Claude Code;
+- private GitHub repository;
+- Vercel Deploy Previews;
+- Netlify Free для будущего commercial production;
+- Resend test mode;
+- GitHub Actions в пределах бесплатного лимита;
+- Playwright, axe-core и Lighthouse локально;
+- GA4 account и tracking code preparation без загрузки до consent;
+- open-source dependencies после dependency review.
 
-**Обоснование Next.js:** `optimization.md` запрещает тяжёлые фреймворки без подтверждённой необходимости. Необходимость подтверждена: (1) Vercel не поддерживает серверные функции для чистого HTML без фреймворка; (2) API Route нужен для обработки формы и auto-reply; (3) Next.js SSG (Static Site Generation) генерирует статический HTML при сборке — основной контент остаётся в исходном HTML; (4) ценность для обучения.
+### Не добавлять сейчас
+
+- Astro migration;
+- Postmark;
+- paid CMS;
+- database;
+- paid form provider;
+- Better Stack или другой paid monitoring;
+- GTM;
+- session replay;
+- heatmaps;
+- ad pixels;
+- translation SaaS;
+- paid UI kit;
+- permanent staging branch;
+- новые сервисы «на будущее»;
+- full browser matrix в каждом PR, если это расходует бесплатные CI minutes без необходимости.
+
+### Dependency gate
+
+Перед установкой package Claude Code обязан указать:
+
+1. какую конкретную проблему решает package;
+2. почему native Next.js / React / browser API недостаточны;
+3. runtime и bundle impact;
+4. security и maintenance risk;
+5. license;
+6. можно ли отложить dependency.
+
+Без отдельного одобрения package не устанавливается.
 
 ---
 
-## Стек технологий
+## Target Repository Boundary
 
-| Технология | Назначение |
-|---|---|
-| Next.js 15+ (App Router) | Фреймворк; статическая генерация страниц + API Routes |
-| React 19+ | UI-библиотека (часть Next.js) |
-| TypeScript | Язык программирования (опционально, рекомендуется) |
-| CSS Modules + CSS Custom Properties | Стилизация; переменные из `design.md` |
-| `next/font` | Самостоятельное размещение шрифтов Inter и Inter Tight |
-| `lucide-react` | Иконки (библиотека Lucide) |
-| Resend | Отправка email (auto-reply + уведомление о заявке) |
-| Vercel | Хостинг, деплой, серверные функции |
-| GitHub | Хранение кода, контроль версий |
-| GA4 | Аналитика (после consent) |
-| Google Search Console | Мониторинг поисковой выдачи |
+Не перестраивать repository только ради соответствия схеме. Существующие пути сохраняются, если они не создают defect.
 
----
-
-## Этапы разработки
-
----
-
-### Этап 0. Подготовка окружения
-
-**Цель:** создать рабочее пространство — репозиторий, проект Next.js, подключение к Vercel.
-
-**Что делать:**
-
-1. Создать аккаунт на GitHub (если нет). Создать новый репозиторий (например, `opsfield-systems`). Репозиторий — это облачная папка с историей всех изменений в коде.
-
-2. Создать аккаунт на Vercel. Подключить GitHub-репозиторий. Vercel автоматически разворачивает сайт при каждом коммите (сохранении изменений) в ветку `main`.
-
-3. Создать проект Next.js локально:
-
-```bash
-npx create-next-app@latest opsfield-systems --typescript --app --tailwind=no --eslint --src-dir=no --import-alias="@/*"
-```
-
-Флаги:
-- `--typescript` — использует TypeScript (строгая типизация, ловит ошибки до запуска).
-- `--app` — использует App Router (современная архитектура Next.js).
-- `--tailwind=no` — без Tailwind CSS; используем CSS Modules с переменными из `design.md`.
-- `--eslint` — включает проверку качества кода.
-- `--src-dir=no` — файлы в корне проекта (`app/`), а не в `src/app/`.
-
-4. Установить зависимости:
-
-```bash
-npm install lucide-react
-npm install resend
-```
-
-5. Настроить структуру файлов проекта:
-
-```
-opsfield-systems/
+```text
+/
+├── CLAUDE.md
+├── CLAUDE.local.md                       # gitignored
+├── .claude/
+│   ├── settings.json
+│   ├── settings.local.json               # gitignored
+│   ├── rules/
+│   │   ├── architecture.md
+│   │   ├── content-protection.md
+│   │   ├── accessibility-seo.md
+│   │   └── forms-testing.md
+│   └── hooks/
+│       ├── protect-source-files.sh
+│       └── block-destructive-command.sh
+├── .github/
+│   └── workflows/quality.yml
+├── docs/
+│   ├── source-of-truth/
+│   │   ├── sitemap.md
+│   │   ├── texts.md
+│   │   ├── design.md
+│   │   ├── optimization.md
+│   │   ├── vibe-coding-stack.md
+│   │   ├── multilingual.md
+│   │   └── development-plan.md
+│   ├── architecture-decisions/
+│   │   └── ADR-001-keep-nextjs.md
+│   ├── audits/
+│   │   └── current-codebase-audit.md
+│   └── component-registry.md
 ├── app/
-│   ├── layout.tsx              # Корневой layout: шрифты, header, footer
-│   ├── page.tsx                # Главная страница (11 секций)
-│   ├── globals.css             # CSS-переменные, базовые стили
-│   ├── not-found.tsx           # Страница 404
-│   ├── privacy-policy/
-│   │   └── page.tsx
-│   ├── terms-of-use/
-│   │   └── page.tsx
-│   ├── cookie-policy/
-│   │   └── page.tsx
-│   └── api/
-│       └── submit/
-│           └── route.ts        # API Route: обработка формы + auto-reply
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── not-found.tsx
+│   ├── privacy-policy/page.tsx
+│   ├── terms-of-use/page.tsx
+│   ├── cookie-policy/page.tsx
+│   ├── robots.ts
+│   ├── sitemap.ts
+│   └── api/submit/route.ts
 ├── components/
 │   ├── layout/
-│   │   ├── Header.tsx
-│   │   ├── Footer.tsx
-│   │   ├── SkipLink.tsx
-│   │   └── CookieConsent.tsx
 │   ├── sections/
-│   │   ├── Hero.tsx
-│   │   ├── ProblemSection.tsx
-│   │   ├── WhatWeDiagnose.tsx
-│   │   ├── AIProcessAutomation.tsx
-│   │   ├── HowDiagnosticWorks.tsx
-│   │   ├── DiagnosticScenarios.tsx
-│   │   ├── WhyOpsfield.tsx
-│   │   ├── DeliveryModel.tsx
-│   │   ├── BusinessITDiagnostic.tsx
-│   │   ├── FAQ.tsx
-│   │   └── FinalCTA.tsx
 │   ├── ui/
-│   │   ├── Button.tsx
-│   │   ├── Card.tsx
-│   │   ├── DiagnosticForm.tsx
-│   │   └── HeroDiagram.tsx     # SVG-диаграмма
+│   ├── forms/
 │   └── analytics/
-│       └── Analytics.tsx       # GA4 (загружается после consent)
 ├── lib/
-│   ├── constants.ts            # Тексты, email, конфигурация
-│   └── analytics.ts            # Функции отправки событий
+│   ├── constants.ts
+│   ├── validation.ts
+│   ├── analytics.ts
+│   └── site-config.ts
 ├── public/
-│   ├── favicon.ico
-│   ├── apple-touch-icon.png
-│   ├── og-image.png
-│   ├── robots.txt
-│   └── sitemap.xml
-├── next.config.js
-├── tsconfig.json
-└── package.json
+├── tests/
+│   ├── contracts/
+│   ├── e2e/
+│   └── accessibility/
+├── next.config.ts
+├── playwright.config.ts
+├── package.json
+└── package-lock.json
 ```
 
-6. Настроить Git-ветки:
-- `main` — автоматический деплой на Vercel (production).
-- `staging` — для тестирования перед merge в main.
-- `feature/*` — для отдельных задач (каждая секция, форма, и т.д.).
+### Architecture rules
 
-7. Убедиться, что Vercel-поддомен (`project.vercel.app`) имеет `noindex` в `<meta>` и через `X-Robots-Tag` header. Это учебный проект, индексация поисковиками не нужна.
-
-**Материалы из RAG:** `optimization.md` → "Техническая архитектура MVP", "Hosting and Infrastructure"; `design.md` → "Font Families".
-
-**Кто делает:** владелец с помощью Claude.
-
-**Результат:** работающий Next.js проект, подключённый к Vercel. При push в `main` автоматически создаётся live-версия сайта.
-
-**Чек-лист перед переходом к этапу 1:**
-
-- [ ] GitHub-репозиторий создан.
-- [ ] Next.js проект запускается локально (`npm run dev` → открывается `http://localhost:3000`).
-- [ ] Vercel подключён к репозиторию.
-- [ ] Push в `main` создаёт preview на Vercel.
-- [ ] `lucide-react` и `resend` установлены.
-
-**Типичные ошибки:**
-- Использовать устаревший Pages Router вместо App Router.
-- Забыть `--app` при создании проекта.
-- Не подключить репозиторий к Vercel.
-
-**Зависит от владельца:** создание аккаунтов GitHub и Vercel.
+- Server Components используются по умолчанию.
+- `"use client"` добавляется только для реального browser interaction.
+- Main copy, navigation, FAQ answers и legal content присутствуют в rendered HTML.
+- Не превращать landing page в SPA.
+- Не добавлять global state manager.
+- Не добавлять database, authentication или CMS.
+- Не заменять стабильный Route Handler на Server Actions без business reason.
+- Не переносить copy в YAML/JSON только ради имитации отменённой Astro-архитектуры.
+- Hardcoded approved copy защищается contract tests и minimal diff.
+- Working behavior важнее архитектурной косметики.
 
 ---
 
-### Этап 1. Дизайн-фундамент
+## Claude Code Governance
 
-**Цель:** перевести визуальные правила из `design.md` в рабочий CSS.
+### `CLAUDE.md`
 
-**Что делать:**
+Максимум 200 строк. Содержит:
 
-1. Настроить шрифты через `next/font`. Это встроенный механизм Next.js, который автоматически скачивает шрифты из Google Fonts и размещает их на сервере (self-hosting). Внешних запросов к Google не происходит — это полностью соответствует требованию `optimization.md` → "Fonts".
+- Opsfield Systems project summary;
+- Next.js App Router stack;
+- список source-of-truth files;
+- priority hierarchy;
+- exact 11-section rule;
+- запрет invented content и copy rewrite;
+- запрет framework migration;
+- запрет production deploy;
+- ссылки на `.claude/rules/`.
 
-```typescript
-// app/layout.tsx
-import { Inter } from 'next/font/google';
-import localFont from 'next/font/local';
-// или оба через next/font/google если Inter Tight доступен
+### Rule files
+
+#### `.claude/rules/architecture.md`
+
+- сохранять Next.js App Router;
+- не добавлять Astro, Remix, Vue, Svelte, CMS или database;
+- не выполнять broad folder restructure;
+- не обновлять major framework внутри feature task;
+- не создавать route, отсутствующий в `sitemap.md`;
+- не устанавливать dependency без owner approval.
+
+#### `.claude/rules/content-protection.md`
+
+- `texts.md` immutable;
+- не сокращать, не объединять, не улучшать и не переводить approved copy;
+- не создавать отдельный mobile copy;
+- не добавлять fake metrics, testimonials, logos, awards или credentials;
+- не добавлять old brand и O-1 scope.
+
+#### `.claude/rules/accessibility-seo.md`
+
+- semantic HTML;
+- один H1;
+- stable section IDs;
+- WCAG 2.2 AA target;
+- keyboard access;
+- FAQ content в initial HTML;
+- preview всегда noindex;
+- metadata/canonical только из approved sources.
+
+#### `.claude/rules/forms-testing.md`
+
+- exact form schema;
+- server-side validation;
+- honeypot;
+- no PII in analytics/logs;
+- duplicate-submit protection;
+- no visitor auto-reply до verified domain;
+- failed/skipped tests всегда раскрываются.
+
+### Baseline settings
+
+Синтаксис проверяется через `/permissions` в установленной версии Claude Code.
+
+```json
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "autoMemoryEnabled": false,
+  "disableBypassPermissionsMode": "disable",
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(npx playwright *)",
+      "Bash(git status)",
+      "Bash(git diff *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Edit(./docs/source-of-truth/**)",
+      "Bash(git push *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean *)",
+      "Bash(vercel *)",
+      "Bash(netlify deploy *)",
+      "Bash(npm publish *)",
+      "Bash(rm -rf *)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true,
+    "autoAllowBashIfSandboxed": false,
+    "allowUnsandboxedCommands": false,
+    "filesystem": {
+      "denyRead": ["./.env", "./.env.*", "./secrets"],
+      "denyWrite": ["./docs/source-of-truth"]
+    },
+    "network": {
+      "allowedDomains": ["registry.npmjs.org", "github.com"]
+    }
+  }
+}
 ```
 
-2. Создать `app/globals.css` с полным набором CSS-переменных из `design.md` → "CSS Variable Reference". Это единственный источник правды для всех визуальных токенов в коде.
+### Working workflow
 
-3. Настроить типографику: размеры заголовков (desktop и mobile), межстрочные интервалы, font-weight. Таблица размеров — `design.md` → "Typography Scale".
-
-4. Настроить spacing: 8px-сетку (`--space-1` через `--space-7`), edge padding для разных экранов. Значения — `design.md` → "Spacing Scale".
-
-5. Настроить breakpoints: `768px`, `1024px`, `1280px`. Базовый стиль — mobile-first. Определение — `optimization.md` → "Responsive Implementation".
-
-6. Создать базовые UI-компоненты (файлы в `components/ui/`):
-   - `Button.tsx` — primary и secondary варианты. Спецификация — `design.md` → "Buttons and CTA".
-   - `Card.tsx` — базовая карточка с тенями, радиусами, padding.
-
-7. Добавить `prefers-reduced-motion` правило — отключение всех анимаций. CSS — `design.md` → "Transitions".
-
-8. Настроить `max-width: 1200px` для контейнера. Максимальная ширина текста — `720px`. Значение — `optimization.md` → "Техническая архитектура MVP".
-
-**Материалы из RAG:** `design.md` — целиком (цвета, типографика, spacing, radii, тени, transitions, CSS Variable Reference); `optimization.md` → "Responsive Implementation" (breakpoints), "Техническая архитектура MVP" (max-width).
-
-**Кто делает:** владелец с помощью Claude.
-
-**Результат:** `globals.css` с полной дизайн-системой. Компоненты Button и Card. При открытии сайта видна правильная типографика, цвета, отступы.
-
-**Чек-лист перед переходом к этапу 2:**
-
-- [ ] Все CSS-переменные из `design.md` → "CSS Variable Reference" присутствуют в `globals.css`.
-- [ ] Шрифты Inter и Inter Tight загружаются через `next/font` (self-hosted).
-- [ ] `font-display: swap` установлен (Next.js делает это автоматически через `next/font`).
-- [ ] Breakpoints: 768px, 1024px, 1280px — ровно три, без дублирования.
-- [ ] Spacing кратен 8px.
-- [ ] Кнопки имеют min-height 44px.
-- [ ] `prefers-reduced-motion` отключает анимации.
-- [ ] Контейнер: max-width 1200px.
-- [ ] `#CBD5E1` не используется как цвет текста.
-
-**Типичные ошибки:**
-- Загрузить шрифты через `<link>` из Google Fonts CDN вместо `next/font`.
-- Использовать `#CBD5E1` для текста (документация запрещает — только для border).
-- Задать breakpoints, отличающиеся от `optimization.md`.
-- Забыть `font-display: swap`.
-
-**Зависит от владельца:** нет.
-
----
-
-### Этап 2. Layout: header, footer, структура секций
-
-**Цель:** создать каркас страницы — навигацию, подвал и пустые контейнеры для 11 секций.
-
-**Что делать:**
-
-1. Создать `components/layout/SkipLink.tsx` — невидимая ссылка «Skip to main content», появляется при нажатии Tab. Спецификация — `design.md` → "Skip Link". Target: `id` на `<main>`.
-
-2. Создать `components/layout/Header.tsx`:
-   - Логотип: «Opsfield Systems» → ссылка на `/`.
-   - Навигация: Services (`#what-we-diagnose`), How It Works (`#how-the-diagnostic-works`), Results (`#proof-examples`), FAQ (`#faq`).
-   - Primary CTA: «Request Diagnostic» → `#diagnostic-request-form`.
-   - Desktop: логотип слева, навигация по центру / справа, CTA справа.
-   - Mobile: логотип слева, кнопка меню справа. Drawer с теми же ссылками.
-   - Sticky: шапка «прилипает» при прокрутке. Высота: 72–80px.
-   - Источники: `texts.md` → "Header"; `sitemap.md` → "Header"; `design.md` → "Header".
-
-3. Создать `components/layout/Footer.tsx`:
-   - CTA-панель: «Start with clarity before investing in tools or implementation.» → `#diagnostic-request-form`.
-   - Позиционирование: одна строка текста.
-   - Три группы ссылок: Company (Team, Services, Results, Contact), Get Started (Request Diagnostic, How It Works, FAQ), Legal (Privacy Policy, Terms of Use, Cookie Policy).
-   - Копирайт: `© 2026 Opsfield Systems. California, USA.`
-   - Dark surface: допускается тёмный фон. Цвета — `design.md` → "Footer dark surface".
-   - Источники: `texts.md` → "Footer"; `sitemap.md` → "Footer"; `design.md` → "Footer".
-
-4. Настроить `app/layout.tsx` — корневой layout Next.js. Включает SkipLink, Header, `<main>`, Footer. Подключает шрифты и `globals.css`.
-
-5. В `app/page.tsx` создать 11 пустых `<section>` с ID из `sitemap.md` → "Section IDs":
-
-```
-#hero
-#problem-section
-#what-we-diagnose
-#ai-process-automation
-#how-the-diagnostic-works
-#proof-examples
-#why-opsfield-systems
-#delivery-model
-#business-it-diagnostic (содержит #diagnostic-request-form)
-#faq
-#final-cta
+```text
+feature/task-name
+→ Claude Code Plan Mode
+→ owner approves plan
+→ minimal implementation
+→ local checks
+→ owner reviews diff
+→ owner commits/pushes
+→ Deploy Preview
+→ owner performs browser review
+→ owner merges
 ```
 
-6. Добавить `scroll-margin-top` к каждой секции — компенсация высоты sticky header, чтобы контент не прятался за шапкой при переходе по якорной ссылке. Значение примерно равно высоте header (80px + отступ).
+Claude Code не выполняет:
 
-7. Настроить smooth scroll с учётом `prefers-reduced-motion: reduce` — при этой настройке scroll мгновенный. Якорные ссылки — обычные `<a href="#section-id">`, работают без JavaScript.
-
-**Материалы из RAG:** `sitemap.md` → "Section IDs", "Header", "Footer", "Internal Linking Map"; `texts.md` → "Header", "Footer"; `design.md` → "Header", "Footer", "Skip Link"; `optimization.md` → "HTML Structure", "Anchor behavior", "Accessibility → Keyboard".
-
-**Кто делает:** владелец с помощью Claude.
-
-**Результат:** страница с работающей навигацией, sticky header, footer. 11 пустых секций с правильными ID. Мобильное меню открывается/закрывается.
-
-**Чек-лист перед переходом к этапу 3:**
-
-- [ ] Skip link виден при нажатии Tab и переводит фокус на `<main>`.
-- [ ] Header содержит: Services / How It Works / Results / FAQ / Request Diagnostic.
-- [ ] Все навигационные ссылки ведут к правильным якорям.
-- [ ] Логотип ведёт на `/`.
-- [ ] Primary CTA в header: «Request Diagnostic» → `#diagnostic-request-form`.
-- [ ] Мобильное меню: открывается, закрывается по крестику и Escape, фокус удерживается внутри.
-- [ ] Footer содержит три группы ссылок + CTA-панель + копирайт.
-- [ ] Footer: Team → `#delivery-model`, Contact → `#diagnostic-request-form`.
-- [ ] Legal ссылки: `/privacy-policy`, `/terms-of-use`, `/cookie-policy`.
-- [ ] Ровно 11 `<section>` с ID из `sitemap.md`.
-- [ ] Один `<h1>` на странице (пока placeholder).
-- [ ] `scroll-margin-top` задан на секциях.
-- [ ] Smooth scroll отключается при `prefers-reduced-motion`.
-- [ ] Sticky header не перекрывает контент при якорной навигации.
-- [ ] Нет горизонтального скролла на мобильном (320px, 375px).
-- [ ] Touch targets ≥ 44px.
-- [ ] Нет `LLC`, `Inc.`, `®` у бренда.
-
-**Типичные ошибки:**
-- Создать больше или меньше 11 секций.
-- Использовать `<button>` для навигационных ссылок вместо `<a>`.
-- Забыть focus trap в мобильном drawer.
-- Забыть `scroll-margin-top` — контент прячется за sticky header.
-- Footer: ссылка Team ведёт не на `#delivery-model`.
-
-**Зависит от владельца:** нет.
+- `git push`;
+- production deploy;
+- DNS changes;
+- billing actions;
+- external account changes;
+- secret rotation;
+- source-of-truth edits внутри code task;
+- destructive Git/filesystem commands.
 
 ---
 
-### Этап 3. Контентные секции (1–8, 10–11)
-
-**Цель:** заполнить 10 из 11 секций контентом и компонентами. Секция 9 (Business & IT Diagnostic с формой) делается отдельно на этапе 4.
-
-Рекомендуемый порядок — сверху вниз.
-
-**Что делать для каждой секции:**
-
-#### Секция 1 — Hero (`#hero`)
-
-Компонент: `components/sections/Hero.tsx`
-
-Содержание из `texts.md` → "Hero":
-- Eyebrow: «B2B IT & Operations Advisory».
-- H1: «Diagnostic-First IT & Business Consulting».
-- Subtitle: «For B2B companies blocked by process, data, and system gaps — we diagnose before you build.»
-- Text: одна строка описания.
-- Primary CTA: «Request a Business & IT Diagnostic» → `#diagnostic-request-form` (data-request-type="Business & IT Diagnostic").
-- Secondary CTA: «See How the Diagnostic Works» → `#how-the-diagnostic-works`.
-- ICP qualifier: «Best fit: B2B companies with 50–250 employees.» — chip-стиль, не H1 и не badge.
-- Trust line: «Boutique advisory since 2021. Senior-led. Vendor-neutral. 4–6 active clients at a time.»
-
-Layout из `design.md` → "Hero Layout":
-- Desktop: split 55% текст / 45% визуал. Min-height 540px.
-- Tablet: single column; текст → CTA → trust → визуал (max-height 300px).
-- Mobile: single column; текст → primary CTA (full-width) → secondary CTA (text link) → trust. Визуал упрощён или скрыт.
-
-Hero Visual: `components/ui/HeroDiagram.tsx` — SVG-диаграмма по спецификации `design.md` → "Hero Diagnostic Map — visual specification". 5 узлов (Processes, CRM/RevOps, Data, Automation, IT Systems) с Lucide-иконками, центральный callout «Bottlenecks · Gaps · Risks», нижний flow «Diagnostic → Roadmap → Implementation».
-
-#### Секция 2 — Problem Section (`#problem-section`)
-
-Компонент: `components/sections/ProblemSection.tsx`
-
-Содержание из `texts.md` → "Problem Section":
-- H2: «Your business may not have a technology problem first.»
-- Text + proof-строка.
-- CTA: «Diagnose the Operating Bottleneck» → `#diagnostic-request-form` (data-request-type="Business & IT Diagnostic").
-
-#### Секция 3 — What We Diagnose (`#what-we-diagnose`)
-
-Компонент: `components/sections/WhatWeDiagnose.tsx`
-
-Содержание из `texts.md` → "What We Diagnose". Service cards по типу из `design.md` → "Service Card":
-- Lucide icon (24px), H4 title, описание (2–3 строки), output.
-- Grid: 3 desktop / 2 tablet / 1 mobile.
-- CTA (text link): «See How the Diagnostic Works» → `#how-the-diagnostic-works`.
-
-#### Секция 4 — AI & Process Automation (`#ai-process-automation`)
-
-Компонент: `components/sections/AIProcessAutomation.tsx`
-
-Содержание из `texts.md` → "AI & Process Automation". Та же структура service cards.
-- CTA: «Assess Automation Opportunities» → `#diagnostic-request-form` (data-request-type="AI & Process Automation Review").
-- Не должна выглядеть как AI-hype. Нет роботов, neon, glowing brain.
-
-#### Секция 5 — How the Diagnostic Works (`#how-the-diagnostic-works`)
-
-Компонент: `components/sections/HowDiagnosticWorks.tsx`
-
-Содержание из `texts.md` → "How the Diagnostic Works". Step cards по типу из `design.md` → "Step Card":
-- 3 шага с номерами.
-- Горизонтальная последовательность на desktop, вертикальный stepper на mobile.
-- CTA: «Start With a Diagnostic» → `#diagnostic-request-form` (generic, без data-request-type).
-
-#### Секция 6 — Diagnostic Scenarios (`#proof-examples`)
-
-Компонент: `components/sections/DiagnosticScenarios.tsx`
-
-Содержание из `texts.md` → "Diagnostic Scenarios". Proof cards по типу из `design.md` → "Scenario / Proof Card":
-- 3 анонимизированных сценария.
-- Каждый: тип клиента, ситуация, что нашла диагностика, что доставлено.
-- Border-left: `4px solid var(--accent)`.
-- One-column stacked layout.
-- Примечание внизу: «Scenarios are anonymized...»
-- CTA (text link): «Request a Diagnostic for Your Team» → `#diagnostic-request-form` (generic).
-
-Правила: не изобретать имена, логотипы, метрики. Сценарии — illustrative composites, не подтверждённые кейсы. Не стилизовать как verified metric tile.
-
-#### Секция 7 — Why Opsfield Systems (`#why-opsfield-systems`)
-
-Компонент: `components/sections/WhyOpsfield.tsx`
-
-Содержание из `texts.md` → "Why Opsfield Systems". Comparison table / cards по типу из `design.md` → "Comparison Card / Table":
-- Desktop: side-by-side таблица. Opsfield-колонка: `--accent-light` фон.
-- Mobile: парные карточки по спецификации `design.md` → "Mobile comparison layout".
-- CTA: «Validate the Decision Before You Implement» → `#diagnostic-request-form` (data-request-type="Business & IT Diagnostic").
-
-#### Секция 8 — Delivery Model (`#delivery-model`)
-
-Компонент: `components/sections/DeliveryModel.tsx`
-
-Содержание из `texts.md` → "Delivery Model". Delivery role cards по типу из `design.md` → "Delivery Role Card":
-- 2 карточки: Managing Partner, Solution Architect.
-- Без stock-фото. Без выдуманных имён и биографий.
-- Relevant environments: HubSpot, Salesforce и т.д. — текстом, не логотипами.
-- CTA (text link): «Work With Senior Advisors» → `#diagnostic-request-form` (generic).
-
-#### Секция 10 — FAQ (`#faq`)
-
-Компонент: `components/sections/FAQ.tsx`
-
-Содержание из `texts.md` → "FAQ". Accessible accordion по спецификации `design.md` → "FAQ Item":
-- Каждый вопрос: `<button aria-expanded>` с chevron.
-- Ответы в HTML (не подгружаются динамически).
-- Divider: `1px solid var(--border-default)`.
-- Padding: `20px 0`.
-- Touch target: min 44px.
-- Первый вопрос может быть открыт по умолчанию.
-- Вопросы «Who do you work with best?» и «When are you not the right fit?» — с семантическими списками (`<ul>`, `<li>`).
-- Fit: CheckCircle2 icon + текст. Not Fit: XCircle icon + текст. Оба: текст несёт смысл, не только цвет/иконка.
-
-Источник ответов: `optimization.md` → "Fit / Not Fit implementation".
-
-#### Секция 11 — Final CTA (`#final-cta`)
-
-Компонент: `components/sections/FinalCTA.tsx`
-
-Содержание из `texts.md` → "Final CTA":
-- H2: «Turn operational uncertainty into a scoped next step.»
-- Text.
-- Primary CTA: «Request a Business & IT Diagnostic» → `#diagnostic-request-form`.
-- Secondary CTA: «See How the Diagnostic Works» → `#how-the-diagnostic-works`.
-- Допускается `var(--accent)` фон с `var(--text-on-accent)` текстом.
-
-**Материалы из RAG:** `texts.md` — тексты каждой секции; `design.md` — типы карточек, Hero Layout, Section Visual Map, Icon Inventory, Mobile comparison layout; `sitemap.md` → Internal Linking Map, CTA → Request Type Routing; `optimization.md` → Accessibility.
-
-**Кто делает:** владелец с помощью Claude.
-
-**Результат:** 10 секций с контентом, отформатированные, адаптивные.
-
-**Чек-лист перед переходом к этапу 4:**
-
-- [ ] Тексты совпадают с `texts.md` (дословно или допустимо сокращены для layout).
-- [ ] Каждый CTA ведёт на правильный якорь из Internal Linking Map (`sitemap.md`).
-- [ ] CTA-ссылки к форме содержат `data-request-type` согласно таблице в `sitemap.md` → "CTA → Request Type Routing".
-- [ ] Hero: 55/45 split на desktop, single column на mobile.
-- [ ] Hero visual: SVG-диаграмма отображается на desktop и tablet; упрощена/скрыта на mobile.
-- [ ] Primary CTA виден без скролла на desktop и mobile.
-- [ ] ICP qualifier: chip-стиль, не H1, не badge.
-- [ ] Cards: 3 desktop / 2 tablet / 1 mobile.
-- [ ] Comparison table: парные карточки на mobile.
-- [ ] FAQ: accessible accordion, ответы в HTML, ARIA-атрибуты.
-- [ ] FAQ: Fit/Not Fit — семантические списки, не только цвет.
-- [ ] Proof cards: illustrative, не styled как verified metrics.
-- [ ] Нет fake logos, metrics, testimonials, awards.
-- [ ] Нет AI-hype: роботов, neon, glowing brain.
-- [ ] Bot icon: только в секции AI & Process Automation, никогда в Hero.
-- [ ] Один H1 на странице.
-- [ ] Heading hierarchy: h1 → h2 → h3 → h4 без пропусков.
-- [ ] Touch targets ≥ 44px.
-- [ ] Нет горизонтального скролла на 320px и 375px.
-
-**Типичные ошибки:**
-- Скопировать текст не из `texts.md`.
-- Использовать стоковые фото.
-- Подать scenarios как подтверждённые кейсы.
-- Забыть парный формат comparison cards на mobile.
-- Использовать `<div>` для FAQ trigger вместо `<button>`.
-- FAQ-ответы подгружаются JavaScript вместо присутствия в HTML.
-- Повторить позиционирование Hero в других секциях.
-
-**Зависит от владельца:** визуальное утверждение Hero-диаграммы (после реализации).
+# Этапы реализации
 
 ---
 
-### Этап 4. Business & IT Diagnostic + форма
+## Этап 0. Окружение и repository
 
-**Цель:** реализовать секцию 9 — единый conversion cluster с формой.
+**Статус:** Completed — не переделывать.
 
-**Что делать:**
+### Уже выполнено
 
-1. Создать `components/sections/BusinessITDiagnostic.tsx` с четырьмя вложенными подблоками в строгом порядке (`sitemap.md` → "Business & IT Diagnostic — sub-block order"):
+- создан Next.js App Router project;
+- подключён TypeScript;
+- создан GitHub repository;
+- Vercel подключён для preview;
+- локальный development server запускается;
+- Node/npm environment работает.
 
-   **Подблок 1 — Offer:**
-   - H2: «A structured first step before another tool, hire, or implementation project.»
-   - Текст: complimentary 30–45 minute fit review.
-   - Output: problem summary, root-cause hypotheses, fit/no-fit decision, path forward.
-   - Primary CTA: «Request a Business & IT Diagnostic» → `#diagnostic-request-form`.
-   - Стиль: Diagnostic Offer Card из `design.md`.
+### Контроль при аудите
 
-   **Подблок 2 — Before You Commit:**
-   - Review assets, risk control, privacy note.
-   - Стиль: Risk-Reduction Panel из `design.md`. Calm, low-friction.
-
-   **Подблок 3 — What Happens After You Submit:**
-   - 3 step cards: review → diagnostic → proposal.
-   - Стиль: Step Card из `design.md`.
-
-   **Подблок 4 — Diagnostic Request Form (`#diagnostic-request-form`):**
-   - Отдельный компонент `components/ui/DiagnosticForm.tsx`.
-
-2. Создать форму `DiagnosticForm.tsx`:
-
-   **4 обязательных поля** (`optimization.md` → "Forms and Conversion → Required fields"):
-   - Name — text input.
-   - Work Email — email input (`type="email"`).
-   - Company — text input.
-   - What's your biggest operational challenge right now? — textarea, max 500 символов.
-
-   **Progressive disclosure** (`design.md` → "Progressive Disclosure Control"):
-   - Control: `<button>` или `<details><summary>` с текстом «Add more context (optional)» / «Hide optional fields».
-   - Иконка: ChevronDown / ChevronUp, 16px.
-   - Цвет: `var(--accent)`.
-   - Закрыт по умолчанию.
-   - Открытие/закрытие не очищает введённые данные.
-
-   **Опциональные поля** (внутри progressive disclosure):
-   - Company Website — url input.
-   - Role — text input.
-   - Company Size — select: 1–25, 26–50, 51–100, 101–250, 251–500, 500+.
-   - Timeline — select: ASAP, This month, 1–3 months, 3–6 months, Researching.
-   - Request Type — select: 8 значений из `texts.md` → "Request type options".
-
-   **Request Type routing** (`sitemap.md` → "CTA → Request Type Routing"):
-   - При нажатии CTA с `data-request-type` — JavaScript читает значение и заполняет select.
-   - Request Type — один `<select>`, может быть prefilled и остаётся editable.
-   - Не создавать два поля request_type (hidden + visible).
-   - Если optional-блок закрыт и request_type prefilled — значение хранится в state и передаётся при submit.
-
-   **Скрытые поля:** page_url, page_section, cta_text, referrer, utm параметры, timestamp.
-
-   **Honeypot:** одно скрытое поле для защиты от спама. Если заполнено — submission отклоняется.
-
-   **Visible labels:** каждое поле имеет `<label>`. Placeholder не заменяет label. `required` и `aria-required="true"` только на обязательных полях.
-
-   **Валидация:**
-   - Client-side: email format, textarea max length, required fields.
-   - Ошибки привязаны через `aria-describedby`.
-   - При ошибке — фокус на первое неверное поле.
-   - Данные сохраняются после ошибки.
-
-   **Состояния формы** (`design.md` → "Forms → Submission State"):
-   - Default → Loading (кнопка: «Submitting...», spinner, width preserved, fields: opacity 0.6) → Success → Error.
-   - Если > 3 секунд: «Still processing...»
-   - Duplicate submit prevention: кнопка disabled.
-
-   **Button:** «Submit Diagnostic Request» (не generic «Submit»).
-
-   **Microcopy:** «Four required fields. Additional context is optional. No full system access is required for the first fit review.»
-
-   **Privacy notice:** «By submitting this form, you acknowledge our Privacy Policy. We use your information to evaluate fit and contact you about your diagnostic request.» Ссылка Privacy Policy → `/privacy-policy`.
-
-   **Success state** (`optimization.md` → "Forms and Conversion → Success state"):
-   - Подтверждение получения.
-   - Следующий шаг: senior review.
-   - Ссылка обратно на `#how-the-diagnostic-works`.
-
-   **Error state:**
-   - Объяснение ошибки.
-   - Сохранение данных.
-   - Retry.
-   - Fallback email: `general@opsfieldsystems.com` (из `texts.md`).
-
-3. Вся секция — один визуальный блок с общим фоном. Подблоки — не отдельные full-width секции. Sub-blocks не имеют отдельных navigation anchors (кроме `#diagnostic-request-form`).
-
-**Материалы из RAG:** `texts.md` → "Business & IT Diagnostic" (все подблоки), "Diagnostic Request Form"; `design.md` → "Forms", "Progressive Disclosure Control", "Diagnostic Offer Card", "Risk-Reduction Panel", "Step Card", "Form Panel"; `optimization.md` → "Forms and Conversion", "Form Processing", "Progressive disclosure behavior"; `sitemap.md` → "CTA → Request Type Routing", "Diagnostic Request Form", "Business & IT Diagnostic — sub-block order".
-
-**Кто делает:** владелец с помощью Claude.
-
-**Результат:** полностью функциональная секция 9 с формой. Отправка формы вызывает API Route (который будет создан на этапе 5).
-
-**Чек-лист перед переходом к этапу 5:**
-
-- [ ] Секция содержит 4 подблока в правильном порядке: Offer → Before You Commit → Post-Submit Steps → Form.
-- [ ] Подблоки визуально объединены — один фон, одна секция.
-- [ ] Форма: ровно 4 обязательных поля.
-- [ ] Optional fields скрыты за «Add more context (optional)».
-- [ ] Форма отправляется без открытия optional-блока.
-- [ ] Progressive disclosure: открытие/закрытие не очищает данные.
-- [ ] Request Type: один `<select>`, может быть prefilled из CTA.
-- [ ] CTA routing работает: каждый CTA из Internal Linking Map корректно заполняет request_type.
-- [ ] Honeypot-поле скрыто, невидимо для пользователя.
-- [ ] Company Size: без предвыбранного значения, без визуального выделения 51–100 / 101–250.
-- [ ] Validation: email, textarea max 500, required fields.
-- [ ] Error → focus на первое неверное поле.
-- [ ] Данные сохраняются после ошибки валидации.
-- [ ] Loading state: кнопка «Submitting...», fields opacity 0.6, duplicate submit blocked.
-- [ ] Success и Error states отображаются.
-- [ ] Privacy notice видим рядом с кнопкой.
-- [ ] Microcopy: «Four required fields...» видим.
-- [ ] Button: «Submit Diagnostic Request», не generic «Submit».
-- [ ] Visible labels на каждом поле. Placeholder не заменяет label.
-- [ ] `type="email"` на поле Work Email.
-- [ ] Input font-size ≥ 16px (избежать zoom на iOS).
-- [ ] Optional fields не имеют `required` или `aria-required`.
-
-**Типичные ошибки:**
-- Создать два поля request_type (hidden + visible select).
-- Сделать optional fields обязательными.
-- Забыть `type="email"`.
-- Не сохранить данные после ошибки.
-- Кнопка «Submit» вместо «Submit Diagnostic Request».
-- Разбить секцию на 4 отдельных full-width блока.
-- Предвыбрать Company Size.
-
-**Зависит от владельца:** нет.
+- проверить актуальные версии из `package.json` и lockfile;
+- не считать указанную в старом плане версию фактической без проверки;
+- не обновлять major автоматически.
 
 ---
 
-### Этап 5. Backend формы: API Route + Resend
+## Этап 1. Design foundation
 
-**Цель:** создать серверную функцию, которая обрабатывает данные формы, отправляет уведомление и auto-reply.
+**Статус:** Completed — не переделывать.
 
-**Что делать:**
+### Уже выполнено
 
-1. Создать аккаунт на [resend.com](https://resend.com). Получить API-ключ. Бесплатный план: 100 emails/день, 3000/месяц.
+- CSS Custom Properties;
+- typography и spacing;
+- fonts;
+- Button/Card primitives;
+- responsive breakpoints;
+- reduced-motion baseline.
 
-2. Добавить API-ключ в Vercel Environment Variables:
-   - Имя: `RESEND_API_KEY`
-   - Значение: ключ из Resend dashboard.
-   - Не хранить API-ключи в коде (файлы `.env.local` для локальной разработки, Vercel dashboard для production).
+### Контроль при аудите
 
-3. Создать `app/api/submit/route.ts` — API Route в Next.js App Router:
-
-   **Логика:**
-   - Принять POST-запрос с данными формы.
-   - Проверить honeypot (если заполнен — отклонить молча).
-   - Серверная валидация: email формат, обязательные поля, textarea ≤ 500 символов.
-   - При ошибке: вернуть JSON с описанием ошибок.
-   - При успехе:
-     - Отправить notification email на адрес владельца (с данными заявки).
-     - Отправить auto-reply на email из формы.
-     - Вернуть JSON `{ success: true }`.
-
-   **Auto-reply** (`optimization.md` → "Auto-reply email"):
-   - Subject: «Diagnostic request received — Opsfield Systems».
-   - Body: шаблон из `optimization.md`.
-   - Не включать текст challenge в auto-reply.
-   - Не включать другие данные формы.
-   - From: Resend-домен (для учебного проекта) или `general@opsfieldsystems.com` (для production).
-
-   **Notification email:**
-   - Subject: «New diagnostic request from [Company]».
-   - Body: все данные формы (name, email, company, challenge, optional fields если заполнены).
-   - To: личный email владельца (для учебного проекта).
-
-4. Обновить `DiagnosticForm.tsx` для отправки данных на `/api/submit` через `fetch`.
-
-5. Настроить rate limiting (базовый): отклонять больше 5 submissions с одного IP за 10 минут. Для бесплатного тарифа Vercel это можно сделать через in-memory counter (достаточно для MVP).
-
-**Что НЕ делать** (`optimization.md` → "Data restrictions"):
-- Не запрашивать пароли, API-ключи, SSN, immigration documents.
-- Не хранить данные формы в localStorage.
-- Не отправлять PII (имена, email, текст challenge) в analytics.
-
-**Материалы из RAG:** `optimization.md` → "Form Processing", "Auto-reply email", "Spam protection", "Data restrictions", "Validation"; `texts.md` → auto-reply шаблон (в `optimization.md`).
-
-**Кто делает:** владелец с помощью Claude.
-
-**Результат:** форма отправляет данные на API Route. Владелец получает email с заявкой. Отправитель получает auto-reply.
-
-**Чек-лист перед переходом к этапу 6:**
-
-- [ ] API Route создан в `app/api/submit/route.ts`.
-- [ ] RESEND_API_KEY добавлен в Vercel Environment Variables.
-- [ ] Honeypot проверяется на сервере.
-- [ ] Серверная валидация: email, required fields, textarea max 500.
-- [ ] При успехе: notification email приходит на адрес владельца.
-- [ ] При успехе: auto-reply приходит на email из формы.
-- [ ] Auto-reply не содержит текст challenge и другие данные формы.
-- [ ] При ошибке: JSON с описанием ошибок, HTTP 400.
-- [ ] При серверной ошибке: HTTP 500, user видит error state.
-- [ ] Форма на frontend корректно обрабатывает success и error.
-- [ ] API-ключ не хардкодится в файлах.
-
-**Типичные ошибки:**
-- Хранить API-ключ в коде вместо environment variables.
-- Забыть серверную валидацию (надеяться только на клиентскую).
-- Включить текст challenge в auto-reply.
-- Не обработать ошибку Resend API (например, невалидный email).
-- Не протестировать на Vercel (локально работает иначе).
-
-**Зависит от владельца:** создание аккаунта Resend, добавление API-ключа в Vercel.
+- сверить tokens с `design.md`;
+- найти literal colors/spacing при наличии token;
+- проверить `#CBD5E1` только как border/decorative color;
+- проверить 44px touch targets;
+- не переносить стили в новую систему без defect.
 
 ---
 
-### Этап 6. Legal-страницы, 404 и cookie consent
+## Этап 2. Layout shell
 
-**Цель:** создать юридические страницы, кастомную 404 и баннер согласия на cookies.
+**Статус:** Completed — не переделывать.
 
-**Что делать:**
+### Уже выполнено
 
-1. Создать страницы:
-   - `app/privacy-policy/page.tsx` — текст из `texts.md` → "Privacy Policy".
-   - `app/terms-of-use/page.tsx` — текст из `texts.md` → "Terms of Use".
-   - `app/cookie-policy/page.tsx` — текст из `texts.md` → "Cookie Policy".
-   - `app/not-found.tsx` — кастомная 404 (Next.js convention).
+- SkipLink;
+- Header;
+- Footer;
+- mobile drawer;
+- 11 top-level sections;
+- anchor navigation;
+- sticky header;
+- 404 baseline.
 
-2. Для каждой legal-страницы:
-   - Уникальный `<title>` и `<meta description>` из `texts.md`.
-   - `<meta name="robots" content="noindex,follow">`.
-   - Тот же header/footer, что и главная.
-   - Семантическая разметка: заголовки, абзацы, списки.
+### Контроль при аудите
 
-3. 404-страница (`optimization.md` → "404 page"):
-   - Заголовок, краткое сообщение.
-   - Ссылка на главную и на `#diagnostic-request-form`.
-   - `noindex`.
-   - Тот же header/footer.
-
-4. Email-адреса из `texts.md` (например, `privacy@opsfieldsystems.com`) вставляются в код as-is. Они не будут функциональными в учебном проекте, но код готов к замене на рабочие адреса.
-
-5. Создать `components/layout/CookieConsent.tsx`:
-   - Компактная панель внизу экрана (не полноэкранный popup).
-   - Три действия: Accept, Decline, Privacy Policy (ссылка на `/privacy-policy`).
-   - По умолчанию: аналитика отключена.
-   - Accept → сохраняет предпочтение в cookie (до 12 месяцев), включает GA4.
-   - Decline → сохраняет предпочтение, GA4 остаётся выключенным.
-   - Кнопки Accept и Decline визуально равнозначны (нет dark pattern).
-   - Читаема на mobile.
-   - Копия: «We use optional analytics cookies to understand how the site is used.»
-   - Не предвыбирать галочки.
-   - Спецификация: `design.md` → "Cookie Consent"; `optimization.md` → "Privacy and Compliance → Cookie banner".
-
-**Материалы из RAG:** `texts.md` → Privacy Policy, Terms of Use, Cookie Policy (полные тексты); `design.md` → "Cookie Consent"; `optimization.md` → "Privacy and Compliance", "404 page".
-
-**Кто делает:** владелец с помощью Claude.
-
-**Результат:** 3 legal-страницы + 404 + cookie consent banner.
-
-**Чек-лист перед переходом к этапу 7:**
-
-- [ ] Legal-страницы имеют `noindex,follow`.
-- [ ] Legal-страницы имеют уникальный title и meta description из `texts.md`.
-- [ ] Legal-страницы используют тот же header/footer.
-- [ ] 404: заголовок, сообщение, ссылки на `/` и `#diagnostic-request-form`, `noindex`.
-- [ ] Cookie banner: Accept / Decline / Privacy Policy.
-- [ ] Accept и Decline визуально равнозначны.
-- [ ] Cookie banner не блокирует страницу.
-- [ ] Cookie banner читаем на mobile.
-- [ ] Consent preference сохраняется (banner не показывается повторно).
-- [ ] GA4 не загружается до Accept (реализация — этап 9).
-- [ ] Email-адреса из `texts.md` вставлены в legal-страницы.
-
-**Типичные ошибки:**
-- Забыть `noindex` на legal-страницах.
-- Сделать Decline мелким и незаметным (dark pattern).
-- Cookie banner перекрывает контент или форму.
-- 404-страница не использует общий layout.
-
-**Зависит от владельца:** нет (юридический review — отдельная задача для production).
+- focus trap;
+- Escape и возврат фокуса;
+- `scroll-margin-top`;
+- корректные footer links;
+- отсутствие horizontal scroll.
 
 ---
 
-### Этап 7. SEO, structured data и метаданные
+## Этап 3. Контентные секции 1–8, 10–11
 
-**Цель:** настроить техническое SEO.
+**Статус:** Completed — не переделывать.
 
-**Что делать:**
+### Уже выполнено
 
-1. Настроить metadata в Next.js (`app/layout.tsx` и каждой странице) через `export const metadata`:
-   - Homepage: title и description из `texts.md` → "Meta title", "Meta description".
-   - Legal pages: title и description из `texts.md`.
+- Hero;
+- Problem Section;
+- What We Diagnose;
+- AI & Process Automation;
+- How the Diagnostic Works;
+- Diagnostic Scenarios;
+- Why Opsfield Systems;
+- Delivery Model;
+- FAQ;
+- Final CTA.
 
-2. Open Graph и Twitter Card metadata из `optimization.md` → "Open Graph and Social Metadata":
-   - `og:title`, `og:description`, `og:image`, `og:url`, `og:type`, `og:site_name`.
-   - `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`.
-   - URL: Vercel subdomain для учебного проекта.
+### Контроль при аудите
 
-3. Создать favicon и OG image:
-   - Favicon: буква «O» в цвете `#1D4ED8` на прозрачном фоне, 32×32 и 180×180 (Apple Touch Icon). Спецификация — `design.md` → "Brand Identity Launch Rules → Development placeholders".
-   - OG image: 1200×630px, `#F8FAFC` фон, «Opsfield Systems» по центру.
+- exact approved copy;
+- CTA targets и `data-request-type`;
+- Hero mobile order;
+- comparison paired cards mobile;
+- scenario disclaimer;
+- FAQ semantics;
+- no fake proof;
+- no old brand;
+- no O-1.
 
-4. Canonical URL:
-   - Self-referencing canonical на каждой странице.
-   - Для учебного проекта: Vercel subdomain URL.
-   - В production: заменить на final domain.
+---
 
-5. Structured data (JSON-LD) в `app/layout.tsx` или `app/page.tsx`:
-   - `@graph` с 4 сущностями: Organization, WebSite, WebPage, Service.
-   - Опционально: FAQPage.
-   - Все спецификации — `optimization.md` → "Structured Data".
-   - Замечание: `[production-domain]` заменить на Vercel subdomain для учебного проекта.
+## Этап 4. Синхронизация документации и Claude Code governance
 
-6. `public/robots.txt`:
+**Статус:** Next.
 
-```
-User-agent: *
-Allow: /
+**Цель:** устранить конфликт Astro/Next.js до продолжения разработки.
 
-Sitemap: https://[vercel-subdomain]/sitemap.xml
+### Действия
+
+1. Сохранить этот файл как `docs/source-of-truth/development-plan.md`.
+2. Создать `docs/architecture-decisions/ADR-001-keep-nextjs.md`.
+3. Обновить `vibe-coding-stack.md`:
+   - текущий stack — Next.js;
+   - Vercel только preview;
+   - zero-budget production — Netlify Free без framework rewrite;
+   - Resend вместо Postmark;
+   - сохранить Claude Code governance и tests.
+4. Обновить `optimization.md`:
+   - убрать Astro-specific implementation;
+   - убрать Netlify Forms как обязательный form backend;
+   - указать Next.js Route Handler;
+   - разделить preview и production SEO behavior;
+   - provider list формировать по фактически активному production stack.
+5. Обновить `multilingual.md`:
+   - English-only MVP;
+   - Next.js-compatible future locale routing;
+   - не создавать routes/directories сейчас.
+6. Обновить `sitemap.md` → Project File Map.
+7. Пометить Astro plan как `superseded — do not use`.
+8. Пометить старый Next.js plan как historical, если он содержит устаревшие решения.
+9. Архивировать Clearpath и multi-page документы.
+10. Создать `CLAUDE.md`, rule files, settings и hooks.
+11. Проверить `/permissions`.
+12. Создать `docs/component-registry.md`.
+
+### Repository search
+
+Найти и классифицировать:
+
+```text
+Astro
+Netlify Forms
+Postmark
+Clearpath
+Formspree
+staging branch
+Vercel Hobby production
 ```
 
-Для учебного проекта можно поставить `Disallow: /` (запрет индексации), так как это не production-сайт.
+### Acceptance criteria
 
-7. `public/sitemap.xml`:
-   - Для MVP: только homepage.
-   - Не включать legal-страницы (noindex).
+- [ ] В active documentation один stack.
+- [ ] Next.js не помечен как superseded.
+- [ ] Astro migration нигде не обязательна.
+- [ ] Source-of-truth защищён от code tasks.
+- [ ] Secrets недоступны Claude Code.
+- [ ] Production commands заблокированы.
+- [ ] `development-plan.md`, `vibe-coding-stack.md`, `optimization.md` не противоречат друг другу.
 
-**Материалы из RAG:** `texts.md` → Meta title, Meta description; `optimization.md` → "SEO Metadata", "Canonical", "Robots", "Open Graph", "Structured Data"; `design.md` → "Brand Identity Launch Rules".
+### Зона риска
 
-**Кто делает:** владелец с помощью Claude.
-
-**Результат:** все мета-теги, structured data, robots.txt, sitemap.xml, favicon, OG image.
-
-**Чек-лист перед переходом к этапу 8:**
-
-- [ ] Meta title и description совпадают с `texts.md`.
-- [ ] Canonical URL — self-referencing.
-- [ ] OG и Twitter metadata заполнены.
-- [ ] OG image: 1200×630px, абсолютный HTTPS URL.
-- [ ] Favicon: 32×32 и 180×180.
-- [ ] JSON-LD: Organization, WebSite, WebPage, Service — валидны (проверка на Schema.org Validator).
-- [ ] robots.txt ссылается на sitemap.xml.
-- [ ] sitemap.xml содержит только homepage.
-- [ ] Legal-страницы не в sitemap.xml.
-- [ ] Нет `[production-domain]` placeholder в deployed-коде.
-- [ ] H1 содержит основной коммерческий intent.
-
-**Типичные ошибки:**
-- Оставить placeholder `[production-domain]` в JSON-LD.
-- Добавить legal-страницы в sitemap.xml.
-- Написать свой meta description вместо утверждённого в `texts.md`.
-- Забыть `og:image` с абсолютным URL.
-
-**Зависит от владельца:** нет.
+Без этого этапа Claude Code будет смешивать `.astro`, React components, Netlify Forms, Route Handlers, Postmark и Resend в одном repository.
 
 ---
 
-### Этап 8. Accessibility и performance
+## Этап 5. Audit выполненных этапов 0–3
 
-**Цель:** убедиться в доступности сайта и скорости загрузки.
+**Цель:** подтвердить реальное состояние frontend, не переписывая его.
 
-**Что делать:**
+### Запрещено
 
-**Accessibility (WCAG 2.2 AA)** — `optimization.md` → "Accessibility":
+- broad refactor;
+- redesign;
+- framework migration;
+- major dependency update;
+- новая content architecture;
+- исправление всех findings одним diff.
 
-1. Keyboard navigation: все interactive elements доступны с клавиатуры. Логичный tab order. Visible focus state (min 2px ring). Mobile drawer: focus trap + Escape.
+### Действия
 
-2. ARIA: FAQ — `<button aria-expanded>`, `aria-controls`. Form — errors через `aria-describedby`, success через `aria-live="polite"`. Decorative SVG — `aria-hidden="true"`, `focusable="false"`.
+1. Проверить clean working tree.
+2. Запустить:
 
-3. Contrast: основной текст на фоне — min 4.5:1. `#CBD5E1` не как текст. Status не только цветом.
+```bash
+node --version
+npm --version
+npm ci
+npm run lint
+npx tsc --noEmit
+npm run build
+npm audit --omit=dev
+```
 
-4. Images: информативные — meaningful `alt`. Decorative — `alt=""`. Hero diagram — `alt` описывает вывод, не элементы.
+3. Создать inventory:
+   - Next.js/React/TypeScript versions;
+   - routes;
+   - Server/Client Components;
+   - dependencies;
+   - external requests;
+   - analytics scripts;
+   - существующие form/backend files, даже если incomplete.
+4. Проверить rendered frontend:
+   - 11 sections;
+   - order и IDs;
+   - один H1;
+   - CTA targets;
+   - Header/Footer;
+   - mobile drawer;
+   - FAQ;
+   - 404;
+   - responsive widths 320/375/768/1024/1280/1440.
+5. Сравнить copy с `texts.md`.
+6. Сравнить visual behavior с `design.md`.
+7. Проверить отсутствие:
+   - old brand;
+   - O-1;
+   - fake proof;
+   - TODO/TBD/lorem ipsum;
+   - secrets;
+   - production claims/placeholders в visible UI.
+8. Создать `docs/audits/current-codebase-audit.md`.
 
-5. Forms: visible `<label>`, `autocomplete`, required status текстом + `required` / `aria-required`.
+### Severity model
 
-**Performance** — `optimization.md` → "Performance":
+| Severity | Значение | Действие |
+|---|---|---|
+| Blocker | build/security/PII/critical broken navigation | исправить до этапа 6 |
+| High | wrong copy, broken CTA, inaccessible drawer, structural mismatch | отдельная task до этапа 6 |
+| Medium | responsive/performance/maintainability issue | исправить до release QA |
+| Low | cosmetic issue без conversion/accessibility impact | defer |
 
-1. Core Web Vitals targets: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1.
+### Acceptance criteria
 
-2. Next.js оптимизации:
-   - Static Generation (SSG): все страницы pre-rendered.
-   - `next/font`: шрифты self-hosted с `font-display: swap`.
-   - `next/image`: автоматическая оптимизация изображений (если используются растровые).
-   - Code splitting: автоматическое в Next.js.
-
-3. Images: SVG для диаграмм и иконок. `loading="lazy"` для below-fold. Width и height / aspect-ratio определены. Hero visual — не lazy (LCP element).
-
-4. CSS: переменные из `design.md`, никаких animation libraries.
-
-5. JavaScript: только для menu, FAQ accordion, form, cookie consent, analytics. Не hydrate всю страницу для мелких взаимодействий.
-
-6. Layout stability: зарезервировать место для cookie banner, form messages, images.
-
-**Материалы из RAG:** `optimization.md` → "Accessibility", "Performance", "Core Web Vitals"; `design.md` → "Transitions".
-
-**Кто делает:** владелец с помощью Claude.
-
-**Результат:** Lighthouse: Performance 90+, Accessibility 95+, Best Practices 95+, SEO 95+.
-
-**Чек-лист перед переходом к этапу 9:**
-
-- [ ] Keyboard-only navigation работает (все элементы доступны).
-- [ ] Focus states видимы на light и dark surfaces.
-- [ ] FAQ: ARIA states работают.
-- [ ] Form: labels и errors программно связаны.
-- [ ] Mobile drawer: focus trap работает, Escape закрывает.
-- [ ] Contrast: AA для всех текстов.
-- [ ] Touch targets ≥ 44px.
-- [ ] `prefers-reduced-motion` отключает анимации.
-- [ ] Input font-size ≥ 16px на mobile (нет zoom на iOS).
-- [ ] LCP ≤ 2.5s.
-- [ ] CLS ≤ 0.1.
-- [ ] Hero visual не lazy-loaded.
-- [ ] Below-fold images: `loading="lazy"`.
-- [ ] Fonts: WOFF2 + `font-display: swap` (через `next/font`).
-- [ ] Нет render-blocking third-party scripts.
-- [ ] Нет горизонтального скролла на 320px.
-
-**Типичные ошибки:**
-- Удалить outline без замены.
-- Забыть `font-size: 16px` на mobile inputs.
-- Не зарезервировать место для cookie banner.
-- Hero diagram lazy-loaded (ломает LCP).
-
-**Зависит от владельца:** нет.
+- [ ] Build проходит или blocker документирован.
+- [ ] Audit report создан.
+- [ ] Каждый finding имеет severity, evidence и affected files.
+- [ ] Никакой скрытый refactor не выполнен.
+- [ ] Этапы 4+ не помечены выполненными по наличию placeholder-файлов.
 
 ---
 
-### Этап 9. Аналитика
+## Этап 6. Business & IT Diagnostic + Diagnostic Request Form
 
-**Цель:** подключить GA4 после cookie consent.
+**Статус:** Not started.
 
-**Что делать:**
+**Цель:** реализовать секцию 9 и frontend формы.
 
-1. Создать GA4 property в Google Analytics. Получить Measurement ID (формат `G-XXXXXXXXXX`). Аккаунт — на бизнес Google-аккаунте.
+### Section structure
 
-2. Добавить Measurement ID в Vercel Environment Variables: `NEXT_PUBLIC_GA_MEASUREMENT_ID`.
+`#business-it-diagnostic` остаётся одной top-level section с четырьмя sub-blocks:
 
-3. Создать `components/analytics/Analytics.tsx`:
-   - Проверяет consent status.
-   - Если consent = accepted → загружает GA4 script.
-   - Если consent = declined или не установлен → GA4 не загружается.
-   - Analytics не блокирует rendering.
-   - Events fail silently при отсутствии consent.
+1. Offer;
+2. Before You Commit;
+3. What Happens After You Submit;
+4. Diagnostic Request Form — `#diagnostic-request-form`.
 
-4. Настроить основные events из `optimization.md` → "Analytics":
-   - `cta_click` (cta_text, cta_location, target, request_type).
-   - `form_submit_success`, `form_submit_error`.
-   - `faq_item_open` (question_slug).
-   - `scroll_25_percent`, `scroll_50_percent`, `scroll_75_percent`, `scroll_100_percent`.
-   - `section_enter` (section_id).
-   - `form_start`, `form_field_focus`, `form_field_blur`.
+Не разбивать sub-blocks на отдельные full-width sections.
 
-5. Privacy constraints (`optimization.md` → "Analytics → Privacy constraints"):
-   - НЕ отправлять: field values, challenge text, email, name, company.
-   - `request_type`: отправляется label из select list (non-PII).
-   - `last_field_focused`: только имя поля (не содержимое).
-   - Naming: `snake_case`.
+### Form fields
 
-6. Google Search Console:
-   - Подтвердить владение сайтом через Vercel DNS или HTML-файл.
-   - Отправить sitemap.xml.
+#### Required — ровно 4
 
-**Материалы из RAG:** `optimization.md` → "Analytics" (полный список events, naming, privacy).
+1. Name — text.
+2. Work Email — `type="email"`.
+3. Company — text.
+4. Main Challenge — textarea, max 500.
 
-**Кто делает:** владелец с помощью Claude.
+#### Optional — progressive disclosure
 
-**Результат:** GA4 работает после consent. Events отправляются. GSC подключён.
+Control:
 
-**Чек-лист перед переходом к этапу 10:**
+```text
+Add more context (optional)
+Hide optional fields
+```
 
+Fields:
+
+- Company Website;
+- Role;
+- Company Size;
+- Timeline;
+- Request Type.
+
+### Company Size options
+
+- 1–25;
+- 26–50;
+- 51–100;
+- 101–250;
+- 251–500;
+- 500+.
+
+Ни один вариант не preselected и не выделяется визуально.
+
+### Timeline options
+
+- ASAP;
+- This month;
+- 1–3 months;
+- 3–6 months;
+- Researching.
+
+### Request Type options
+
+- Business & IT Diagnostic;
+- AI & Process Automation Review;
+- Business Process Audit;
+- CRM / RevOps Audit;
+- IT Stack Assessment;
+- AI Readiness Assessment;
+- 90-Day Roadmap;
+- Not sure yet.
+
+### CTA routing
+
+- CTA с `data-request-type` prefills единственный Request Type select.
+- Значение остаётся editable.
+- Generic CTA оставляет field empty.
+- Не создавать hidden + visible duplicate `request_type`.
+
+### Hidden context fields
+
+- page_url;
+- page_section;
+- cta_text;
+- referrer;
+- utm_source;
+- utm_medium;
+- utm_campaign;
+- utm_content;
+- utm_term;
+- timestamp.
+
+### UX and accessibility
+
+- visible `<label>` для каждого field;
+- placeholder не заменяет label;
+- optional fields не `required`;
+- input font-size минимум 16px mobile;
+- error связан через `aria-describedby`;
+- focus на first invalid field;
+- multiple errors могут иметь focusable summary;
+- values сохраняются после validation error;
+- disclosure не очищает values;
+- form работает без открытия optional block;
+- submit button: `Submit Diagnostic Request`;
+- loading: `Submitting...`;
+- duplicate click blocked;
+- success/error через `aria-live`;
+- privacy notice ведёт на `/privacy-policy`.
+
+### Acceptance criteria
+
+- [ ] Section содержит 4 sub-blocks в фиксированном порядке.
+- [ ] Ровно 4 required fields.
+- [ ] Optional block закрыт по умолчанию.
+- [ ] Form submittable без optional fields.
+- [ ] Один editable Request Type field.
+- [ ] CTA routing работает.
+- [ ] Company Size не preselected.
+- [ ] Validation соответствует schema.
+- [ ] User input сохраняется после ошибки.
+- [ ] Loading/success/error states доступны.
+- [ ] Copy дословно соответствует `texts.md`.
+- [ ] Нет backend/email claim до этапа 7.
+
+### Типичные ошибки
+
+- Client Component на всю страницу вместо локальной form boundary.
+- Два request type fields.
+- Optional fields становятся required.
+- Success показывается до подтверждения server response.
+- Generic `Submit` вместо approved button text.
+
+---
+
+## Этап 7. Route Handler + Resend preview mode
+
+**Статус:** Not started.
+
+**Цель:** реализовать безопасную server-side обработку без ложного production email behavior.
+
+### Configuration
+
+Server-only variables:
+
+```text
+SITE_MODE=preview | production
+RESEND_API_KEY
+RESEND_FROM_EMAIL
+OWNER_NOTIFICATION_EMAIL
+SITE_URL
+```
+
+`SITE_MODE` и secrets не должны иметь prefix `NEXT_PUBLIC_`.
+
+### Route Handler
+
+`app/api/submit/route.ts`:
+
+1. принимает только POST;
+2. проверяет content type и body size;
+3. нормализует fields;
+4. allowlists known fields;
+5. отбрасывает unknown fields;
+6. проверяет honeypot;
+7. выполняет server-side validation;
+8. sanitizes email template output;
+9. не логирует raw PII/challenge;
+10. возвращает generic client errors;
+11. подробные internal errors не уходят в browser.
+
+### Validation
+
+- Name required;
+- Work Email required и normalized;
+- Company required;
+- Main Challenge required, max 500;
+- optional select values только из approved enums;
+- request body size ограничен;
+- malformed input rejected.
+
+### Preview mode
+
+- тестовые submissions только владельцу или approved Resend test addresses;
+- visitor auto-reply произвольным адресатам выключен;
+- owner notification может тестироваться на email владельца;
+- success UI не утверждает, что письмо посетителю отправлено;
+- no production lead collection promise.
+
+### Production mode
+
+Требует:
+
+- verified owned domain;
+- SPF/DKIM;
+- production sender;
+- monitored Reply-To;
+- real owner notification;
+- visitor auto-reply;
+- bounce/failure path test.
+
+### Auto-reply
+
+Subject:
+
+```text
+Diagnostic request received — Opsfield Systems
+```
+
+Body:
+
+```text
+Thank you for your diagnostic request.
+A senior advisor will review your submission
+and respond within 2 business days.
+
+If you have additional context to share,
+you can reply to this email.
+
+— Opsfield Systems
+```
+
+Не включать challenge, company и другие form values.
+
+### Rate limiting
+
+In-memory counter не считать надёжным serverless rate limiter.
+
+Preview baseline:
+
+- honeypot;
+- strict validation;
+- body limit;
+- duplicate-submit protection;
+- platform logs без PII.
+
+Production anti-abuse control выбирается после окончательного hosting decision.
+
+### Acceptance criteria
+
+- [ ] Invalid submissions rejected server-side.
+- [ ] Unknown fields discarded.
+- [ ] Secrets отсутствуют в client bundle.
+- [ ] Preview не auto-reply произвольным visitors.
+- [ ] No raw PII logging.
+- [ ] No challenge text in auto-reply.
+- [ ] Email failure не маскируется как email success.
+- [ ] Form data не отправляется в analytics.
+- [ ] Test cases: valid, invalid email, oversize challenge, honeypot, duplicate click, Resend failure.
+
+---
+
+## Этап 8. Legal pages, privacy behavior и consent foundation
+
+**Статус:** Not started.
+
+### Pages
+
+- `/privacy-policy`;
+- `/terms-of-use`;
+- `/cookie-policy`.
+
+### Requirements
+
+- content из `texts.md` без самовольной юридической редакции;
+- `noindex,follow` на production legal pages;
+- preview host — `noindex,nofollow` для всех routes;
+- unique title/description;
+- visible back-to-home navigation;
+- form notice ссылается на Privacy Policy;
+- legal drafts не называются counsel-approved.
+
+### Provider accuracy
+
+Preview drafts могут описывать фактически активные test providers, но production legal pages перечисляют только production providers:
+
+- production hosting provider;
+- Resend, если email active;
+- GA4 только после consent-controlled activation;
+- DNS/registrar provider только в той роли, которую он реально выполняет.
+
+Не перечислять unused providers.
+
+### Consent foundation
+
+До GA4:
+
+- optional analytics не загружать;
+- не создавать сложный CMP без cookies/analytics;
+- подготовить component boundary и preference storage;
+- full banner активировать вместе с GA4.
+
+Required actions после GA4 activation:
+
+- Accept;
+- Decline;
+- Privacy Policy;
+- возможность изменить preference.
+
+### Acceptance criteria
+
+- [ ] Три legal routes работают.
+- [ ] Provider list соответствует deployment mode.
+- [ ] Нет fake legal entity/inbox/domain.
+- [ ] Legal draft status понятен.
+- [ ] GA4 отсутствует до consent.
+- [ ] Form privacy notice работает.
+
+---
+
+## Этап 9. SEO, metadata и preview isolation
+
+**Статус:** Not started.
+
+### Preview rules
+
+Для Vercel и Netlify previews:
+
+- `robots: noindex,nofollow`;
+- `X-Robots-Tag: noindex, nofollow`;
+- preview host не становится production canonical;
+- sitemap не отправляется в Search Console;
+- structured data не содержит placeholder production identity.
+
+### Production implementation
+
+- metadata из `texts.md`;
+- unique legal metadata;
+- canonical helper из `SITE_URL`;
+- `app/robots.ts`;
+- `app/sitemap.ts`;
+- Open Graph;
+- X/Twitter metadata;
+- Organization/WebSite/WebPage/Service JSON-LD;
+- FAQPage только при exact visible match;
+- 404 noindex;
+- legal noindex;
+- only homepage в indexable sitemap MVP.
+
+### Environment gate
+
+```text
+SITE_MODE
+SITE_URL
+```
+
+Production build/deploy должен быть заблокирован, если:
+
+- `SITE_URL` отсутствует;
+- host placeholder;
+- host является preview domain;
+- brand/legal launch gate не выполнен.
+
+### Acceptance criteria
+
+- [ ] Preview не индексируется.
+- [ ] Production metadata совпадает с `texts.md`.
+- [ ] Canonical self-referencing.
+- [ ] Legal routes noindex.
+- [ ] FAQ в initial HTML.
+- [ ] JSON-LD соответствует visible content.
+- [ ] Нет old brand, O-1 и placeholder domain.
+
+---
+
+## Этап 10. Accessibility and Performance
+
+**Статус:** Not started.
+
+### Accessibility
+
+- keyboard-only navigation;
+- logical tab order;
+- visible `:focus-visible`;
+- SkipLink;
+- drawer focus trap;
+- Escape + focus return;
+- FAQ `<button aria-expanded>`;
+- labels и autocomplete;
+- error association;
+- error summary;
+- success `aria-live="polite"`;
+- AA contrast;
+- status not color-only;
+- touch targets ≥44px;
+- 200% и 400% zoom;
+- reduced motion;
+- VoiceOver/NVDA smoke.
+
+### Performance
+
+- minimize Client Components;
+- no page-wide hydration;
+- Hero/LCP asset not lazy;
+- below-fold images lazy;
+- image dimensions specified;
+- `next/font` или existing local setup;
+- no heavy animation library;
+- no duplicate icon bundles;
+- no optional third-party scripts before consent;
+- review production build output.
+
+### Release targets
+
+- Lighthouse Performance ≥90 desktop and ≥85 mobile;
+- Accessibility ≥95;
+- Best Practices ≥95;
+- SEO ≥95 on production-like build;
+- no serious/critical axe violations;
+- no horizontal scroll at QA widths.
+
+Targets — release gates, не публичные promises.
+
+### Acceptance criteria
+
+- [ ] Keyboard flow complete.
+- [ ] Drawer/FAQ/form accessible.
+- [ ] Reduced motion respected.
+- [ ] Zoom tests pass.
+- [ ] No serious/critical axe issue.
+- [ ] No horizontal scroll 320–1440px.
+- [ ] Performance work основана на measured defects.
+
+---
+
+## Этап 11. Minimal CI, contract tests и E2E
+
+**Статус:** Not started.
+
+### Mandatory local checks
+
+```text
+npm ci
+npm run lint
+npx tsc --noEmit
+npm run build
+contract tests
+Playwright Chromium smoke
+axe smoke
+```
+
+### `package.json`
+
+Добавить единый script:
+
+```json
+{
+  "scripts": {
+    "check": "npm run lint && npx tsc --noEmit && npm run build"
+  }
+}
+```
+
+### GitHub Actions
+
+Lightweight Pull Request workflow:
+
+```yaml
+name: Quality
+on: [pull_request]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npx tsc --noEmit
+      - run: npm run build
+      - run: npm run test:contracts
+```
+
+Full Playwright matrix и Lighthouse запускаются locally перед milestone/release, если CI minutes ограничены.
+
+### Contract tests
+
+Проверяют:
+
+- route list;
+- exactly 11 top-level sections;
+- section order/IDs;
+- one H1;
+- CTA targets;
+- critical approved copy;
+- form fields/options;
+- request type routing;
+- legal robots;
+- preview noindex;
+- no old brand;
+- no O-1;
+- no public TODO/TBD/lorem ipsum;
+- no production placeholders in production mode;
+- FAQ content in HTML;
+- GA4 absent without consent.
+
+### E2E smoke
+
+- navigation anchors;
+- mobile drawer;
+- FAQ;
+- progressive form disclosure;
+- validation;
+- CTA prefill;
+- form success/error mocked paths;
+- preview robots.
+
+### Acceptance criteria
+
+- [ ] `npm run check` passes.
+- [ ] CI runs on PR.
+- [ ] Contract tests protect structure/copy.
+- [ ] Failed/skipped checks disclosed.
+- [ ] Full browser matrix remains release gate.
+
+---
+
+## Этап 12. Analytics preparation
+
+**Статус:** Not started.
+
+### До production
+
+- создать analytics abstraction;
+- events are no-op без consent;
+- не загружать `gtag.js`;
+- не добавлять Measurement ID в public preview;
+- не использовать Vercel/Netlify analytics как незаявленную замену tracking plan.
+
+### Production activation
+
+- GA4 Basic Consent Mode;
+- default analytics denied;
+- Accept загружает GA4;
+- Decline оставляет GA4 absent;
+- preference можно изменить;
+- no PII;
+- no form values;
+- no challenge text;
+- no full query strings;
+- validate в GA4 DebugView.
+
+### MVP events
+
+- `cta_click`;
+- `nav_anchor_click`;
+- `faq_item_open`;
+- `form_start`;
+- `form_submit_attempt`;
+- `form_submit_success`;
+- `form_submit_error`.
+
+Field-level analytics, abandonment и complex visibility events отложены до реального traffic volume.
+
+### Acceptance criteria
+
+- [ ] Preview не отправляет analytics.
 - [ ] GA4 не загружается до Accept.
-- [ ] После Decline GA4 отсутствует.
-- [ ] Сайт полностью работает без analytics.
-- [ ] Events проверены в GA4 DebugView.
-- [ ] PII не передаётся (имена, email, текст challenge).
-- [ ] Event naming: snake_case.
-- [ ] GSC подключён, sitemap.xml отправлен.
-- [ ] Analytics не блокирует rendering.
-
-**Типичные ошибки:**
-- Загрузить GA4 до consent.
-- Передать PII в analytics.
-- Забыть проверить events в DebugView.
-- Naming: camelCase вместо snake_case.
-
-**Зависит от владельца:** создание GA4 property и GSC account.
+- [ ] Event payloads не содержат PII.
+- [ ] Events связаны с conversion decisions.
 
 ---
 
-### Этап 10. Тестирование и QA
+## Этап 13. Pre-Launch Preview и Production Activation
 
-**Цель:** комплексная проверка перед деплоем.
+**Статус:** Not started.
 
-**Что делать:**
+### Part A — zero-budget pre-launch
 
-Пройти полный чеклист из `optimization.md` → "Technical QA Before Launch". Адаптация для учебного проекта (без production domain):
+Checklist:
 
-**Контент и структура:**
-- [ ] Рабочий бренд Opsfield Systems везде; нет альтернативных названий.
-- [ ] Порядок секций совпадает с `sitemap.md` — ровно 11 top-level.
-- [ ] Business & IT Diagnostic — один composite section (4 sub-blocks).
-- [ ] Hero, Problem, Method, Why, Final CTA не повторяют одно и то же.
-- [ ] Тексты и CTA совпадают с `texts.md`.
-- [ ] Нет TODO, TBD, lorem ipsum, placeholder copy.
-- [ ] Нет fake logos, metrics, testimonials, awards.
-- [ ] Illustrative scenarios помечены как illustrative.
-- [ ] Нет O-1 упоминаний.
-- [ ] Нет `LLC`, `Inc.`, `®`.
-- [ ] Каждый CTA из `texts.md` ведёт к правильному якорю.
+- [ ] Все этапы 4–12 завершены.
+- [ ] Vercel preview `noindex,nofollow`.
+- [ ] Form работает в preview/test mode.
+- [ ] Нет visitor auto-reply arbitrary recipients.
+- [ ] Нет GA4.
+- [ ] Нет fake production domain/entity/email.
+- [ ] Все 11 sections complete.
+- [ ] Legal drafts доступны.
+- [ ] 320/375/768/1024/1280/1440 QA.
+- [ ] Chromium/Firefox/WebKit smoke.
+- [ ] iOS Safari smoke по возможности.
+- [ ] Keyboard, zoom, reduced motion.
+- [ ] Build, contract tests, axe pass.
+- [ ] Owner manually reviews every CTA and visible copy.
 
-**SEO:**
-- [ ] Один H1.
-- [ ] Правильный title и meta description.
-- [ ] Self-referencing canonical.
-- [ ] robots directives корректны.
-- [ ] sitemap.xml содержит только indexable URLs.
-- [ ] OG и Twitter metadata заполнены.
-- [ ] JSON-LD валиден.
-- [ ] FAQ в HTML (не dynamic load).
-- [ ] FAQ содержит Fit / Not Fit criteria.
-- [ ] Нет broken internal links.
+**Результат:** готовый pre-launch asset для внутренней проверки и демонстрации, не commercial production.
 
-**Форма:**
-- [ ] 4 обязательных поля: Name, Work Email, Company, Main Challenge.
-- [ ] Optional fields скрыты по умолчанию.
-- [ ] Форма отправляется без optional fields.
-- [ ] CTA routing prefills request_type (один field, editable).
-- [ ] Client-side и server-side validation работают.
-- [ ] Success и error states работают.
-- [ ] Auto-reply приходит.
-- [ ] Notification приходит.
-- [ ] Privacy notice видим.
-- [ ] Honeypot работает.
+### Part B — production gates
 
-**Privacy:**
-- [ ] Cookie banner: Accept / Decline / Privacy Policy.
-- [ ] GA4 не загружается до Accept.
-- [ ] GA4 остаётся выключенным после Decline.
-- [ ] Сайт работает без analytics.
+#### Business/legal
 
-**Accessibility:**
-- [ ] Keyboard navigation работает.
-- [ ] Focus states видимы.
-- [ ] Mobile drawer focus trap работает.
-- [ ] FAQ ARIA states работают.
-- [ ] Form labels и errors связаны.
-- [ ] Contrast: AA.
-- [ ] Touch targets ≥ 44px.
-- [ ] `prefers-reduced-motion` работает.
-- [ ] Нет горизонтального скролла.
+- [ ] Trademark/common-law review завершён.
+- [ ] Legal operator / DBA подтверждён.
+- [ ] Production domain зарегистрирован в business-controlled account.
+- [ ] General/privacy inboxes созданы.
+- [ ] Legal drafts обновлены под фактического operator/providers.
 
-**Performance:**
-- [ ] LCP ≤ 2.5s.
-- [ ] INP ≤ 200ms.
-- [ ] CLS ≤ 0.1.
-- [ ] Hero visual оптимизирован.
-- [ ] Images с dimensions.
-- [ ] Below-fold images lazy-load.
-- [ ] Fonts: WOFF2, swap.
-- [ ] Lighthouse targets.
+#### Hosting — выбрать одно
 
-**Cross-browser:**
-- [ ] Chrome (desktop + Android).
-- [ ] Firefox.
-- [ ] Safari (desktop + iOS).
-- [ ] Edge.
-- [ ] Safari iOS: form zoom, smooth scroll, sticky, autocomplete.
+**A. Netlify Free — основной zero-budget path**
 
-**Адаптивное тестирование:**
-- [ ] 320px, 375px, 768px, 1024px, 1280px, 1440px.
+- [ ] Existing Next.js project подключён без framework rewrite.
+- [ ] App Router routes работают.
+- [ ] Route Handler работает через platform adapter.
+- [ ] Environment variables разделены preview/production.
+- [ ] Headers, redirects, 404 проверены.
+- [ ] Function usage/credits monitored.
 
-**Материалы из RAG:** `optimization.md` → "Technical QA Before Launch" (полный чеклист).
+**B. Vercel Pro — paid alternative**
 
-**Кто делает:** владелец с помощью Claude.
+- [ ] Pro plan активирован.
+- [ ] Spending controls reviewed.
+- [ ] Production domain connected.
+- [ ] Environment variables separated.
 
-**Результат:** все чеклист-пункты пройдены.
+#### Email
 
-**Зависит от владельца:** контентная проверка, визуальная проверка на реальных устройствах.
+- [ ] Domain verified в Resend.
+- [ ] SPF/DKIM pass.
+- [ ] Sender uses verified domain.
+- [ ] Reply-To monitored.
+- [ ] Owner notification delivered.
+- [ ] Visitor auto-reply delivered.
+- [ ] Failure/bounce path tested.
+
+#### SEO/analytics/release
+
+- [ ] Production canonical.
+- [ ] Production robots.
+- [ ] sitemap.xml.
+- [ ] Search Console verification.
+- [ ] GA4 consent behavior.
+- [ ] Real production form submission.
+- [ ] Security headers.
+- [ ] Cross-browser matrix.
+- [ ] Accessibility manual checks.
+- [ ] Lighthouse thresholds.
+- [ ] No placeholders/preview messaging.
+
+### Activation rule
+
+Indexing, analytics и real lead collection не включаются частично. Production switches только после прохождения обязательных gates.
 
 ---
 
-### Этап 11. Деплой
+## Этап 14. Post-Launch Maintenance
 
-**Цель:** убедиться, что Vercel-версия сайта стабильна и доступна.
+**Статус:** Deferred until production.
 
-**Что делать:**
+### Weekly — first month
 
-1. Merge ветки `staging` в `main`. Vercel автоматически деплоит.
+- review submissions;
+- review spam/abuse;
+- verify email delivery;
+- inspect function errors;
+- check broken links;
+- assess qualified lead quality.
 
-2. Проверить live-сайт на Vercel subdomain:
-   - Все страницы открываются.
-   - Форма отправляется.
-   - Auto-reply приходит.
-   - Cookie banner работает.
-   - GA4 работает после consent (если настроен).
-   - 404-страница работает.
-   - Legal-страницы доступны.
+### Monthly
 
-3. Настроить security headers в `next.config.js` или `vercel.json`:
-   - `X-Content-Type-Options: nosniff`.
-   - `Referrer-Policy: strict-origin-when-cross-origin`.
-   - `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
-   - Content Security Policy: начать в report-only mode.
-   - HTTPS: автоматически через Vercel.
-   - Спецификация: `optimization.md` → "Headers baseline".
+- security/dependency review;
+- form end-to-end test;
+- analytics validation;
+- Search Console review;
+- performance review;
+- environment inventory backup;
+- provider usage/credit review.
 
-4. Для перехода к production (когда domain и legal clearance готовы):
-   - Подключить домен к Vercel.
-   - Настроить Cloudflare DNS (если решите использовать).
-   - Заменить Vercel subdomain на production domain в canonical, sitemap, structured data, OG.
-   - Настроить email (Google Workspace / Zoho).
-   - Настроить redirect: HTTP → HTTPS, www → без www (или наоборот).
-   - Убрать `noindex` с homepage.
-   - Зарегистрировать domain в GSC.
+### Quarterly
 
-**Материалы из RAG:** `optimization.md` → "Hosting and Infrastructure", "Headers baseline", "Deployment pipeline", "DNS and domain".
+- legal/provider list review;
+- data-retention cleanup;
+- accessibility smoke;
+- conversion review;
+- multilingual launch criteria review;
+- hosting economics review.
 
-**Кто делает:** владелец с помощью Claude.
+### Migration reconsideration
 
-**Результат:** сайт доступен на Vercel subdomain. Все функции работают.
-
-**Зависит от владельца:** визуальная проверка, тестирование формы.
+Astro или другая architecture рассматривается только при measurable need и отдельном ADR.
 
 ---
 
-## Порядок работы и зависимости
+## Dependencies and Execution Order
 
-```
-Этап 0 → Этап 1 → Этап 2 → Этап 3 → Этап 4 → Этап 5
-                                                    ↓
-                              Этап 6 (параллельно с 5)
-                                                    ↓
-                              Этап 7 → Этап 8 → Этап 9 → Этап 10 → Этап 11
+```text
+Completed: 0 → 1 → 2 → 3
+                         ↓
+Next: 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 → 12 → 13
+                                                        ↓
+                                              14 after launch
 ```
 
-Этапы 3 и 6 можно вести параллельно. Этап 5 зависит от этапа 4 (форма должна существовать). Этап 9 зависит от этапа 6 (cookie consent нужен для GA4). Всё остальное — последовательно.
+Rules:
+
+- этап 4 обязателен до любых новых code changes;
+- этап 5 audit-only;
+- Blocker/High findings из этапа 5 исправляются отдельными tasks до этапа 6;
+- этап 6 frontend form до этапа 7 backend;
+- этап 8 legal foundation до analytics activation;
+- этапы 9–12 могут частично выполняться параллельно только после стабильной формы;
+- этап 13 production blocked до business/domain/email gates;
+- этап 14 только после launch.
 
 ---
 
-## Внешние аккаунты и сервисы
+## What Is Explicitly Cancelled
 
-| Сервис | Когда нужен | Бесплатный план | Что получить |
-|---|---|---|---|
-| GitHub | Этап 0 | Да | Репозиторий |
-| Vercel | Этап 0 | Да (Hobby) | Хостинг + деплой |
-| Resend | Этап 5 | 100 emails/день | API-ключ |
-| Google Analytics 4 | Этап 9 | Да | Measurement ID |
-| Google Search Console | Этап 9 | Да | Верификация домена |
+- Next.js → Astro rewrite;
+- forced Netlify Forms migration;
+- Postmark integration;
+- Astro Content Layer;
+- mandatory YAML/JSON content migration;
+- locale directories/routes в MVP;
+- Language Switcher;
+- Better Stack;
+- permanent staging branch;
+- full Playwright matrix on every PR;
+- Lighthouse CI on every PR;
+- CMS;
+- database;
+- authentication;
+- GTM;
+- heatmaps;
+- session replay;
+- paid monitoring;
+- paid form tools;
+- automated AI translation;
+- local/open-source LLM workflow — доступен только Claude Code.
 
 ---
 
-## Критические правила (не нарушать)
+## Alternative and Gray Options
 
-Собраны из всех четырёх source-файлов:
+### Допустимый fallback
 
-1. **Не создавать** страницы, секции, URL, anchors, отсутствующие в `sitemap.md`.
-2. **Не менять** тексты и CTA — брать из `texts.md`.
-3. **Не выдумывать** клиентов, кейсы, метрики, сертификаты, биографии.
-4. **Не добавлять** O-1 Agent Services в любом виде.
-5. **Не использовать** `LLC`, `Inc.`, `®` у бренда.
-6. **Не использовать** AI-hype визуалы: роботы, neon, glowing brain.
-7. **Не использовать** stock photos: handshake, meeting room, developers typing.
-8. **Не использовать** generic CTA: «Contact Us», «Learn More», «Submit».
-9. **Не загружать** GA4 до cookie consent.
-10. **Не передавать** PII (имена, email, текст challenge) в analytics.
-11. **Не хранить** form data в localStorage.
-12. **Не использовать** jQuery, Bootstrap.
-13. **Не создавать** horizontal page scroll.
-14. **Не использовать** lorem ipsum.
-15. **Не размещать** `#CBD5E1` как цвет текста.
-16. **11 секций** — не больше, не меньше.
-17. **Business & IT Diagnostic** — одна секция, 4 подблока.
-18. **Request Type** — один field, не два (hidden + visible).
-19. **Company Size** — без предвыбранного значения.
-20. **FAQ** — ответы в HTML, не dynamic load.
+**Netlify Free + existing Next.js** — допустимый коммерческий zero-budget hosting path. Обязателен end-to-end adapter/function test.
+
+### Временный деградированный вариант
+
+Форма может отправлять только owner notification без visitor auto-reply до verified domain. Success message не должен обещать письмо пользователю.
+
+### Не рекомендованный вариант
+
+Публично использовать Vercel Hobby для commercial lead generation. Это создаёт platform-compliance risk и не входит в approved plan.
+
+### Серые варианты, которые запрещены
+
+- shared/cracked Claude accounts;
+- stolen API keys;
+- unofficial API proxies;
+- обход Claude Code permissions;
+- подмена production identity бесплатными фиктивными inbox/domain;
+- скрытый запуск GA4 без consent;
+- отправка email через чужой verified domain;
+- маскировка коммерческого production как personal project.
+
+Экономия от этих вариантов ниже риска account suspension, data leakage и потери leads.
+
+---
+
+## Critical Risks
+
+| Risk | Business impact | Control |
+|---|---|---|
+| Документация всё ещё описывает Astro | Claude создаёт несовместимый code | Этап 4 до coding |
+| Ошочно считать form/backend готовыми | Launch без работающей conversion path | Этапы 6–7 marked not started |
+| Vercel Hobby commercial restriction | Platform compliance / suspension risk | Preview only; Netlify Free or Vercel Pro production |
+| Нет domain | Low trust, no canonical, no verified sender | Domain mandatory production gate |
+| Resend test domain | Нет arbitrary visitor auto-reply | Preview owner-only; verify domain before production |
+| Claude broad refactor | Потеря готового frontend | Plan Mode, minimal diff, branch isolation |
+| Hardcoded copy drift | Claims/CTA расходятся с source | Contract tests + read-only source |
+| Serverless anti-abuse weakness | Spam/function usage | Honeypot, validation, body limit; production control later |
+| PII in logs/analytics | Privacy/legal risk | No raw logs, no values in analytics |
+| Legal drafts list unused providers | Misleading disclosure | Launch-time provider audit |
+| No second developer | Review blind spots | Tests, small diffs, owner QA |
+| Netlify adapter/function mismatch | Production form failure | Dedicated production preview and real submission test |
+
+---
+
+## Definition of Done for Every Claude Code Task
+
+Claude Code может заявить `complete` только если сообщает:
+
+1. task scope;
+2. source-of-truth sections used;
+3. files inspected;
+4. files changed;
+5. exact behavior changed;
+6. commands run;
+7. command results;
+8. tests added/updated;
+9. tests not run and reason;
+10. browser/screenshots evidence where relevant;
+11. remaining manual QA;
+12. known risks;
+13. confirmation that source-of-truth was not modified.
+
+Code appearance не является доказательством completion.
+
+---
+
+## Standard Claude Code Task Prompt
+
+```text
+Read CLAUDE.md and all applicable files in .claude/rules/.
+Read the relevant source-of-truth files in docs/source-of-truth/ as read-only.
+
+Work in Plan Mode first.
+Do not edit any file yet.
+
+For this task:
+1. Restate the exact goal.
+2. List the source-of-truth sections that apply.
+3. List the existing files/components you inspected.
+4. List the minimum files that must change.
+5. Identify risks to currently working behavior.
+6. Propose the smallest implementation plan.
+7. List commands and tests you will run.
+8. State and justify any dependency you want to add.
+
+Constraints:
+- Keep the existing Next.js App Router architecture.
+- Do not migrate to Astro or another framework.
+- Do not rewrite approved copy.
+- Do not invent content, routes, services, metrics or form fields.
+- Do not modify docs/source-of-truth/ in a code task.
+- Do not read .env files or secrets.
+- Do not run git push, vercel deploy, netlify deploy, destructive Git commands or production actions.
+- Do not perform unrelated refactoring.
+- Preserve all working behavior outside the stated scope.
+- Report every failed, skipped or unavailable test.
+
+Wait for owner approval of the plan before editing code.
+```
+
+---
+
+## Immediate Next Action
+
+Выполнить **только этап 4**.
+
+После синхронизации documentation/governance выполнить этап 5 как audit-only task. Не начинать форму и backend до audit report и закрытия Blocker/High findings.

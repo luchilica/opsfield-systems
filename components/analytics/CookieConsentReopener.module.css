@@ -1,0 +1,14 @@
+/* Renders as a text link inside the footer Legal column. Inherits color from the
+   className passed by the footer so it matches the surrounding legal links. */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* touch target */
+  padding: 0;
+  background: none;
+  border: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
