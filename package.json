@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check": "npm run lint && npx tsc --noEmit && npm run build",
+    "test:contracts": "npx playwright test tests/contracts/",
+    "test:e2e": "npx playwright test tests/e2e/",
+    "test": "npm run test:contracts && npm run test:e2e"
   },
   "dependencies": {
     "lucide-react": "^1.21.0",
@@ -17,6 +21,7 @@
   },
   "devDependencies": {
     "@axe-core/cli": "^4.12.1",
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
