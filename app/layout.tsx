@@ -5,6 +5,8 @@ import SkipLink from "@/components/layout/SkipLink";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/analytics/CookieConsent";
+import AnalyticsProvider from "@/components/analytics/AnalyticsProvider";
+import AnalyticsClickTracker from "@/components/analytics/AnalyticsClickTracker";
 import { siteConfig } from "@/lib/site-config";
 
 // Body + H4 — Inter. Weights 400 (body/lead/small) and 600 (H4).
@@ -47,6 +49,8 @@ export default function RootLayout({
         <main id="main-content">{children}</main>
         <Footer />
         <CookieConsent />
+        <AnalyticsProvider />
+        <AnalyticsClickTracker />
       </body>
     </html>
   );

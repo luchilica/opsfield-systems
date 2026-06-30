@@ -9,6 +9,7 @@ import {
 } from "react";
 import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { trackEvent } from "@/lib/analytics";
 import styles from "./DiagnosticForm.module.css";
 
 // Copy from docs/texts.md → "Diagnostic Request Form".
@@ -65,6 +66,7 @@ export default function DiagnosticForm() {
   const emailRef = useRef<HTMLInputElement>(null);
   const companyRef = useRef<HTMLInputElement>(null);
   const challengeRef = useRef<HTMLTextAreaElement>(null);
+  const startedRef = useRef(false); // fire form_start only once per session
 
   const set = (key: keyof Values, value: string) =>
     setValues((v) => ({ ...v, [key]: value }));
@@ -107,7 +109,10 @@ export default function DiagnosticForm() {
     event.preventDefault();
     if (status === "loading") return; // block duplicate submission
 
+    trackEvent("form_submit_attempt");
+
     // Honeypot: silently accept (show success) without sending anything.
+    // No success event — this path is a bot trap.
     if (values.website.trim() !== "") {
       setStatus("success");
       return;
@@ -117,6 +122,7 @@ export default function DiagnosticForm() {
     if (Object.keys(found).length > 0) {
       setErrors(found);
       focusFirstError(found);
+      trackEvent("form_submit_error", { error_type: "validation_error" });
       return;
     }
     setErrors({});
@@ -127,8 +133,12 @@ export default function DiagnosticForm() {
       // TODO: Stage 5 — replace with actual API call to /api/submit.
       await new Promise((resolve) => setTimeout(resolve, 1500));
       setStatus("success");
+      trackEvent("form_submit_success", {
+        request_type: values.requestType || "not_specified",
+      });
     } catch {
       setStatus("error");
+      trackEvent("form_submit_error", { error_type: "network_error" });
     } finally {
       clearTimeout(slowTimer);
       setSlow(false);
@@ -161,7 +171,17 @@ export default function DiagnosticForm() {
         access is required for the first fit review.
       </p>
 
-      <form className={styles.form} onSubmit={onSubmit} noValidate>
+      <form
+        className={styles.form}
+        onSubmit={onSubmit}
+        onFocus={() => {
+          if (!startedRef.current) {
+            startedRef.current = true;
+            trackEvent("form_start", { section: "business-it-diagnostic" });
+          }
+        }}
+        noValidate
+      >
         <div className={`${styles.fields} ${loading ? styles.fieldsLoading : ""}`}>
           {/* Honeypot — visually removed, not display:none. */}
           <div className={styles.honeypot} aria-hidden="true">

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, CheckCircle2, XCircle } from "lucide-react";
 import { FAQ_ITEMS } from "./faqData";
+import { trackEvent } from "@/lib/analytics";
 import styles from "./FAQ.module.css";
 
 // Q&A content lives in ./faqData (shared with the FAQPage JSON-LD so schema and
@@ -32,7 +33,12 @@ export default function FAQ() {
                   className={styles.trigger}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
-                  onClick={() => setOpenIndex(isOpen ? -1 : i)}
+                  onClick={() => {
+                    if (!isOpen) {
+                      trackEvent("faq_item_open", { faq_question: item.q });
+                    }
+                    setOpenIndex(isOpen ? -1 : i);
+                  }}
                 >
                   <span>{item.q}</span>
                   <ChevronDown
