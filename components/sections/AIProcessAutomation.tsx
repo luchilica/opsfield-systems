@@ -18,7 +18,9 @@ export default function AIProcessAutomation() {
   return (
     <div className="container">
       <div className={styles.block}>
-        <Bot size={32} className={styles.icon} aria-hidden="true" />
+        <span className={styles.icon}>
+          <Bot size={22} aria-hidden="true" />
+        </span>
 
         <h2 className={styles.heading}>
           From diagnostic to implementation: AI &amp; Process Automation.

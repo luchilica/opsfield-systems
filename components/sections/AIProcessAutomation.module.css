@@ -8,8 +8,16 @@
   gap: var(--space-3);
 }
 
-/* Bot icon allowed ONLY in this section — used as a restrained lead mark. */
+/* Bot icon allowed ONLY in this section — restrained lead mark in the shared
+   accent-tinted icon container (consistent with the card icon language). */
 .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-light);
   color: var(--accent);
 }
 

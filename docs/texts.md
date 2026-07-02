@@ -116,15 +116,8 @@
 
 - **H2:** Senior attention without a handoff chain.
 - **Text:** Opsfield Systems works with 4–6 active clients at a time so senior advisors remain involved from problem framing through scope and delivery.
-- **Daniel Kovacs — Managing Partner**
-  Focus: operating model design, diagnostic methodology, roadmap prioritization, and executive decision support.
-  Background: 12+ years in B2B operations consulting. Previously led process transformation at mid-market SaaS and services firms across CRM, RevOps, and cross-functional workflow design.
-
-- **Alina Torres — Solution Architect**
-  Focus: CRM architecture, RevOps pipeline design, data flow mapping, integrations, automation design, and implementation risk review.
-  Background: 10+ years in systems architecture and integration. Deep experience with HubSpot, Salesforce, and multi-tool B2B environments including Zapier, Make, and custom middleware.
-
-- **Note:** Team names and bios are fictional working-brand placeholders authorized by the owner. Replace with verified real identities before production launch.
+- **Managing Partner:** operating model design, diagnostic methodology, roadmap prioritization, and executive decision support.
+- **Solution Architect:** CRM architecture, RevOps pipeline design, data flow mapping, integrations, automation design, and implementation risk review.
 - **Relevant environments:** HubSpot, Salesforce, Pipedrive, Asana, Monday, Notion, QuickBooks, Zapier, and Make.
 - **CTA (text link):** Work With Senior Advisors
 

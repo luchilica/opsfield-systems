@@ -353,7 +353,7 @@ The homepage must render exactly 11 top-level sections in the order defined by `
 - Problem Section: why growth slows and where symptoms appear.
 - How the Diagnostic Works: method and decision outputs; do not repeat the Hero slogan.
 - Why Opsfield Systems: comparison of operating approaches; do not restate the full positioning paragraph.
-- Delivery Model: who remains involved and what each role covers; do not invent biographies or credentials, except fictional placeholder bios explicitly labeled as working-brand placeholders to be replaced with verified real identities before production launch.
+- Delivery Model: who remains involved and what each role covers; do not invent biographies or credentials.
 - Final CTA: decision prompt and action; do not repeat the Hero or Problem copy verbatim.
 
 ### Deduplication check (before publishing text changes)
@@ -1443,7 +1443,7 @@ Newsletter is Phase 2 only.
 - Создавать страницы, отсутствующие в `sitemap.md`.
 - Упоминать удалённые draft page files.
 - Размещать O-1 Readiness Support вне разрешённого scope (service card, один FAQ, один request type) — в Hero, H1, header nav, primary CTA, meta или primary JSON-LD Service.
-- Придумывать и представлять как подтверждённые: real clients, real metrics, certifications, awards, partnerships, logos или reviews. Разрешённые исключения: (a) illustrative composite figures — только если явно помечены как anonymized composites (например, Diagnostic Scenarios с диапазонами вроде $180K–$240K, $320K); (b) fictional placeholder team bios — только если явно помечены как working-brand placeholders и заменяются на verified real identities до production launch.
+- Придумывать и представлять как подтверждённые: real clients, real metrics, certifications, awards, partnerships, logos, reviews, имена или bios команды. Разрешённое исключение: illustrative composite figures — только если явно помечены как anonymized composites (например, Diagnostic Scenarios с диапазонами вроде $180K–$240K, $320K).
 - Использовать lorem ipsum.
 - JS-render основного контента.
 - Использовать jQuery или Bootstrap.

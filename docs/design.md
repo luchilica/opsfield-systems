@@ -553,9 +553,9 @@ Structure:
 Rules:
 
 - Maximum 2 cards for MVP
-- Do not present unverified real clients, real metrics, certifications, awards, logos, reviews, or Fortune 500 claims.
-- Allowed placeholders, only when explicitly labeled as such: (a) illustrative composite figures labeled as anonymized composites; (b) fictional placeholder team names, bios, and initials-avatar portraits labeled as working-brand placeholders to be replaced with verified real identities before production launch.
-- Use a semantic role icon or a labeled initials-avatar placeholder when no approved portrait exists.
+- Do not present unverified real clients, real metrics, certifications, awards, logos, reviews, names, years, or Fortune 500 claims.
+- Illustrative composite figures are allowed only when explicitly labeled as anonymized composites.
+- No stock or fictional portrait placeholders presented as real people; use a semantic role icon when no approved portrait exists.
 
 ### ICP Qualifier
 
@@ -1051,7 +1051,7 @@ Do not include placeholder assets in production launch.
 - Primary CTA видим без скролла.
 - Все секции из `sitemap.md` имеют визуальное решение.
 - AI section не выглядит как AI-hype.
-- O-1 полностью отсутствует в публичных MVP-макетах.
+- O-1 Readiness Support присутствует только как вторичная карточка в What We Diagnose, один FAQ и один form request type; отсутствует в Hero, H1, header nav, primary CTA, meta и primary JSON-LD Service.
 - Cards сканируются за 5–8 секунд.
 - FAQ имеет доступный accordion pattern.
 - Form содержит visible labels, clear states и privacy notice.
