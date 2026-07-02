@@ -25,7 +25,7 @@ Final project files:
 | `/privacy-policy` | Privacy Policy | Legal | Noindex | `texts.md` |
 | `/terms-of-use` | Terms of Use | Legal | Noindex | `texts.md` |
 | `/cookie-policy` | Cookie Policy | Legal | Noindex | `texts.md` |
-| `/404` | Page Not Found | Utility | Noindex | (inline or Netlify default) |
+| `/404` | Page Not Found | Utility | Noindex | (custom via app/not-found.tsx) |
 
 ### MVP rule
 

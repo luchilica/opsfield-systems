@@ -783,6 +783,8 @@ These may be collected by follow-up email after submission.
 
 ## Form Processing
 
+> ⚠️ SUPERSEDED — The Netlify Forms / Formspree details in this section are historical. The actual form backend is a Next.js Route Handler (`app/api/submit/route.ts`) with Resend for email notifications. Use this section only as historical reference.
+
 ### Default MVP implementation
 
 - Hosting: Netlify.
@@ -1135,13 +1137,13 @@ Evaluate variable fonts: if Inter variable + Inter Tight variable total less tha
 
 ### Default MVP stack
 
-- Hosting: Netlify.
-- Deployment: Git-based automatic deploy.
-- DNS: Cloudflare.
+- Hosting: Vercel.
+- Deployment: Git-based automatic deploy via Vercel GitHub integration.
+- DNS: Vercel or Cloudflare (when custom domain is registered).
 - Domain registrar: Cloudflare Registrar or approved registrar.
-- SSL: automatic HTTPS through hosting/CDN.
-- Email: Google Workspace or Zoho using the production domain.
-- Form: Netlify Forms.
+- SSL: automatic HTTPS through Vercel.
+- Email notifications: Resend.
+- Form processing: Next.js Route Handler (app/api/submit/route.ts).
 - Analytics: GA4 after consent.
 - Search monitoring: Google Search Console.
 
@@ -1158,19 +1160,19 @@ Repository: GitHub (recommended) or GitLab
 Branch strategy:
 - `main` → auto-deploys to production
 - `staging` → deploys to password-protected preview (`noindex`)
-- `feature/*` → Netlify deploy previews for PR review
+- `feature/*` → Vercel Preview Deployments for PR review
 
 Workflow:
 - Feature branch → pull request → staging review → merge to main
 - Direct commits to main discouraged after launch
 
-Netlify configuration:
+Vercel configuration:
 - Build command: none (static HTML) or build tool command if using Tailwind purge
-- Publish directory: `/` or `/dist`
+- Framework auto-detected by Vercel
 - Auto-publish: enabled for main
 - Deploy previews: enabled for pull requests
 
-Netlify subdomain (`[name].netlify.app`):
+Vercel subdomain (`[name].vercel.app`):
 - `noindex`
 - Redirect to production domain after launch
 
@@ -1203,7 +1205,7 @@ Configure at platform level where possible:
 - `Permissions-Policy`
 - Content Security Policy in report-only mode first, then enforced after testing.
 
-### CSP baseline for static Netlify site
+### CSP baseline for Next.js on Vercel
 
 Start with report-only mode:
 
@@ -1233,7 +1235,7 @@ Notes:
 
 ### 404 page
 
-Netlify supports custom 404 via `/404.html`.
+Next.js supports custom 404 via `app/not-found.tsx`.
 Content: heading, brief message, link to homepage, link to diagnostic form.
 Use `noindex` meta tag.
 Apply same header and footer as main page.

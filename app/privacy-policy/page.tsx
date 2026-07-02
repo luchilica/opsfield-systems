@@ -74,10 +74,9 @@ export default function PrivacyPolicy() {
       <p>
         We may disclose information to service providers that support website
         hosting, form processing, cybersecurity, analytics, email, document
-        management, and professional advisory services. The planned MVP
-        infrastructure includes Netlify for hosting and form processing,
-        Cloudflare for DNS and security, and Google Analytics 4 only after
-        analytics consent.
+        management, and professional advisory services. The current
+        infrastructure includes Vercel for hosting, Resend for email
+        notifications, and Google Analytics 4 only after analytics consent.
       </p>
       <p>
         We may also disclose information when required by law, to protect rights

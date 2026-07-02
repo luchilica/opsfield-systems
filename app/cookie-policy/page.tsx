@@ -42,9 +42,8 @@ export default function CookiePolicy() {
         when they are required for the service to function.
       </p>
       <p>
-        Planned providers may include Netlify for hosting and form processing and
-        Cloudflare for DNS, content delivery, and security. Actual cookies depend
-        on the deployed configuration.
+        Current providers include Vercel for hosting and Resend for email
+        notifications. Actual cookies depend on the deployed configuration.
       </p>
 
       <h3>Analytics</h3>

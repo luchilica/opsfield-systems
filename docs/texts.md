@@ -242,7 +242,7 @@ We collect information directly from you, automatically from your browser or dev
 
 ### Service Providers and Disclosures
 
-We may disclose information to service providers that support website hosting, form processing, cybersecurity, analytics, email, document management, and professional advisory services. The planned MVP infrastructure includes Netlify for hosting and form processing, Cloudflare for DNS and security, and Google Analytics 4 only after analytics consent.
+We may disclose information to service providers that support website hosting, form processing, cybersecurity, analytics, email, document management, and professional advisory services. The current infrastructure includes Vercel for hosting, Resend for email notifications, and Google Analytics 4 only after analytics consent.
 
 We may also disclose information when required by law, to protect rights or security, in connection with a business transaction, or with your direction or consent. Service providers may process information only for the services they perform for us and subject to applicable contractual restrictions.
 
@@ -405,7 +405,7 @@ Cookies are small text files stored on a browser or device. Similar technologies
 
 These technologies support core website functions such as security, network delivery, form operation, fraud prevention, and storage of cookie preferences. They cannot be disabled through the website preference tool when they are required for the service to function.
 
-Planned providers may include Netlify for hosting and form processing and Cloudflare for DNS, content delivery, and security. Actual cookies depend on the deployed configuration.
+Current providers include Vercel for hosting and Resend for email notifications. Actual cookies depend on the deployed configuration.
 
 #### Analytics
 

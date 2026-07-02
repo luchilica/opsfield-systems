@@ -1,3 +1,5 @@
+# ⚠️ SUPERSEDED — This file describes a REJECTED Astro/Netlify/Postmark architecture. The actual production stack is Next.js App Router + Vercel + Resend. See development-plan.md for the current architecture decision and implementation plan. Do not use this file for implementation decisions.
+
 # Vibe Coding Stack
 
 ## Final Decision
