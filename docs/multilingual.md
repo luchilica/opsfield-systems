@@ -1,3 +1,5 @@
+# ⚠️ SUPERSEDED — The i18n implementation in this file describes a REJECTED Astro/Netlify stack. The actual stack is Next.js App Router + Vercel + Resend, and the MVP ships English-only. Any future multilingual work must target Next.js/Vercel (not Astro), and does NOT supersede the Next.js/Vercel architecture. See development-plan.md. Do not use this file for implementation or architecture decisions.
+
 # Multilingual Architecture
 
 ## Final Decision

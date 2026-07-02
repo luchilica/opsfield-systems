@@ -553,9 +553,9 @@ Structure:
 Rules:
 
 - Maximum 2 cards for MVP
-- No stock portrait placeholders presented as real people
-- Do not invent names, certifications, years or Fortune 500 claims
-- Use semantic role icon only when no approved portrait exists
+- Do not present unverified real clients, real metrics, certifications, awards, logos, reviews, or Fortune 500 claims.
+- Allowed placeholders, only when explicitly labeled as such: (a) illustrative composite figures labeled as anonymized composites; (b) fictional placeholder team names, bios, and initials-avatar portraits labeled as working-brand placeholders to be replaced with verified real identities before production launch.
+- Use a semantic role icon or a labeled initials-avatar placeholder when no approved portrait exists.
 
 ### ICP Qualifier
 
