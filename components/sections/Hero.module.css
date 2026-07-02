@@ -137,12 +137,13 @@
   }
 
   .content {
-    flex: 0 0 55%;
+    /* shrink to absorb the row gap so 55% + 45% + gap never overflows */
+    flex: 0 1 55%;
     max-width: 55%;
   }
 
   .visual {
-    flex: 0 0 45%;
+    flex: 0 1 45%;
     max-width: 45%;
     max-height: none;
     overflow: visible;

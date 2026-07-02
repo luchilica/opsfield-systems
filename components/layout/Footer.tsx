@@ -56,7 +56,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         {/* CTA panel */}
-        <div className={styles.ctaPanel}>
+        <div className={`${styles.ctaPanel} print-hide`}>
           <p className={styles.ctaText}>
             Start with clarity before investing in tools or implementation.
           </p>

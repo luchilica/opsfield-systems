@@ -9,7 +9,7 @@
   box-shadow: var(--shadow-sm);
   padding: 24px; /* mobile */
   overflow: hidden;
-  transition: box-shadow var(--transition-fast);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
 @media (min-width: 768px) {
@@ -18,7 +18,8 @@
   }
 }
 
-/* Hover: change shadow only — no transform/lift (Shadow Rules). */
+/* Hover: elevate shadow + a subtle ≤2px lift (docs/design.md → Тени). */
 .hover:hover {
   box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }

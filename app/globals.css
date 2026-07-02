@@ -300,3 +300,82 @@ main > section:nth-child(even) {
     scroll-behavior: auto !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Print — clean, ink-friendly output. Spec: docs/design.md → Print.
+   -------------------------------------------------------------------------- */
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+    animation: none !important;
+    color: var(--text-primary) !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  /* Sticky header → static; drop nav, CTA, menu button and the mobile drawer.
+     Keep the logo wordmark. */
+  header {
+    position: static !important;
+    border: none !important;
+  }
+  header nav,
+  header button,
+  header a[href="#diagnostic-request-form"],
+  header [role="dialog"],
+  header [aria-hidden="true"] {
+    display: none !important;
+  }
+
+  /* Footer CTA panel, cookie banner, and other print-hidden chrome. */
+  .print-hide {
+    display: none !important;
+  }
+
+  /* Hero visual + all decorative icons are dropped. */
+  #hero [role="img"],
+  svg {
+    display: none !important;
+  }
+
+  /* The form is replaced by a short instruction. */
+  #diagnostic-request-form form {
+    display: none !important;
+  }
+  #diagnostic-request-form::after {
+    content: "Visit the website to request a diagnostic.";
+    display: block;
+    margin-top: var(--space-2);
+  }
+
+  /* Append real URLs after links (skip in-page anchors and the "/" logo). */
+  a:not([href^="#"]):not([href="/"])::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: var(--text-secondary) !important;
+  }
+
+  /* Page breaks + print type scale. */
+  #faq,
+  #final-cta {
+    page-break-before: always;
+    break-before: page;
+  }
+  body {
+    font-size: 11pt;
+  }
+  h1 {
+    font-size: 18pt;
+  }
+  h2 {
+    font-size: 14pt;
+  }
+}
