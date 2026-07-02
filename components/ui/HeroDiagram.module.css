@@ -1,32 +1,78 @@
-/* HeroDiagram — diagnostic system map.
-   Spec: docs/design.md → "Hero Diagnostic Map — visual specification".
-   Decorative; the service is also explained in the Hero text. No Tailwind. */
+/* HeroDiagram — contained "diagnostic readout" panel.
+   Spec: docs/design.md → "Hero Diagnostic Map". Decorative; the service is also
+   explained in the Hero text. Brand tokens only. No Tailwind. */
 
-.diagram {
+.panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  width: 100%;
-  max-width: 480px;
-  margin-inline: auto;
+  padding: var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
 }
 
-/* Flow of the 5 nodes — vertical on mobile/tablet, horizontal on desktop. */
-.nodes {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+/* Status header — a live diagnostic "reading". */
+.status {
+  display: inline-flex;
+  align-items: center;
   gap: var(--space-1);
+  align-self: flex-start;
+  padding: 6px 12px;
+  background: var(--accent-light);
+  border-radius: 99px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--accent-hover);
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2.2s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(29, 78, 216, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(29, 78, 216, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(29, 78, 216, 0);
+  }
+}
+
+/* 5 system nodes in a 2-column grid; the odd last one spans full width. */
+.nodes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
 }
 
 .node {
   display: flex;
   align-items: center;
   gap: var(--space-1);
-  background: var(--bg-surface);
+  padding: 12px 14px;
+  background: var(--bg-page);
   border: 1px solid var(--border-default);
   border-radius: 12px;
-  padding: 12px 16px;
+}
+
+.node:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
 }
 
 .nodeIcon {
@@ -41,60 +87,29 @@
   line-height: 1.3;
 }
 
-/* Connector chevron — points down when stacked, rotated to point right on desktop. */
-.connector {
-  align-self: center;
-  display: flex;
-  color: var(--border-default);
-  transform: rotate(90deg);
-}
-
-/* Center callout. */
-.callout {
-  align-self: center;
-  background: var(--accent-light);
-  border: 1px solid var(--accent);
-  border-radius: 12px;
-  padding: 8px 16px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--accent-hover);
-  text-align: center;
-}
-
-/* Bottom flow sequence. */
+/* Delivery flow footer. */
 .flow {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   gap: var(--space-1);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-default);
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
+}
+
+.flowStep {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.flowStep:last-of-type {
+  color: var(--accent-hover);
 }
 
 .flowArrow {
   color: var(--text-muted);
   flex-shrink: 0;
-}
-
-/* Desktop: horizontal node flow (target max 480 × 360). */
-@media (min-width: 1024px) {
-  .nodes {
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: space-between;
-  }
-
-  .node {
-    flex-direction: column;
-    text-align: center;
-    flex: 1;
-  }
-
-  .connector {
-    transform: rotate(0deg);
-  }
 }

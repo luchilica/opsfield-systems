@@ -38,7 +38,9 @@ export default function WhatWeDiagnose() {
         {AREAS.map(({ title, Icon, description }) => (
           <Card key={title}>
             <div className={styles.card}>
-              <Icon size={24} className={styles.cardIcon} aria-hidden="true" />
+              <span className={styles.cardIcon}>
+                <Icon size={22} aria-hidden="true" />
+              </span>
               <h3 className={styles.cardTitle}>{title}</h3>
               <p className={styles.cardDesc}>{description}</p>
             </div>

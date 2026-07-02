@@ -16,12 +16,23 @@
 }
 
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-secondary);
+}
+
+/* Diagnostic tick — a short accent rule that anchors the eyebrow. */
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
 }
 
 .subtitle {
@@ -61,10 +72,29 @@
 
 /* Visual column */
 .visual {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+/* Blueprint dot-grid behind the diagnostic panel — signature texture, brand
+   accent at low opacity, faded at the edges. Decorative. */
+.visual::before {
+  content: "";
+  position: absolute;
+  inset: -28px;
+  z-index: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(29, 78, 216, 0.1) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 45%, transparent 78%);
+  mask-image: radial-gradient(ellipse at center, #000 45%, transparent 78%);
+  pointer-events: none;
 }
 
 /* ----- Mobile (< 768px) ----- */
