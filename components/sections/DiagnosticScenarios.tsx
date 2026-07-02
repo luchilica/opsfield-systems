@@ -37,6 +37,7 @@ const SCENARIOS = [
 export default function DiagnosticScenarios() {
   return (
     <div className="container">
+      <p className="kicker">DIAGNOSTIC SCENARIOS</p>
       <h2 className={styles.intro}>Representative diagnostic scenarios.</h2>
 
       <div className={styles.list}>

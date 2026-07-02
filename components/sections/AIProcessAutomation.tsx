@@ -14,9 +14,13 @@ const SCOPE = [
   "AI readiness",
 ];
 
+// Process-to-automation flow (docs/texts.md → "Flow").
+const FLOW = ["Diagnostic", "Automation opportunity", "Roadmap or limited scope"];
+
 export default function AIProcessAutomation() {
   return (
     <div className="container">
+      <p className="kicker">AI &amp; AUTOMATION</p>
       <div className={styles.block}>
         <span className={styles.icon}>
           <Bot size={22} aria-hidden="true" />
@@ -31,6 +35,14 @@ export default function AIProcessAutomation() {
           Systems can help turn findings into a practical automation roadmap or
           limited implementation scope.
         </p>
+
+        <ol className={styles.flow} aria-label="From diagnostic to automation">
+          {FLOW.map((step) => (
+            <li key={step} className={styles.flowStep}>
+              {step}
+            </li>
+          ))}
+        </ol>
 
         <p className={styles.scopeLabel}>Scope</p>
         <ul className={styles.scope}>

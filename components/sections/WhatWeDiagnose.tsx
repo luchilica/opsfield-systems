@@ -29,6 +29,7 @@ const AREAS = [
 export default function WhatWeDiagnose() {
   return (
     <div className="container">
+      <p className="kicker">WHAT WE DIAGNOSE</p>
       <h2 className={styles.intro}>
         We diagnose the gaps between how your business works and how your systems
         support it.

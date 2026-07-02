@@ -17,6 +17,7 @@ const SYMPTOMS = [
 export default function ProblemSection() {
   return (
     <div className="container">
+      <p className="kicker">THE PROBLEM</p>
       <div className={styles.block}>
         <h2>Your business may not have a technology problem first.</h2>
 

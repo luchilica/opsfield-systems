@@ -23,6 +23,7 @@ const POST_SUBMIT_STEPS = [
 export default function BusinessITDiagnostic() {
   return (
     <div className="container">
+      <p className="kicker">THE DIAGNOSTIC</p>
       <div className={styles.panel}>
         {/* Sub-block 1 — Offer */}
         <div className={styles.subblock}>

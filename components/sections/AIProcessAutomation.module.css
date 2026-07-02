@@ -30,6 +30,33 @@
   color: var(--text-secondary);
 }
 
+/* Process-to-automation flow — restrained, arrow-separated steps. */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-1);
+}
+
+.flowStep {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.flowStep:last-child {
+  color: var(--accent-hover);
+}
+
+.flowStep:not(:last-child)::after {
+  content: "→";
+  margin-left: var(--space-2);
+  color: var(--accent);
+  font-weight: 400;
+}
+
 .scopeLabel {
   font-weight: 600;
   margin-top: var(--space-2);

@@ -34,6 +34,7 @@
 
 #### Block: Problem Section
 
+- **Eyebrow:** THE PROBLEM
 - **H2:** Your business may not have a technology problem first.
 - **Text:** Growth often slows because processes, data, ownership, and systems no longer work together.
 - **Proof:** In diagnostic reviews, root causes often appear in handoffs, CRM logic, reporting definitions, ownership gaps, and tool sprawl.
@@ -43,6 +44,7 @@
 
 #### Block: What We Diagnose
 
+- **Eyebrow:** WHAT WE DIAGNOSE
 - **H2:** We diagnose the gaps between how your business works and how your systems support it.
 - **Processes:** handoffs, approvals, ownership gaps, duplicated work, undocumented workflows.
 - **Revenue / data / systems:** CRM, RevOps, dashboards, reporting rules, integrations, automation, AI readiness, IT risk.
@@ -58,8 +60,10 @@
 
 #### Block: AI & Process Automation
 
+- **Eyebrow:** AI & AUTOMATION
 - **H2:** From diagnostic to implementation: AI & Process Automation.
 - **Text:** When the diagnostic identifies a clear automation opportunity, Opsfield Systems can help turn findings into a practical automation roadmap or limited implementation scope.
+- **Flow:** Diagnostic → Automation opportunity → Roadmap or limited scope
 - **Scope:** workflow automation, CRM automation, document processing, lead scoring, reporting automation, and AI readiness.
 - **Principle:** We automate the right process, not the loudest request.
 - **CTA:** Assess Automation Opportunities
@@ -68,6 +72,7 @@
 
 #### Block: How the Diagnostic Works
 
+- **Eyebrow:** HOW IT WORKS
 - **H2:** From operating symptoms to a clear next step.
 - **Step 1:** We review workflows, systems, CRM usage, reporting, automation, and decision bottlenecks.
 - **Step 2:** We map likely root causes and score fixes by impact, effort, risk, dependency, and business value.
@@ -78,6 +83,7 @@
 
 #### Block: Diagnostic Scenarios
 
+- **Eyebrow:** DIAGNOSTIC SCENARIOS
 - **H2:** Representative diagnostic scenarios.
 - **Example 1:** B2B services firm (≈80 employees, HubSpot)  
   **Situation:** Inbound leads were falling between marketing and sales — no defined handoff owner, no SLA, and 3 duplicate CRM fields creating confusion.  
@@ -97,6 +103,7 @@
 
 #### Block: Why Opsfield Systems
 
+- **Eyebrow:** THE DIFFERENCE
 - **H2:** Why Opsfield Systems
 - **Text:** The difference is what gets validated before budget, tools, or implementation are committed.
 - **Comparison:**
@@ -114,6 +121,7 @@
 
 #### Block: Delivery Model
 
+- **Eyebrow:** DELIVERY MODEL
 - **H2:** Senior attention without a handoff chain.
 - **Text:** Opsfield Systems works with 4–6 active clients at a time so senior advisors remain involved from problem framing through scope and delivery.
 - **Managing Partner:** operating model design, diagnostic methodology, roadmap prioritization, and executive decision support.
@@ -125,6 +133,7 @@
 
 #### Block: Business & IT Diagnostic
 
+- **Eyebrow:** THE DIAGNOSTIC
 - **H2:** A structured first step before another tool, hire, or implementation project.
 - **Text:** The first diagnostic conversation is a complimentary 30–45 minute fit review to frame the problem and identify likely bottleneck areas. Paid engagements begin only after a separate written proposal with defined scope and pricing.
 - **Output:** problem summary, root-cause hypotheses, fit / no-fit decision, and path to audit, assessment, roadmap, advisory, or implementation.

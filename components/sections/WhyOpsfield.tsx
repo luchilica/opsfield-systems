@@ -25,6 +25,7 @@ const PAIRS = [
 export default function WhyOpsfield() {
   return (
     <div className="container">
+      <p className="kicker">THE DIFFERENCE</p>
       <h2 className={styles.intro}>Why Opsfield Systems</h2>
       <p className={`lead ${styles.text}`}>
         The difference is what gets validated before budget, tools, or

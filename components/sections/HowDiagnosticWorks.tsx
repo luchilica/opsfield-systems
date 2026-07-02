@@ -13,6 +13,7 @@ const STEPS = [
 export default function HowDiagnosticWorks() {
   return (
     <div className="container">
+      <p className="kicker">HOW IT WORKS</p>
       <h2 className={styles.intro}>
         From operating symptoms to a clear next step.
       </h2>

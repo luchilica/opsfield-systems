@@ -24,6 +24,7 @@ const ROLES = [
 export default function DeliveryModel() {
   return (
     <div className="container">
+      <p className="kicker">DELIVERY MODEL</p>
       <h2 className={styles.intro}>Senior attention without a handoff chain.</h2>
       <p className={`lead ${styles.text}`}>
         Opsfield Systems works with 4–6 active clients at a time so senior
