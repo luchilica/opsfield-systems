@@ -92,8 +92,8 @@
     transparent 1px
   );
   background-size: 22px 22px;
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 45%, transparent 78%);
-  mask-image: radial-gradient(ellipse at center, #000 45%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 45%, transparent 78%);
+  mask-image: radial-gradient(ellipse at center, black 45%, transparent 78%);
   pointer-events: none;
 }
 
