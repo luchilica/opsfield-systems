@@ -22,9 +22,14 @@ export default function HowDiagnosticWorks() {
           <li key={i}>
             <Card hover={false}>
               <div className={styles.step}>
-                <span className={styles.number} aria-hidden="true">
-                  {i + 1}
-                </span>
+                <div className={styles.stepHead}>
+                  <span className={styles.number} aria-hidden="true">
+                    {i + 1}
+                  </span>
+                  {i < STEPS.length - 1 && (
+                    <span className={styles.connector} aria-hidden="true" />
+                  )}
+                </div>
                 <p className={styles.stepText}>
                   <span className="xsmall">Step {i + 1}</span>
                   <br />

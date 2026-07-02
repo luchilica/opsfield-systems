@@ -24,7 +24,11 @@ const FLOW = ["Diagnostic", "Roadmap", "Implementation"] as const;
 
 export default function HeroDiagram() {
   return (
-    <div className={styles.panel} aria-hidden="true">
+    <div
+      className={styles.panel}
+      role="img"
+      aria-label="Diagnostic system map: Processes, CRM / RevOps, Data, Automation, and IT Systems are reviewed for bottlenecks, gaps, and risks — from diagnostic to roadmap to implementation."
+    >
       <div className={styles.status}>
         <span className={styles.pulse} />
         Bottlenecks · Gaps · Risks

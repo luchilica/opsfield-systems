@@ -7,6 +7,7 @@
 }
 
 .steps {
+  list-style: none;
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3);
@@ -23,6 +24,20 @@
   flex-direction: column;
   gap: var(--space-2);
   height: 100%;
+}
+
+/* Step header — number badge with a connecting rule toward the next step. */
+.stepHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.connector {
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent-light);
 }
 
 /* Prominent accent step number. */

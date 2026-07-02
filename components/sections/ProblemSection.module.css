@@ -21,6 +21,59 @@
   color: var(--text-primary);
 }
 
+/* Symptom / root-cause cards — the exact proof terms as scannable items.
+   Grid: 1 col mobile / 2 tablet / 3 desktop. Full container width. */
+.symptoms {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .symptoms {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .symptoms {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.symptom {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.symptomIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.symptomTitle {
+  margin: 0;
+  /* <h3> for correct heading order; visual size preserved as h4. */
+  font-family: var(--font-body);
+  font-size: 18px;
+}
+
+@media (min-width: 1024px) {
+  .symptomTitle {
+    font-size: 22px;
+  }
+}
+
 .cta {
-  margin-top: var(--space-2);
+  margin-top: var(--space-5);
 }
