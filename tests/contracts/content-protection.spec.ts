@@ -11,12 +11,42 @@ test("no old brand references in page source", async ({ page }) => {
   }
 });
 
-test("no O-1 / immigration references in visible content", async ({ page }) => {
+test("O-1 wording is scoped to the service card + FAQ, absent from primary surfaces", async ({
+  page,
+}) => {
   await page.goto("/");
-  const text = (await page.locator("body").innerText()).toLowerCase();
-  for (const term of ["o-1", "o1 agent", "immigration", "visa", "petition"]) {
-    expect(text, term).not.toContain(term);
+  const O1_TERMS = ["o-1", "immigration", "visa", "petition"];
+
+  // O-1 must NOT appear in primary surfaces.
+  const surfaces: Record<string, string> = {
+    hero: (await page.locator("#hero").innerText()).toLowerCase(),
+    h1: (await page.locator("h1").innerText()).toLowerCase(),
+    header: (await page.getByRole("banner").innerText()).toLowerCase(),
+    title: (await page.title()).toLowerCase(),
+    description: (
+      (await page
+        .locator('head meta[name="description"]')
+        .getAttribute("content")) ?? ""
+    ).toLowerCase(),
+  };
+  for (const [surface, content] of Object.entries(surfaces)) {
+    for (const term of O1_TERMS) {
+      expect(content, `${surface}:${term}`).not.toContain(term);
+    }
   }
+
+  // The "agent" framing for O-1 must never appear anywhere.
+  expect((await page.locator("body").innerText()).toLowerCase()).not.toContain(
+    "o-1 agent",
+  );
+
+  // O-1 Readiness Support is present only in its allowed places.
+  await expect(page.locator("#what-we-diagnose")).toContainText(
+    "O-1 Readiness Support",
+  );
+  await expect(page.locator("#faq")).toContainText(
+    "Do you handle O-1 visa petitions?",
+  );
 });
 
 test("no TODO/TBD/lorem ipsum/placeholder in rendered content", async ({

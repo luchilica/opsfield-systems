@@ -1,10 +1,10 @@
-import { GitBranch, Layers, ArrowRight } from "lucide-react";
+import { GitBranch, Layers, FileBadge, ArrowRight } from "lucide-react";
 import Card from "@/components/ui/Card";
 import styles from "./WhatWeDiagnose.module.css";
 
-// Copy from docs/texts.md → "What We Diagnose". The document defines exactly two
-// service areas (Processes; Revenue / data / systems) and one shared Output —
-// no per-card outputs or CTAs are invented.
+// Copy from docs/texts.md → "What We Diagnose": two diagnostic areas (Processes;
+// Revenue / data / systems) plus O-1 Readiness Support as a secondary service
+// card (last). One shared Output — no per-card outputs or CTAs are invented.
 const AREAS = [
   {
     title: "Processes",
@@ -17,6 +17,12 @@ const AREAS = [
     Icon: Layers,
     description:
       "CRM, RevOps, dashboards, reporting rules, integrations, automation, AI readiness, IT risk.",
+  },
+  {
+    title: "O-1 Readiness Support",
+    Icon: FileBadge,
+    description:
+      "For IT professionals and founders exploring the O-1 visa path, we help structure evidence of extraordinary ability: publication strategy, portfolio architecture, recommendation coordination, and expert profile positioning. We work alongside qualified immigration counsel — we do not provide legal advice or file petitions.",
   },
 ];
 

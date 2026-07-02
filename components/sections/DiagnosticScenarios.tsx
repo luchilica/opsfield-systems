@@ -12,7 +12,7 @@ const SCENARIOS = [
     found:
       "4 undocumented handoff points across 2 teams with no shared visibility.",
     delivered:
-      "Handoff process reduced from 5 steps to 2. Single ownership assigned per lead stage. 30-day cleanup priority list adopted by both teams.",
+      "Handoff process reduced from 5 steps to 2. Single ownership assigned per lead stage. Estimated revenue at risk from dropped handoffs: $180K–$240K annually. 30-day cleanup priority list adopted by both teams.",
   },
   {
     clientType: "Scaling SaaS team (≈120 employees, Salesforce + Looker)",
@@ -21,7 +21,7 @@ const SCENARIOS = [
     found:
       "7 inconsistent metric definitions and 2 disconnected data sources feeding the same dashboard.",
     delivered:
-      "Unified reporting definitions document, data-source consolidation plan, and a BI roadmap prioritized by stakeholder impact.",
+      "Unified reporting definitions document covering 7 previously inconsistent metrics. Data-source consolidation plan eliminated 40+ hours/month of manual reconciliation. BI roadmap prioritized by stakeholder impact with 90-day execution timeline.",
   },
   {
     clientType: "Multi-location operator (≈200 employees, Monday + Zapier + spreadsheets)",
@@ -30,7 +30,7 @@ const SCENARIOS = [
     found:
       "11 manual approval steps that could be reduced to 4 with workflow consolidation.",
     delivered:
-      "Bottleneck map, automation backlog ranked by effort and impact, and a 90-day roadmap adopted by operations leadership.",
+      "Bottleneck map identified $320K in annual labor cost tied to manual approvals. Automation backlog ranked by effort and impact. 90-day roadmap adopted by operations leadership with projected 60% reduction in approval cycle time.",
   },
 ];
 
@@ -62,8 +62,8 @@ export default function DiagnosticScenarios() {
       </div>
 
       <p className={`small ${styles.note}`}>
-        Scenarios are anonymized. Details reflect the type of diagnostic work and
-        deliverables Opsfield provides.
+        Scenarios are anonymized composites. Figures are illustrative and reflect
+        the type of impact diagnostic work typically identifies.
       </p>
 
       {/* Text-link CTA → form, generic (no data-request-type) per sitemap.md. */}

@@ -25,6 +25,7 @@ const REQUEST_TYPE_OPTIONS = [
   "IT Stack Assessment",
   "AI Readiness Assessment",
   "90-Day Roadmap",
+  "O-1 Readiness Support",
   "Not sure yet",
 ];
 

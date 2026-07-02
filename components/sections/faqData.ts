@@ -75,6 +75,11 @@ export const FAQ_ITEMS: FaqItem[] = [
     type: "text",
     a: "No. ROI requires baseline data, scope definition, adoption risk review, and implementation assumptions.",
   },
+  {
+    q: "Do you handle O-1 visa petitions?",
+    type: "text",
+    a: "We do not provide legal advice or file immigration petitions. What we offer is O-1 readiness support: helping IT professionals and founders build the evidence portfolio that demonstrates extraordinary ability — publications, speaking, expert positioning, and recommendation strategy. Petition filing and legal counsel are provided by qualified immigration attorneys we coordinate with.",
+  },
 ];
 
 // Serializes an answer to match the VISIBLE rendering, for FAQPage JSON-LD.

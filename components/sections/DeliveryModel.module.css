@@ -24,11 +24,36 @@
   }
 }
 
-.role {
+.member {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
   height: 100%;
+}
+
+/* Portrait placeholder: initials in an accent circle until a real photo is
+   dropped into public/images/team/. */
+.avatar,
+.photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 40px;
+  letter-spacing: 0.02em;
+}
+
+.photo {
+  object-fit: cover;
 }
 
 .roleTitle {
@@ -44,8 +69,20 @@
   }
 }
 
+.roleLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: calc(-1 * var(--space-1));
+}
+
 .roleText {
   color: var(--text-secondary);
+}
+
+.fieldLabel {
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 /* Relevant environments — text names, never tool logos. */
