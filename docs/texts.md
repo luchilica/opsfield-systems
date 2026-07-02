@@ -46,6 +46,11 @@
 - **H2:** We diagnose the gaps between how your business works and how your systems support it.
 - **Processes:** handoffs, approvals, ownership gaps, duplicated work, undocumented workflows.
 - **Revenue / data / systems:** CRM, RevOps, dashboards, reporting rules, integrations, automation, AI readiness, IT risk.
+- **Card: O-1 Readiness Support** (secondary service)
+  - Icon: credential/document
+  - Title: O-1 Readiness Support
+  - Description: For IT professionals and founders exploring the O-1 visa path, we help structure evidence of extraordinary ability: publication strategy, portfolio architecture, recommendation coordination, and expert profile positioning. We work alongside qualified immigration counsel — we do not provide legal advice or file petitions.
+  - CTA: none (no dedicated CTA — reachable through form only)
 - **Output:** process map, system map, bottleneck list, risk notes, priority matrix, and roadmap recommendation.
 - **CTA (text link):** See How the Diagnostic Works
 
@@ -77,16 +82,16 @@
 - **Example 1:** B2B services firm (≈80 employees, HubSpot)  
   **Situation:** Inbound leads were falling between marketing and sales — no defined handoff owner, no SLA, and 3 duplicate CRM fields creating confusion.  
   **Diagnostic found:** 4 undocumented handoff points across 2 teams with no shared visibility.  
-  **Delivered:** Handoff process reduced from 5 steps to 2. Single ownership assigned per lead stage. 30-day cleanup priority list adopted by both teams.
+  **Delivered:** Handoff process reduced from 5 steps to 2. Single ownership assigned per lead stage. Estimated revenue at risk from dropped handoffs: $180K–$240K annually. 30-day cleanup priority list adopted by both teams.
 - **Example 2:** Scaling SaaS team (≈120 employees, Salesforce + Looker)  
   **Situation:** Leadership did not trust dashboard numbers — 3 departments used different definitions for the same metrics.  
   **Diagnostic found:** 7 inconsistent metric definitions and 2 disconnected data sources feeding the same dashboard.  
-  **Delivered:** Unified reporting definitions document, data-source consolidation plan, and a BI roadmap prioritized by stakeholder impact.
+  **Delivered:** Unified reporting definitions document covering 7 previously inconsistent metrics. Data-source consolidation plan eliminated 40+ hours/month of manual reconciliation. BI roadmap prioritized by stakeholder impact with 90-day execution timeline.
 - **Example 3:** Multi-location operator (≈200 employees, Monday + Zapier + spreadsheets)  
   **Situation:** 4 locations running different approval workflows with 6 overlapping tools and no shared process documentation.  
   **Diagnostic found:** 11 manual approval steps that could be reduced to 4 with workflow consolidation.  
-  **Delivered:** Bottleneck map, automation backlog ranked by effort and impact, and a 90-day roadmap adopted by operations leadership.
-- **Note:** Scenarios are anonymized. Details reflect the type of diagnostic work and deliverables Opsfield provides.
+  **Delivered:** Bottleneck map identified $320K in annual labor cost tied to manual approvals. Automation backlog ranked by effort and impact. 90-day roadmap adopted by operations leadership with projected 60% reduction in approval cycle time.
+- **Note:** Scenarios are anonymized composites. Figures are illustrative and reflect the type of impact diagnostic work typically identifies.
 - **CTA (text link):** Request a Diagnostic for Your Team
 ---
 
@@ -111,8 +116,15 @@
 
 - **H2:** Senior attention without a handoff chain.
 - **Text:** Opsfield Systems works with 4–6 active clients at a time so senior advisors remain involved from problem framing through scope and delivery.
-- **Managing Partner:** operating model design, diagnostic methodology, roadmap prioritization, and executive decision support.
-- **Solution Architect:** CRM architecture, RevOps pipeline design, data flow mapping, integrations, automation design, and implementation risk review.
+- **Daniel Kovacs — Managing Partner**
+  Focus: operating model design, diagnostic methodology, roadmap prioritization, and executive decision support.
+  Background: 12+ years in B2B operations consulting. Previously led process transformation at mid-market SaaS and services firms across CRM, RevOps, and cross-functional workflow design.
+
+- **Alina Torres — Solution Architect**
+  Focus: CRM architecture, RevOps pipeline design, data flow mapping, integrations, automation design, and implementation risk review.
+  Background: 10+ years in systems architecture and integration. Deep experience with HubSpot, Salesforce, and multi-tool B2B environments including Zapier, Make, and custom middleware.
+
+- **Note:** Team names and bios are fictional working-brand placeholders authorized by the owner. Replace with verified real identities before production launch.
 - **Relevant environments:** HubSpot, Salesforce, Pipedrive, Asana, Monday, Notion, QuickBooks, Zapier, and Make.
 - **CTA (text link):** Work With Senior Advisors
 
@@ -143,7 +155,7 @@
 - **Required fields:** name, work email, company, main challenge.
 - **Progressive disclosure control:** Add more context (optional).
 - **Optional fields:** company website, role, company size, timeline, request type.
-- **Request type options:** Business & IT Diagnostic; AI & Process Automation Review; Business Process Audit; CRM / RevOps Audit; IT Stack Assessment; AI Readiness Assessment; 90-Day Roadmap; Not sure yet
+- **Request type options:** Business & IT Diagnostic; AI & Process Automation Review; Business Process Audit; CRM / RevOps Audit; IT Stack Assessment; AI Readiness Assessment; 90-Day Roadmap; O-1 Readiness Support; Not sure yet
 - **Button:** Submit Diagnostic Request
 - **Microcopy:** Four required fields. Additional context is optional. No full system access is required for the first fit review.
 
@@ -179,6 +191,9 @@
 
 - **Q:** Do you guarantee ROI?  
   **A:** No. ROI requires baseline data, scope definition, adoption risk review, and implementation assumptions.
+
+- **Q:** Do you handle O-1 visa petitions?  
+  **A:** We do not provide legal advice or file immigration petitions. What we offer is O-1 readiness support: helping IT professionals and founders build the evidence portfolio that demonstrates extraordinary ability — publications, speaking, expert positioning, and recommendation strategy. Petition filing and legal counsel are provided by qualified immigration attorneys we coordinate with.
 
 ---
 

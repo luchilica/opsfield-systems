@@ -287,6 +287,15 @@ Sitemap: https://[production-domain]/sitemap.xml
 - lead scoring automation
 - reporting automation consulting
 
+### O-1 Readiness Support cluster
+
+- O-1 visa readiness support
+- O-1 extraordinary ability evidence
+- O-1 portfolio strategy consulting
+- O-1 readiness support for IT professionals
+
+Use only in the service card and FAQ. Do not add to Hero or H1.
+
 ### Geographic modifiers
 
 Use only where natural and accurate:
@@ -298,12 +307,13 @@ Use only where natural and accurate:
 
 Do not use `Bay Area` unless Opsfield Systems actually serves or targets that market specifically.
 
-### Deferred O-1 scope
+### O-1 Readiness Support — secondary service
 
-- O-1 Agent Services are not part of the public MVP.
-- Do not include O-1 in homepage copy, footer, navigation, forms, request types, internal links, metadata, structured data, sitemap.xml, paid campaigns, analytics routing, or content planning.
-- Do not create an O-1 URL or hidden anchor on MVP.
-- Reconsider only as a separately approved future scope after qualified U.S. immigration counsel reviews the operating model, petitioner responsibilities, agreements, intake process, and public copy.
+- O-1 Readiness Support is a secondary service. It does not appear in primary navigation, Hero, H1, primary CTA, homepage meta title, homepage meta description, or the primary JSON-LD Service entity.
+- It appears only as a secondary service card in What We Diagnose, one FAQ entry, and one form request type option (`O-1 Readiness Support`). No dedicated CTA, no separate URL or top-level section.
+- Do not request or store immigration documents, visa data, government identification numbers, or petition materials through the MVP form.
+- Name the service `O-1 Readiness Support`; do not use the word `agent` to describe it.
+- O-1 Readiness Support copy requires review by qualified U.S. immigration counsel before production launch.
 
 ---
 
@@ -343,7 +353,7 @@ The homepage must render exactly 11 top-level sections in the order defined by `
 - Problem Section: why growth slows and where symptoms appear.
 - How the Diagnostic Works: method and decision outputs; do not repeat the Hero slogan.
 - Why Opsfield Systems: comparison of operating approaches; do not restate the full positioning paragraph.
-- Delivery Model: who remains involved and what each role covers; do not invent biographies or credentials.
+- Delivery Model: who remains involved and what each role covers; do not invent biographies or credentials, except fictional placeholder bios explicitly labeled as working-brand placeholders to be replaced with verified real identities before production launch.
 - Final CTA: decision prompt and action; do not repeat the Hero or Problem copy verbatim.
 
 ### Deduplication check (before publishing text changes)
@@ -1018,21 +1028,14 @@ Do not list unused providers.
 
 ---
 
-## Deferred O-1 Scope
+## O-1 Readiness Support Scope
 
-- O-1 Agent Services are excluded from the public MVP and must not be implemented as visible or hidden website content.
-- No O-1 section, footer link, request type, preselected form value, anchor, URL, metadata, structured data, internal link, analytics route, campaign, or content entry may be created.
-- Do not collect immigration documents, passport data, government identification numbers, eligibility details, or petition materials through the MVP website.
-- A future O-1 scope requires a separately approved operating process, written agreements, secure intake controls, and review by qualified U.S. immigration counsel before any website implementation.
+- O-1 Readiness Support is a secondary service. It is limited to: one secondary service card in What We Diagnose, one FAQ entry, and one form request type option (`O-1 Readiness Support`).
+- It must NOT appear in: Hero, H1, header navigation, primary CTA labels, homepage meta title, homepage meta description, or the primary JSON-LD Service entity. No dedicated CTA, no separate URL or top-level section, no preselected form value.
+- Do not collect immigration documents, passport data, government identification numbers, visa data, eligibility details, or petition materials through the MVP form.
+- O-1 Readiness Support copy requires review by qualified U.S. immigration counsel before production launch.
 
-**Code hygiene:** Remove immigration/O-1 references from production HTML comments, CSS classes, JavaScript variables, fixtures, public source maps, and deployment documentation. The generic term `agent` remains allowed for legitimate non-immigration technical contexts such as AI agents; do not use it in production to describe visa, petition, petitioner, or work-authorization services.
-
----
-
-Code hygiene:
-Do not use the word `agent` in the context of immigration, visas, or work authorization in any production code, HTML comments, CSS class names, JavaScript variables, or documentation that ships with the deployment.
-
-Remove any development-phase O-1 references before production launch. O-1 references in private planning documents are acceptable but must not be deployed.
+**Code hygiene:** Name the service `O-1 Readiness Support` in all copy. Do not use the word `agent` in the context of immigration, visas, petitions, or work authorization in any production code, HTML comments, CSS class names, JavaScript variables, or shipped documentation. The generic term `agent` remains allowed for legitimate non-immigration technical contexts such as AI agents.
 
 ## Performance
 
@@ -1346,7 +1349,7 @@ Newsletter is Phase 2 only.
 - [ ] No TODO, TBD, lorem ipsum or hidden placeholder copy.
 - [ ] No fake logos, metrics, testimonials, awards or certifications.
 - [ ] Illustrative composite figures are explicitly labeled and are not presented as verified client proof or guaranteed outcomes.
-- [ ] No O-1 public copy, links, anchors, form options, metadata, schema, or routing remain in the MVP.
+- [ ] O-1 Readiness Support appears only as the secondary service card, one FAQ entry, and one form request type option — not in Hero, H1, header nav, primary CTA, meta title, meta description, or primary JSON-LD Service.
 - [ ] Custom 404 page exists, returns HTTP 404, links to the homepage and diagnostic form, and uses `noindex`.
 - [ ] Every CTA in `texts.md` resolves to a valid URL or anchor in `sitemap.md`.
 
@@ -1439,8 +1442,8 @@ Newsletter is Phase 2 only.
 - Использовать старое название компании.
 - Создавать страницы, отсутствующие в `sitemap.md`.
 - Упоминать удалённые draft page files.
-- Публиковать или маршрутизировать O-1 Agent Services в MVP.
-- Придумывать offers, cases, metrics, logos, certifications, reviews или bios.
+- Размещать O-1 Readiness Support вне разрешённого scope (service card, один FAQ, один request type) — в Hero, H1, header nav, primary CTA, meta или primary JSON-LD Service.
+- Придумывать и представлять как подтверждённые: real clients, real metrics, certifications, awards, partnerships, logos или reviews. Разрешённые исключения: (a) illustrative composite figures — только если явно помечены как anonymized composites (например, Diagnostic Scenarios с диапазонами вроде $180K–$240K, $320K); (b) fictional placeholder team bios — только если явно помечены как working-brand placeholders и заменяются на verified real identities до production launch.
 - Использовать lorem ipsum.
 - JS-render основного контента.
 - Использовать jQuery или Bootstrap.

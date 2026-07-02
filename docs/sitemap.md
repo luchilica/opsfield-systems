@@ -203,6 +203,7 @@ The optional block is collapsed by default. CTA-specific entries may prefill req
 - IT Stack Assessment
 - AI Readiness Assessment
 - 90-Day Roadmap
+- O-1 Readiness Support
 - Not sure yet
 
 ### Button
@@ -215,22 +216,19 @@ The optional block is collapsed by default. CTA-specific entries may prefill req
 
 ---
 
-## Deferred O-1 Scope — not part of MVP
+## O-1 Readiness Support — Secondary Service
 
-O-1 Agent Services are excluded from the public MVP architecture.
+O-1 Readiness Support is a secondary, non-primary service.
 
-| Placement | MVP status |
-|---|---|
-| Landing page copy | Do not include |
-| Header / navigation | Do not include |
-| Footer | Do not include |
-| Diagnostic form / request type | Do not include |
-| Form data restrictions | Do not collect immigration documents, visa data, government IDs, or petition materials |
-| Metadata / structured data / sitemap.xml | Do not include |
-| Dedicated URL | Do not create |
-| Paid campaigns / content plan | Do not include |
+Visibility rules:
+- Do NOT include in: Hero, H1, header nav items, primary CTA label, homepage meta title, homepage meta description, JSON-LD primary Service.
+- DO include in: What We Diagnose section (as last card), Request Type form options, FAQ (one Q&A).
+- Anchor: part of #what-we-diagnose section, no separate top-level section.
+- The 11 top-level section count does NOT change.
 
-The service may be reconsidered only as a separate future scope after the operating model, petitioner responsibilities, inquiry workflow, agreements, and all public copy have been reviewed by qualified U.S. immigration counsel.
+Form data restrictions (unchanged): do not request or store immigration documents, visa data, government identification numbers, or petition materials through the MVP form.
+
+O-1 Readiness Support copy requires review by qualified U.S. immigration counsel before production launch.
 
 ---
 
@@ -274,7 +272,7 @@ The service may be reconsidered only as a separate future scope after the operat
 - Legal pages: noindex, but publicly accessible.
 - Thank-you pages: noindex.
 - Paid traffic landing pages: noindex.
-- Deferred services, including O-1 Agent Services, must not appear in public MVP metadata, structured data, internal links, forms, or sitemap.xml.
+- O-1 Readiness Support appears only as a secondary service card in What We Diagnose and as a form request type option.
 - FAQ must remain crawlable HTML text.
 - Each landing section must have a stable lowercase hyphen-separated anchor ID.
 - Custom 404 page exists, links to homepage or diagnostic form, and uses noindex.
@@ -294,7 +292,7 @@ The service may be reconsidered only as a separate future scope after the operat
 - Working brand is Opsfield Systems everywhere; production launch requires completed brand, entity, and domain verification.
 - No previous-brand references remain.
 - No references to removed draft page files remain.
-- O-1 Agent Services are fully excluded from the public MVP.
+- O-1 Readiness Support is a secondary service, limited to the What We Diagnose card, one FAQ entry, and one form request type option; it is excluded from Hero, H1, header nav, primary CTA, and metadata.
 - Diagnostic Request Form remains the main conversion target.
 - Privacy Policy, Terms of Use, and Cookie Policy are included as legal pages.
 - Legal pages are noindex but publicly accessible.
