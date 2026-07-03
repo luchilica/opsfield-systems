@@ -252,8 +252,10 @@ section[id] {
 /* --------------------------------------------------------------------------
    Section background rhythm (docs/design.md) — default --bg-page;
    even sections use --bg-subtle for visual rhythm. Applied consistently.
+   Uses :nth-of-type (counts only <section> siblings) so non-section nodes in
+   <main> — e.g. the JSON-LD <script> from JsonLd — do not offset the parity.
    -------------------------------------------------------------------------- */
-main > section:nth-child(even) {
+main > section:nth-of-type(even) {
   background: var(--bg-subtle);
 }
 
