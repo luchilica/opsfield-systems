@@ -1,0 +1,57 @@
+[
+  {
+    "n": 1,
+    "id": "hero",
+    "bg": "#000000"
+  },
+  {
+    "n": 2,
+    "id": "problem-section",
+    "bg": "#F1F5F9"
+  },
+  {
+    "n": 3,
+    "id": "what-we-diagnose",
+    "bg": "#000000"
+  },
+  {
+    "n": 4,
+    "id": "ai-process-automation",
+    "bg": "#F1F5F9"
+  },
+  {
+    "n": 5,
+    "id": "how-the-diagnostic-works",
+    "bg": "#000000"
+  },
+  {
+    "n": 6,
+    "id": "proof-examples",
+    "bg": "#F1F5F9"
+  },
+  {
+    "n": 7,
+    "id": "why-opsfield-systems",
+    "bg": "#000000"
+  },
+  {
+    "n": 8,
+    "id": "delivery-model",
+    "bg": "#F1F5F9"
+  },
+  {
+    "n": 9,
+    "id": "business-it-diagnostic",
+    "bg": "#000000"
+  },
+  {
+    "n": 10,
+    "id": "faq",
+    "bg": "#F1F5F9"
+  },
+  {
+    "n": 11,
+    "id": "final-cta",
+    "bg": "#000000"
+  }
+]
