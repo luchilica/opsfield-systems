@@ -1,79 +1,138 @@
-/* Problem Section — constrained text block. Copy from docs/texts.md. No Tailwind. */
+/* Problem Section — v2 full-fill brand block. White text on brand blue, corner
+   + motifs, and a paper causes card. Section bg/color set by #problem-section in
+   globals.css. Copy from docs/texts.md. No Tailwind. */
+
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-6);
+  }
+}
 
 .block {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-3);
-  max-width: var(--text-max);
+  max-width: 560px;
+}
+
+/* On-brand + mono eyebrow (white on blue). */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono-fallback);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.eyebrow::before {
+  content: "+";
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: 14px;
+  line-height: 1;
+  color: var(--paper);
 }
 
 .text {
-  color: var(--text-secondary);
-}
-
-/* Proof line — restrained emphasis with an accent rule (not warning-styled). */
-.proof {
-  border-left: 4px solid var(--accent);
-  padding: var(--space-2) var(--space-3);
-  background: var(--bg-subtle);
-  border-radius: 0 12px 12px 0;
-  color: var(--text-primary);
-}
-
-/* Symptom / root-cause cards — the exact proof terms as scannable items.
-   Grid: 1 col mobile / 2 tablet / 3 desktop. Full container width. */
-.symptoms {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-2);
-  margin-top: var(--space-5);
-}
-
-@media (min-width: 768px) {
-  .symptoms {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .symptoms {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.symptom {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.symptomIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--accent-light);
-  color: var(--accent);
-}
-
-.symptomTitle {
-  margin: 0;
-  /* <h3> for correct heading order; visual size preserved as h4. */
-  font-family: var(--font-body);
-  font-size: 18px;
-}
-
-@media (min-width: 1024px) {
-  .symptomTitle {
-    font-size: 22px;
-  }
+  color: var(--text-on-brand);
 }
 
 .cta {
-  margin-top: var(--space-5);
+  margin-top: var(--space-1);
+}
+
+/* Paper causes card — 2px ink border, hard shadow. */
+.causes {
+  background: var(--paper);
+  color: var(--ink-900);
+  border: var(--border-heavy) solid var(--ink-900);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hard);
+  overflow: hidden;
+}
+
+.causesHead {
+  padding: 16px 26px 14px;
+  border-bottom: var(--border-heavy) solid var(--ink-900);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink-900);
+}
+
+.cause {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 26px;
+  border-top: 1px solid var(--stone-200);
+}
+
+.cause:first-of-type {
+  border-top: none;
+}
+
+.causeIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.causeName {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -0.015em;
+  color: var(--ink-900);
+}
+
+.causeNum {
+  margin-left: auto;
+  font-family: var(--font-mono-fallback);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--stone-400);
+}
+
+/* Decorative corner + motifs. */
+.plusTop,
+.plusBottom {
+  position: absolute;
+  z-index: 0;
+  color: rgba(255, 255, 255, 0.13);
+  pointer-events: none;
+}
+
+.plusTop {
+  top: -30px;
+  right: 5%;
+}
+
+.plusBottom {
+  bottom: 10px;
+  left: 3%;
+}
+
+@media (max-width: 767px) {
+  .plusTop,
+  .plusBottom {
+    display: none;
+  }
 }

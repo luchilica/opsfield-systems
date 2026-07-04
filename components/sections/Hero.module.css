@@ -1,5 +1,5 @@
-/* Hero — split layout on desktop (55/45), single column on tablet/mobile.
-   Spec: docs/design.md → "Hero Layout". Tokens from globals.css. No Tailwind. */
+/* Hero — v2 block edition. Split grid on desktop (text / brand panel).
+   Spec: docs/design.md (v2) → "Hero Layout". Tokens from globals.css. No Tailwind. */
 
 .hero {
   display: flex;
@@ -37,12 +37,24 @@
   color: var(--accent);
 }
 
+/* Mega blocky display headline. */
+.headline {
+  font-size: clamp(2.6rem, 1.8rem + 3.2vw, 4.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.032em;
+}
+
+.accentWord {
+  color: var(--blue-500);
+}
+
 .subtitle {
-  color: var(--text-primary);
+  color: var(--text-strong);
+  max-width: 34em;
 }
 
 .supporting {
-  color: var(--text-secondary);
+  color: var(--text-body);
   max-width: var(--text-max);
 }
 
@@ -60,43 +72,26 @@
   display: inline-flex;
   align-items: center;
   align-self: flex-start;
-  background: var(--accent-light);
-  color: var(--accent-hover);
-  padding: 8px 16px;
-  border-radius: 99px;
-  font-size: 14px;
+  background: var(--blue-50);
+  color: var(--blue-700);
+  border: 1px solid var(--blue-100);
+  padding: 8px 14px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 12px;
+  letter-spacing: 0.04em;
   line-height: 1.4;
 }
 
 .trust {
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 /* Visual column */
 .visual {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-}
-
-/* Blueprint dot-grid behind the diagnostic panel — signature texture, brand
-   accent at low opacity, faded at the edges. Decorative. */
-.visual::before {
-  content: "";
-  position: absolute;
-  inset: -28px;
-  z-index: 0;
-  background-image: radial-gradient(
-    circle,
-    rgba(29, 78, 216, 0.1) 1px,
-    transparent 1px
-  );
-  background-size: 22px 22px;
-  -webkit-mask-image: radial-gradient(ellipse at center, black 45%, transparent 78%);
-  mask-image: radial-gradient(ellipse at center, black 45%, transparent 78%);
-  pointer-events: none;
 }
 
 /* ----- Mobile (< 768px) ----- */
@@ -121,33 +116,22 @@
     align-items: center;
     width: auto;
   }
-
-  /* Visual below text, capped height. */
-  .visual {
-    max-height: 300px;
-    overflow: hidden;
-  }
 }
 
-/* ----- Desktop (>= 1024px): split 55 / 45 ----- */
+/* ----- Desktop (>= 1024px): split grid ----- */
 @media (min-width: 1024px) {
   .hero {
-    flex-direction: row;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
     gap: var(--space-6);
-    min-height: 540px;
+    align-items: stretch;
   }
 
   .content {
-    /* shrink to absorb the row gap so 55% + 45% + gap never overflows */
-    flex: 0 1 55%;
-    max-width: 55%;
+    justify-content: center;
   }
 
   .visual {
-    flex: 0 1 45%;
-    max-width: 45%;
-    max-height: none;
-    overflow: visible;
+    align-items: stretch;
   }
 }

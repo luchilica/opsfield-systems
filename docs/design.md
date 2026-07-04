@@ -32,37 +32,33 @@
 
 ## Цвета
 
+v2 palette (block/brand-first). Deep-ultramarine dominates; near-black ink is the structural pair; white paper is the ground; cool stone neutrals; the analytical set is diagnostics-only.
+
 | Назначение | HEX | CSS Variable |
 |---|---|---|
-| Основной текст | `#0B1220` | `--text-primary` |
-| Второстепенный текст | `#475569` | `--text-secondary` |
-| Приглушённый текст: placeholder / disabled | `#94A3B8` | `--text-muted` |
-| Текст на акценте | `#FFFFFF` | `--text-on-accent` |
-| Фон страницы | `#F8FAFC` | `--bg-page` |
-| Поверхности / карточки | `#FFFFFF` | `--bg-surface` |
-| Чередование секций / hover card | `#F1F5F9` | `--bg-subtle` |
-| Акцентный / CTA | `#1D4ED8` | `--accent` |
-| Акцент hover | `#1E40AF` | `--accent-hover` |
-| Акцент light: tags / chips | `#DBEAFE` | `--accent-light` |
-| Borders | `#CBD5E1` | `--border-default` |
-| Border focus | `#1D4ED8` | `--border-focus` |
-| Success | `#16A34A` | `--state-success` |
-| Error | `#DC2626` | `--state-error` |
-| Warning | `#D97706` | `--state-warning` |
+| Strong текст / ink surface | `#0A0A0F` | `--text-strong` / `--ink-900` / `--border-strong` / `--bg-inverse` |
+| Body текст | `#2C2E38` | `--text-body` (`--stone-700`) |
+| Muted текст | `#676B77` | `--text-muted` (`--stone-500`) |
+| Faint текст | `#9498A3` | `--text-faint` (`--stone-400`) |
+| Текст на brand / ink | `#FFFFFF` | `--text-on-brand` / `--text-on-dark` |
+| Фон страницы (paper) | `#FFFFFF` | `--paper` / `--bg-page` |
+| Stone band (alternate) | `#F2F2F4` | `--stone-100` / `--bg-band` |
+| **Brand blue — DOMINANT** / CTA | `#2551D2` | `--blue-500` / `--accent` / `--bg-brand` |
+| Brand blue hover | `#183CA5` | `--blue-600` / `--accent-hover` |
+| Blue tint: chips | `#EDF1FC` | `--blue-50` / `--accent-tint` |
+| Hairline border | `#E5E6EA` | `--stone-200` / `--border-hair` |
+| Focus | `#2551D2` | `--focus-ring` |
+| Evergreen — delivered / success (diagnostics) | `#17A26A` | `--evergreen-500` |
+| Amber — effort / warning (diagnostics) | `#E1A21A` | `--amber-500` |
+| Clay — risk / error (diagnostics) | `#E64A2E` | `--clay-500` |
 
-### Color Rules
+### Color Rules (v2)
 
-- `#CBD5E1` используется только для borders и decorative elements.
-- `#CBD5E1` запрещено использовать для основного или второстепенного текста.
-- Blue — action, links, focus, active states.
-- Amber — только risk / warning / dependency.
-- Green — только validated outcome / success.
-- Красный — только errors и critical state.
+- Brand blue dominates as a **full-fill surface** (hero panel, Problem, Final CTA, form accents). Near-black ink is the structural pair: 2px borders, `dark` buttons, ink-full sections, footer.
+- Backgrounds are **solid fills, never gradients**. Sections alternate between four surfaces only: paper, stone band, ink, brand.
+- The analytical set (evergreen / amber / clay) appears **only inside diagnostics** (matrix quadrants, process-map flags, delivered rows). Green = validated outcome; Amber = effort/dependency; Clay/red = risk/error.
 - Не использовать цвет как единственный способ передать статус.
-- Основной интерфейс: 75–85% neutral / white / off-white.
-- Accent colors используются дозированно, без декоративных gradients.
-- Visited links: `var(--accent-hover)` for text links; or `var(--accent)` if visited/unvisited distinction is not needed (single-page anchor navigation).
-- Do not rely on browser default purple.
+- Visited links: `var(--accent-hover)` for text links; single-page anchor nav may keep `var(--accent)`. Do not rely on browser default purple.
 
 ---
 
@@ -348,17 +344,16 @@ Easing: `--ease-out: cubic-bezier(0.22, 0.61, 0.36, 1)` (no bounce, no spring, n
 
 ### Desktop
 
-- Split: left `55%` / right `45%`.
+- Split grid: left `1.15fr` / right `0.85fr` (text / brand panel).
 - Left order:
-  1. Eyebrow / category label
-  2. H1
-  3. Subtitle
+  1. `+` mono eyebrow / category label
+  2. Mega Mulish-900 H1 (final term set in `--blue-500`)
+  3. Lead (Mulish 500)
   4. Supporting text
-  5. Primary and secondary CTA
-  6. Trust line
-- Right: diagnostic visual, system map SVG or process diagram.
-- Vertical alignment: center.
-- Min-height: `540px`.
+  5. Primary and secondary CTA (blocky)
+  6. ICP chip + trust line
+- Right: **brand-blue diagnostic-map panel** — 2px ink border, hard shadow, corner `+` mark, mono labels; the 5 system nodes + `Diagnostic → Roadmap → Implementation` flow. Abstract (no illustrative metrics in the hero).
+- Section divided from the next by the shared 2px ink rule.
 - Primary CTA remains the strongest visual action.
 
 ### Tablet

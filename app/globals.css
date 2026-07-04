@@ -369,6 +369,21 @@ main > section:nth-of-type(even) {
   background: var(--bg-band);
 }
 
+/* v2 blocky dividers — every block is separated by the shared 2px ink rule. */
+main > section {
+  border-bottom: var(--border-heavy) solid var(--ink-900);
+}
+
+/* Full-fill brand block (v2) — overrides the even-band rhythm by id.
+   Headings on brand/ink surfaces invert to white (base heading color is ink). */
+#problem-section {
+  background: var(--blue-500);
+  color: var(--text-on-brand);
+}
+#problem-section :is(h1, h2, h3, h4) {
+  color: var(--text-on-brand);
+}
+
 /* --------------------------------------------------------------------------
    Focus styles
    -------------------------------------------------------------------------- */

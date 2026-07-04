@@ -7,11 +7,12 @@ import {
   Layers,
   ArrowRight,
 } from "lucide-react";
+import PlusMark from "./PlusMark";
 import styles from "./HeroDiagram.module.css";
 
-// Spec: docs/design.md → "Hero Diagnostic Map". A contained diagnostic-readout
-// panel: status header, the 5 system nodes, and the diagnostic → delivery flow.
-// Decorative — hidden from assistive tech; the Hero text conveys the meaning.
+// Spec: docs/design.md (v2) → "Hero Diagnostic Map". A blocky brand-blue panel:
+// mono status label, the 5 system nodes, and the diagnostic → delivery flow.
+// Abstract map (no illustrative metrics) — decorative; the Hero text conveys it.
 const NODES = [
   { label: "Processes", Icon: GitBranch },
   { label: "CRM / RevOps", Icon: Database },
@@ -29,10 +30,10 @@ export default function HeroDiagram() {
       role="img"
       aria-label="Diagnostic system map: Processes, CRM / RevOps, Data, Automation, and IT Systems are reviewed for bottlenecks, gaps, and risks — from diagnostic to roadmap to implementation."
     >
-      <div className={styles.status}>
-        <span className={styles.pulse} />
-        Bottlenecks · Gaps · Risks
-      </div>
+      <PlusMark size={44} className={styles.cornerPlus} />
+
+      <div className={styles.status}>System Diagnostic Map</div>
+      <div className={styles.risks}>Bottlenecks · Gaps · Risks</div>
 
       <div className={styles.nodes}>
         {NODES.map(({ label, Icon }) => (

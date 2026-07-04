@@ -9,7 +9,10 @@ export default function Hero() {
       <div className={styles.content}>
         <p className={styles.eyebrow}>B2B IT &amp; Operations Advisory</p>
 
-        <h1>Diagnostic-First IT &amp; Business Consulting</h1>
+        <h1 className={styles.headline}>
+          Diagnostic-First IT &amp; Business{" "}
+          <span className={styles.accentWord}>Consulting</span>
+        </h1>
 
         {/* Semantically a paragraph, visually a lead. */}
         <p className={`lead ${styles.subtitle}`}>
