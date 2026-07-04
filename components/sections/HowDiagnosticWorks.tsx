@@ -1,9 +1,8 @@
 import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
 import styles from "./HowDiagnosticWorks.module.css";
 
-// Copy from docs/texts.md → "How the Diagnostic Works".
-// CTA "Start With a Diagnostic" → form, generic (no data-request-type) per sitemap.md.
+// Copy from docs/texts.md → "How the Diagnostic Works". v2 numbered step columns
+// (step 2 featured). CTA "Start With a Diagnostic" → form (generic) per sitemap.md.
 const STEPS = [
   "We review workflows, systems, CRM usage, reporting, automation, and decision bottlenecks.",
   "We map likely root causes and score fixes by impact, effort, risk, dependency, and business value.",
@@ -20,33 +19,27 @@ export default function HowDiagnosticWorks() {
 
       <ol className={styles.steps}>
         {STEPS.map((text, i) => (
-          <li key={i}>
-            <Card hover={false}>
-              <div className={styles.step}>
-                <div className={styles.stepHead}>
-                  <span className={styles.number} aria-hidden="true">
-                    {i + 1}
-                  </span>
-                  {i < STEPS.length - 1 && (
-                    <span className={styles.connector} aria-hidden="true" />
-                  )}
-                </div>
-                <p className={styles.stepText}>
-                  <span className="xsmall">Step {i + 1}</span>
-                  <br />
-                  {text}
-                </p>
-              </div>
-            </Card>
+          <li
+            key={i}
+            className={`${styles.step} ${i === 1 ? styles.stepFeatured : ""}`}
+          >
+            <span className={styles.number} aria-hidden="true">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <p className={styles.stepLabel}>Step {i + 1}</p>
+            <p className={styles.stepText}>{text}</p>
           </li>
         ))}
       </ol>
 
-      <div className={styles.cta}>
-        <Button href="#diagnostic-request-form" variant="primary" icon>
-          Start With a Diagnostic
-        </Button>
-      </div>
+      <Button
+        href="#diagnostic-request-form"
+        variant="primary"
+        icon
+        className={styles.cta}
+      >
+        Start With a Diagnostic
+      </Button>
     </div>
   );
 }

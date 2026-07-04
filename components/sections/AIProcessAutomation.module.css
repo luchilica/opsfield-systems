@@ -1,25 +1,5 @@
-/* AI & Process Automation — restrained accent, no AI-hype. Copy from docs/texts.md.
-   No Tailwind. */
-
-.block {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-3);
-}
-
-/* Bot icon allowed ONLY in this section — restrained lead mark in the shared
-   accent-tinted icon container (consistent with the card icon language). */
-.icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--accent-light);
-  color: var(--accent);
-}
+/* AI & Process Automation — v2 ink block. Section bg/color set by
+   #ai-process-automation in globals.css. Restrained, no AI-hype. No Tailwind. */
 
 .heading {
   max-width: var(--text-max);
@@ -27,66 +7,99 @@
 
 .text {
   max-width: var(--text-max);
-  color: var(--text-secondary);
+  color: var(--text-on-dark-muted);
+  margin-top: var(--space-2);
 }
 
-/* Process-to-automation flow — restrained, arrow-separated steps. */
+/* Process-to-automation flow — arrow-separated steps on dark. */
 .flow {
+  margin-top: var(--space-4);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-2);
   list-style: none;
   padding: 0;
-  margin-top: var(--space-1);
 }
 
 .flowStep {
-  font-weight: 600;
-  color: var(--text-primary);
+  font-family: var(--font-mono-fallback);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
 }
 
 .flowStep:last-child {
-  color: var(--accent-hover);
+  color: var(--blue-300);
 }
 
 .flowStep:not(:last-child)::after {
   content: "→";
   margin-left: var(--space-2);
-  color: var(--accent);
+  color: var(--blue-300);
   font-weight: 400;
 }
 
+/* Scope box — ink-800 panel with a paper border. */
+.scopeBox {
+  margin-top: var(--space-4);
+  padding: 30px;
+  background: var(--ink-800);
+  border: var(--border-heavy) solid var(--paper);
+  border-radius: var(--radius-md);
+}
+
+.scopeRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
 .scopeLabel {
-  font-weight: 600;
-  margin-top: var(--space-2);
+  margin-right: 6px;
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-on-dark-muted);
 }
 
 .scope {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1);
+  display: contents;
   list-style: none;
-  padding: 0;
 }
 
 .scopeItem {
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-default);
-  border-radius: 99px;
-  padding: 6px 14px;
-  font-size: 14px;
-  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border: 1.5px solid var(--border-on-dark);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--paper);
 }
 
-/* Principle — restrained emphasis, not a banner. */
+/* Principle — restrained blocky emphasis. */
 .principle {
-  border-left: 4px solid var(--accent);
-  padding: var(--space-2) var(--space-3);
-  color: var(--text-primary);
-  font-weight: 600;
+  margin: 24px 0 0;
+  padding-top: 20px;
+  border-top: var(--border-heavy) solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--paper);
 }
 
 .cta {
-  margin-top: var(--space-2);
+  margin-top: var(--space-4);
 }

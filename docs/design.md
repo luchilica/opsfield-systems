@@ -433,24 +433,21 @@ Sizes:
 
 Used in:
 
-- What We Diagnose
-- AI & Process Automation
+- What We Diagnose (two area cards + shared "You receive" output bar + O-1 ink panel)
 
 Structure:
 
-1. Lucide icon, `24px`
-2. H4 title
+1. Lucide icon, `30px`, `--accent`
+2. H3 title (Mulish `900`, ~24px)
 3. Description, maximum 2–3 lines
-4. Output or deliverable
-5. Contextual CTA when provided in `texts.md`
+4. Shared "You receive" output bar — mono outline badges from the `texts.md` Output line
 
-Rules:
+Rules (v2):
 
-- Padding: `24px`
-- No fixed min-height
-- Grid: 3 desktop / 2 tablet / 1 mobile
-- Icon is supporting, never the only label
-- No technology logo as primary visual
+- Blocky `Card`: 2px ink border, `--radius-md`, **hard shadow** on the area cards
+- Tones: `paper` + `blueTint` area cards; the O-1 secondary service is an **ink tile + paper body** panel
+- Grid: 2 columns desktop / 1 mobile (area cards)
+- Icon is supporting, never the only label; no technology logo as primary visual
 
 ### Step Card
 
@@ -461,18 +458,16 @@ Used in:
 
 Structure:
 
-1. Step number
-2. H4 title
-3. Short description
-4. Output or decision
+1. Big Mulish-900 step number (`01`/`02`/`03`), `--blue-500` (white on the featured column)
+2. Mono `Step N` label
+3. Short description (verbatim from `texts.md`)
 
-Rules:
+Rules (v2):
 
-- Step number: accent color, visually prominent
-- Padding: `24px`
-- Horizontal sequence on desktop
-- Vertical stepper on mobile
-- Use connecting lines only when they clarify sequence
+- Blocky column: 2px ink border, `--radius-md`, **hard shadow**
+- Middle/featured column filled brand blue (`--blue-500`)
+- Step number visually prominent
+- 3-column grid on desktop / stacked on mobile
 
 ### Scenario / Proof Card
 

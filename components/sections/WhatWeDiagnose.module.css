@@ -1,5 +1,5 @@
-/* What We Diagnose — service cards + shared output. Copy from docs/texts.md.
-   Grid: 1 col mobile / 2 tablet / 3 desktop. No Tailwind. */
+/* What We Diagnose — v2 block edition. Two area cards (hard shadow), a
+   "You receive" output bar, and the O-1 ink panel. Copy from docs/texts.md. */
 
 .intro {
   max-width: var(--text-max);
@@ -18,59 +18,153 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Service card inner layout */
+/* Service card inner layout — icon top, title/desc pinned to the base. */
 .card {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 200px;
   height: 100%;
 }
 
 .cardIcon {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--accent-light);
   color: var(--accent);
 }
 
 .cardTitle {
-  margin: 0;
-  /* A-004: <h3> for correct heading order; visual size preserved as h4. */
-  font-family: var(--font-body);
-  font-size: 18px;
-}
-
-@media (min-width: 1024px) {
-  .cardTitle {
-    font-size: 22px;
-  }
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
 }
 
 .cardDesc {
-  color: var(--text-secondary);
+  margin: 0;
+  color: var(--text-body);
+  font-weight: var(--fw-medium);
 }
 
-/* Shared output block (one deliverable list for the whole section). */
+/* "You receive" output bar — bordered block + mono outline badges. */
 .output {
-  margin-top: var(--space-4);
-  padding: var(--space-3);
-  background: var(--accent-light);
-  border-radius: 16px;
-  color: var(--text-primary);
+  margin-top: var(--space-3);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 22px 26px;
+  border: var(--border-heavy) solid var(--ink-900);
+  border-radius: var(--radius-md);
 }
 
 .outputLabel {
-  font-weight: 600;
+  margin-right: 6px;
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink-900);
+}
+
+.outputList {
+  display: contents;
+  list-style: none;
+}
+
+.outputBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border: 1.5px solid var(--ink-900);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-900);
+}
+
+/* O-1 secondary service — bordered panel, dark tile + paper body. */
+.o1 {
+  margin-top: var(--space-3);
+  display: grid;
+  grid-template-columns: 1fr;
+  border: var(--border-heavy) solid var(--ink-900);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .o1 {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+.o1Tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  padding: 24px 28px;
+  background: var(--ink-900);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.03em;
+}
+
+.o1Body {
+  padding: 22px 26px;
+}
+
+.o1Head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.o1Icon {
+  display: inline-flex;
+  color: var(--accent);
+}
+
+.o1Title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
+}
+
+.o1Badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border: 1.5px solid var(--ink-900);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-900);
+}
+
+.o1Desc {
+  margin: 0;
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+  color: var(--text-body);
 }
 
 /* Text-link CTA (per texts.md the CTA is a text link, not a button). */
@@ -83,7 +177,8 @@
   align-items: center;
   gap: var(--space-1);
   min-height: 44px;
-  font-weight: 600;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
   color: var(--accent);
   text-decoration: none;
 }

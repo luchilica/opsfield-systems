@@ -384,6 +384,20 @@ main > section {
   color: var(--text-on-brand);
 }
 
+/* Full-fill ink block (v2) — AI & Process Automation. */
+#ai-process-automation {
+  background: var(--ink-900);
+  color: var(--text-on-dark);
+}
+#ai-process-automation :is(h1, h2, h3, h4) {
+  color: var(--text-on-dark);
+}
+/* Eyebrow reads as lighter blue on the near-black surface. */
+#ai-process-automation .kicker,
+#ai-process-automation .kicker::before {
+  color: var(--blue-300);
+}
+
 /* --------------------------------------------------------------------------
    Focus styles
    -------------------------------------------------------------------------- */
