@@ -2,8 +2,23 @@ import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import styles from "./Button.module.css";
 
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "dark"
+  | "on-brand"
+  | "on-brand-outline";
+
+const VARIANT_CLASS: Record<ButtonVariant, string> = {
+  primary: styles.primary,
+  secondary: styles.secondary,
+  dark: styles.dark,
+  "on-brand": styles.onBrand,
+  "on-brand-outline": styles.onBrandOutline,
+};
+
 interface ButtonProps {
-  variant?: "primary" | "secondary";
+  variant?: ButtonVariant;
   href?: string;
   icon?: boolean;
   children: ReactNode;
@@ -26,7 +41,7 @@ export default function Button({
 }: ButtonProps) {
   const classes = [
     styles.button,
-    styles[variant],
+    VARIANT_CLASS[variant],
     disabled ? styles.disabled : null,
     className,
   ]

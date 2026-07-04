@@ -1,11 +1,15 @@
 import type { ReactNode } from "react";
 import styles from "./Card.module.css";
 
+type CardTone = "paper" | "brand" | "ink" | "sunken" | "blueTint";
+
 interface CardProps {
   children: ReactNode;
   className?: string;
   as?: "div" | "article";
   hover?: boolean;
+  tone?: CardTone;
+  hardShadow?: boolean;
 }
 
 export default function Card({
@@ -13,10 +17,18 @@ export default function Card({
   className,
   as = "div",
   hover = true,
+  tone = "paper",
+  hardShadow = false,
 }: CardProps) {
   const Tag = as;
 
-  const classes = [styles.card, hover ? styles.hover : null, className]
+  const classes = [
+    styles.card,
+    tone === "paper" ? null : styles[tone],
+    hardShadow ? styles.hard : null,
+    hover ? styles.hover : null,
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 

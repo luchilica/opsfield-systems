@@ -1,25 +1,62 @@
-/* Card — surface container.
-   Tokens from docs/design.md → "Radii and Borders", "Тени", "Edge Padding".
-   No Tailwind. */
+/* Card — blocky v2 surface. Solid block; the block IS the tone color.
+   Paper cards get a heavy 2px ink border. Hard shadow reserved for headline
+   cards. Interactive cards translate −3/−3 on hover (the signature press).
+   Tokens from docs/design.md (v2) → "Тени / Cards". No Tailwind. */
 
 .card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  border-radius: 16px;
-  box-shadow: var(--shadow-sm);
+  position: relative;
+  background: var(--surface-card);
+  color: var(--text-body);
+  border: var(--border-heavy) solid var(--border-strong);
+  border-radius: var(--radius-md);
   padding: 24px; /* mobile */
   overflow: hidden;
-  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+  transition: transform var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
 }
 
 @media (min-width: 768px) {
   .card {
-    padding: 32px;
+    padding: 28px;
   }
 }
 
-/* Hover: elevate shadow + a subtle ≤2px lift (docs/design.md → Тени). */
+/* Tones — the block is the color (border matches, no hairline on solids). */
+.brand {
+  background: var(--blue-500);
+  color: var(--text-on-brand);
+  border-color: var(--blue-500);
+}
+
+.ink {
+  background: var(--ink-900);
+  color: var(--text-on-dark);
+  border-color: var(--ink-900);
+}
+
+.sunken {
+  background: var(--stone-100);
+  color: var(--text-body);
+  border-color: var(--stone-200);
+}
+
+.blueTint {
+  background: var(--blue-50);
+  color: var(--ink-900);
+  border-color: var(--blue-100);
+}
+
+/* Signature 8px offset ink shadow — headline cards only. */
+.hard {
+  box-shadow: var(--shadow-hard);
+}
+
+/* Interactive hover — the block press: shift −3/−3, extend the shadow. */
 .hover:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hover.hard:hover {
+  box-shadow: 11px 11px 0 var(--ink-900);
 }

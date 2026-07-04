@@ -169,15 +169,15 @@ Once a pattern is chosen, maintain it consistently.
 
 | Component | Radius |
 |---|---:|
-| Input | `8px` |
-| Button | `12px` |
-| Card | `16px` |
-| Panel / featured block | `24px` |
+| Input | `4px` (`--radius-sm`) |
+| Button | `4px` (`--radius-sm`) |
+| Card | `6px` (`--radius-md`) |
+| Panel / featured block | `10px` (`--radius-lg`) |
 
-- Default border: `1px solid var(--border-default)`.
-- Focus border: `var(--border-focus)`.
-- Не использовать border как основной способ разделения всех секций.
-- Основное разделение секций — whitespace и background alternation.
+- Structural border (v2): `2px solid var(--border-strong)` (`--ink-900`) on every block — the primary divider.
+- Hairline for internal divisions: `1px solid var(--border-hair)` (`--stone-200`).
+- Focus border: `var(--focus-ring)`.
+- v2 is **border-led and blocky** — near-brutalist tight corners; section dividers use the shared 2px ink rule (this reverses v1, which avoided borders as the main divider).
 
 ---
 
@@ -185,16 +185,17 @@ Once a pattern is chosen, maintain it consistently.
 
 | Уровень | CSS | Использование |
 |---|---|---|
-| `sm` | `0 1px 3px rgba(11,18,32,0.06)` | Card resting state |
-| `md` | `0 4px 12px rgba(11,18,32,0.08)` | Card hover, dropdown |
-| `lg` | `0 8px 24px rgba(11,18,32,0.12)` | Modal, sticky header |
+| `sm` | `0 2px 4px rgba(10,10,15,0.06)` | subtle rest |
+| `md` | `0 8px 20px rgba(10,10,15,0.10)` | hover, dropdown |
+| `lg` | `0 24px 44px rgba(10,10,15,0.16)` | modal, sticky header |
+| `hard` | `8px 8px 0 var(--ink-900)` | **signature** block shadow — headline cards |
+| `brand-hard` | `8px 8px 0 var(--blue-500)` | signature block shadow on a brand block |
 
-### Shadow Rules
+### Shadow Rules (v2)
 
-- Не использовать heavy floating cards.
-- Hover не должен поднимать карточку более чем на `2px`.
-- Не сочетать сильную тень, толстый border и насыщенный background одновременно.
-- Тень не заменяет visual hierarchy.
+- The signature elevation is the **hard 8px ink offset** (no blur, no spread) — block-print. Reserve for headline cards (hero panel, How-it-works columns, form, scenario report).
+- Interactive block cards translate **−3/−3px** on hover, extending the hard shadow (the signature press). No scale-down.
+- Soft ambient shadows (`md`/`lg`) are secondary — hovers only; on paper prefer **2px border + hard shadow** to atmospheric depth.
 
 ---
 
@@ -202,9 +203,11 @@ Once a pattern is chosen, maintain it consistently.
 
 | Token | Значение | Использование |
 |---|---|---|
-| `--transition-fast` | `150ms ease-out` | Hover, focus, button states |
-| `--transition-normal` | `200ms ease-out` | Accordion, tooltip, dropdown |
-| `--transition-slow` | `300ms ease-in-out` | Mobile menu, modal |
+| `--dur-fast` / `--transition-fast` | `100–150ms var(--ease-out)` | Hover, focus, button states |
+| `--dur-med` / `--transition-normal` | `180–200ms var(--ease-out)` | Accordion, tooltip, dropdown |
+| `--dur-slow` / `--transition-slow` | `320ms var(--ease-in-out)` | Mobile menu, modal |
+
+Easing: `--ease-out: cubic-bezier(0.22, 0.61, 0.36, 1)` (no bounce, no spring, no infinite loops).
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -664,23 +667,24 @@ Rules:
 
 ## Buttons and CTA
 
+Buttons are blocky (v2): Mulish `700`, `15px`, near-square corners, `2px` borders.
+
 ### Primary Button
 
-- Background: `var(--accent)`
-- Text: `var(--text-on-accent)`
-- Hover: `var(--accent-hover)`
-- Radius: `12px`
-- Minimum height: `44px`
-- Padding: `12px 20px`
+- Background: `var(--accent)`; Text: `var(--accent-on)`; Border: `2px solid var(--accent)`
+- Hover: `var(--accent-hover)` (fill + border)
+- Radius: `4px` (`--radius-sm`); Minimum height: `44px`; Padding: `14px 22px`
 - Optional trailing icon: ArrowRight, `20px`
 
-### Secondary Button
+### Secondary Button (outline)
 
-- Background: transparent
-- Text: `var(--text-primary)`
-- Border: `1px solid var(--border-default)`
-- Hover border: `var(--accent)`
-- Minimum height: `44px`
+- Background: transparent; Text: `var(--ink-900)`; Border: `2px solid var(--ink-900)`
+- Hover: **invert to filled ink** — background `var(--ink-900)`, text `var(--paper)`
+- Radius: `4px`; Minimum height: `44px`
+
+### Additional variants (v2)
+
+- `dark` (solid ink), `on-brand` (paper fill for use inside blue blocks), `on-brand-outline` (paper border on blue).
 
 ### Text Link
 

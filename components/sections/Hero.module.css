@@ -18,21 +18,23 @@
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  gap: 8px;
+  font-family: var(--font-mono-fallback);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--accent);
 }
 
-/* Diagnostic tick — a short accent rule that anchors the eyebrow. */
+/* Signature + glyph prefix — the brand plus/cross motif at eyebrow scale. */
 .eyebrow::before {
-  content: "";
-  width: 28px;
-  height: 2px;
-  background: var(--accent);
+  content: "+";
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: 14px;
+  line-height: 1;
+  color: var(--accent);
 }
 
 .subtitle {

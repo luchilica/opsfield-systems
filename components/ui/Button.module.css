@@ -1,44 +1,90 @@
-/* Button — shared base for both <button> and <a> renderings.
-   Tokens from docs/design.md → "Buttons and CTA". No Tailwind. */
+/* Button — blocky v2. 2px borders, near-square corners, mono-free Mulish 700.
+   Tokens from docs/design.md (v2) → "Buttons and CTA". No Tailwind. */
 
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   min-height: 44px; /* required touch target — accessibility */
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.2;
+  padding: 14px 22px;
+  border: var(--border-heavy) solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  letter-spacing: 0;
   text-decoration: none;
   cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
 }
 
-/* Primary */
+/* Primary — brand-blue fill */
 .primary {
   background: var(--accent);
-  color: var(--text-on-accent);
-  border: none;
-  transition: background var(--transition-fast);
+  color: var(--accent-on);
+  border-color: var(--accent);
 }
-
 .primary:hover {
   background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  text-decoration: none;
 }
 
-/* Secondary */
+/* Secondary — v2 outline: 2px ink border, inverts to filled ink on hover */
 .secondary {
   background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border-default);
-  transition: border-color var(--transition-fast);
+  color: var(--ink-900);
+  border-color: var(--ink-900);
+}
+.secondary:hover {
+  background: var(--ink-900);
+  color: var(--paper);
+  border-color: var(--ink-900);
+  text-decoration: none;
 }
 
-.secondary:hover {
-  border-color: var(--accent);
+/* Dark — solid ink */
+.dark {
+  background: var(--ink-900);
+  color: var(--paper);
+  border-color: var(--ink-900);
+}
+.dark:hover {
+  background: var(--ink-800);
+  border-color: var(--ink-800);
+  text-decoration: none;
+}
+
+/* On-brand — paper fill for use inside blue blocks */
+.onBrand {
+  background: var(--paper);
+  color: var(--ink-900);
+  border-color: var(--paper);
+}
+.onBrand:hover {
+  background: var(--ink-900);
+  color: var(--paper);
+  border-color: var(--ink-900);
+  text-decoration: none;
+}
+
+/* On-brand outline — paper border for use inside blue blocks */
+.onBrandOutline {
+  background: transparent;
+  color: var(--paper);
+  border-color: var(--paper);
+}
+.onBrandOutline:hover {
+  background: var(--paper);
+  color: var(--ink-900);
+  border-color: var(--paper);
+  text-decoration: none;
 }
 
 /* Keep the trailing icon visually aligned and non-shrinking */
@@ -46,11 +92,12 @@
   flex-shrink: 0;
 }
 
-/* Disabled (both variants) */
+/* Disabled (all variants) */
 .disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
   pointer-events: none;
+  box-shadow: none;
 }
 
 /* Focus ring is inherited from the global :focus-visible rule in globals.css */
