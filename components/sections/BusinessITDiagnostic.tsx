@@ -1,12 +1,10 @@
-import { CheckCircle2, FileText, Shield } from "lucide-react";
-import Button from "@/components/ui/Button";
 import DiagnosticForm from "@/components/ui/DiagnosticForm";
+import PlusMark from "@/components/ui/PlusMark";
 import styles from "./BusinessITDiagnostic.module.css";
 
 // Copy from docs/texts.md → "Business & IT Diagnostic" (Offer, Before You Commit,
-// What Happens After You Submit). One composite section; sub-blocks share one panel
-// and have no independent anchors except #diagnostic-request-form on the form.
-
+// What Happens After You Submit). One composite section; only #diagnostic-request-form
+// is an anchor. v2 block layout: ink output panel + paper cards + bordered form.
 const OUTPUT = [
   "Problem summary",
   "Root-cause hypotheses",
@@ -14,7 +12,14 @@ const OUTPUT = [
   "Path to audit, assessment, roadmap, advisory, or implementation",
 ];
 
-const POST_SUBMIT_STEPS = [
+const REVIEW = [
+  "Diagnostic question framework",
+  "Priority matrix structure",
+  "Roadmap structure",
+  "Example deliverables",
+];
+
+const POST_SUBMIT = [
   "We review your company and main challenge, together with any optional context you choose to provide.",
   "A senior advisor confirms fit and runs the diagnostic around symptoms, systems, bottlenecks, and risks.",
   "If there is a valid next step, we provide a fixed-scope proposal before any commitment.",
@@ -24,107 +29,85 @@ export default function BusinessITDiagnostic() {
   return (
     <div className="container">
       <p className="kicker">THE DIAGNOSTIC</p>
-      <div className={styles.panel}>
-        {/* Sub-block 1 — Offer */}
-        <div className={styles.subblock}>
-          <h2>
-            A structured first step before another tool, hire, or implementation
-            project.
-          </h2>
-          <p className={`lead ${styles.lead}`}>
-            The first diagnostic conversation is a complimentary 30–45 minute fit
-            review to frame the problem and identify likely bottleneck areas.
-            Paid engagements begin only after a separate written proposal with
-            defined scope and pricing.
-          </p>
+      <h2 className={styles.intro}>
+        A structured first step before another tool, hire, or implementation
+        project.
+      </h2>
+      <p className={`lead ${styles.lead}`}>
+        The first diagnostic conversation is a complimentary 30–45 minute fit
+        review to frame the problem and identify likely bottleneck areas. Paid
+        engagements begin only after a separate written proposal with defined
+        scope and pricing.
+      </p>
 
-          <p className={styles.outputLabel}>What you receive</p>
-          <ul className={styles.outputList}>
-            {OUTPUT.map((item) => (
-              <li key={item} className={styles.outputItem}>
-                <CheckCircle2
-                  size={20}
-                  aria-hidden="true"
-                  className={styles.outputIcon}
-                />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-
-          <Button
-            href="#diagnostic-request-form"
-            variant="primary"
-            icon
-            className={styles.cta}
-            data-request-type="Business & IT Diagnostic"
-          >
-            Request a Business &amp; IT Diagnostic
-          </Button>
-        </div>
-
-        {/* Sub-block 2 — Before You Commit (Risk-Reduction Panel) */}
-        <div className={`${styles.subblock} ${styles.divided}`}>
-          <h3>Before You Commit</h3>
-          <p className={styles.riskText}>
-            Evaluate the approach before any paid engagement.
-          </p>
-
-          <div className={styles.riskRow}>
-            <FileText size={24} aria-hidden="true" className={styles.riskIcon} />
-            <p>
-              <span className={styles.riskLabel}>Review assets: </span>
-              <span className={styles.riskText}>
-                diagnostic question framework, priority matrix structure, roadmap
-                structure, and example deliverables.
-              </span>
-            </p>
+      <div className={styles.grid}>
+        {/* Left column — diagnostic output + before you commit */}
+        <div className={styles.aside}>
+          <div className={styles.outputPanel}>
+            <p className={styles.outputLabel}>Diagnostic output</p>
+            <ul className={styles.outputList}>
+              {OUTPUT.map((o, i) => (
+                <li key={o} className={styles.outputItem}>
+                  <span className={styles.outputNum}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{o}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className={styles.riskRow}>
-            <Shield size={24} aria-hidden="true" className={styles.riskIcon} />
-            <p>
-              <span className={styles.riskLabel}>Risk control: </span>
-              <span className={styles.riskText}>
-                no full system access is required for the initial fit review.
-                Deeper access starts only after scope and NDA are agreed.
-              </span>
+          <div className={styles.card}>
+            <h3 className={styles.cardTitle}>Before You Commit</h3>
+            <p className={styles.muted}>
+              Evaluate the approach before any paid engagement.
+            </p>
+            <p className={styles.reviewLabel}>Review assets</p>
+            <ul className={styles.chips}>
+              {REVIEW.map((r) => (
+                <li key={r} className={styles.chip}>
+                  {r}
+                </li>
+              ))}
+            </ul>
+            <p className={styles.muted}>
+              No full system access is required for the initial fit review.
+              Deeper access starts only after scope and NDA are agreed.
             </p>
           </div>
-
-          <p className={`small ${styles.privacy}`}>
-            By submitting the form, you acknowledge our{" "}
-            <a href="/privacy-policy">Privacy Policy</a>. We use your information
-            to evaluate fit and contact you about your diagnostic request.
-          </p>
         </div>
 
-        {/* Sub-block 3 — What Happens After You Submit the Request */}
-        <div className={`${styles.subblock} ${styles.divided}`}>
-          <h3>What Happens After You Submit the Request</h3>
-          <ol className={styles.steps}>
-            {POST_SUBMIT_STEPS.map((text, i) => (
-              <li key={i} className={styles.step}>
-                <span className={styles.stepNumber} aria-hidden="true">
-                  {i + 1}
-                </span>
-                <p className={styles.stepText}>
-                  <span className="xsmall">Step {i + 1}</span>
-                  <br />
-                  {text}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </div>
+        {/* Right column — after you submit + form */}
+        <div className={styles.main}>
+          <div className={styles.card}>
+            <p className={styles.stepsLabel}>What happens after you submit</p>
+            <ol className={styles.steps}>
+              {POST_SUBMIT.map((text, i) => (
+                <li key={i} className={styles.step}>
+                  <span className={styles.stepNumber} aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className={styles.stepLabel}>Step {i + 1}</p>
+                  <p className={styles.stepText}>{text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
 
-        {/* Sub-block 4 — Diagnostic Request Form */}
-        <div
-          id="diagnostic-request-form"
-          className={`${styles.subblock} ${styles.divided}`}
-        >
-          <h3>Diagnostic Request Form</h3>
-          <DiagnosticForm />
+          <div id="diagnostic-request-form" className={styles.formPanel}>
+            <div className={styles.formHeader}>
+              <span className={styles.formHeaderTitle}>
+                <PlusMark size={20} className={styles.formPlus} />
+                Diagnostic Request Form
+              </span>
+              <span className={styles.formBadge}>
+                Complimentary 30–45 min fit review
+              </span>
+            </div>
+            <div className={styles.formBody}>
+              <DiagnosticForm />
+            </div>
+          </div>
         </div>
       </div>
     </div>

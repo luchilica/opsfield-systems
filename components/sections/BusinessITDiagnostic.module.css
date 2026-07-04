@@ -1,52 +1,60 @@
-/* Business & IT Diagnostic — one composite conversion section.
-   Four sub-blocks (Offer → Before You Commit → Post-Submit Steps → Form) share
-   ONE panel surface. Specs: docs/design.md → "Diagnostic Offer Card",
-   "Risk-Reduction Panel", "Step Card". Copy from docs/texts.md. No Tailwind. */
+/* Business & IT Diagnostic — one composite conversion section, v2 block layout.
+   Left: ink diagnostic-output panel + paper "Before You Commit" card. Right:
+   paper "After you submit" card + bordered form (ink +header). Copy from
+   docs/texts.md. Only #diagnostic-request-form is an anchor. No Tailwind. */
 
-/* Shared surface for all sub-blocks — white panel with accent border
-   (docs/design.md → Diagnostic Offer Card: "white with accent border"). */
-.panel {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-  background: var(--bg-surface);
-  border: 1px solid var(--accent);
-  border-radius: 24px;
-  padding: var(--space-4);
+.intro {
+  max-width: var(--text-max);
+}
+
+.lead {
+  color: var(--text-body);
+  max-width: var(--text-max);
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  align-items: start;
 }
 
 @media (min-width: 1024px) {
-  .panel {
-    padding: var(--space-6);
+  .grid {
+    grid-template-columns: 340px 1fr;
+    gap: var(--space-4);
   }
 }
 
-.subblock {
+.aside,
+.main {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
 
-/* Divider between sub-blocks (whitespace + a hairline). */
-.divided {
-  border-top: 1px solid var(--border-default);
-  padding-top: var(--space-5);
+/* ----- Ink diagnostic-output panel ----- */
+.outputPanel {
+  background: var(--ink-900);
+  color: var(--paper);
+  border: var(--border-heavy) solid var(--ink-900);
+  border-radius: var(--radius-md);
+  padding: 26px;
 }
 
-.lead {
-  color: var(--text-secondary);
-  max-width: var(--text-max);
-}
-
-/* ----- Offer output list ----- */
 .outputLabel {
-  font-weight: 600;
+  margin-bottom: 18px;
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-on-dark-muted);
 }
 
 .outputList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -54,54 +62,103 @@
 
 .outputItem {
   display: flex;
-  align-items: flex-start;
-  gap: var(--space-1);
+  align-items: center;
+  gap: 13px;
+  padding: 11px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+  color: var(--paper);
 }
 
-.outputIcon {
+.outputItem:first-child {
+  border-top: none;
+}
+
+.outputNum {
   flex-shrink: 0;
-  margin-top: 2px;
-  color: var(--accent);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blue-300);
 }
 
-.cta {
-  margin-top: var(--space-2);
+/* ----- Paper cards ----- */
+.card {
+  background: var(--paper);
+  border: var(--border-heavy) solid var(--ink-900);
+  border-radius: var(--radius-md);
+  padding: 26px;
 }
 
-/* ----- Before You Commit (Risk-Reduction Panel) — calm, not warning-red ----- */
-.riskRow {
+.cardTitle {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
+}
+
+.muted {
+  margin: 0;
+  color: var(--stone-500);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.reviewLabel {
+  margin: var(--space-3) 0 var(--space-2);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink-900);
+}
+
+.chips {
+  list-style: none;
   display: flex;
-  align-items: flex-start;
-  gap: var(--space-2);
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0 0 var(--space-3);
+  padding: 0;
 }
 
-.riskIcon {
-  flex-shrink: 0;
-  margin-top: 2px;
-  color: var(--accent);
+.chip {
+  display: inline-flex;
+  padding: 6px 11px;
+  border: 1.5px solid var(--ink-900);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink-900);
 }
 
-.riskLabel {
-  font-weight: 600;
+/* ----- After-you-submit steps ----- */
+.stepsLabel {
+  margin-bottom: var(--space-4);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink-900);
 }
 
-.riskText {
-  color: var(--text-secondary);
-}
-
-.privacy {
-  color: var(--text-secondary);
-  margin-top: var(--space-1);
-}
-
-/* ----- Post-submit steps (Step Card) ----- */
 .steps {
+  list-style: none;
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3);
+  margin: 0;
+  padding: 0;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 640px) {
   .steps {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -110,26 +167,83 @@
 .step {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  background: var(--bg-subtle);
-  border-radius: 16px;
-  padding: var(--space-3);
 }
 
 .stepNumber {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 99px;
-  background: var(--accent-light);
-  color: var(--accent-hover);
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.028em;
+  line-height: 0.95;
+  color: var(--blue-500);
+}
+
+.stepLabel {
+  margin: 12px 0 6px;
+  font-family: var(--font-mono-fallback);
+  font-size: 10px;
   font-weight: 700;
-  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stone-400);
 }
 
 .stepText {
-  color: var(--text-secondary);
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: var(--fw-medium);
+  line-height: 1.55;
+  color: var(--text-body);
+}
+
+/* ----- Form panel — bordered, hard shadow, ink +header ----- */
+.formPanel {
+  scroll-margin-top: 96px;
+  background: var(--paper);
+  border: var(--border-heavy) solid var(--ink-900);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hard);
+  overflow: hidden;
+}
+
+.formHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 26px;
+  background: var(--ink-900);
+  color: var(--paper);
+}
+
+.formHeaderTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.02em;
+}
+
+.formPlus {
+  color: var(--blue-500);
+}
+
+.formBadge {
+  display: inline-flex;
+  padding: 6px 11px;
+  background: var(--paper);
+  color: var(--ink-900);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.formBody {
+  padding: 26px;
 }

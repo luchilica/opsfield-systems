@@ -701,7 +701,7 @@ Buttons are blocky (v2): Mulish `700`, `15px`, near-square corners, `2px` border
 |---|---|
 | Default | White background, default border |
 | Hover | Slightly darker border |
-| Focus | `2–3px` visible focus ring using `--border-focus` |
+| Focus | blue border (`--blue-500`) + `--ring` glow (`0 0 0 3px`) |
 | Error | Error border + text explanation |
 | Success | Success icon + confirmation text |
 | Disabled | Muted surface and text, reason must remain clear |
@@ -718,8 +718,9 @@ On submit click:
 
 ### Form Panel
 
-- Form panel radius: `24px`.
-- Padding: `32px` desktop / `24px` mobile.
+- Bordered form panel (v2): 2px ink border, `--radius-md`, **hard shadow**, ink `+`-header (title + fit-review badge).
+- Inputs: 2px ink border, `--radius-xs`, `≥16px` font (no iOS zoom); mono uppercase labels.
+- Composite layout: ink diagnostic-output panel + "Before You Commit" card on the left; "After you submit" steps + the form on the right.
 - Show the 4 required fields first: Name, Work Email, Company, Main Challenge.
 - Place an accessible disclosure control after the required fields: `Add more context (optional)`.
 - Keep Company Website, Role, Company Size, Timeline, and Request Type collapsed by default.
