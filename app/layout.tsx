@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Inter_Tight } from "next/font/google";
+import { Mulish, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SkipLink from "@/components/layout/SkipLink";
 import Header from "@/components/layout/Header";
@@ -9,21 +9,22 @@ import AnalyticsProvider from "@/components/analytics/AnalyticsProvider";
 import AnalyticsClickTracker from "@/components/analytics/AnalyticsClickTracker";
 import { siteConfig } from "@/lib/site-config";
 
-// Body + H4 — Inter. Weights 400 (body/lead/small) and 600 (H4).
-// Exposed as --font-body; overrides the fallback stack declared in :root.
-const inter = Inter({
+// v2 brand face — Mulish, weight-driven hierarchy (900 display/wordmark, 800
+// sub-heads, 700 UI, 600 emphasis, 400–500 body). Self-hosted by next/font
+// (no third-party font requests). Exposed as --font-sans.
+const mulish = Mulish({
   subsets: ["latin"],
-  weight: ["400", "600"],
-  variable: "--font-body",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-sans",
   display: "swap",
 });
 
-// H1–H3 — Inter Tight. Weights 600 (H3) and 700 (H1/H2).
-// Exposed as --font-heading; overrides the fallback stack declared in :root.
-const interTight = Inter_Tight({
+// v2 mono — JetBrains Mono for eyebrows, data labels, badges, form labels and
+// metric readouts. Exposed as --font-mono.
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-heading",
+  weight: ["400", "500", "700"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -43,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${interTight.variable} ${inter.variable}`}>
+      <body className={`${mulish.variable} ${jetbrainsMono.variable}`}>
         <SkipLink />
         <Header />
         <main id="main-content">{children}</main>

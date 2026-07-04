@@ -1,54 +1,156 @@
 /* ==========================================================================
-   Opsfield Systems — Design System
+   Opsfield Systems — Design System (v2 · block/brand-first)
    Tokens, typography scale and base styles.
-   Source of truth: docs/design.md, docs/optimization.md.
-   No Tailwind, no third-party CSS frameworks.
+   Source of truth: docs/design.md (v2), docs/optimization.md.
+   Imported from the "Opsfield Systems Design System" (claude.ai/design).
+   No Tailwind, no third-party CSS frameworks. Fonts self-hosted via next/font.
    Breakpoints (only three): 768px tablet, 1024px desktop, 1280px large desktop.
+
+   MIGRATION NOTE: v1 semantic aliases (--text-primary, --accent, --bg-page, …)
+   are retained below and repointed to v2 values so existing section/component
+   CSS keeps rendering with the v2 palette/type while each block is migrated to
+   the v2 names and blocky treatment (2px ink borders, hard shadow, + motif).
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   CSS Variable Reference — copied verbatim from docs/design.md.
-   Single source of truth for all design tokens in CSS.
-   --font-heading / --font-body are the documented fallback stacks; the
-   next/font classes on <body> override them with the self-hosted families.
-   -------------------------------------------------------------------------- */
 :root {
-  /* Text */
-  --text-primary: #0B1220;
-  --text-secondary: #475569;
-  --text-muted: #94A3B8;
+  /* ---- v2 raw palette (tokens/colors.css) ---------------------------------- */
+  /* Brand blue — deep ultramarine, DOMINANT */
+  --blue-50: #EDF1FC;
+  --blue-100: #DBE3F8;
+  --blue-200: #AEC1F4;
+  --blue-300: #7492E7;
+  --blue-500: #2551D2;
+  --blue-600: #183CA5;
+  --blue-700: #0C2883;
+
+  /* Ink — near-black */
+  --ink-50: #F2F3F5;
+  --ink-100: #E4E6EA;
+  --ink-500: #545666;
+  --ink-800: #1A1B24;
+  --ink-900: #0A0A0F;
+
+  /* Stone — cool neutrals */
+  --stone-50: #FAFAFB;
+  --stone-100: #F2F2F4;
+  --stone-200: #E5E6EA;
+  --stone-300: #C9CBD2;
+  --stone-400: #9498A3;
+  --stone-500: #676B77;
+  --stone-600: #454857;
+  --stone-700: #2C2E38;
+
+  --paper: #FFFFFF;
+
+  /* Analytical set — diagnostics only (matrix, process-map flags, delivered) */
+  --evergreen-500: #17A26A;
+  --evergreen-50: #DDF5EA;
+  --amber-500: #E1A21A;
+  --amber-50: #FBF0D6;
+  --clay-500: #E64A2E;
+  --clay-50: #FBE1D9;
+
+  /* ---- v2 semantic aliases ------------------------------------------------- */
+  --bg-band: var(--stone-100);
+  --bg-inverse: var(--ink-900);
+  --bg-brand: var(--blue-500);
+  --surface-card: var(--paper);
+  --surface-sunken: var(--stone-50);
+
+  --text-strong: var(--ink-900);
+  --text-body: var(--stone-700);
+  --text-faint: var(--stone-400);
+  --text-on-dark: #FFFFFF;
+  --text-on-dark-muted: rgba(255, 255, 255, 0.66);
+  --text-on-brand: #FFFFFF;
+  --text-on-brand-muted: rgba(255, 255, 255, 0.78);
+
+  --border-hair: var(--stone-200);
+  --border-strong: var(--ink-900);
+  --border-on-dark: rgba(255, 255, 255, 0.16);
+  --border-on-brand: rgba(255, 255, 255, 0.28);
+
+  --accent-tint: var(--blue-50);
+  --accent-on: #FFFFFF;
+
+  --label-situation: var(--ink-900);
+  --label-found: var(--blue-500);
+  --label-delivered: var(--evergreen-500);
+
+  --focus-ring: var(--blue-500);
+
+  /* ---- v1 → v2 bridge aliases (kept until each block is migrated) ---------- */
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--stone-700);
+  --text-muted: var(--stone-500);
   --text-on-accent: #FFFFFF;
+  --bg-page: var(--paper);
+  --bg-surface: var(--paper);
+  --bg-subtle: var(--stone-100);
+  --accent: var(--blue-500);
+  --accent-hover: var(--blue-600);
+  --accent-light: var(--blue-50);
+  --border-default: var(--stone-200);
+  --border-focus: var(--blue-500);
 
-  /* Backgrounds */
-  --bg-page: #F8FAFC;
-  --bg-surface: #FFFFFF;
-  --bg-subtle: #F1F5F9;
+  /* States (mapped to the analytical set) */
+  --state-success: var(--evergreen-500);
+  --state-error: var(--clay-500);
+  --state-warning: var(--amber-500);
 
-  /* Accent */
-  --accent: #1D4ED8;
-  --accent-hover: #1E40AF;
-  --accent-light: #DBEAFE;
+  /* ---- Typography (tokens/typography.css) ---------------------------------- */
+  --font-display: var(--font-sans, "Mulish", system-ui, -apple-system, sans-serif);
+  --font-mono-fallback: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  /* Bridge: v1 heading/body names now resolve to the single Mulish brand face */
+  --font-heading: var(--font-display);
+  --font-body: var(--font-sans, "Mulish", system-ui, -apple-system, sans-serif);
 
-  /* Borders */
-  --border-default: #CBD5E1;
-  --border-focus: #1D4ED8;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+  --fw-black: 900;
 
-  /* States */
-  --state-success: #16A34A;
-  --state-error: #DC2626;
-  --state-warning: #D97706;
+  --ls-display: -0.028em;
+  --ls-heading: -0.015em;
+  --ls-body: 0;
+  --ls-eyebrow: 0.14em;
+  --ls-caps: 0.06em;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(11, 18, 32, 0.06);
-  --shadow-md: 0 4px 12px rgba(11, 18, 32, 0.08);
-  --shadow-lg: 0 8px 24px rgba(11, 18, 32, 0.12);
+  /* ---- Elevation, radii, borders, motion (tokens/elevation.css) ------------ */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-pill: 999px;
 
-  /* Transitions */
-  --transition-fast: 150ms ease-out;
-  --transition-normal: 200ms ease-out;
-  --transition-slow: 300ms ease-in-out;
+  --border-width: 1px;
+  --border-heavy: 2px;
 
-  /* Spacing — 8px grid */
+  --shadow-xs: 0 1px 0 rgba(10, 10, 15, 0.06);
+  --shadow-sm: 0 2px 4px rgba(10, 10, 15, 0.06);
+  --shadow-md: 0 8px 20px rgba(10, 10, 15, 0.10);
+  --shadow-lg: 0 24px 44px rgba(10, 10, 15, 0.16);
+  --shadow-hard: 8px 8px 0 var(--ink-900);
+  --shadow-brand-hard: 8px 8px 0 var(--blue-500);
+  --shadow-report: 0 2px 0 var(--stone-200), 0 12px 24px rgba(10, 10, 15, 0.06);
+
+  --ring: 0 0 0 3px rgba(30, 58, 255, 0.32);
+
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.2, 1);
+  --dur-fast: 100ms;
+  --dur-med: 180ms;
+  --dur-slow: 320ms;
+
+  /* Bridge: v1 transition tokens (map onto the v2 easing) */
+  --transition-fast: 150ms var(--ease-out);
+  --transition-normal: 200ms var(--ease-out);
+  --transition-slow: 320ms var(--ease-in-out);
+
+  /* ---- Spacing — 8px grid (kept from v1; v2's 4px grid is a superset) ------ */
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;
@@ -56,17 +158,12 @@
   --space-5: 48px;
   --space-6: 64px;
   --space-7: 96px;
+  --space-8: 104px; /* v2 full-section rhythm */
 
-  /* Typography */
-  --font-heading: "Inter Tight", "Inter", system-ui,
-    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-body: "Inter", system-ui,
-    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-
-  /* Layout */
-  --container-max: 1200px;   /* docs/optimization.md — main container */
-  --text-max: 720px;         /* docs/design.md — text column */
-  --edge-padding: 20px;      /* mobile; overridden at tablet/desktop */
+  /* ---- Layout -------------------------------------------------------------- */
+  --container-max: 1200px;
+  --text-max: 720px;
+  --edge-padding: 20px;
 }
 
 /* --------------------------------------------------------------------------
@@ -91,12 +188,13 @@ html {
 body {
   font-family: var(--font-body);
   font-size: 16px;
-  font-weight: 400;
-  line-height: 1.6;
-  color: var(--text-primary);
+  font-weight: var(--fw-regular);
+  line-height: 1.55;
+  color: var(--text-body);
   background-color: var(--bg-page);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   /* Prevents horizontal scroll from the off-canvas mobile drawer.
      `clip` (not `hidden`) does not create a scroll container, so the
      sticky header keeps working. */
@@ -129,93 +227,105 @@ textarea {
   color: inherit;
 }
 
+::selection {
+  background: var(--blue-500);
+  color: var(--paper);
+}
+
 /* --------------------------------------------------------------------------
-   Typography Scale — mobile-first (base = mobile values from docs/design.md).
-   Desktop sizes applied at the 1024px desktop breakpoint.
-   Headings H1–H3 use --font-heading (Inter Tight); H4 uses --font-body (Inter).
+   Typography Scale — mobile-first. v2 Mulish, weight-driven, blocky display.
+   Headings use Mulish 900/800 with tight negative tracking; H4 uses 700.
    -------------------------------------------------------------------------- */
 h1,
 h2,
-h3 {
-  font-family: var(--font-heading);
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
 }
 
+h1,
+h2 {
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-display);
+  line-height: 1.02;
+}
+
+h3,
 h4 {
-  font-family: var(--font-body); /* H4 is Inter, NOT Inter Tight */
+  font-weight: var(--fw-extrabold);
+  letter-spacing: var(--ls-heading);
+  line-height: 1.12;
 }
 
 h1 {
-  font-size: 38px;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-size: 40px;
 }
 
 h2 {
   font-size: 30px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
 }
 
 h3 {
   font-size: 22px;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: 0;
+  font-weight: var(--fw-extrabold);
 }
 
 h4 {
   font-size: 18px;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: 0;
+  font-weight: var(--fw-bold);
 }
 
 .lead {
   font-family: var(--font-body);
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.6;
+  font-size: 19px;
+  font-weight: var(--fw-medium);
+  line-height: 1.5;
   letter-spacing: 0;
+  color: var(--text-body);
 }
 
 .small {
   font-size: 14px;
-  font-weight: 400;
+  font-weight: var(--fw-regular);
   line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .xsmall {
   font-size: 12px;
-  font-weight: 400;
+  font-weight: var(--fw-regular);
   line-height: 1.4;
   letter-spacing: 0.01em;
 }
 
-/* Section kicker/eyebrow — accent tick + uppercase category label. Placed as
-   the first child of a section .container, above the H2. Mirrors the hero
-   eyebrow so every section reads as a labelled chapter. */
-.kicker {
-  display: flex;
+/* --------------------------------------------------------------------------
+   Eyebrow / kicker — v2 signature: JetBrains Mono, UPPERCASE, tracked, with a
+   bold + glyph prefix. `.kicker` (existing section usage) and `.ops-eyebrow`
+   (design-system name) share one treatment.
+   -------------------------------------------------------------------------- */
+.kicker,
+.ops-eyebrow {
+  display: inline-flex;
   width: fit-content;
   align-items: center;
-  gap: var(--space-2);
+  gap: 8px;
   margin-bottom: var(--space-2);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-family: var(--font-mono-fallback);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--accent);
 }
 
-.kicker::before {
-  content: "";
-  width: 28px;
-  height: 2px;
-  background: var(--accent);
+.kicker::before,
+.ops-eyebrow::before {
+  content: "+";
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: 14px;
+  line-height: 1;
+  color: var(--accent);
 }
 
 /* --------------------------------------------------------------------------
@@ -250,20 +360,20 @@ section[id] {
 }
 
 /* --------------------------------------------------------------------------
-   Section background rhythm (docs/design.md) — default --bg-page;
-   even sections use --bg-subtle for visual rhythm. Applied consistently.
-   Uses :nth-of-type (counts only <section> siblings) so non-section nodes in
-   <main> — e.g. the JSON-LD <script> from JsonLd — do not offset the parity.
+   Section background rhythm — default paper; even <section> siblings take the
+   stone band. Uses :nth-of-type (counts only <section> siblings) so non-section
+   nodes in <main> — e.g. the JSON-LD <script> — do not offset the parity.
+   (v2 ink/brand full-fill sections are applied per-block during migration.)
    -------------------------------------------------------------------------- */
 main > section:nth-of-type(even) {
-  background: var(--bg-subtle);
+  background: var(--bg-band);
 }
 
 /* --------------------------------------------------------------------------
    Focus styles
    -------------------------------------------------------------------------- */
 :focus-visible {
-  outline: 2px solid var(--border-focus);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -278,18 +388,18 @@ main > section:nth-of-type(even) {
   }
 }
 
-/* Desktop — typography scale switches to desktop sizes; sections use --space-7 */
+/* Desktop — typography scale switches to desktop sizes */
 @media (min-width: 1024px) {
   :root {
     --edge-padding: 40px;
   }
 
   h1 {
-    font-size: 52px;
+    font-size: 60px;
   }
 
   h2 {
-    font-size: 40px;
+    font-size: 42px;
   }
 
   h3 {
@@ -301,7 +411,7 @@ main > section:nth-of-type(even) {
   }
 
   .lead {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .section {
@@ -315,7 +425,7 @@ main > section:nth-of-type(even) {
 }
 
 /* --------------------------------------------------------------------------
-   Reduced motion — copied from docs/design.md → Transitions
+   Reduced motion
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -339,7 +449,7 @@ main > section:nth-of-type(even) {
     text-shadow: none !important;
     transition: none !important;
     animation: none !important;
-    color: var(--text-primary) !important;
+    color: var(--text-strong) !important;
   }
 
   html,
@@ -347,8 +457,6 @@ main > section:nth-of-type(even) {
     background: #fff !important;
   }
 
-  /* Sticky header → static; drop nav, CTA, menu button and the mobile drawer.
-     Keep the logo wordmark. */
   header {
     position: static !important;
     border: none !important;
@@ -361,18 +469,15 @@ main > section:nth-of-type(even) {
     display: none !important;
   }
 
-  /* Footer CTA panel, cookie banner, and other print-hidden chrome. */
   .print-hide {
     display: none !important;
   }
 
-  /* Hero visual + all decorative icons are dropped. */
   #hero [role="img"],
   svg {
     display: none !important;
   }
 
-  /* The form is replaced by a short instruction. */
   #diagnostic-request-form form {
     display: none !important;
   }
@@ -382,14 +487,12 @@ main > section:nth-of-type(even) {
     margin-top: var(--space-2);
   }
 
-  /* Append real URLs after links (skip in-page anchors and the "/" logo). */
   a:not([href^="#"]):not([href="/"])::after {
     content: " (" attr(href) ")";
     font-size: 0.85em;
-    color: var(--text-secondary) !important;
+    color: var(--text-body) !important;
   }
 
-  /* Page breaks + print type scale. */
   #faq,
   #final-cta {
     page-break-before: always;
