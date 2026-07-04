@@ -1,75 +1,91 @@
 /* FAQ — accessible accordion. Answers always present in HTML (SEO).
-   Spec: docs/design.md → "FAQ Item"; docs/optimization.md → accordion a11y.
-   No Tailwind. */
+   v2: 2px ink dividers + a +/× toggle box. Keeps aria-expanded + hidden panel.
+   Spec: docs/design.md → "FAQ Item"; docs/optimization.md → accordion a11y. */
 
 .intro {
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-5);
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid var(--border-default);
-  max-width: 820px;
+  border-bottom: var(--border-heavy) solid var(--ink-900);
+  max-width: 900px;
 }
 
 .item {
-  border-bottom: 1px solid var(--border-default);
+  border-top: var(--border-heavy) solid var(--ink-900);
 }
 
-/* Trigger heading carries no margin; the button fills the row.
-   A-004: rendered as <h3> for correct heading order (section h2 → h3); the
-   button inherits these props so the visual stays at the original h4 size. */
 .heading {
   margin: 0;
-  font-family: var(--font-body);
-  font-size: 18px;
-  font-weight: 600;
-}
-
-@media (min-width: 1024px) {
-  .heading {
-    font-size: 22px;
-  }
 }
 
 .trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-2);
+  gap: var(--space-3);
   width: 100%;
   min-height: 44px;
-  padding: 20px 0;
+  padding: 24px 4px;
   background: none;
   border: none;
   cursor: pointer;
   text-align: left;
-  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -0.015em;
+  color: var(--ink-900);
 }
 
 .trigger:hover {
   color: var(--accent);
 }
 
-.chevron {
-  flex-shrink: 0;
-  color: var(--text-secondary);
-  transition: transform var(--transition-normal);
+@media (min-width: 1024px) {
+  .trigger {
+    font-size: 20px;
+  }
 }
 
-.chevronOpen {
-  transform: rotate(180deg);
+/* +/× toggle box — + rotates 45° to × and fills brand blue when open. */
+.toggle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: var(--border-heavy) solid var(--ink-900);
+  background: var(--paper);
+  color: var(--ink-900);
+  font-family: var(--font-sans);
+  font-weight: var(--fw-black);
+  font-size: 18px;
+  line-height: 1;
+  transition: transform var(--dur-med) var(--ease-out),
+    background var(--dur-med) var(--ease-out),
+    color var(--dur-med) var(--ease-out);
+}
+
+.toggleOpen {
+  transform: rotate(45deg);
+  background: var(--blue-500);
+  color: var(--paper);
 }
 
 .panel {
-  padding: 0 0 20px;
-  color: var(--text-secondary);
+  padding: 0 4px 26px;
+  color: var(--text-body);
   max-width: var(--text-max);
 }
 
 .answer {
   margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* Fit / Not Fit semantic lists — meaning carried by text, not colour alone. */
@@ -86,19 +102,19 @@
   display: flex;
   align-items: flex-start;
   gap: var(--space-1);
-  color: var(--text-primary);
+  color: var(--ink-900);
 }
 
 .fitIcon {
   flex-shrink: 0;
   margin-top: 2px;
-  color: var(--state-success);
+  color: var(--evergreen-500);
 }
 
 .notFitIcon {
   flex-shrink: 0;
   margin-top: 2px;
-  color: var(--state-error);
+  color: var(--clay-500);
 }
 
 .closing {

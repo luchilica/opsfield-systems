@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, CheckCircle2, XCircle } from "lucide-react";
+import { CheckCircle2, XCircle } from "lucide-react";
 import { FAQ_ITEMS } from "./faqData";
 import { trackEvent } from "@/lib/analytics";
 import styles from "./FAQ.module.css";
@@ -41,13 +41,14 @@ export default function FAQ() {
                   }}
                 >
                   <span>{item.q}</span>
-                  <ChevronDown
-                    size={20}
+                  <span
                     aria-hidden="true"
-                    className={`${styles.chevron} ${
-                      isOpen ? styles.chevronOpen : ""
+                    className={`${styles.toggle} ${
+                      isOpen ? styles.toggleOpen : ""
                     }`}
-                  />
+                  >
+                    +
+                  </span>
                 </button>
               </h3>
 

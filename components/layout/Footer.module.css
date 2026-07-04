@@ -1,17 +1,17 @@
-/* Footer — dark surface. Palette from docs/design.md → "Footer dark surface".
-   These colors are scoped to .footer only and do not affect the global theme.
-   No Tailwind. */
+/* Footer — v2 ink surface. Mono group labels, paper links. Colors scoped to
+   .footer only. Spec: docs/design.md → "Footer". No Tailwind. */
 
 .footer {
-  --footer-bg: #0B1220;
-  --footer-text: #F8FAFC;
-  --footer-link: #93C5FD;
-  --footer-link-hover: #BFDBFE;
-  --footer-muted: #94A3B8;
-  --footer-divider: rgba(248, 250, 252, 0.12);
+  --footer-bg: #0A0A0F;
+  --footer-text: #ffffff;
+  --footer-link: #ffffff;
+  --footer-link-hover: var(--blue-300);
+  --footer-muted: rgba(255, 255, 255, 0.66);
+  --footer-divider: rgba(255, 255, 255, 0.15);
 
   background: var(--footer-bg);
   color: var(--footer-text);
+  border-top: var(--border-heavy) solid var(--ink-900);
 }
 
 .inner {
@@ -34,8 +34,10 @@
 }
 
 .ctaText {
-  font-family: var(--font-heading);
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: var(--fw-extrabold);
+  font-size: 22px;
+  letter-spacing: -0.02em;
   color: var(--footer-text);
   max-width: var(--text-max);
 }
@@ -72,13 +74,13 @@
 }
 
 .groupTitle {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
   color: var(--footer-muted);
-  margin-bottom: var(--space-1);
+  margin-bottom: var(--space-2);
 }
 
 .linkList {
@@ -90,7 +92,9 @@
   align-items: center;
   min-height: 44px; /* touch target */
   color: var(--footer-link);
-  font-size: 16px;
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-weight: var(--fw-semibold);
   text-decoration: none;
 }
 
@@ -100,9 +104,7 @@
   text-decoration: underline;
 }
 
-/* A-002: focus ring visible on the dark footer. The global blue outline
-   (--border-focus, ~2.8:1 on #0B1220) is too low-contrast; use the light
-   footer-link token. docs/optimization.md → visible on light AND dark. */
+/* Focus ring visible on the ink footer. */
 .footer :focus-visible {
   outline-color: var(--footer-link);
 }
@@ -116,5 +118,6 @@
 
 .copyright {
   color: var(--footer-muted);
-  font-size: 14px;
+  font-family: var(--font-mono-fallback);
+  font-size: 12px;
 }

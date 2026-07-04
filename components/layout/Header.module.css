@@ -1,21 +1,18 @@
-/* Header — sticky site header with desktop nav and mobile drawer.
-   Tokens from globals.css. Breakpoint: 768px splits mobile drawer / desktop nav.
-   No Tailwind. */
+/* Header — sticky site header, v2 blocky. 2px ink bottom rule, OS tile wordmark.
+   Breakpoint: 768px splits mobile drawer / desktop nav. No Tailwind. */
 
 .header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--bg-page);
-  border-bottom: 1px solid transparent;
-  transition: box-shadow var(--transition-fast),
-    border-color var(--transition-fast);
+  background: var(--paper);
+  border-bottom: var(--border-heavy) solid var(--ink-900);
+  transition: box-shadow var(--dur-med) var(--ease-out);
 }
 
 /* Elevated state once the page is scrolled. */
 .scrolled {
-  box-shadow: var(--shadow-lg);
-  border-bottom-color: var(--border-default);
+  box-shadow: var(--shadow-md);
 }
 
 .inner {
@@ -23,22 +20,20 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  min-height: 72px;
+  min-height: 76px;
 }
 
-@media (min-width: 1024px) {
-  .inner {
-    min-height: 80px;
-  }
-}
-
-/* Logo wordmark — text only, editable until trademark clearance. */
+/* Logo wordmark — Mulish 900 + solid OS tile. Editable until trademark clearance. */
 .logo {
-  font-family: var(--font-heading);
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
   font-size: 20px;
-  line-height: 1.1;
-  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -0.028em;
+  color: var(--ink-900);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -46,7 +41,22 @@
 .logo:hover,
 .logo:focus-visible {
   text-decoration: none;
-  color: var(--accent);
+  color: var(--ink-900);
+}
+
+.logoTile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--blue-500);
+  color: var(--paper);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.5px;
 }
 
 /* ----- Desktop navigation ----- */
@@ -62,8 +72,8 @@
   .desktopNav {
     display: flex;
     align-items: center;
-    gap: var(--space-1);
     margin-left: auto;
+    margin-right: var(--space-3);
   }
 
   .desktopCta {
@@ -74,7 +84,7 @@
 .navList {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: var(--space-3);
   list-style: none;
 }
 
@@ -82,12 +92,12 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 12px;
-  font-family: var(--font-body);
-  font-size: 16px;
-  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-weight: var(--fw-bold);
+  color: var(--ink-900);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
 .navLink:hover,
@@ -96,22 +106,23 @@
   text-decoration: none;
 }
 
-/* ----- Mobile menu button ----- */
+/* ----- Mobile menu button — solid ink square ----- */
 .menuButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
-  background: transparent;
+  background: var(--ink-900);
   border: none;
-  border-radius: 12px;
-  color: var(--text-primary);
+  border-radius: var(--radius-xs);
+  color: var(--paper);
   cursor: pointer;
 }
 
 .menuButton:hover {
-  color: var(--accent);
+  background: var(--ink-800);
+  color: var(--paper);
 }
 
 @media (min-width: 768px) {
@@ -125,11 +136,11 @@
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(11, 18, 32, 0.4);
+  background: rgba(10, 10, 15, 0.5);
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-slow),
-    visibility var(--transition-slow);
+  transition: opacity var(--dur-slow) var(--ease-in-out),
+    visibility var(--dur-slow);
 }
 
 .overlayOpen {
@@ -148,13 +159,14 @@
   width: min(320px, 85vw);
   height: 100dvh;
   padding: var(--space-4) var(--space-3);
-  background: var(--bg-surface);
+  background: var(--paper);
+  border-left: var(--border-heavy) solid var(--ink-900);
   box-shadow: var(--shadow-lg);
   transform: translateX(100%);
   /* Hidden when closed so its links are not keyboard-focusable. */
   visibility: hidden;
-  transition: transform var(--transition-slow),
-    visibility var(--transition-slow);
+  transition: transform var(--dur-slow) var(--ease-in-out),
+    visibility var(--dur-slow);
   overflow-y: auto;
 }
 
@@ -193,12 +205,13 @@
   align-items: center;
   min-height: 44px;
   padding: 0 var(--space-1);
-  font-family: var(--font-body);
-  font-size: 16px;
-  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: var(--fw-bold);
+  color: var(--ink-900);
   text-decoration: none;
-  border-bottom: 1px solid var(--border-default);
-  transition: color var(--transition-fast);
+  border-bottom: 1px solid var(--stone-200);
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
 .drawerLink:hover,

@@ -98,6 +98,9 @@ export default function Header() {
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.logo}>
+          <span className={styles.logoTile} aria-hidden="true">
+            OS
+          </span>
           Opsfield Systems
         </Link>
 

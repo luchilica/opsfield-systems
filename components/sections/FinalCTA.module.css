@@ -1,34 +1,24 @@
-/* Final CTA — strong accent panel with primary + secondary action.
-   Spec: docs/design.md → "Section background rhythm" (Final CTA may use accent)
-   + "Section-Level Visual Map" (strong CTA panel). Copy from docs/texts.md.
-   Does not repeat the Hero positioning. No Tailwind. */
+/* Final CTA — v2 full-fill brand block with + motifs. Section bg/color set by
+   #final-cta in globals.css. Copy from docs/texts.md. No Tailwind. */
 
-.panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  text-align: center;
-  background: var(--accent);
-  color: var(--text-on-accent);
-  border-radius: 24px;
-  padding: var(--space-4) var(--space-3);
-}
-
-@media (min-width: 1024px) {
-  .panel {
-    padding: var(--space-6) var(--space-5);
-  }
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
 }
 
 .heading {
-  color: var(--text-on-accent);
-  max-width: var(--text-max);
+  color: var(--paper);
+  font-size: clamp(2.2rem, 1.6rem + 2vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 .text {
-  color: var(--text-on-accent);
-  max-width: var(--text-max);
+  color: var(--text-on-brand);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-5);
+  max-width: 620px;
 }
 
 .actions {
@@ -36,44 +26,44 @@
   flex-direction: column;
   align-items: stretch;
   gap: var(--space-2);
-  width: 100%;
-  margin-top: var(--space-2);
 }
 
 @media (min-width: 768px) {
   .actions {
     flex-direction: row;
-    justify-content: center;
-    width: auto;
+    flex-wrap: wrap;
+    align-items: center;
   }
 }
 
-/* Contrast overrides on the accent background.
-   `.panel .xBtn` (specificity 0,2,0) reliably beats Button's own `.primary`
-   / `.secondary` (0,1,0) regardless of stylesheet order. */
-.panel .primaryBtn {
-  background: var(--text-on-accent);
-  color: var(--accent);
+/* Keep the focus ring visible on the brand background. */
+.inner :focus-visible {
+  outline-color: var(--paper);
 }
 
-.panel .primaryBtn:hover {
-  background: var(--bg-subtle);
+/* Decorative corner + motifs (behind content). */
+.plusTop,
+.plusBottom {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.panel .secondaryBtn {
-  background: transparent;
-  color: var(--text-on-accent);
-  border-color: var(--text-on-accent);
+.plusTop {
+  top: -50px;
+  right: -30px;
+  color: rgba(255, 255, 255, 0.14);
 }
 
-.panel .secondaryBtn:hover {
-  border-color: var(--text-on-accent);
-  background: rgba(255, 255, 255, 0.12);
+.plusBottom {
+  bottom: 0;
+  left: 3%;
+  color: rgba(255, 255, 255, 0.1);
 }
 
-/* A-001: keep the focus ring visible on the accent panel. The global blue
-   :focus-visible outline (--border-focus) is invisible against this background.
-   docs/optimization.md → focus must be visible on light AND dark surfaces. */
-.panel :focus-visible {
-  outline-color: var(--text-on-accent);
+@media (max-width: 767px) {
+  .plusTop,
+  .plusBottom {
+    display: none;
+  }
 }

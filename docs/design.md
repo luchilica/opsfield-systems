@@ -785,56 +785,39 @@ Style on `:focus`:
 - `z-index`: above sticky header
 - font: Body weight `600`
 
-### Desktop
+### Desktop (v2)
 
-- Logo left.
-- Navigation center/right:
-  - Services
-  - How It Works
-  - Results
-  - FAQ
-- Primary CTA right: `Request Diagnostic`.
-- Sticky state may use `shadow-lg`.
-- Header height: `72–80px`.
+- Sticky; **2px ink bottom rule**; `shadow-md` when scrolled. Height `76px`.
+- Logo left: Mulish-900 wordmark + solid **`OS` tile** (blue fill, paper text).
+- Navigation right (Mulish `700`): Services / How It Works / Results / FAQ.
+- Primary CTA right (blocky): `Request Diagnostic`.
 
-### Mobile
+### Mobile (v2)
 
-- Logo left.
-- Menu trigger right.
-- Drawer contains the same links as desktop.
-- Primary CTA appears near the top and bottom of drawer.
-- Touch targets: minimum `44px`.
-- No mega menu.
+- Logo left; menu trigger right = **solid ink square** (paper icon).
+- Drawer (2px ink left border) contains the same links; primary CTA near the top.
+- Touch targets: minimum `44px`. No mega menu.
 
 ---
 
 ## Footer
 
-- Dark navy or deep slate surface is allowed.
-- Three groups:
-  - Company
-  - Get Started
-  - Legal
-- Include:
-  - Privacy Policy
-  - Terms of Use
-  - Cookie Policy
-- Footer CTA panel appears above footer links.
-- Do not create a large link directory.
-- Social icons are secondary, not dominant.
+- v2: full **ink** surface (`--ink-900`), 2px ink top rule, mono uppercase group labels, paper links.
+- Three groups: Company / Get Started / Legal (Privacy Policy / Terms of Use / Cookie Policy).
+- Footer CTA panel appears above the links. Do not create a large link directory.
 
-### Footer dark surface (if used)
+### Footer surface (v2)
 
-| Element | Color | Contrast on #0B1220 |
-|---|---|---|
-| Background | #0B1220 or #1E293B | — |
-| Body text | #F8FAFC | ~16:1 ✓ |
-| Links | #93C5FD (blue-300) | ~8.5:1 ✓ |
-| Links hover | #BFDBFE (blue-200) | ~11:1 ✓ |
-| Muted text | #94A3B8 | ~5.8:1 ✓ |
-| Divider | rgba(248,250,252,0.12) | — |
+| Element | Color |
+|---|---|
+| Background | `--ink-900` (`#0A0A0F`) |
+| Body / links | `#FFFFFF` (paper) |
+| Link hover | `--blue-300` |
+| Group labels (mono) | `rgba(255,255,255,0.66)` |
+| Muted / copyright (mono) | `rgba(255,255,255,0.66)` |
+| Divider | `rgba(255,255,255,0.15)` |
 
-If footer uses dark surface, these colors override the default light-surface palette within footer only.
+These colors are scoped to the footer only and override the default light-surface palette within the footer.
 
 ---
 
