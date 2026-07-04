@@ -1,12 +1,21 @@
 import { ArrowRight } from "lucide-react";
-import Card from "@/components/ui/Card";
 import styles from "./DiagnosticScenarios.module.css";
 
 // Copy from docs/texts.md → "Diagnostic Scenarios". Anonymized + illustrative.
+// v2 report cards: brand header + Situation / Diagnostic found / Delivered rows.
 // Do not present as verified case studies, metrics, logos or testimonials.
-const SCENARIOS = [
+type Scenario = {
+  client: string;
+  environment: string[];
+  situation: string;
+  found: string;
+  delivered: string;
+};
+
+const SCENARIOS: Scenario[] = [
   {
-    clientType: "B2B services firm (≈80 employees, HubSpot)",
+    client: "B2B services firm (≈80 employees)",
+    environment: ["HubSpot"],
     situation:
       "Inbound leads were falling between marketing and sales — no defined handoff owner, no SLA, and 3 duplicate CRM fields creating confusion.",
     found:
@@ -15,7 +24,8 @@ const SCENARIOS = [
       "Handoff process reduced from 5 steps to 2. Single ownership assigned per lead stage. Estimated revenue at risk from dropped handoffs: $180K–$240K annually. 30-day cleanup priority list adopted by both teams.",
   },
   {
-    clientType: "Scaling SaaS team (≈120 employees, Salesforce + Looker)",
+    client: "Scaling SaaS team (≈120 employees)",
+    environment: ["Salesforce", "Looker"],
     situation:
       "Leadership did not trust dashboard numbers — 3 departments used different definitions for the same metrics.",
     found:
@@ -24,7 +34,8 @@ const SCENARIOS = [
       "Unified reporting definitions document covering 7 previously inconsistent metrics. Data-source consolidation plan eliminated 40+ hours/month of manual reconciliation. BI roadmap prioritized by stakeholder impact with 90-day execution timeline.",
   },
   {
-    clientType: "Multi-location operator (≈200 employees, Monday + Zapier + spreadsheets)",
+    client: "Multi-location operator (≈200 employees)",
+    environment: ["Monday", "Zapier", "spreadsheets"],
     situation:
       "4 locations running different approval workflows with 6 overlapping tools and no shared process documentation.",
     found:
@@ -34,6 +45,12 @@ const SCENARIOS = [
   },
 ];
 
+const ROWS = [
+  { key: "situation", label: "Situation", num: "01" },
+  { key: "found", label: "Diagnostic found", num: "02" },
+  { key: "delivered", label: "Delivered", num: "03" },
+] as const;
+
 export default function DiagnosticScenarios() {
   return (
     <div className="container">
@@ -42,32 +59,41 @@ export default function DiagnosticScenarios() {
 
       <div className={styles.list}>
         {SCENARIOS.map((s, i) => (
-          <Card key={i} as="article" hover={false} className={styles.scenario}>
-            <div className={styles.scenarioInner}>
-              <p className={styles.clientType}>{s.clientType}</p>
-              <p className={styles.row}>
-                <span className={styles.label}>Situation: </span>
-                <span className={styles.value}>{s.situation}</span>
-              </p>
-              <p className={styles.row}>
-                <span className={styles.label}>Diagnostic found: </span>
-                <span className={styles.value}>{s.found}</span>
-              </p>
-              <p className={styles.row}>
-                <span className={styles.label}>Delivered: </span>
-                <span className={styles.value}>{s.delivered}</span>
-              </p>
+          <article key={i} className={styles.scenario}>
+            <div className={styles.header}>
+              <div>
+                <p className={styles.scenarioNum}>
+                  Scenario · {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className={styles.client}>{s.client}</h3>
+              </div>
+              <div className={styles.envs}>
+                {s.environment.map((e) => (
+                  <span key={e} className={styles.env}>
+                    {e}
+                  </span>
+                ))}
+              </div>
             </div>
-          </Card>
+
+            {ROWS.map((r) => (
+              <div key={r.key} className={`${styles.rowGrid} ${styles[r.key]}`}>
+                <div className={styles.rowLabel}>
+                  <span className={styles.rowNum}>{r.num}</span>
+                  <span className={styles.rowName}>{r.label}</span>
+                </div>
+                <p className={styles.rowText}>{s[r.key]}</p>
+              </div>
+            ))}
+          </article>
         ))}
       </div>
 
-      <p className={`small ${styles.note}`}>
+      <p className={styles.note}>
         Scenarios are anonymized composites. Figures are illustrative and reflect
         the type of impact diagnostic work typically identifies.
       </p>
 
-      {/* Text-link CTA → form, generic (no data-request-type) per sitemap.md. */}
       <div className={styles.cta}>
         <a href="#diagnostic-request-form" className={styles.textLink}>
           Request a Diagnostic for Your Team

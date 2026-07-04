@@ -1,6 +1,5 @@
-/* Diagnostic Scenarios — anonymized, illustrative. Stacked single column.
-   NOT styled as verified metric tiles or case studies. Copy from docs/texts.md.
-   No Tailwind. */
+/* Diagnostic Scenarios — v2 report cards. Brand-blue header + Situation /
+   Diagnostic found / Delivered rows. Anonymized + illustrative. No Tailwind. */
 
 .intro {
   max-width: var(--text-max);
@@ -10,46 +9,128 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);
 }
 
-/* Scenario card — accent left rule per design.md Scenario / Proof Card. */
 .scenario {
-  border-left: 4px solid var(--accent);
+  background: var(--paper);
+  border: var(--border-heavy) solid var(--ink-900);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hard);
+  overflow: hidden;
 }
 
-.scenarioInner {
+/* Report header — brand blue. */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 20px 26px;
+  background: var(--blue-500);
+  color: var(--paper);
+}
+
+.scenarioNum {
+  margin: 0 0 8px;
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-on-brand-muted);
+}
+
+.client {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--paper);
+}
+
+.envs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.env {
+  padding: 5px 9px;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--paper);
+}
+
+/* Situation / Diagnostic found / Delivered rows. */
+.rowGrid {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 20px;
+  padding: 22px 26px;
+  border-top: var(--border-heavy) solid var(--ink-900);
+}
+
+.rowLabel {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 4px;
 }
 
-/* Client type — supporting label, not a verified metric tile. */
-.clientType {
-  font-weight: 600;
-  color: var(--text-secondary);
+.rowNum {
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
 }
 
-.row {
+.rowName {
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+/* Triad accents. */
+.situation .rowNum,
+.situation .rowName {
+  color: var(--ink-900);
+}
+.found .rowNum,
+.found .rowName {
+  color: var(--blue-500);
+}
+.delivered .rowNum,
+.delivered .rowName {
+  color: var(--evergreen-500);
+}
+
+.rowText {
   margin: 0;
-}
-
-.label {
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.value {
-  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: var(--fw-medium);
+  line-height: 1.55;
+  color: var(--ink-900);
 }
 
 .note {
-  margin-top: var(--space-4);
-  color: var(--text-secondary);
+  margin: var(--space-3) 0 0;
+  font-size: 13px;
+  font-style: italic;
+  font-weight: var(--fw-medium);
+  color: var(--stone-500);
 }
 
 .cta {
-  margin-top: var(--space-3);
+  margin-top: var(--space-4);
 }
 
 .textLink {
@@ -57,7 +138,8 @@
   align-items: center;
   gap: var(--space-1);
   min-height: 44px;
-  font-weight: 600;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
   color: var(--accent);
   text-decoration: none;
 }

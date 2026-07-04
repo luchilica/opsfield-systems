@@ -484,10 +484,11 @@ Structure:
 5. Timeline, only if confirmed
 6. Anonymized note where required
 
-Rules:
+Rules (v2):
 
-- Padding: `32px`
-- Border-left: `4px solid var(--accent)`
+- Report card: `paper` surface, 2px ink border, `--radius-md`, **hard shadow**
+- Brand-blue header: `Scenario · 0N` + client + environment mono tags
+- Three stacked rows — Situation (ink) / Diagnostic found (blue) / Delivered (evergreen) — each a mono num + label + text, divided by the 2px ink rule
 - One-column stacked layout
 - Do not invent names, logos or testimonials.
 - A real anonymized case must be supported by an internal source record and approval.
@@ -505,30 +506,16 @@ Structure:
 - What others do first
 - What Opsfield does first
 
-Rules:
+Rules (v2):
 
-- Use side-by-side table on desktop
-- Stack each comparison pair into a card on mobile
-- Opsfield column receives subtle `--accent-light` background
+- Bordered table (2px ink border, `--radius-md`, **hard shadow**), two columns on desktop
+- Ink header `What others do first` | brand header `What Opsfield does first`
+- Others rows: `X` (`--clay-500`) + muted text; Opsfield rows: `Check` (`--blue-500`) + Mulish-800 ink text
 - Do not make competitors look deceptive; compare operating approaches
 
 ### Mobile comparison layout
 
-Each table row becomes a paired card:
-- Top half: competitor approach
-  - Background: `var(--bg-subtle)`
-  - Padding: `16px`
-  - Label: `Others` in XSmall, `var(--text-muted)`
-- Bottom half: Opsfield approach
-  - Background: `var(--accent-light)`
-  - Padding: `16px`
-  - Label: `Opsfield` in XSmall, `var(--accent-hover)`
-- Divider: `1px solid var(--border-default)`
-- Card radius: `12px`
-- Gap between cards: `var(--space-3)`
-
-Do not split into two separate lists.
-The paired contrast is the core message.
+The two columns collapse to a single column; cells stack in order (others cell, then Opsfield cell, per row). The `X` / `Check` icon and the weight contrast keep each cell self-labeled — do not split into two separate lists. The paired contrast is the core message.
 
 ### Delivery Role Card
 
@@ -538,17 +525,16 @@ Used in:
 
 Structure:
 
-1. Role
-2. Scope of responsibility
-3. Relevant systems or expertise
-4. Confirmed credentials only
+1. Role name
+2. Responsibilities as `+` bullets (verbatim terms from the `texts.md` Focus line)
+3. Relevant environments (mono tags), shared across the section
 
-Rules:
+Rules (v2):
 
+- Ink block: two role cards — card 1 `brand` (blue), card 2 `paper`, both hard-shadow
 - Maximum 2 cards for MVP
 - Do not present unverified real clients, real metrics, certifications, awards, logos, reviews, names, years, or Fortune 500 claims.
-- Illustrative composite figures are allowed only when explicitly labeled as anonymized composites.
-- No stock or fictional portrait placeholders presented as real people; use a semantic role icon when no approved portrait exists.
+- No stock or fictional portrait placeholders; role identity is the role name + responsibilities only (no semantic-icon requirement in v2).
 
 ### ICP Qualifier
 

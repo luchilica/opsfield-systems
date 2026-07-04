@@ -1,61 +1,108 @@
-import { Compass, Workflow, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Card from "@/components/ui/Card";
+import PlusMark from "@/components/ui/PlusMark";
 import styles from "./DeliveryModel.module.css";
 
-// Copy from docs/texts.md → "Delivery Model". Role-only cards per design.md
-// "Delivery Role Card" — no names, no photos, no invented credentials. A
-// semantic role icon is used since no approved portrait exists. CTA → form,
-// generic (no data-request-type).
+// Copy from docs/texts.md → "Delivery Model". Role-only cards (no names, photos,
+// or invented credentials); responsibilities are the exact terms from the Focus
+// lines, listed as bullets. v2 ink block. CTA text link → form (generic).
 const ROLES = [
   {
     title: "Managing Partner",
-    Icon: Compass,
-    responsibilities:
-      "Operating model design, diagnostic methodology, roadmap prioritization, and executive decision support.",
+    tone: "brand",
+    responsibilities: [
+      "Operating model design",
+      "Diagnostic methodology",
+      "Roadmap prioritization",
+      "Executive decision support",
+    ],
   },
   {
     title: "Solution Architect",
-    Icon: Workflow,
-    responsibilities:
-      "CRM architecture, RevOps pipeline design, data flow mapping, integrations, automation design, and implementation risk review.",
+    tone: "paper",
+    responsibilities: [
+      "CRM architecture",
+      "RevOps pipeline design",
+      "Data flow mapping",
+      "Integrations",
+      "Automation design",
+      "Implementation risk review",
+    ],
   },
+] as const;
+
+const ENVIRONMENTS = [
+  "HubSpot",
+  "Salesforce",
+  "Pipedrive",
+  "Asana",
+  "Monday",
+  "Notion",
+  "QuickBooks",
+  "Zapier",
+  "Make",
 ];
 
 export default function DeliveryModel() {
   return (
     <div className="container">
-      <p className="kicker">DELIVERY MODEL</p>
-      <h2 className={styles.intro}>Senior attention without a handoff chain.</h2>
-      <p className={`lead ${styles.text}`}>
-        Opsfield Systems works with 4–6 active clients at a time so senior
-        advisors remain involved from problem framing through scope and delivery.
-      </p>
+      <PlusMark size={220} className={styles.plusTop} />
+      <PlusMark size={120} className={styles.plusBottom} />
 
-      <div className={styles.roles}>
-        {ROLES.map(({ title, Icon, responsibilities }) => (
-          <Card key={title}>
-            <div className={styles.role}>
-              <span className={styles.roleIcon}>
-                <Icon size={22} aria-hidden="true" />
-              </span>
-              <h3 className={styles.roleTitle}>{title}</h3>
-              <p className={styles.roleText}>{responsibilities}</p>
-            </div>
-          </Card>
-        ))}
-      </div>
+      <div className={styles.inner}>
+        <p className="kicker">DELIVERY MODEL</p>
+        <h2 className={styles.intro}>Senior attention without a handoff chain.</h2>
+        <p className={`lead ${styles.text}`}>
+          Opsfield Systems works with 4–6 active clients at a time so senior
+          advisors remain involved from problem framing through scope and
+          delivery.
+        </p>
 
-      <p className={styles.environments}>
-        <span className={styles.environmentsLabel}>Relevant environments: </span>
-        HubSpot, Salesforce, Pipedrive, Asana, Monday, Notion, QuickBooks,
-        Zapier, and Make.
-      </p>
+        <div className={styles.roles}>
+          {ROLES.map(({ title, tone, responsibilities }) => (
+            <Card key={title} tone={tone} hardShadow hover={false}>
+              <div className={styles.role}>
+                <h3
+                  className={`${styles.roleTitle} ${
+                    tone === "brand" ? styles.onDark : ""
+                  }`}
+                >
+                  {title}
+                </h3>
+                <ul className={styles.respList}>
+                  {responsibilities.map((r) => (
+                    <li
+                      key={r}
+                      className={`${styles.resp} ${
+                        tone === "brand" ? styles.respOnDark : ""
+                      }`}
+                    >
+                      {r}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Card>
+          ))}
+        </div>
 
-      <div className={styles.cta}>
-        <a href="#diagnostic-request-form" className={styles.textLink}>
-          Work With Senior Advisors
-          <ArrowRight size={20} aria-hidden="true" />
-        </a>
+        <div className={styles.envBlock}>
+          <p className={styles.envLabel}>Relevant environments</p>
+          <ul className={styles.envList}>
+            {ENVIRONMENTS.map((e) => (
+              <li key={e} className={styles.envItem}>
+                {e}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={styles.cta}>
+          <a href="#diagnostic-request-form" className={styles.textLink}>
+            Work With Senior Advisors
+            <ArrowRight size={20} aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </div>
   );

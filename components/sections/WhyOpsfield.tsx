@@ -1,7 +1,9 @@
+import { Fragment } from "react";
+import { Check, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import styles from "./WhyOpsfield.module.css";
 
-// Copy from docs/texts.md → "Why Opsfield Systems".
+// Copy from docs/texts.md → "Why Opsfield Systems" (comparison table).
 // CTA → form with data-request-type "Business & IT Diagnostic" per sitemap.md.
 const PAIRS = [
   {
@@ -32,18 +34,24 @@ export default function WhyOpsfield() {
         implementation are committed.
       </p>
 
-      <div className={styles.pairs}>
+      <div className={styles.table}>
+        <div className={`${styles.head} ${styles.headOthers}`}>
+          What others do first
+        </div>
+        <div className={`${styles.head} ${styles.headOpsfield}`}>
+          What Opsfield does first
+        </div>
         {PAIRS.map((pair, i) => (
-          <div key={i} className={styles.pair}>
-            <div className={`${styles.half} ${styles.others}`}>
-              <span className={`xsmall ${styles.othersLabel}`}>Others</span>
-              <span className={styles.cellText}>{pair.others}</span>
+          <Fragment key={i}>
+            <div className={`${styles.cell} ${styles.cellOthers}`}>
+              <X size={19} className={styles.iconX} aria-hidden="true" />
+              <span>{pair.others}</span>
             </div>
-            <div className={`${styles.half} ${styles.opsfield}`}>
-              <span className={`xsmall ${styles.opsfieldLabel}`}>Opsfield</span>
-              <span className={styles.cellText}>{pair.opsfield}</span>
+            <div className={`${styles.cell} ${styles.cellOpsfield}`}>
+              <Check size={19} className={styles.iconCheck} aria-hidden="true" />
+              <span>{pair.opsfield}</span>
             </div>
-          </div>
+          </Fragment>
         ))}
       </div>
 

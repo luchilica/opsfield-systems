@@ -1,5 +1,11 @@
-/* Delivery Model — two senior role cards (no photos, no invented names).
-   Copy from docs/texts.md. No Tailwind. */
+/* Delivery Model — v2 ink block. Two role cards (brand + paper) with bullet
+   responsibilities, environment tags, and decorative + motifs. Section bg/color
+   set by #delivery-model in globals.css. Copy from docs/texts.md. No Tailwind. */
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
 
 .intro {
   max-width: var(--text-max);
@@ -7,7 +13,7 @@
 
 .text {
   max-width: var(--text-max);
-  color: var(--text-secondary);
+  color: var(--text-on-dark-muted);
   margin-top: var(--space-2);
   margin-bottom: var(--space-5);
 }
@@ -27,52 +33,97 @@
 .role {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
   height: 100%;
-}
-
-/* Semantic role icon in an accent-tinted container (no portrait). */
-.roleIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--accent-light);
-  color: var(--accent);
 }
 
 .roleTitle {
   margin: 0;
-  /* A-004: <h3> for correct heading order; visual size preserved as h4. */
-  font-family: var(--font-body);
-  font-size: 18px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
 }
 
-@media (min-width: 1024px) {
-  .roleTitle {
-    font-size: 22px;
-  }
+.onDark {
+  color: var(--paper);
 }
 
-.roleText {
-  color: var(--text-secondary);
+.respList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
 }
 
-/* Relevant environments — text names, never tool logos. */
-.environments {
-  margin-top: var(--space-4);
-  color: var(--text-secondary);
+/* Each responsibility prefixed with the brand + glyph. */
+.resp {
+  position: relative;
+  padding-left: 22px;
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+  color: var(--text-body);
 }
 
-.environmentsLabel {
-  font-weight: 600;
-  color: var(--text-primary);
+.resp::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  color: var(--accent);
+}
+
+.respOnDark {
+  color: var(--text-on-brand);
+}
+
+.respOnDark::before {
+  color: var(--paper);
+}
+
+/* Relevant environments — mono tags, never tool logos. */
+.envBlock {
+  margin-top: var(--space-5);
+}
+
+.envLabel {
+  margin-bottom: 14px;
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-on-dark-muted);
+}
+
+.envList {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.envItem {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1.5px solid var(--border-on-dark);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--paper);
 }
 
 .cta {
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
 }
 
 .textLink {
@@ -80,12 +131,41 @@
   align-items: center;
   gap: var(--space-1);
   min-height: 44px;
-  font-weight: 600;
-  color: var(--accent);
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  color: var(--blue-300);
   text-decoration: none;
 }
 
 .textLink:hover,
 .textLink:focus-visible {
+  color: var(--paper);
   text-decoration: underline;
+}
+
+/* Decorative corner + motifs (behind content). */
+.plusTop,
+.plusBottom {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.plusTop {
+  top: -40px;
+  right: -20px;
+  color: rgba(37, 81, 210, 0.28);
+}
+
+.plusBottom {
+  bottom: 40px;
+  left: 3%;
+  color: rgba(37, 81, 210, 0.18);
+}
+
+@media (max-width: 767px) {
+  .plusTop,
+  .plusBottom {
+    display: none;
+  }
 }

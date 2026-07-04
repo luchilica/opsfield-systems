@@ -1,7 +1,6 @@
-/* Why Opsfield Systems — paired comparison cards. Copy from docs/texts.md.
-   Paired cards on mobile (NOT a horizontally scrolling table); halves sit
-   side-by-side on desktop. Spec: docs/design.md → "Mobile comparison layout".
-   No Tailwind. */
+/* Why Opsfield Systems — v2 comparison table. Bordered block + hard shadow;
+   ink header vs brand header; X (clay) vs Check (blue). Stacks on mobile.
+   Copy from docs/texts.md. No Tailwind. */
 
 .intro {
   max-width: var(--text-max);
@@ -10,70 +9,86 @@
 
 .text {
   max-width: var(--text-max);
-  color: var(--text-secondary);
+  color: var(--text-body);
   margin-bottom: var(--space-5);
 }
 
-.pairs {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-/* One comparison pair → a card with two halves. */
-.pair {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--border-default);
-  border-radius: 12px;
+.table {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: var(--border-heavy) solid var(--ink-900);
+  border-radius: var(--radius-md);
   overflow: hidden;
+  box-shadow: var(--shadow-hard);
 }
 
-.half {
-  padding: 16px;
-}
-
-.others {
-  background: var(--bg-subtle);
-  border-bottom: 1px solid var(--border-default);
-}
-
-.opsfield {
-  background: var(--accent-light);
-}
-
-.othersLabel {
-  display: block;
-  /* A-003: --text-muted (#94A3B8) is ~2.5:1 on the card — fails WCAG 1.4.3.
-     --text-secondary keeps the label subdued vs the accent "Opsfield" label
-     while meeting 4.5:1. */
-  color: var(--text-secondary);
-  margin-bottom: var(--space-1);
-}
-
-.opsfieldLabel {
-  display: block;
-  color: var(--accent-hover);
-  margin-bottom: var(--space-1);
-}
-
-.cellText {
-  color: var(--text-primary);
-}
-
-/* Desktop: halves side-by-side. */
 @media (min-width: 768px) {
-  .pair {
-    flex-direction: row;
+  .table {
+    grid-template-columns: 1fr 1fr;
   }
+}
 
-  .half {
-    flex: 1;
+.head {
+  padding: 18px 26px;
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.headOthers {
+  background: var(--ink-900);
+}
+
+.headOpsfield {
+  background: var(--blue-500);
+}
+
+.cell {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 20px 26px;
+  background: var(--paper);
+  border-top: var(--border-heavy) solid var(--ink-900);
+}
+
+.cellOthers {
+  color: var(--stone-500);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+}
+
+.cellOpsfield {
+  color: var(--ink-900);
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -0.015em;
+}
+
+.iconX {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--clay-500);
+}
+
+.iconCheck {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--blue-500);
+}
+
+/* Desktop: vertical divider between the two columns. */
+@media (min-width: 768px) {
+  .headOthers {
+    border-right: var(--border-heavy) solid var(--paper);
   }
-
-  .others {
-    border-bottom: none;
-    border-right: 1px solid var(--border-default);
+  .cellOthers {
+    border-right: var(--border-heavy) solid var(--ink-900);
   }
 }
 
