@@ -67,12 +67,12 @@ v2 palette (block/brand-first). Deep-ultramarine dominates; near-black ink is th
 ### Font Families
 
 ```css
---font-heading: "Inter Tight", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
---font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+--font-display / --font-sans: "Mulish", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+--font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 ```
 
-- Заголовки: `Inter Tight`
-- H4 и основной текст: `Inter`
+- Заголовки и body: `Mulish` (weight-driven — 900 display, 800 sub-heads, 700 UI, 600 emphasis, 400–500 body)
+- Eyebrows, labels, data readouts, badges: `JetBrains Mono`
 - Не использовать альтернативный heading font.
 - Не использовать декоративные, sci-fi или startup-display fonts.
 - Максимум 2 font families.
@@ -81,14 +81,14 @@ v2 palette (block/brand-first). Deep-ultramarine dominates; near-black ink is th
 
 | Уровень | Размер desktop | Размер mobile | Weight | Line-height | Letter-spacing | Шрифт |
 |---|---:|---:|---:|---:|---:|---|
-| H1 | `52px` | `38px` | `700` | `1.1` | `-0.02em` | Inter Tight |
-| H2 | `40px` | `30px` | `700` | `1.2` | `-0.01em` | Inter Tight |
-| H3 | `28px` | `22px` | `600` | `1.3` | `0` | Inter Tight |
-| H4 | `22px` | `18px` | `600` | `1.3` | `0` | Inter |
-| Lead | `18px` | `17px` | `400` | `1.6` | `0` | Inter |
-| Body | `16px` | `16px` | `400` | `1.6` | `0` | Inter |
-| Small | `14px` | `14px` | `400` | `1.5` | `0` | Inter |
-| XSmall | `12px` | `12px` | `400` | `1.4` | `0.01em` | Inter |
+| H1 | `60px` | `40px` | `900` | `0.98` | `-0.032em` | Mulish |
+| H2 | `42px` | `30px` | `900` | `1.02` | `-0.028em` | Mulish |
+| H3 | `28px` | `22px` | `800` | `1.12` | `-0.015em` | Mulish |
+| H4 | `22px` | `18px` | `700` | `1.12` | `-0.015em` | Mulish |
+| Lead | `20px` | `19px` | `500` | `1.5` | `0` | Mulish |
+| Body | `16px` | `16px` | `400` | `1.55` | `0` | Mulish |
+| Small | `14px` | `14px` | `400` | `1.5` | `0` | Mulish |
+| Eyebrow / label | `12px` | `12px` | `500` | `1.4` | `0.14em` | JetBrains Mono |
 
 ### Typography Rules
 
@@ -223,6 +223,12 @@ Easing: `--ease-out: cubic-bezier(0.22, 0.61, 0.36, 1)` (no bounce, no spring, n
 ---
 
 ## CSS Variable Reference
+
+> **SUPERSEDED (v1 snapshot).** The block below is the original v1 `:root`. The
+> live source of truth is `app/globals.css` (v2 tokens) plus the reconciled
+> `Цвета` / `Типографика` / `Тени` / `Transitions` / `Radii and Borders`
+> sections above (Mulish + JetBrains Mono, blue/ink/stone/paper, hard shadow,
+> 2–6px radii). Kept for historical diff only.
 
 ```css
 :root {
@@ -1005,13 +1011,13 @@ Do not include placeholder assets in production launch.
 
 - Используется рабочий бренд Opsfield Systems; предварительная California name search и проверка доступности домена отмечены как owner-reported, но logo и wordmark остаются редактируемыми до trademark clearance и регистрации домена.
 - В логотипе и footer отсутствуют неподтверждённые `LLC`, `Inc.` и `®`.
-- Заголовки используют только Inter Tight.
-- Body использует Inter.
+- Заголовки используют Mulish (900/800, tight negative tracking).
+- Body использует Mulish; eyebrows / labels / data readouts используют JetBrains Mono.
 - Цвета используют утверждённые CSS variables.
 - `#CBD5E1` не используется как текстовый цвет.
 - Spacing построен на 8px grid.
 - Breakpoints не дублируются и берутся из `optimization.md`.
-- Hero соответствует 55/45 desktop layout.
+- Hero соответствует v2 split-grid layout (text `1.15fr` / brand panel `0.85fr`).
 - Primary CTA видим без скролла.
 - Все секции из `sitemap.md` имеют визуальное решение.
 - AI section не выглядит как AI-hype.
