@@ -12,8 +12,13 @@ const SCOPE = [
   "AI readiness",
 ];
 
-// Process-to-automation flow (docs/texts.md → "Flow").
-const FLOW = ["Diagnostic", "Automation opportunity", "Roadmap or limited scope"];
+// Process-to-automation flow (docs/texts.md → "Flow") as three step pills:
+// Diagnostic (blue) → Automation opportunity (ink) → Roadmap / limited scope (green).
+const FLOW = [
+  { n: "01", label: "Diagnostic", tone: "pillBlue" },
+  { n: "02", label: "Automation opportunity", tone: "pillDark" },
+  { n: "03", label: "Roadmap or limited scope", tone: "pillGreen" },
+] as const;
 
 export default function AIProcessAutomation() {
   return (
@@ -30,8 +35,9 @@ export default function AIProcessAutomation() {
 
       <ol className={styles.flow} aria-label="From diagnostic to automation">
         {FLOW.map((step) => (
-          <li key={step} className={styles.flowStep}>
-            {step}
+          <li key={step.n} className={`${styles.pill} ${styles[step.tone]}`}>
+            <span className={styles.pillStep}>Step {step.n}</span>
+            <span className={styles.pillLabel}>{step.label}</span>
           </li>
         ))}
       </ol>

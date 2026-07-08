@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Info, Search, CheckCircle2 } from "lucide-react";
 import styles from "./DiagnosticScenarios.module.css";
 
 // Copy from docs/texts.md → "Diagnostic Scenarios". Anonymized + illustrative.
@@ -46,9 +46,9 @@ const SCENARIOS: Scenario[] = [
 ];
 
 const ROWS = [
-  { key: "situation", label: "Situation", num: "01" },
-  { key: "found", label: "Diagnostic found", num: "02" },
-  { key: "delivered", label: "Delivered", num: "03" },
+  { key: "situation", label: "Situation", num: "01", Icon: Info },
+  { key: "found", label: "Diagnostic found", num: "02", Icon: Search },
+  { key: "delivered", label: "Delivered", num: "03", Icon: CheckCircle2 },
 ] as const;
 
 export default function DiagnosticScenarios() {
@@ -79,6 +79,11 @@ export default function DiagnosticScenarios() {
             {ROWS.map((r) => (
               <div key={r.key} className={`${styles.rowGrid} ${styles[r.key]}`}>
                 <div className={styles.rowLabel}>
+                  <r.Icon
+                    size={16}
+                    className={styles.rowIcon}
+                    aria-hidden="true"
+                  />
                   <span className={styles.rowNum}>{r.num}</span>
                   <span className={styles.rowName}>{r.label}</span>
                 </div>

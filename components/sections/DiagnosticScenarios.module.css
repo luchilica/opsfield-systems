@@ -101,15 +101,18 @@
 
 /* Triad accents. */
 .situation .rowNum,
-.situation .rowName {
+.situation .rowName,
+.situation .rowIcon {
   color: var(--ink-900);
 }
 .found .rowNum,
-.found .rowName {
+.found .rowName,
+.found .rowIcon {
   color: var(--blue-500);
 }
 .delivered .rowNum,
-.delivered .rowName {
+.delivered .rowName,
+.delivered .rowIcon {
   color: var(--evergreen-500);
 }
 

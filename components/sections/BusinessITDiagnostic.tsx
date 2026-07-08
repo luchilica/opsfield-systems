@@ -107,7 +107,7 @@ export default function BusinessITDiagnostic() {
             <div className={styles.formHeader}>
               <span className={styles.formHeaderTitle}>
                 <PlusMark size={20} className={styles.formPlus} />
-                Diagnostic Request Form
+                Diagnostic Request
               </span>
               <span className={styles.formBadge}>
                 Complimentary 30–45 min fit review

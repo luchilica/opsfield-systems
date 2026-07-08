@@ -1,5 +1,5 @@
 import Button from "@/components/ui/Button";
-import HeroDiagram from "@/components/ui/HeroDiagram";
+import HeroSummary from "@/components/ui/HeroSummary";
 import styles from "./Hero.module.css";
 
 // All copy from docs/texts.md → "Hero". Do not alter wording.
@@ -11,7 +11,7 @@ export default function Hero() {
 
         <h1 className={styles.headline}>
           Diagnostic-First IT &amp; Business{" "}
-          <span className={styles.accentWord}>Consulting</span>
+          <span className={styles.accentWord}>Development</span>
         </h1>
 
         {/* Semantically a paragraph, visually a lead. */}
@@ -39,19 +39,25 @@ export default function Hero() {
           </Button>
         </div>
 
-        {/* ICP qualifier — supporting chip, not a heading or badge. */}
-        <p className={styles.icpChip}>
-          Best fit: B2B companies with 50–250 employees.
-        </p>
-
-        <p className={`small ${styles.trust}`}>
-          Boutique advisory since 2021. Senior-led. Vendor-neutral. 4–6 active
-          clients at a time.
-        </p>
+        {/* Trust stats — reformats the boutique-advisory / ICP trust line. */}
+        <div className={styles.stats}>
+          <div className={styles.stat}>
+            <p className={styles.statNum}>4–6</p>
+            <p className={styles.statCap}>Active clients at a time</p>
+          </div>
+          <div className={styles.stat}>
+            <p className={styles.statNum}>50–250</p>
+            <p className={styles.statCap}>Employees · best fit</p>
+          </div>
+          <div className={styles.stat}>
+            <p className={styles.statNum}>Since 2021</p>
+            <p className={styles.statCap}>Boutique advisory</p>
+          </div>
+        </div>
       </div>
 
       <div className={styles.visual}>
-        <HeroDiagram />
+        <HeroSummary />
       </div>
     </div>
   );

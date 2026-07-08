@@ -33,8 +33,39 @@
 .role {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
   height: 100%;
+}
+
+/* Head — initials tile + title + role subtitle. */
+.roleHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono-fallback);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.avatarOnBrand {
+  background: var(--ink-900);
+  color: var(--paper);
+}
+
+.avatarOnPaper {
+  background: var(--blue-500);
+  color: var(--paper);
 }
 
 .roleTitle {
@@ -50,6 +81,38 @@
   color: var(--paper);
 }
 
+.roleSub {
+  margin-top: 4px;
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.roleSubOnDark {
+  color: var(--text-on-brand-muted);
+}
+
+/* Divider label above the responsibility list. */
+.engLabel {
+  margin-top: 6px;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border-hair);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.engLabelOnDark {
+  color: var(--text-on-brand-muted);
+  border-top-color: var(--border-on-brand);
+}
+
 .respList {
   list-style: none;
   display: flex;
@@ -59,22 +122,19 @@
   padding: 0;
 }
 
-/* Each responsibility prefixed with the brand + glyph. */
+/* Each responsibility prefixed with a functional icon. */
 .resp {
-  position: relative;
-  padding-left: 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   font-size: 15px;
   font-weight: var(--fw-medium);
   color: var(--text-body);
 }
 
-.resp::before {
-  content: "+";
-  position: absolute;
-  left: 0;
-  top: -1px;
-  font-family: var(--font-display);
-  font-weight: var(--fw-black);
+.respIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
   color: var(--accent);
 }
 
@@ -82,7 +142,7 @@
   color: var(--text-on-brand);
 }
 
-.respOnDark::before {
+.respOnDark .respIcon {
   color: var(--paper);
 }
 

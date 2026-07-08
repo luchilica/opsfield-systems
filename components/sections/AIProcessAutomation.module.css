@@ -11,35 +11,59 @@
   margin-top: var(--space-2);
 }
 
-/* Process-to-automation flow — arrow-separated steps on dark. */
+/* Process-to-automation flow — three step pills (blue → ink → green). */
 .flow {
   margin-top: var(--space-4);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: var(--space-2);
   list-style: none;
   padding: 0;
 }
 
-.flowStep {
+@media (min-width: 768px) {
+  .flow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.pill {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 16px 18px;
+  border: var(--border-heavy) solid transparent;
+  border-radius: var(--radius-sm);
+}
+
+.pillStep {
   font-family: var(--font-mono-fallback);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
+  color: var(--text-on-brand-muted);
+}
+
+.pillLabel {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.01em;
   color: var(--paper);
 }
 
-.flowStep:last-child {
-  color: var(--blue-300);
+.pillBlue {
+  background: var(--blue-500);
 }
 
-.flowStep:not(:last-child)::after {
-  content: "→";
-  margin-left: var(--space-2);
-  color: var(--blue-300);
-  font-weight: 400;
+.pillDark {
+  background: var(--ink-800);
+  border-color: var(--border-on-dark);
+}
+
+.pillGreen {
+  background: var(--evergreen-500);
 }
 
 /* Scope box — ink-800 panel with a paper border. */

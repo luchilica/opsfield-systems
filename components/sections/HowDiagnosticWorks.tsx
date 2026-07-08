@@ -1,12 +1,26 @@
+import { Search, Gauge, Signpost } from "lucide-react";
 import Button from "@/components/ui/Button";
 import styles from "./HowDiagnosticWorks.module.css";
 
 // Copy from docs/texts.md → "How the Diagnostic Works". v2 numbered step columns
-// (step 2 featured). CTA "Start With a Diagnostic" → form (generic) per sitemap.md.
+// (step 2 featured), each with a title + corner icon. CTA "Start With a
+// Diagnostic" → form (generic) per sitemap.md.
 const STEPS = [
-  "We review workflows, systems, CRM usage, reporting, automation, and decision bottlenecks.",
-  "We map likely root causes and score fixes by impact, effort, risk, dependency, and business value.",
-  "You receive a clear next step: audit, assessment, roadmap, advisory, implementation support, pause, or no-fit.",
+  {
+    title: "Review",
+    Icon: Search,
+    text: "We review workflows, systems, CRM usage, reporting, automation, and decision bottlenecks.",
+  },
+  {
+    title: "Map & score",
+    Icon: Gauge,
+    text: "We map likely root causes and score fixes by impact, effort, risk, dependency, and business value.",
+  },
+  {
+    title: "Recommend",
+    Icon: Signpost,
+    text: "You receive a clear next step: audit, assessment, roadmap, advisory, implementation support, pause, or no-fit.",
+  },
 ];
 
 export default function HowDiagnosticWorks() {
@@ -18,15 +32,18 @@ export default function HowDiagnosticWorks() {
       </h2>
 
       <ol className={styles.steps}>
-        {STEPS.map((text, i) => (
+        {STEPS.map(({ title, Icon, text }, i) => (
           <li
             key={i}
             className={`${styles.step} ${i === 1 ? styles.stepFeatured : ""}`}
           >
-            <span className={styles.number} aria-hidden="true">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <p className={styles.stepLabel}>Step {i + 1}</p>
+            <div className={styles.stepTop}>
+              <span className={styles.number} aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <Icon size={24} className={styles.stepIcon} aria-hidden="true" />
+            </div>
+            <p className={styles.stepTitle}>{title}</p>
             <p className={styles.stepText}>{text}</p>
           </li>
         ))}

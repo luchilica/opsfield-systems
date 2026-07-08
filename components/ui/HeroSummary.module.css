@@ -1,0 +1,110 @@
+/* Hero diagnostic-summary card — v2 blocky brand-blue panel. Mirrors the
+   scenario report (Situation / Diagnostic found / Delivered) plus two headline
+   metrics. Illustrative composite — not a verified case. Tokens from globals.css. */
+
+.panel {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--blue-500);
+  color: var(--paper);
+  border: var(--border-heavy) solid var(--ink-900);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hard);
+  padding: 28px;
+  overflow: hidden;
+}
+
+.cornerPlus {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  color: var(--paper);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.label {
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-on-brand-muted);
+}
+
+.client {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.rows {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  padding: 15px 0;
+  border-top: 1px solid var(--border-on-brand);
+}
+
+.row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.rowLabel {
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.rowText {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--paper);
+}
+
+.metrics {
+  /* Stick to the bottom when the panel is stretched taller than its content
+     (desktop split grid), matching the reference layout. */
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: var(--border-heavy) solid var(--paper);
+  display: flex;
+  gap: 36px;
+}
+
+/* Space above the metric block when it bottom-aligns. */
+.rows {
+  margin-bottom: 20px;
+}
+
+.metricNum {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.metricCap {
+  margin-top: 8px;
+  font-family: var(--font-mono-fallback);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-on-brand-muted);
+}

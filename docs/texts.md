@@ -1,8 +1,8 @@
 # texts.md
 
-## Page: Diagnostic-First IT & Business Consulting
+## Page: Diagnostic-First IT & Business Development
 
-**Meta title:** Diagnostic-First IT & Business Consulting | Opsfield Systems  
+**Meta title:** Diagnostic-First IT & Business Development | Opsfield Systems  
 **Meta description:** B2B companies with 50–250 employees use Opsfield Systems to diagnose process, CRM, data, and IT bottlenecks before committing to tools, hires, or implementation.
 
 <!-- INTERNAL BRAND STATUS: Opsfield Systems is the working brand. Do not publish or launch until comprehensive trademark clearance, California legal-entity / DBA mapping, and ownership of the final production domain are confirmed. Do not display LLC, Inc., ®, or another legal identifier unless verified. -->
@@ -22,7 +22,7 @@
 #### Block: Hero
 
 - **Eyebrow:** B2B IT & Operations Advisory
-- **H1:** Diagnostic-First IT & Business Consulting
+- **H1:** Diagnostic-First IT & Business Development
 - **Subtitle:** For B2B companies blocked by process, data, and system gaps — we diagnose before you build.
 - **Text:** Opsfield Systems helps B2B teams find where operations, CRM, data flow, automation, and IT systems are slowing execution.
 - **Primary CTA:** Request a Business & IT Diagnostic
@@ -47,7 +47,7 @@
 - **Eyebrow:** WHAT WE DIAGNOSE
 - **H2:** We diagnose the gaps between how your business works and how your systems support it.
 - **Processes:** handoffs, approvals, ownership gaps, duplicated work, undocumented workflows.
-- **Revenue / data / systems:** CRM, RevOps, dashboards, reporting rules, integrations, automation, AI readiness, IT risk.
+- **Revenue, data & systems:** CRM, RevOps, dashboards, reporting rules, integrations, automation, AI readiness, IT risk.
 - **Card: O-1 Readiness Support** (secondary service)
   - Icon: credential/document
   - Title: O-1 Readiness Support

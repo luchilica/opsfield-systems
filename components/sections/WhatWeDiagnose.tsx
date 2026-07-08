@@ -24,7 +24,7 @@ const AREAS = [
       "Handoffs, approvals, ownership gaps, duplicated work, undocumented workflows.",
   },
   {
-    title: "Revenue / data / systems",
+    title: "Revenue, data & systems",
     Icon: Layers,
     tone: "blueTint",
     description:
