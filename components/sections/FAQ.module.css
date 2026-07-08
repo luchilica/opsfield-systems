@@ -6,11 +6,12 @@
   margin-bottom: var(--space-5);
 }
 
+/* Full-width accordion (matches the DS образец): rows span the whole container;
+   only the answer text is width-capped (.panel) for readability. */
 .list {
   display: flex;
   flex-direction: column;
   border-bottom: var(--border-heavy) solid var(--ink-900);
-  max-width: 900px;
 }
 
 .item {
