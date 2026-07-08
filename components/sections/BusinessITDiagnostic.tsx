@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import DiagnosticForm from "@/components/ui/DiagnosticForm";
 import PlusMark from "@/components/ui/PlusMark";
 import styles from "./BusinessITDiagnostic.module.css";
@@ -19,13 +22,16 @@ const REVIEW = [
   "Example deliverables",
 ];
 
+// Compact post-submit steps (condensed labels, per conversion-friction pass).
 const POST_SUBMIT = [
-  "We review your company and main challenge, together with any optional context you choose to provide.",
-  "A senior advisor confirms fit and runs the diagnostic around symptoms, systems, bottlenecks, and risks.",
-  "If there is a valid next step, we provide a fixed-scope proposal before any commitment.",
+  "We review your submission",
+  "Senior advisor confirms fit",
+  "Fixed-scope proposal before commitment",
 ];
 
 export default function BusinessITDiagnostic() {
+  const [detailsOpen, setDetailsOpen] = useState(false);
+
   return (
     <div className="container">
       <p className="kicker">THE DIAGNOSTIC</p>
@@ -62,27 +68,45 @@ export default function BusinessITDiagnostic() {
             <p className={styles.muted}>
               Evaluate the approach before any paid engagement.
             </p>
-            <p className={styles.reviewLabel}>Review assets</p>
-            <ul className={styles.chips}>
-              {REVIEW.map((r) => (
-                <li key={r} className={styles.chip}>
-                  {r}
-                </li>
-              ))}
-            </ul>
-            <p className={styles.muted}>
-              No full system access is required for the initial fit review.
-              Deeper access starts only after scope and NDA are agreed.
-            </p>
-            {/* Privacy note — verbatim from docs/texts.md → "Before You Commit";
-                Risk-Reduction Panel spec requires a privacy notice + Privacy
-                Policy link inside the panel. */}
-            <p className={`${styles.muted} ${styles.privacyNote}`}>
-              By submitting the form, you acknowledge our{" "}
-              <a href="/privacy-policy">Privacy Policy</a>. We use your
-              information to evaluate fit and contact you about your diagnostic
-              request.
-            </p>
+            <button
+              type="button"
+              className={styles.detailsToggle}
+              aria-expanded={detailsOpen}
+              aria-controls="before-you-commit-details"
+              onClick={() => setDetailsOpen((o) => !o)}
+            >
+              {detailsOpen ? "Hide details" : "See review details →"}
+            </button>
+
+            {/* Collapsed by default — stays in the DOM (max-height:0) for SEO. */}
+            <div
+              id="before-you-commit-details"
+              className={`${styles.collapse} ${
+                detailsOpen ? "" : styles.collapseClosed
+              }`}
+            >
+              <p className={styles.reviewLabel}>Review assets</p>
+              <ul className={styles.chips}>
+                {REVIEW.map((r) => (
+                  <li key={r} className={styles.chip}>
+                    {r}
+                  </li>
+                ))}
+              </ul>
+              <p className={styles.muted}>
+                No full system access is required for the initial fit review.
+                Deeper access starts only after scope and NDA are agreed.
+              </p>
+              {/* Privacy note — verbatim from docs/texts.md → "Before You Commit";
+                  Risk-Reduction Panel spec requires a privacy notice + Privacy
+                  Policy link inside the panel. */}
+              <p className={`${styles.muted} ${styles.privacyNote}`}>
+                By submitting the form, you acknowledge our{" "}
+                <a href="/privacy-policy">Privacy Policy</a>. We use your
+                information to evaluate fit and contact you about your diagnostic
+                request.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -90,17 +114,13 @@ export default function BusinessITDiagnostic() {
         <div className={styles.main}>
           <div className={styles.card}>
             <p className={styles.stepsLabel}>What happens after you submit</p>
-            <ol className={styles.steps}>
+            <ol className={styles.afterInline}>
               {POST_SUBMIT.map((text, i) => (
-                <li key={i} className={styles.step}>
-                  <div className={styles.stepHead}>
-                    <span className={styles.stepChip} aria-hidden="true">
-                      {i + 1}
-                    </span>
-                    <span className={styles.connector} aria-hidden="true" />
-                  </div>
-                  <p className={styles.stepLabel}>Step {i + 1}</p>
-                  <p className={styles.stepText}>{text}</p>
+                <li key={i} className={styles.afterItem}>
+                  <span className={styles.afterNum} aria-hidden="true">
+                    {i + 1}
+                  </span>
+                  {text}
                 </li>
               ))}
             </ol>
