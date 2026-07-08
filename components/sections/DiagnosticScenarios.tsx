@@ -80,7 +80,8 @@ export default function DiagnosticScenarios() {
               <div key={r.key} className={`${styles.rowGrid} ${styles[r.key]}`}>
                 <div className={styles.rowLabel}>
                   <r.Icon
-                    size={16}
+                    size={24}
+                    strokeWidth={1.5}
                     className={styles.rowIcon}
                     aria-hidden="true"
                   />

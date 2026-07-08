@@ -84,17 +84,17 @@
 }
 
 .rowNum {
-  font-family: var(--font-mono-fallback);
-  font-size: 11px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
 }
 
 .rowName {
-  font-family: var(--font-mono-fallback);
-  font-size: 11px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   line-height: 1.3;
 }
