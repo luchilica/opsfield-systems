@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Check, X } from "lucide-react";
+import { CheckCircle2, XCircle } from "lucide-react";
 import Button from "@/components/ui/Button";
 import styles from "./WhyOpsfield.module.css";
 
@@ -44,11 +44,11 @@ export default function WhyOpsfield() {
         {PAIRS.map((pair, i) => (
           <Fragment key={i}>
             <div className={`${styles.cell} ${styles.cellOthers}`}>
-              <X size={19} className={styles.iconX} aria-hidden="true" />
+              <XCircle size={19} className={styles.iconX} aria-hidden="true" />
               <span>{pair.others}</span>
             </div>
             <div className={`${styles.cell} ${styles.cellOpsfield}`}>
-              <Check size={19} className={styles.iconCheck} aria-hidden="true" />
+              <CheckCircle2 size={19} className={styles.iconCheck} aria-hidden="true" />
               <span>{pair.opsfield}</span>
             </div>
           </Fragment>
