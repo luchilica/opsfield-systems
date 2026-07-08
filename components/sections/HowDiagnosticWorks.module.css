@@ -29,6 +29,15 @@
   border: var(--border-heavy) solid var(--ink-900);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-hard);
+  /* Signature press — matches the shared Card interaction (reduced-motion is
+     handled globally in globals.css). */
+  transition: transform var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
+}
+
+.step:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0 var(--ink-900);
 }
 
 .stepFeatured {

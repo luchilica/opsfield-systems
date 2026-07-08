@@ -62,7 +62,7 @@ export default function Footer() {
           </p>
           <Button
             href="#diagnostic-request-form"
-            variant="primary"
+            variant="on-brand"
             data-request-type="Business & IT Diagnostic"
           >
             Request Diagnostic

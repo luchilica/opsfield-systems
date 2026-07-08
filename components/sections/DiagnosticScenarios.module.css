@@ -18,6 +18,15 @@
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-hard);
   overflow: hidden;
+  /* Signature press — matches the shared Card interaction (reduced-motion is
+     handled globally in globals.css). */
+  transition: transform var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
+}
+
+.scenario:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0 var(--ink-900);
 }
 
 /* Report header — brand blue. */

@@ -20,6 +20,15 @@
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-hard);
+  /* Signature press — matches the shared Card interaction (reduced-motion is
+     handled globally in globals.css). */
+  transition: transform var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
+}
+
+.table:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0 var(--ink-900);
 }
 
 @media (min-width: 768px) {
