@@ -45,8 +45,10 @@
 
 .rows {
   margin-top: 22px;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .row {
@@ -85,9 +87,9 @@
 }
 
 .metrics {
-  /* Stick to the bottom when the panel is stretched taller than its content
-     (desktop split grid), matching the reference layout. */
-  margin-top: auto;
+  /* Rows (flex:1) fill the stretched panel and push the metrics to the bottom,
+     so the summary reads as an evenly spaced report rather than a top cluster
+     with an empty band above the metrics. */
   padding-top: 20px;
   border-top: var(--border-heavy) solid var(--paper);
   display: flex;
