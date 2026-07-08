@@ -56,37 +56,46 @@
   margin-top: var(--space-1);
 }
 
-/* Paper causes card — 2px ink border, hard shadow. */
+/* Symptom / root-cause items — five standalone paper cards, each with a 2px ink
+   border + hard shadow. Grid: 2-up desktop / single column mobile. */
 .causes {
-  background: var(--paper);
-  color: var(--ink-900);
-  border: var(--border-heavy) solid var(--ink-900);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-hard);
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .causesHead {
-  padding: 16px 26px 14px;
-  border-bottom: var(--border-heavy) solid var(--ink-900);
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--ink-900);
+  color: var(--paper);
 }
 
-.cause {
+.causeGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  /* room so the 8px hard shadow never clips against the section edge */
+  padding: 2px 10px 10px 2px;
+}
+
+@media (min-width: 560px) {
+  .causeGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.causeCard {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 15px 26px;
-  border-top: 1px solid var(--stone-200);
-}
-
-.cause:first-of-type {
-  border-top: none;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px;
+  background: var(--paper);
+  border: var(--border-heavy) solid var(--ink-900);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hard);
 }
 
 .causeIcon {
@@ -97,18 +106,10 @@
 
 .causeName {
   font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: var(--fw-extrabold);
+  font-size: 18px;
+  font-weight: var(--fw-bold);
   letter-spacing: -0.015em;
   color: var(--ink-900);
-}
-
-.causeNum {
-  margin-left: auto;
-  font-family: var(--font-mono-fallback);
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--stone-400);
 }
 
 /* Decorative corner + motifs. */

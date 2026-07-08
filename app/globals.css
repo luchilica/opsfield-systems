@@ -453,6 +453,30 @@ main > section {
 }
 
 /* --------------------------------------------------------------------------
+   Variable section rhythm (per request; diverges from the uniform образец,
+   which pads every block equally). Padding-based so the shared 2px ink rule
+   stays continuous — no inter-block background strips. Default boundary padding
+   is --space-7 (96px); these override only the two targeted boundaries.
+   -------------------------------------------------------------------------- */
+
+/* Method → proof pair: tighten "How It Works" ↔ "Diagnostic Scenarios" to 64px. */
+#how-the-diagnostic-works {
+  padding-bottom: var(--space-6); /* 64px */
+}
+#proof-examples {
+  padding-top: var(--space-6); /* 64px */
+}
+
+/* Deliberate pause before the conversion block: widen
+   "Delivery Model" ↔ "Business & IT Diagnostic" to 128px. */
+#delivery-model {
+  padding-bottom: 128px;
+}
+#business-it-diagnostic {
+  padding-top: 128px;
+}
+
+/* --------------------------------------------------------------------------
    Focus styles
    -------------------------------------------------------------------------- */
 :focus-visible {

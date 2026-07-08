@@ -41,17 +41,16 @@ export default function ProblemSection() {
 
         <div className={styles.causes}>
           <p className={styles.causesHead}>Where root causes appear</p>
-          {CAUSES.map(({ title, Icon }, i) => (
-            <div key={title} className={styles.cause}>
-              <span className={styles.causeIcon}>
-                <Icon size={19} aria-hidden="true" />
-              </span>
-              <span className={styles.causeName}>{title}</span>
-              <span className={styles.causeNum}>
-                {String(i + 1).padStart(2, "0")}
-              </span>
-            </div>
-          ))}
+          <div className={styles.causeGrid}>
+            {CAUSES.map(({ title, Icon }) => (
+              <div key={title} className={styles.causeCard}>
+                <span className={styles.causeIcon}>
+                  <Icon size={24} aria-hidden="true" />
+                </span>
+                <span className={styles.causeName}>{title}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
