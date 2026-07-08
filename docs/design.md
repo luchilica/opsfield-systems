@@ -56,7 +56,7 @@ v2 palette (block/brand-first). Deep-ultramarine dominates; near-black ink is th
 
 - Brand blue dominates as a **full-fill surface** (hero panel, Problem, Final CTA, form accents). Near-black ink is the structural pair: 2px borders, `dark` buttons, ink-full sections, footer.
 - Backgrounds are **solid fills, never gradients**. Sections alternate between four surfaces only: paper, stone band, ink, brand.
-- The analytical set (evergreen / amber / clay) appears **only inside diagnostics** (matrix quadrants, process-map flags, delivered rows). Green = validated outcome; Amber = effort/dependency; Clay/red = risk/error.
+- The analytical set (evergreen / amber / clay) is reserved for diagnostics (matrix quadrants, process-map flags, delivered rows) plus two sanctioned outcome accents: the AI flow **Roadmap / limited scope** step pill (evergreen) and the comparison-table `X` (clay). Green = validated outcome / roadmap; Amber = effort/dependency; Clay/red = risk/error.
 - Не использовать цвет как единственный способ передать статус.
 - Visited links: `var(--accent-hover)` for text links; single-page anchor nav may keep `var(--accent)`. Do not rely on browser default purple.
 
@@ -336,85 +336,69 @@ resolves to the loaded face, so mono readouts render in the brand mono.
   3. Lead (Mulish 500)
   4. Supporting text
   5. Primary and secondary CTA (blocky)
-  6. ICP chip + trust line
-- Right: **brand-blue diagnostic-map panel** — 2px ink border, hard shadow, corner `+` mark, mono labels; the 5 system nodes + `Diagnostic → Roadmap → Implementation` flow. Abstract (no illustrative metrics in the hero).
+  6. Trust stats row (3 block numerals + mono captions)
+- Right: **brand-blue diagnostic-summary card** (`HeroSummary`) — 2px ink border, hard shadow, corner `+` mark; an illustrative diagnostic report (Situation → Diagnostic found → Delivered) plus two headline metrics (`$180K+` revenue at risk, `30-day` cleanup). Figures are illustrative and estimate-framed, mirroring Scenario 01 — not verified Opsfield results.
 - Section divided from the next by the shared 2px ink rule.
 - Primary CTA remains the strongest visual action.
 
 ### Tablet
 
 - Single column.
-- Order: H1 + subtitle + CTA → trust line → visual.
-- Visual: full-width simplified diagram.
-- Visual max-height: `300px`.
+- Order: H1 + subtitle + CTA → trust stats → visual.
 
 ### Mobile
 
 - Single column.
-- Order: H1 + subtitle + primary CTA + secondary CTA → trust line.
+- Order: H1 + subtitle + primary CTA + secondary CTA → trust stats.
 - Primary CTA: full width.
 - Secondary CTA: text link or outlined button.
-- Complex hero visual: hide or replace with compact diagnostic map.
+- The hero summary card is hidden on mobile (`Hero.module.css`).
 - CTA must appear before any large visual.
 
-### Hero Visual
+### Trust stats row
 
-Recommended structure:
+Replaces the earlier ICP chip + trust-line paragraph. Three stats, each a block
+Mulish-900 numeral + mono uppercase caption, separated from the CTA group by the
+signature 2px ink rule:
 
-```text
-Processes → CRM / RevOps → Data → Automation → IT Systems
-                         ↓
-               Bottlenecks / Gaps / Risks
-                         ↓
-             Diagnostic → Roadmap → Implementation
-```
+- `4–6` — Active clients at a time
+- `50–250` — Employees · best fit (carries the ICP qualifier; see ICP Qualifier)
+- `Since 2021` — Boutique advisory
 
-The visual must explain the service, not decorate the page.
+### Hero Diagnostic Summary — visual specification (v2)
 
-### Hero Diagnostic Map — visual specification (v2)
-
-Type: blocky **brand-blue panel** (`components/ui/HeroDiagram.tsx`), not a light
-SVG node-and-connection diagram. Abstract and decorative — the Hero text carries
-the meaning; no illustrative metrics.
+Type: blocky **brand-blue summary card** (`components/ui/HeroSummary.tsx`) — an
+illustrative diagnostic report (the scenario triad + two headline metrics), not a
+node-and-connection diagram.
 
 Panel:
-- Background: `var(--blue-500)` solid fill
-- Border: `2px solid var(--ink-900)` (`--border-heavy`)
-- Border-radius: `--radius-md` (6px)
-- Shadow: `--shadow-hard` (`8px 8px 0` ink)
+- Background: `var(--blue-500)` solid fill; paper text
+- Border: `2px solid var(--ink-900)`; radius `--radius-md`; shadow `--shadow-hard`
 - Corner `+` mark (`PlusMark`), paper, top-right
-- Fills the hero brand column (`width: 100%`); no fixed max width/height
+- Fills the hero brand column (`width: 100%`)
 
-Status label (top):
-- Text: `System Diagnostic Map`
-- JetBrains Mono, `11px`, uppercase, `--ls-eyebrow`, `rgba(255,255,255,0.85)`
+Header:
+- Mono label `Diagnostic summary · illustrative` (`--text-on-brand-muted`)
+- Client line `B2B services firm · ~80 employees` (Mulish `900`, ~22px)
 
-Risks headline:
-- Text: `Bottlenecks · Gaps · Risks`
-- Mulish `900`, `24px`, paper
+Rows (three, divided by hairlines) — mirror the scenario triad:
+- `01 · Situation` — Leads dropping between marketing & sales
+- `02 · Diagnostic found` — 4 undocumented handoff points, 2 teams
+- `03 · Delivered` — 5 steps → single owner per stage
 
-Nodes (5) — 2-column grid inside the panel, last node spans full width:
-- Processes (GitBranch), CRM / RevOps (Database), Data (BarChart3),
-  Automation (Workflow), IT Systems (Layers)
-- Node style: `rgba(255,255,255,0.08)` fill, `1px solid var(--border-on-brand)`,
-  `--radius-xs` (2px), padding `12px 14px`
-- Icon: `18px`, paper. Label: `14px` Mulish `700`, paper
+Metrics (bottom, above a `2px` paper rule; `margin-top:auto` bottom-aligns them):
+- `$180K+` — Revenue at risk (est.)
+- `30-day` — Cleanup priority
 
-Bottom flow:
-- `Diagnostic → Roadmap → Implementation`
-- Separated from the nodes by a `2px` paper top rule
-- Mono, `12px`, uppercase, paper; `ArrowRight` (`14px`) between steps
+Rules:
+- Figures are illustrative and estimate-framed, mirroring Scenario 01 — never
+  presented as a verified Opsfield result. The hero deliberately leads with this
+  summary card (this reverses the earlier "abstract, no metrics in the hero" rule).
+- On mobile the card is hidden (`Hero.module.css`).
 
-Responsive:
-- The panel is single-column at every width (nodes reflow within it); there is
-  no separate simplified SVG map and no fixed tablet/mobile max-height.
-- On mobile the complex hero visual is hidden while the layout is single-column
-  (`Hero.module.css`), so the CTA and trust line lead.
-
-> Superseded: an earlier v1 spec here described a light node-and-connection SVG
-> (`--bg-surface` nodes, `12px` radii, `480×360` max, `--accent-light` callout).
-> That predates the v2 brand panel and no longer matches the build; kept only in
-> git history.
+> Superseded: the earlier v1 (light node SVG) and v2a (brand node-map panel,
+> `HeroDiagram.tsx`) hero visuals. `HeroDiagram.tsx` remains in the repo but is no
+> longer imported; kept in git history.
 
 ---
 
@@ -449,8 +433,8 @@ Used in:
 
 Structure:
 
-1. Big Mulish-900 step number (`01`/`02`/`03`), `--blue-500` (white on the featured column)
-2. Mono `Step N` label
+1. Top row: big Mulish-900 step number (`01`/`02`/`03`, `--blue-500`; white on the featured column) + a functional corner icon (Lucide, `--accent`; white on featured)
+2. Step title (Mulish-800) — `Review` / `Map & score` / `Recommend`
 3. Short description (verbatim from `texts.md`)
 
 Rules (v2):
@@ -479,7 +463,7 @@ Rules (v2):
 
 - Report card: `paper` surface, 2px ink border, `--radius-md`, **hard shadow**
 - Brand-blue header: `Scenario · 0N` + client + environment mono tags
-- Three stacked rows — Situation (ink) / Diagnostic found (blue) / Delivered (evergreen) — each a mono num + label + text, divided by the 2px ink rule
+- Three stacked rows — Situation (ink) / Diagnostic found (blue) / Delivered (evergreen) — each with a triad-colored Lucide icon (`Info` / `Search` / `CheckCircle2`) + mono num + label + text, divided by the 2px ink rule
 - One-column stacked layout
 - Do not invent names, logos or testimonials.
 - A real anonymized case must be supported by an internal source record and approval.
@@ -517,22 +501,23 @@ Used in:
 
 Structure:
 
-1. Role name
-2. Responsibilities as `+` bullets (verbatim terms from the `texts.md` Focus line)
-3. Relevant environments (mono tags), shared across the section
+1. Header: initials tile (`MP` / `SA`) + role name + mono role subtitle (`Operating model & diagnostic lead` / `CRM / RevOps & data flow`)
+2. `Role in the engagement` mono divider label
+3. Responsibilities as functional Lucide icon bullets (verbatim terms from the `texts.md` Focus line)
+4. Relevant environments (mono tags), shared across the section
 
 Rules (v2):
 
 - Ink block: two role cards — card 1 `brand` (blue), card 2 `paper`, both hard-shadow
 - Maximum 2 cards for MVP
 - Do not present unverified real clients, real metrics, certifications, awards, logos, reviews, names, years, or Fortune 500 claims.
-- No stock or fictional portrait placeholders; role identity is the role name + responsibilities only (no semantic-icon requirement in v2).
+- No stock or fictional portrait placeholders. Identity is an **initials tile** (`MP` / `SA` — dark on the brand card, blue on the paper card), the role name, and a short role subtitle; responsibilities use functional Lucide icon bullets. No real photos or invented credentials.
 
 ### ICP Qualifier
 
 Used in:
 
-- Hero trust / qualifier line
+- Hero trust stats row (the `50–250` stat)
 - FAQ company-fit answer
 
 Content:
@@ -541,8 +526,8 @@ Content:
 
 Rules:
 
-- Present as supporting text or a compact subordinate chip, never as the H1 or dominant badge.
-- Chip styling: the Hero uses the blue-tint chip sanctioned by the color table (`--blue-50` background, `--blue-700` text, `--blue-100` hairline); a neutral `--bg-subtle` / `--text-secondary` chip is also acceptable (e.g. the FAQ fit answer). Either way it must stay subordinate — do not style as a warning, eligibility gate, or exclusive-membership badge, and do not scale it up to a primary badge.
+- Present as supporting text, a hero trust stat, or a compact subordinate chip — never as the H1 or dominant badge.
+- In the Hero it now appears as the `50–250 · Employees · best fit` stat inside the trust stats row (Mulish-900 numeral + mono caption), not a standalone chip. Elsewhere (e.g. the FAQ fit answer) a neutral `--bg-subtle` / `--text-secondary` chip is fine. Either way keep it subordinate — never a warning, eligibility gate, or exclusive-membership badge.
 - Keep the qualifier visible on mobile without placing it above the primary value proposition.
 - Do not repeat the employee range across multiple cards or sections.
 - Companies outside the range are not visually marked as unqualified.
@@ -893,14 +878,14 @@ The order follows `sitemap.md` and `texts.md`.
 
 | Section | Recommended visual treatment |
 |---|---|
-| Hero | Split text + diagnostic system map |
+| Hero | Split text (with trust stats row) + diagnostic-summary card |
 | Problem Section | 3–5 symptom / root-cause cards |
 | What We Diagnose | Service cards with outputs |
-| AI & Process Automation | Process-to-automation flow, restrained accent |
-| How the Diagnostic Works | 3-step numbered sequence |
+| AI & Process Automation | 3 step pills (blue → ink → green) + scope box, restrained |
+| How the Diagnostic Works | 3 numbered step cards with corner icon + title |
 | Diagnostic Scenarios | Full-width anonymized scenario / proof cards |
 | Why Opsfield Systems | Comparison table / paired cards |
-| Delivery Model | Two senior delivery-role cards |
+| Delivery Model | Two senior delivery-role cards (initials tile + role subtitle + icon bullets) |
 | Business & IT Diagnostic | One composite panel: offer → risk reduction → post-submit steps → form |
 | FAQ | Accessible accordion; Fit / Not Fit answers use semantic lists |
 | Final CTA | Strong CTA panel with primary + secondary action |
@@ -1008,7 +993,7 @@ Do not include placeholder assets in production launch.
 - `#CBD5E1` не используется как текстовый цвет.
 - Spacing построен на 8px grid.
 - Breakpoints не дублируются и берутся из `optimization.md`.
-- Hero соответствует v2 split-grid layout (text `1.15fr` / brand panel `0.85fr`).
+- Hero соответствует v2 split-grid layout (text `1.15fr` / brand panel `0.85fr`); правая панель — diagnostic-summary card (`HeroSummary`), слева — trust stats row.
 - Primary CTA видим без скролла.
 - Все секции из `sitemap.md` имеют визуальное решение.
 - AI section не выглядит как AI-hype.
@@ -1016,7 +1001,7 @@ Do not include placeholder assets in production launch.
 - Cards сканируются за 5–8 секунд.
 - FAQ имеет доступный accordion pattern.
 - Form содержит visible labels, clear states и privacy notice.
-- Нет fake logos, fake metrics, fake testimonials или fake awards.
+- Нет fake logos, fake testimonials или fake awards, и нет сфабрикованных верифицированных метрик. Illustrative estimate-framed цифры допустимы только явно помеченными как illustrative и estimate-framed (hero summary card, scenario cards) — см. Scenario / Proof Card и Hero Diagnostic Summary.
 - Нет stock handshake, meeting-room cliché, robots или neon gradients.
 - Motion отключается при `prefers-reduced-motion`.
 - Все кликабельные элементы имеют minimum 44px touch target.

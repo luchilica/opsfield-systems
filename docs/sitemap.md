@@ -13,7 +13,7 @@ Final project files:
 
 **Brand:** Opsfield Systems  
 **Brand status:** Working brand; production launch is blocked until trademark clearance, California legal-entity / DBA mapping, and final domain ownership are confirmed.  
-**Page:** Diagnostic-First IT & Business Consulting
+**Page:** Diagnostic-First IT & Business Development
 
 ---
 
@@ -21,7 +21,7 @@ Final project files:
 
 | URL | Page | Type | Index / Noindex | Source file |
 |---|---|---|---|---|
-| `/` | Diagnostic-First IT & Business Consulting | Commercial landing page | Index | `texts.md` |
+| `/` | Diagnostic-First IT & Business Development | Commercial landing page | Index | `texts.md` |
 | `/privacy-policy` | Privacy Policy | Legal | Noindex | `texts.md` |
 | `/terms-of-use` | Terms of Use | Legal | Noindex | `texts.md` |
 | `/cookie-policy` | Cookie Policy | Legal | Noindex | `texts.md` |
