@@ -40,10 +40,13 @@
   border-color: var(--stone-200);
 }
 
+/* Light tint over paper — keeps the 2px ink border (Service Card is blocky,
+   border-led; unlike the solid brand/ink tones the border must not fade to the
+   tint). See docs/design.md → "Service Card". */
 .blueTint {
   background: var(--blue-50);
   color: var(--ink-900);
-  border-color: var(--blue-100);
+  border-color: var(--border-strong);
 }
 
 /* Signature 8px offset ink shadow — headline cards only. */

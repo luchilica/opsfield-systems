@@ -7,7 +7,7 @@ import {
   useState,
   type FormEvent,
 } from "react";
-import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
+import { ChevronDown, ChevronUp, ArrowRight, CheckCircle2 } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { trackEvent } from "@/lib/analytics";
 import styles from "./DiagnosticForm.module.css";
@@ -149,6 +149,11 @@ export default function DiagnosticForm() {
   if (status === "success") {
     return (
       <div className={styles.success} role="status" aria-live="polite">
+        <CheckCircle2
+          className={styles.successIcon}
+          size={32}
+          aria-hidden="true"
+        />
         <h4 className={styles.successTitle}>Request received.</h4>
         <p>
           Thank you. A senior advisor will review your submission, confirm fit,
@@ -167,11 +172,6 @@ export default function DiagnosticForm() {
 
   return (
     <>
-      <p className={styles.microcopy}>
-        Four required fields. Additional context is optional. No full system
-        access is required for the first fit review.
-      </p>
-
       <form
         className={styles.form}
         onSubmit={onSubmit}
@@ -440,6 +440,13 @@ export default function DiagnosticForm() {
             </p>
           </div>
         )}
+
+        {/* Reassurance microcopy — kept next to the submit control per
+            docs/design.md → Form Panel ("near submit"). */}
+        <p className={styles.microcopy}>
+          Four required fields. Additional context is optional. No full system
+          access is required for the first fit review.
+        </p>
 
         <div className={styles.submitRow}>
           <Button type="submit" variant="primary" disabled={loading}>

@@ -31,7 +31,7 @@ const SCENARIOS: Scenario[] = [
     found:
       "7 inconsistent metric definitions and 2 disconnected data sources feeding the same dashboard.",
     delivered:
-      "Unified reporting definitions document covering 7 previously inconsistent metrics. Data-source consolidation plan eliminated 40+ hours/month of manual reconciliation. BI roadmap prioritized by stakeholder impact with 90-day execution timeline.",
+      "Unified reporting definitions document covering 7 previously inconsistent metrics. Data-source consolidation plan projected to remove 40+ hours/month of manual reconciliation. BI roadmap prioritized by stakeholder impact with 90-day execution timeline.",
   },
   {
     client: "Multi-location operator (≈200 employees)",
@@ -41,7 +41,7 @@ const SCENARIOS: Scenario[] = [
     found:
       "11 manual approval steps that could be reduced to 4 with workflow consolidation.",
     delivered:
-      "Bottleneck map identified $320K in annual labor cost tied to manual approvals. Automation backlog ranked by effort and impact. 90-day roadmap adopted by operations leadership with projected 60% reduction in approval cycle time.",
+      "Bottleneck map identified an estimated $320K in annual labor cost tied to manual approvals. Automation backlog ranked by effort and impact. 90-day roadmap adopted by operations leadership with projected 60% reduction in approval cycle time.",
   },
 ];
 

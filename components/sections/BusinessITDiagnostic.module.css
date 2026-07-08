@@ -107,6 +107,10 @@
   line-height: 1.5;
 }
 
+.privacyNote {
+  margin-top: var(--space-2);
+}
+
 .reviewLabel {
   margin: var(--space-3) 0 var(--space-2);
   font-family: var(--font-mono-fallback);

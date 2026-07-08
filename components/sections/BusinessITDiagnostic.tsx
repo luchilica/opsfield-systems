@@ -74,6 +74,15 @@ export default function BusinessITDiagnostic() {
               No full system access is required for the initial fit review.
               Deeper access starts only after scope and NDA are agreed.
             </p>
+            {/* Privacy note — verbatim from docs/texts.md → "Before You Commit";
+                Risk-Reduction Panel spec requires a privacy notice + Privacy
+                Policy link inside the panel. */}
+            <p className={`${styles.muted} ${styles.privacyNote}`}>
+              By submitting the form, you acknowledge our{" "}
+              <a href="/privacy-policy">Privacy Policy</a>. We use your
+              information to evaluate fit and contact you about your diagnostic
+              request.
+            </p>
           </div>
         </div>
 

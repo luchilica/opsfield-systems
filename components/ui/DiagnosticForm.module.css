@@ -65,7 +65,7 @@
 }
 
 .textarea {
-  min-height: 120px;
+  min-height: 144px;
   resize: vertical;
 }
 
@@ -103,6 +103,10 @@
   gap: var(--space-1);
   min-height: 44px;
   align-self: flex-start;
+  /* Gap from the last required field = --space-4 (32px) per docs/design.md →
+     Progressive Disclosure Control. The .fields flex gap already contributes
+     --space-3 (24px); this margin adds the remaining 8px. */
+  margin-top: var(--space-1);
   padding: 0;
   background: none;
   border: none;
@@ -163,7 +167,9 @@
 }
 
 .processing {
-  color: var(--stone-500);
+  /* Helper text near submit must not read as pale (docs/design.md → Typography
+     Rules); spec States row specifies --text-secondary. */
+  color: var(--text-secondary);
 }
 
 /* ----- Success / error states ----- */
@@ -173,6 +179,10 @@
   flex-direction: column;
   gap: var(--space-2);
   align-items: flex-start;
+}
+
+.successIcon {
+  color: var(--state-success);
 }
 
 .successTitle {
