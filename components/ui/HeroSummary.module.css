@@ -3,7 +3,7 @@
    metrics. Illustrative composite — not a verified case. Tokens from globals.css. */
 
 .panel {
-  position: relative;
+  position: absolute;
   width: 100%;
   display: flex;
   flex-direction: column;
