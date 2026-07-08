@@ -13,7 +13,7 @@ export default function robots(): MetadataRoute.Robots {
 
   return {
     rules: [
-      { userAgent: "*", allow: "/" },
+      { userAgent: "*", allow: "/", disallow: "/api/" },
       // AI crawlers — allow indexing for AEO (Answer Engine Optimization)
       { userAgent: "GPTBot", allow: "/", disallow: "/api/" },
       { userAgent: "ChatGPT-User", allow: "/", disallow: "/api/" },

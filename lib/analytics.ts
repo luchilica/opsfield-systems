@@ -36,6 +36,7 @@ export type AnalyticsEvent =
   | "faq_item_open"
   | "form_start"
   | "form_submit_attempt"
+  | "form_validation_error"
   | "form_submit_success"
   | "form_submit_error";
 

@@ -1,4 +1,4 @@
-import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
+import { siteConfig } from "@/lib/site-config";
 import { FAQ_ITEMS, faqAnswerText } from "@/components/sections/faqData";
 
 // Homepage JSON-LD (@graph). Pure Server Component — renders a single
@@ -13,7 +13,9 @@ const HOME_DESCRIPTION =
   "B2B companies with 50–250 employees use Opsfield Systems to diagnose process, CRM, data, and IT bottlenecks before committing to tools, hires, or implementation.";
 
 export default function JsonLd() {
-  const home = getCanonicalUrl("/");
+  // No trailing slash — matches the canonical/og:url/sitemap Next emits for the
+  // homepage (siteConfig.url is already slash-normalized).
+  const home = siteConfig.url;
   const organizationId = `${home}#organization`;
   const websiteId = `${home}#website`;
   const serviceUrl = `${home}#business-it-diagnostic`;
@@ -28,7 +30,6 @@ export default function JsonLd() {
         url: home,
         description:
           "Diagnostic-first IT and business consulting for B2B companies.",
-        foundingDate: siteConfig.foundingDate,
         areaServed: { "@type": "Country", name: "United States" },
         address: {
           "@type": "PostalAddress",

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPageLayout from "@/components/layout/LegalPageLayout";
-import { siteConfig } from "@/lib/site-config";
+import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
 
 // Content is reproduced verbatim from docs/texts.md → "Page: Cookie Policy".
 // Do not edit the copy here; corrections belong in texts.md.
@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Cookie Policy | Opsfield Systems",
   description:
     "Learn how Opsfield Systems uses necessary and optional analytics cookies and how website visitors can manage their preferences.",
+  alternates: { canonical: getCanonicalUrl("/cookie-policy") },
   robots: siteConfig.isPreview
     ? { index: false, follow: false }
     : { index: false, follow: true },

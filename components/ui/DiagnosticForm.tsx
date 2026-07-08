@@ -68,6 +68,7 @@ export default function DiagnosticForm() {
   const companyRef = useRef<HTMLInputElement>(null);
   const challengeRef = useRef<HTMLTextAreaElement>(null);
   const startedRef = useRef(false); // fire form_start only once per session
+  const lastCtaRef = useRef(""); // text of the last CTA that opened/prefilled the form
 
   const set = (key: keyof Values, value: string) =>
     setValues((v) => ({ ...v, [key]: value }));
@@ -80,6 +81,7 @@ export default function DiagnosticForm() {
       if (!el) return;
       const value = el.getAttribute("data-request-type") || "";
       if (!REQUEST_TYPE_OPTIONS.includes(value)) return;
+      lastCtaRef.current = (el.textContent || "").trim().replace(/\s+/g, " ");
       setValues((v) => ({ ...v, requestType: value }));
       setShowOptional(true);
     };
@@ -123,7 +125,9 @@ export default function DiagnosticForm() {
     if (Object.keys(found).length > 0) {
       setErrors(found);
       focusFirstError(found);
-      trackEvent("form_submit_error", { error_type: "validation_error" });
+      trackEvent("form_validation_error", {
+        field_name: Object.keys(found)[0] ?? "unknown",
+      });
       return;
     }
     setErrors({});
@@ -131,8 +135,38 @@ export default function DiagnosticForm() {
     setStatus("loading");
     const slowTimer = setTimeout(() => setSlow(true), 3000);
     try {
-      // TODO: Stage 5 — replace with actual API call to /api/submit.
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const params = new URLSearchParams(window.location.search);
+      const context = {
+        page_url: window.location.href,
+        page_section: "business-it-diagnostic",
+        cta_text: lastCtaRef.current,
+        referrer: document.referrer,
+        utm_source: params.get("utm_source") ?? "",
+        utm_medium: params.get("utm_medium") ?? "",
+        utm_campaign: params.get("utm_campaign") ?? "",
+        utm_content: params.get("utm_content") ?? "",
+        utm_term: params.get("utm_term") ?? "",
+        timestamp: new Date().toISOString(),
+      };
+      const res = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          company: values.company,
+          challenge: values.challenge,
+          requestType: values.requestType,
+          companyWebsite: values.companyWebsite,
+          role: values.role,
+          companySize: values.companySize,
+          timeline: values.timeline,
+          website: values.website, // honeypot — server double-checks
+          context,
+        }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean };
+      if (!res.ok || !data.ok) throw new Error("submit_failed");
       setStatus("success");
       trackEvent("form_submit_success", {
         request_type: values.requestType || "not_specified",

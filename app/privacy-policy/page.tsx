@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPageLayout from "@/components/layout/LegalPageLayout";
-import { siteConfig } from "@/lib/site-config";
+import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
 
 // Content is reproduced verbatim from docs/texts.md → "Page: Privacy Policy".
 // Do not edit the copy here; corrections belong in texts.md.
@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Opsfield Systems",
   description:
     "Learn how Opsfield Systems collects, uses, protects, and retains personal information submitted through its website and diagnostic request form.",
+  alternates: { canonical: getCanonicalUrl("/privacy-policy") },
   robots: siteConfig.isPreview
     ? { index: false, follow: false }
     : { index: false, follow: true },

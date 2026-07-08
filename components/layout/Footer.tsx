@@ -65,7 +65,7 @@ export default function Footer() {
             variant="primary"
             data-request-type="Business & IT Diagnostic"
           >
-            Request a Diagnostic
+            Request Diagnostic
           </Button>
         </div>
 

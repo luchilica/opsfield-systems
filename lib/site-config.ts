@@ -10,7 +10,6 @@ export interface SiteConfig {
   url: string;
   isPreview: boolean;
   locale: string;
-  foundingDate: string;
 }
 
 const SITE_MODE: SiteMode =
@@ -33,7 +32,6 @@ export const siteConfig: SiteConfig = {
   url: normalizeUrl(resolveSiteUrl()),
   isPreview: SITE_MODE !== "production",
   locale: "en-US",
-  foundingDate: "2021",
 };
 
 // Returns an absolute URL for a site-relative path, e.g. getCanonicalUrl("/")
