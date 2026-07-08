@@ -50,7 +50,7 @@ export default function Hero() {
             <p className={styles.statCap}>Employees · best fit</p>
           </div>
           <div className={styles.stat}>
-            <p className={styles.statNum}>Since 2021</p>
+            <p className={styles.statNum}>5+ yrs</p>
             <p className={styles.statCap}>Boutique advisory</p>
           </div>
         </div>

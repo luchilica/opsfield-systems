@@ -467,6 +467,15 @@ main > section {
   padding-top: var(--space-6); /* 64px */
 }
 
+/* Content-heavy pair: tighten "What We Diagnose" ↔ "AI & Process Automation"
+   to 48px so they read as a pair. */
+#what-we-diagnose {
+  padding-bottom: var(--space-5); /* 48px */
+}
+#ai-process-automation {
+  padding-top: var(--space-5); /* 48px */
+}
+
 /* Deliberate pause before the conversion block: widen
    "Delivery Model" ↔ "Business & IT Diagnostic" to 128px. */
 #delivery-model {

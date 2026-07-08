@@ -12,11 +12,10 @@ export default function FinalCTA() {
 
       <div className={styles.inner}>
         <h2 className={styles.heading}>
-          Turn operational uncertainty into a scoped next step.
+          From uncertainty to a scoped next step.
         </h2>
         <p className={`lead ${styles.text}`}>
-          Clarify the bottleneck, decision risk, and appropriate level of work
-          before committing budget.
+          Clarify the bottleneck and risk level before committing budget.
         </p>
 
         <div className={styles.actions}>
