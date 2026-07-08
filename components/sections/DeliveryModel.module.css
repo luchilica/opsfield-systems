@@ -49,23 +49,23 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 44px;
-  height: 44px;
+  width: 56px;
+  height: 56px;
   border-radius: var(--radius-sm);
-  font-family: var(--font-mono-fallback);
-  font-size: 14px;
-  font-weight: 700;
+  font-family: var(--font-display); /* Mulish */
+  font-size: 22px;
+  font-weight: var(--fw-black); /* 900 */
   letter-spacing: 0.04em;
 }
 
 .avatarOnBrand {
-  background: var(--ink-900);
-  color: var(--paper);
+  background: var(--blue-500);
+  color: #ffffff;
 }
 
 .avatarOnPaper {
   background: var(--blue-500);
-  color: var(--paper);
+  color: #ffffff;
 }
 
 .roleTitle {
