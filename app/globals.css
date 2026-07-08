@@ -414,8 +414,11 @@ main > section {
   color: var(--text-on-brand);
 }
 
-/* Full-fill ink block (v2) — AI & Process Automation. */
+/* Full-fill ink block (v2) — AI & Process Automation. Positioned + clipped for
+   the decorative + motifs. */
 #ai-process-automation {
+  position: relative;
+  overflow: hidden;
   background: var(--ink-900);
   color: var(--text-on-dark);
 }
