@@ -124,6 +124,14 @@
   color: var(--ink-900);
 }
 
+/* Delivered-row estimate figures — evergreen highlight (applied per request;
+   diverges from design.md 471–472 + the образец, which keep these as body text). */
+.metric {
+  font-family: var(--font-display);
+  font-weight: var(--fw-black); /* Mulish 900 */
+  color: var(--evergreen-500); /* #17A26A */
+}
+
 .note {
   margin: var(--space-3) 0 0;
   font-size: 13px;

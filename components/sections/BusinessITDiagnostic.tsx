@@ -93,9 +93,12 @@ export default function BusinessITDiagnostic() {
             <ol className={styles.steps}>
               {POST_SUBMIT.map((text, i) => (
                 <li key={i} className={styles.step}>
-                  <span className={styles.stepNumber} aria-hidden="true">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                  <div className={styles.stepHead}>
+                    <span className={styles.stepChip} aria-hidden="true">
+                      {i + 1}
+                    </span>
+                    <span className={styles.connector} aria-hidden="true" />
+                  </div>
                   <p className={styles.stepLabel}>Step {i + 1}</p>
                   <p className={styles.stepText}>{text}</p>
                 </li>

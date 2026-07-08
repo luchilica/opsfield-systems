@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { ArrowRight, Info, Search, CheckCircle2 } from "lucide-react";
 import styles from "./DiagnosticScenarios.module.css";
 
@@ -9,7 +10,7 @@ type Scenario = {
   environment: string[];
   situation: string;
   found: string;
-  delivered: string;
+  delivered: ReactNode;
 };
 
 const SCENARIOS: Scenario[] = [
@@ -20,8 +21,14 @@ const SCENARIOS: Scenario[] = [
       "Inbound leads were falling between marketing and sales — no defined handoff owner, no SLA, and 3 duplicate CRM fields creating confusion.",
     found:
       "4 undocumented handoff points across 2 teams with no shared visibility.",
-    delivered:
-      "Handoff process reduced from 5 steps to 2. Single ownership assigned per lead stage. Estimated revenue at risk from dropped handoffs: $180K–$240K annually. 30-day cleanup priority list adopted by both teams.",
+    delivered: (
+      <>
+        Handoff process reduced from 5 steps to 2. Single ownership assigned per
+        lead stage. Estimated revenue at risk from dropped handoffs:{" "}
+        <span className={styles.metric}>$180K–$240K</span> annually. 30-day
+        cleanup priority list adopted by both teams.
+      </>
+    ),
   },
   {
     client: "Scaling SaaS team (≈120 employees)",
@@ -30,8 +37,15 @@ const SCENARIOS: Scenario[] = [
       "Leadership did not trust dashboard numbers — 3 departments used different definitions for the same metrics.",
     found:
       "7 inconsistent metric definitions and 2 disconnected data sources feeding the same dashboard.",
-    delivered:
-      "Unified reporting definitions document covering 7 previously inconsistent metrics. Data-source consolidation plan projected to remove 40+ hours/month of manual reconciliation. BI roadmap prioritized by stakeholder impact with 90-day execution timeline.",
+    delivered: (
+      <>
+        Unified reporting definitions document covering 7 previously inconsistent
+        metrics. Data-source consolidation plan projected to remove{" "}
+        <span className={styles.metric}>40+ hours/month</span> of manual
+        reconciliation. BI roadmap prioritized by stakeholder impact with 90-day
+        execution timeline.
+      </>
+    ),
   },
   {
     client: "Multi-location operator (≈200 employees)",
@@ -40,8 +54,15 @@ const SCENARIOS: Scenario[] = [
       "4 locations running different approval workflows with 6 overlapping tools and no shared process documentation.",
     found:
       "11 manual approval steps that could be reduced to 4 with workflow consolidation.",
-    delivered:
-      "Bottleneck map identified an estimated $320K in annual labor cost tied to manual approvals. Automation backlog ranked by effort and impact. 90-day roadmap adopted by operations leadership with projected 60% reduction in approval cycle time.",
+    delivered: (
+      <>
+        Bottleneck map identified an estimated{" "}
+        <span className={styles.metric}>$320K</span> in annual labor cost tied to
+        manual approvals. Automation backlog ranked by effort and impact. 90-day
+        roadmap adopted by operations leadership with projected 60% reduction in
+        approval cycle time.
+      </>
+    ),
   },
 ];
 
