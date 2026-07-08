@@ -79,16 +79,28 @@ v2 palette (block/brand-first). Deep-ultramarine dominates; near-black ink is th
 
 ### Typography Scale
 
-| Уровень | Размер desktop | Размер mobile | Weight | Line-height | Letter-spacing | Шрифт |
-|---|---:|---:|---:|---:|---:|---|
-| H1 | `60px` | `40px` | `900` | `0.98` | `-0.032em` | Mulish |
-| H2 | `42px` | `30px` | `900` | `1.02` | `-0.028em` | Mulish |
-| H3 | `28px` | `22px` | `800` | `1.12` | `-0.015em` | Mulish |
-| H4 | `22px` | `18px` | `700` | `1.12` | `-0.015em` | Mulish |
-| Lead | `20px` | `19px` | `500` | `1.5` | `0` | Mulish |
-| Body | `16px` | `16px` | `400` | `1.55` | `0` | Mulish |
-| Small | `14px` | `14px` | `400` | `1.5` | `0` | Mulish |
-| Eyebrow / label | `12px` | `12px` | `500` | `1.4` | `0.14em` | JetBrains Mono |
+Type sizes are driven by fluid `clamp()` tokens from the design system
+(`tokens/typography.css`, mirrored in `app/globals.css` as `--fs-*`). Sizes below
+list the **mobile floor → desktop ceiling**; each value resizes smoothly between
+them — there are **no per-breakpoint `px` overrides**.
+
+| Уровень | Token | Mobile → Desktop | Weight | Line-height | Letter-spacing | Шрифт |
+|---|---|---:|---:|---:|---:|---|
+| Mega (hero) | `--fs-mega` | `56 → 104px` | `900` | `0.98` | `-0.028em` | Mulish |
+| Display | `--fs-display` | `44 → 72px` | `900` | `0.98` | `-0.028em` | Mulish |
+| H1 | `--fs-h1` | `36 → 52px` | `900` | `0.98` | `-0.028em` | Mulish |
+| H2 | `--fs-h2` | `28 → 40px` | `900` | `1.02` | `-0.028em` | Mulish |
+| H3 | `--fs-h3` | `24px` | `800` | `1.12` | `-0.015em` | Mulish |
+| H4 | `--fs-h4` | `20px` | `700` | `1.12` | `-0.015em` | Mulish |
+| Lead | `--fs-lead` | `20px` | `500` | `1.5` | `0` | Mulish |
+| Body | `--fs-body` | `16px` | `400` | `1.55` | `0` | Mulish |
+| Small | `--fs-sm` | `14px` | `400` | `1.5` | `0` | Mulish |
+| XSmall | `--fs-xs` | `13px` | `400` | `1.4` | `0.01em` | Mulish |
+| Eyebrow / label | `--fs-eyebrow` | `12px` | `500` | `1.4` | `0.14em` | JetBrains Mono |
+
+> The hero headline (`Hero.module.css`) uses `--fs-mega`/display-scale sizing and
+> may set a slightly tighter tracking (`-0.032em`) as a component treatment; the
+> base `h1` element uses `--fs-h1` + `--ls-display` (`-0.028em`).
 
 ### Typography Rules
 
@@ -182,8 +194,8 @@ Once a pattern is chosen, maintain it consistently.
 | Уровень | CSS | Использование |
 |---|---|---|
 | `sm` | `0 2px 4px rgba(10,10,15,0.06)` | subtle rest |
-| `md` | `0 8px 20px rgba(10,10,15,0.10)` | hover, dropdown |
-| `lg` | `0 24px 44px rgba(10,10,15,0.16)` | modal, sticky header |
+| `md` | `0 8px 20px rgba(10,10,15,0.10)` | hover, dropdown, sticky header (when scrolled) |
+| `lg` | `0 24px 44px rgba(10,10,15,0.16)` | modal / dialog |
 | `hard` | `8px 8px 0 var(--ink-900)` | **signature** block shadow — headline cards |
 | `brand-hard` | `8px 8px 0 var(--blue-500)` | signature block shadow on a brand block |
 
@@ -224,67 +236,34 @@ Easing: `--ease-out: cubic-bezier(0.22, 0.61, 0.36, 1)` (no bounce, no spring, n
 
 ## CSS Variable Reference
 
-> **SUPERSEDED (v1 snapshot).** The block below is the original v1 `:root`. The
-> live source of truth is `app/globals.css` (v2 tokens) plus the reconciled
-> `Цвета` / `Типографика` / `Тени` / `Transitions` / `Radii and Borders`
-> sections above (Mulish + JetBrains Mono, blue/ink/stone/paper, hard shadow,
-> 2–6px radii). Kept for historical diff only.
+The single source of truth for all design tokens in CSS is **`app/globals.css`**
+(the v2 `:root`), which mirrors the `Opsfield Systems Design System` project
+(`styles.css` → `tokens/*.css` on claude.ai/design). Token values are not restated
+here — read them from `app/globals.css` so this doc cannot drift from the build.
 
-```css
-:root {
-  /* Text */
-  --text-primary: #0B1220;
-  --text-secondary: #475569;
-  --text-muted: #94A3B8;
-  --text-on-accent: #FFFFFF;
+| Group | File (design system) | Mirrored in |
+|---|---|---|
+| Fonts (Mulish + JetBrains Mono) | `tokens/fonts.css` | `app/globals.css` + `next/font` in `app/layout.tsx` |
+| Colors (blue / ink / stone / semantic) | `tokens/colors.css` | `app/globals.css` `:root` |
+| Type scale + weights + tracking | `tokens/typography.css` | `--fs-*`, `--fw-*`, `--ls-*`, `--lh-*` |
+| Spacing | `tokens/spacing.css` | `--space-*` (see spacing note) |
+| Elevation / radii / borders / motion | `tokens/elevation.css` | `--radius-*`, `--shadow-*`, `--ease-*`, `--dur-*` |
+| Element defaults + eyebrow | `tokens/base.css` | `app/globals.css` base layer + `.kicker` / `.ops-eyebrow` |
 
-  /* Backgrounds */
-  --bg-page: #F8FAFC;
-  --bg-surface: #FFFFFF;
-  --bg-subtle: #F1F5F9;
+**Spacing note.** The design system's `--space-*` scale is a **4px rem grid**
+(`--space-1` = 4px … `--space-8` = 32px). This implementation keeps the **8px px
+grid** (`--space-1` = 8px … `--space-8` = 104px) because every existing section and
+component consumes those values; the two share a 4px superset but the token *names
+are not interchangeable*. `app/globals.css` is authoritative for local spacing.
 
-  /* Accent */
-  --accent: #1D4ED8;
-  --accent-hover: #1E40AF;
-  --accent-light: #DBEAFE;
+**Mono wiring.** JetBrains Mono is self-hosted via `next/font` (`app/layout.tsx`),
+which registers it under its real family name. Local CSS consumes it through
+`--font-mono-fallback` (`"JetBrains Mono", ui-monospace, …`); the literal name
+resolves to the loaded face, so mono readouts render in the brand mono.
 
-  /* Borders */
-  --border-default: #CBD5E1;
-  --border-focus: #1D4ED8;
-
-  /* States */
-  --state-success: #16A34A;
-  --state-error: #DC2626;
-  --state-warning: #D97706;
-
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(11, 18, 32, 0.06);
-  --shadow-md: 0 4px 12px rgba(11, 18, 32, 0.08);
-  --shadow-lg: 0 8px 24px rgba(11, 18, 32, 0.12);
-
-  /* Transitions */
-  --transition-fast: 150ms ease-out;
-  --transition-normal: 200ms ease-out;
-  --transition-slow: 300ms ease-in-out;
-
-  /* Spacing */
-  --space-1: 8px;
-  --space-2: 16px;
-  --space-3: 24px;
-  --space-4: 32px;
-  --space-5: 48px;
-  --space-6: 64px;
-  --space-7: 96px;
-
-  /* Typography */
-  --font-heading: "Inter Tight", "Inter", system-ui,
-    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-body: "Inter", system-ui,
-    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-```
-
-**Note:** This block is the single source of truth for all design tokens in CSS. If a value changes in the color, spacing, or shadow tables above, this block must be updated to match.
+> Historical note: a v1 `:root` snapshot (Inter fonts, warm-paper palette, soft
+> shadows) previously lived here. It was removed once the v2 tokens became the
+> source of truth; see git history (`docs(rebrand)` phases) for the original.
 
 ---
 
@@ -392,44 +371,50 @@ Processes → CRM / RevOps → Data → Automation → IT Systems
 
 The visual must explain the service, not decorate the page.
 
-### Hero Diagnostic Map — visual specification
+### Hero Diagnostic Map — visual specification (v2)
 
-Type: node-and-connection SVG diagram
-Layout: horizontal flow desktop, vertical mobile
+Type: blocky **brand-blue panel** (`components/ui/HeroDiagram.tsx`), not a light
+SVG node-and-connection diagram. Abstract and decorative — the Hero text carries
+the meaning; no illustrative metrics.
 
-Nodes (5):
-- Processes (GitBranch icon)
-- CRM / RevOps (Database icon)
-- Data (BarChart3 icon)
-- Automation (Workflow icon)
-- IT Systems (Layers icon)
+Panel:
+- Background: `var(--blue-500)` solid fill
+- Border: `2px solid var(--ink-900)` (`--border-heavy`)
+- Border-radius: `--radius-md` (6px)
+- Shadow: `--shadow-hard` (`8px 8px 0` ink)
+- Corner `+` mark (`PlusMark`), paper, top-right
+- Fills the hero brand column (`width: 100%`); no fixed max width/height
 
-Node style:
-- Background: `var(--bg-surface)`
-- Border: `1px solid var(--border-default)`
-- Border-radius: `12px`
-- Padding: `12px 16px`
-- Icon: `20px`, `var(--accent)`
-- Label: Small (`14px`), `var(--text-primary)`
+Status label (top):
+- Text: `System Diagnostic Map`
+- JetBrains Mono, `11px`, uppercase, `--ls-eyebrow`, `rgba(255,255,255,0.85)`
 
-Connections:
-- `1px solid var(--border-default)` between nodes
-- Direction arrows optional
-
-Center callout:
+Risks headline:
 - Text: `Bottlenecks · Gaps · Risks`
-- Background: `var(--accent-light)`
-- Border: `1px solid var(--accent)`
-- Text color: `var(--accent-hover)`, Small weight `600`
+- Mulish `900`, `24px`, paper
+
+Nodes (5) — 2-column grid inside the panel, last node spans full width:
+- Processes (GitBranch), CRM / RevOps (Database), Data (BarChart3),
+  Automation (Workflow), IT Systems (Layers)
+- Node style: `rgba(255,255,255,0.08)` fill, `1px solid var(--border-on-brand)`,
+  `--radius-xs` (2px), padding `12px 14px`
+- Icon: `18px`, paper. Label: `14px` Mulish `700`, paper
 
 Bottom flow:
 - `Diagnostic → Roadmap → Implementation`
-- Arrow sequence, Small, `var(--text-secondary)`
+- Separated from the nodes by a `2px` paper top rule
+- Mono, `12px`, uppercase, paper; `ArrowRight` (`14px`) between steps
 
-Sizes:
-- Desktop: max `480px` wide × `360px` tall
-- Tablet: max `100%` × `300px`
-- Mobile: max `100%` × `240px` (simplified: nodes stacked vertically, center callout below)
+Responsive:
+- The panel is single-column at every width (nodes reflow within it); there is
+  no separate simplified SVG map and no fixed tablet/mobile max-height.
+- On mobile the complex hero visual is hidden while the layout is single-column
+  (`Hero.module.css`), so the CTA and trust line lead.
+
+> Superseded: an earlier v1 spec here described a light node-and-connection SVG
+> (`--bg-surface` nodes, `12px` radii, `480×360` max, `--accent-light` callout).
+> That predates the v2 brand panel and no longer matches the build; kept only in
+> git history.
 
 ---
 
@@ -498,8 +483,9 @@ Rules (v2):
 - One-column stacked layout
 - Do not invent names, logos or testimonials.
 - A real anonymized case must be supported by an internal source record and approval.
-- An illustrative composite must be labeled exactly as illustrative, must not use `client`, `delivered`, or `adopted` as factual proof language, and must not be styled as a verified metric tile.
-- Unverified figures may explain a hypothetical diagnostic pattern only; they must never be presented as actual Opsfield performance or a guaranteed outcome.
+- An illustrative composite must be labeled as illustrative and use an anonymized / generic client descriptor (e.g. `B2B services firm (≈80 employees)`), never a real or invented company name. It keeps the design-system triad row labels — Situation / Diagnostic found / **Delivered** — as structural headers; the DS `DiagnosticScenarioCard` образец retains "Delivered", so the label itself is not a factual proof claim.
+- Quantified figures must be framed as estimates or ranges — `estimated`, `revenue at risk`, `projected`, `≈`, `est.` — matching the образец; they must never read as verified realized results, actual Opsfield performance, or a guaranteed outcome, and a figure must not be styled as a standalone verified metric tile.
+- Realized-sounding past tense is acceptable only for structural changes the diagnostic frames (e.g. "handoff reduced from 5 steps to 2"), not for money or hours saved, which stay estimate-framed.
 
 ### Comparison Card / Table
 
@@ -555,8 +541,8 @@ Content:
 
 Rules:
 
-- Present as supporting text or a compact neutral chip, never as the H1 or dominant badge.
-- Use `--bg-subtle`, `--text-secondary`, and a standard border; do not style as a warning, eligibility gate, or exclusive-membership badge.
+- Present as supporting text or a compact subordinate chip, never as the H1 or dominant badge.
+- Chip styling: the Hero uses the blue-tint chip sanctioned by the color table (`--blue-50` background, `--blue-700` text, `--blue-100` hairline); a neutral `--bg-subtle` / `--text-secondary` chip is also acceptable (e.g. the FAQ fit answer). Either way it must stay subordinate — do not style as a warning, eligibility gate, or exclusive-membership badge, and do not scale it up to a primary badge.
 - Keep the qualifier visible on mobile without placing it above the primary value proposition.
 - Do not repeat the employee range across multiple cards or sections.
 - Companies outside the range are not visually marked as unqualified.
@@ -591,7 +577,10 @@ Used in:
 
 Structure:
 
-1. Badge: `First safe step`
+1. Badge: the complimentary fit-review label (`Complimentary 30–45 min fit
+   review`, from `texts.md`). The "safe first step" idea is carried by the offer
+   title (`texts.md` H2) and the Visual Style "Must Feel Like" list, not a
+   separate invented badge string.
 2. Offer title
 3. Complimentary 30–45 minute fit review
 4. What the visitor receives
@@ -605,6 +594,8 @@ Rules:
 - Background: `--accent-light` or white with accent border
 - CTA: `Request a Business & IT Diagnostic`
 - Must not promise a free full audit, roadmap or ROI calculation
+- Badge and all offer copy come from `texts.md` (higher priority than this doc);
+  do not introduce a badge label that is not in `texts.md`.
 
 ### Risk-Reduction Panel
 
@@ -637,8 +628,8 @@ Structure:
 
 Rules:
 
-- Divider: `1px solid var(--border-default)`
-- Padding: `20px 0`
+- Divider: `2px solid var(--border-strong)` (v2 shared ink rule — reverses the v1 1px hairline)
+- Padding: `24px 0`
 - Full question is a button
 - Entire trigger has minimum `44px` touch height
 - Open state must not rely only on icon rotation
@@ -763,7 +754,7 @@ Gap to first optional field: `var(--space-3)` (`24px`)
 - Actions:
   - Accept
   - Decline
-  - Privacy Policy
+  - Cookie Policy (the banner links to its own policy; the Privacy Policy remains reachable from the footer Legal group)
 - Accept and Decline must be visually accessible.
 - Do not preselect optional analytics consent.
 - Do not use a full-screen blocking modal.

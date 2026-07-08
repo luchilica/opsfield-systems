@@ -92,11 +92,11 @@
 - **Example 2:** Scaling SaaS team (≈120 employees, Salesforce + Looker)  
   **Situation:** Leadership did not trust dashboard numbers — 3 departments used different definitions for the same metrics.  
   **Diagnostic found:** 7 inconsistent metric definitions and 2 disconnected data sources feeding the same dashboard.  
-  **Delivered:** Unified reporting definitions document covering 7 previously inconsistent metrics. Data-source consolidation plan eliminated 40+ hours/month of manual reconciliation. BI roadmap prioritized by stakeholder impact with 90-day execution timeline.
+  **Delivered:** Unified reporting definitions document covering 7 previously inconsistent metrics. Data-source consolidation plan projected to remove 40+ hours/month of manual reconciliation. BI roadmap prioritized by stakeholder impact with 90-day execution timeline.
 - **Example 3:** Multi-location operator (≈200 employees, Monday + Zapier + spreadsheets)  
   **Situation:** 4 locations running different approval workflows with 6 overlapping tools and no shared process documentation.  
   **Diagnostic found:** 11 manual approval steps that could be reduced to 4 with workflow consolidation.  
-  **Delivered:** Bottleneck map identified $320K in annual labor cost tied to manual approvals. Automation backlog ranked by effort and impact. 90-day roadmap adopted by operations leadership with projected 60% reduction in approval cycle time.
+  **Delivered:** Bottleneck map identified an estimated $320K in annual labor cost tied to manual approvals. Automation backlog ranked by effort and impact. 90-day roadmap adopted by operations leadership with projected 60% reduction in approval cycle time.
 - **Note:** Scenarios are anonymized composites. Figures are illustrative and reflect the type of impact diagnostic work typically identifies.
 - **CTA (text link):** Request a Diagnostic for Your Team
 ---
