@@ -45,10 +45,8 @@
 
 .rows {
   margin-top: 22px;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .row {
@@ -87,9 +85,8 @@
 }
 
 .metrics {
-  /* Rows (flex:1) fill the stretched panel and push the metrics to the bottom,
-     so the summary reads as an evenly spaced report rather than a top cluster
-     with an empty band above the metrics. */
+  /* Sit directly below the rows. The panel is sized to its content (Hero
+     .visual centers it), so there's no empty band above the metrics. */
   padding-top: 20px;
   border-top: var(--border-heavy) solid var(--paper);
   display: flex;

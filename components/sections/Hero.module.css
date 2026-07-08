@@ -142,7 +142,9 @@
     justify-content: center;
   }
 
+  /* Card sizes to its content and centers next to the (centered) text column,
+     so it reads as a full panel rather than a stretched, half-empty one. */
   .visual {
-    align-items: stretch;
+    align-items: center;
   }
 }
