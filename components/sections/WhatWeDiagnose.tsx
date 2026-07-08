@@ -1,7 +1,7 @@
 import {
   GitBranch,
   Layers,
-  FileBadge,
+  Award,
   Workflow,
   FileText,
   Shield,
@@ -85,7 +85,7 @@ export default function WhatWeDiagnose() {
         <div className={styles.o1Body}>
           <div className={styles.o1Head}>
             <span className={styles.o1Icon}>
-              <FileBadge size={22} aria-hidden="true" />
+              <Award size={22} aria-hidden="true" />
             </span>
             <h3 className={styles.o1Title}>O-1 Readiness Support</h3>
             <span className={styles.o1Badge}>Secondary service</span>
