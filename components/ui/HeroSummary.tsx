@@ -1,3 +1,4 @@
+import { Info, Search, CheckCircle2 } from "lucide-react";
 import PlusMark from "./PlusMark";
 import styles from "./HeroSummary.module.css";
 
@@ -5,12 +6,21 @@ import styles from "./HeroSummary.module.css";
 // Situation / Diagnostic found / Delivered rows + two headline metrics. The
 // figures are illustrative, estimate-framed — not a verified Opsfield result.
 const ROWS = [
-  { label: "01 · Situation", text: "Leads dropping between marketing & sales" },
+  {
+    label: "01 · Situation",
+    text: "Leads dropping between marketing & sales",
+    Icon: Info,
+  },
   {
     label: "02 · Diagnostic found",
     text: "4 undocumented handoff points, 2 teams",
+    Icon: Search,
   },
-  { label: "03 · Delivered", text: "5 steps → single owner per stage" },
+  {
+    label: "03 · Delivered",
+    text: "5 steps → single owner per stage",
+    Icon: CheckCircle2,
+  },
 ] as const;
 
 export default function HeroSummary() {
@@ -28,7 +38,10 @@ export default function HeroSummary() {
       <div className={styles.rows}>
         {ROWS.map((r) => (
           <div key={r.label} className={styles.row}>
-            <p className={styles.rowLabel}>{r.label}</p>
+            <div className={styles.rowLabel}>
+              <r.Icon size={18} className={styles.rowIcon} aria-hidden="true" />
+              <span>{r.label}</span>
+            </div>
             <p className={styles.rowText}>{r.text}</p>
           </div>
         ))}

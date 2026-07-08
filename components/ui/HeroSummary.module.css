@@ -50,7 +50,7 @@
 }
 
 .row {
-  padding: 15px 0;
+  padding: 18px 0;
   border-top: 1px solid var(--border-on-brand);
 }
 
@@ -60,19 +60,27 @@
 }
 
 .rowLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-mono-fallback);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.92);
 }
 
+.rowIcon {
+  flex-shrink: 0;
+  color: var(--paper);
+}
+
 .rowText {
-  margin-top: 6px;
-  font-size: 14px;
+  margin-top: 8px;
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--paper);
 }
 
