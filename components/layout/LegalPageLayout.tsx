@@ -28,8 +28,9 @@ export default function LegalPageLayout({
         </Link>
 
         <header className={styles.header}>
+          <p className="kicker">Legal</p>
           <h1>{title}</h1>
-          <p className={`small ${styles.updated}`}>Last updated: {lastUpdated}</p>
+          <p className={styles.updated}>Last updated · {lastUpdated}</p>
         </header>
 
         <div className={styles.content}>{children}</div>

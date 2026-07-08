@@ -1,11 +1,11 @@
-/* Legal page shell. Source: docs/design.md (typography, spacing, 720px text
-   column). Section spacing var(--space-5); paragraph spacing var(--space-3). */
+/* Legal page shell — v2 block/brand-first language to match the site.
+   Source: docs/design.md (Typography, Radii/Borders, 720px text column).
+   Mono eyebrow + readout, 2px ink divider, blue `+` section markers. */
 
 .wrapper {
   max-width: var(--text-max); /* 720px */
   margin-inline: auto;
   padding-block: var(--space-6);
-  background: var(--bg-page);
   scroll-margin-top: 96px; /* matches sticky-header offset in globals.css */
 }
 
@@ -15,42 +15,84 @@
   }
 }
 
+/* Back link — brand text link (Mulish, blue), distinct from the mono eyebrow. */
 .back {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
   min-height: 44px; /* touch target */
-  font-weight: 600;
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
 }
 
+.back:hover,
+.back:focus-visible {
+  color: var(--accent-hover);
+}
+
+/* Header — mono eyebrow, Mulish-900 title, mono readout, signature 2px ink rule. */
 .header {
   margin-top: var(--space-2);
   margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: var(--border-heavy) solid var(--ink-900);
 }
 
 .updated {
-  margin-top: var(--space-1);
-  color: var(--text-secondary);
+  margin-top: var(--space-2);
+  font-family: var(--font-mono-fallback);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 /* Content rhythm — margin-top only (avoids margin-collapse surprises).
    h2 → section gap; h3 → subsection gap; p/ul/ol → paragraph gap. */
+.content {
+  color: var(--text-body);
+}
+
 .content > :first-child {
   margin-top: 0;
 }
 
+/* Section heading — Mulish extrabold at the H3 token size (doc-scaled), with
+   the brand `+` marker echoing the site eyebrow. */
 .content h2 {
   margin-top: var(--space-5);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: var(--ls-heading);
+  line-height: var(--lh-heading);
+  color: var(--text-strong);
+}
+
+.content h2::before {
+  content: "+";
+  margin-right: 10px;
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  color: var(--accent);
 }
 
 .content h3 {
   margin-top: var(--space-4);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-heading);
+  line-height: var(--lh-heading);
+  color: var(--text-strong);
 }
 
 .content p,
 .content ul,
 .content ol {
   margin-top: var(--space-3);
+  line-height: var(--lh-body);
 }
 
 .content ul,
@@ -58,13 +100,27 @@
   padding-left: var(--space-3);
 }
 
+/* Brand-blue list markers — subtle v2 accent on otherwise plain legal copy. */
 .content li {
   margin-top: var(--space-1);
 }
 
+.content li::marker {
+  color: var(--accent);
+}
+
+/* Inline links keep the global blue treatment; strengthen emphasis weight. */
+.content a {
+  font-weight: var(--fw-semibold);
+}
+
+/* Code — mono chip on a blue tint, tied to the brand data-readout language. */
 .content code {
-  padding: 2px 6px;
-  background: var(--bg-subtle);
-  border-radius: 4px;
-  font-size: 0.9em;
+  padding: 2px 7px;
+  font-family: var(--font-mono-fallback);
+  font-size: 0.85em;
+  color: var(--blue-700);
+  background: var(--accent-tint);
+  border: 1px solid var(--blue-100);
+  border-radius: var(--radius-xs);
 }
