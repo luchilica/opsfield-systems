@@ -77,6 +77,19 @@
   color: var(--paper);
 }
 
+/* Collapsible triad wrapper (cards 2–3). Content stays in the DOM when
+   collapsed — max-height:0 + overflow:hidden, never display:none. Reduced
+   motion zeroes the transition globally (globals.css). */
+.rows {
+  max-height: 1200px;
+  overflow: hidden;
+  transition: max-height 200ms ease-out;
+}
+
+.rowsCollapsed {
+  max-height: 0;
+}
+
 /* Situation / Diagnostic found / Delivered rows. */
 .rowGrid {
   display: grid;
@@ -139,6 +152,27 @@
   font-family: var(--font-display);
   font-weight: var(--fw-black); /* Mulish 900 */
   color: var(--evergreen-500); /* #17A26A */
+}
+
+/* Progressive-disclosure toggle (cards 2–3) — text-link styled button. */
+.toggle {
+  display: block;
+  width: 100%;
+  padding: 16px 26px;
+  background: none;
+  border: none;
+  border-top: var(--border-heavy) solid var(--ink-900);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: var(--fw-bold); /* Mulish 700 */
+  color: var(--accent); /* #2551D2 */
+}
+
+.toggle:hover,
+.toggle:focus-visible {
+  text-decoration: underline;
 }
 
 .note {
