@@ -26,7 +26,7 @@ const AREAS = [
   {
     title: "Revenue, data & systems",
     Icon: Layers,
-    tone: "blueTint",
+    tone: "paper",
     description:
       "CRM, RevOps, dashboards, reporting rules, integrations, automation, AI readiness, IT risk.",
   },
