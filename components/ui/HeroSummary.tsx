@@ -22,7 +22,7 @@ export default function HeroSummary() {
     >
       <PlusMark size={44} className={styles.cornerPlus} />
 
-      <p className={styles.label}>Diagnostic summary · illustrative</p>
+      <p className={styles.label}>Diagnostic summary · representative scenario</p>
       <p className={styles.client}>B2B services firm · ~80 employees</p>
 
       <div className={styles.rows}>
