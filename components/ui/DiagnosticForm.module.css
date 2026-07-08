@@ -44,7 +44,7 @@
 
 .req {
   font-weight: 500;
-  color: var(--stone-400);
+  color: var(--text-muted);
 }
 
 .input,
