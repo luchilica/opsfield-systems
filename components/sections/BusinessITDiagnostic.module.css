@@ -8,7 +8,7 @@
 }
 
 .lead {
-  color: white;
+  color: black;
   max-width: var(--text-max);
   margin-top: var(--space-2);
   margin-bottom: var(--space-5);
