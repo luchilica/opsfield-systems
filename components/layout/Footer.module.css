@@ -91,7 +91,7 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px; /* touch target */
-  color: var(--footer-link);
+  color: white;
   font-family: var(--font-sans);
   font-size: 14.5px;
   font-weight: var(--fw-semibold);
