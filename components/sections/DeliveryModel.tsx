@@ -105,7 +105,13 @@ export default function DeliveryModel() {
                   </div>
                 </div>
 
-                
+                <p
+                  className={`${styles.engLabel} ${
+                    tone === "brand" ? styles.engLabelOnDark : ""
+                  }`}
+                >
+              
+                </p>
 
                 <ul className={styles.respList}>
                   {responsibilities.map(({ Icon, text }) => (
