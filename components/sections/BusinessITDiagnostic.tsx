@@ -26,7 +26,7 @@ const REVIEW = [
 const POST_SUBMIT = [
   "Review your submission",
   "Advisor confirms fit",
-  "Fixed-scope proposal before commitment",
+  "Fixed-scope proposal",
 ];
 
 export default function BusinessITDiagnostic() {
