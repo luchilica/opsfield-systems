@@ -179,7 +179,7 @@
   font-family: var(--font-mono-fallback);
   font-size: 12px;
   font-weight: 500;
-  color: var(--paper);
+  color: white;
 }
 
 .cta {
