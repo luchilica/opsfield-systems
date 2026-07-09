@@ -16,13 +16,12 @@ export default function Hero() {
 
         {/* Semantically a paragraph, visually a lead. */}
         <p className={`lead ${styles.subtitle}`}>
-          For B2B companies blocked by process, data, and system gaps — we
-          diagnose before you build.
+          Opsfield Systems helps B2B teams find where operations, CRM, data
+          flow, automation, and IT systems are slowing execution.
         </p>
 
         <p className={styles.supporting}>
-          Opsfield Systems helps B2B teams find where operations, CRM, data
-          flow, automation, and IT systems are slowing execution.
+          
         </p>
 
         <div className={styles.actions}>
