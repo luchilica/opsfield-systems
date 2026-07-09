@@ -121,7 +121,7 @@
   font-weight: 700;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--text-on-dark-muted);
+  color: white;
 }
 
 .scope {
