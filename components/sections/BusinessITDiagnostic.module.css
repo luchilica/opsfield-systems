@@ -68,7 +68,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   font-size: 15px;
   font-weight: var(--fw-medium);
-  color: var(--paper);
+  color: white;
 }
 
 .outputItem:first-child {
