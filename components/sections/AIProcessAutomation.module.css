@@ -74,7 +74,7 @@
   font-weight: 500;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--text-on-brand-muted);
+  color:white;
 }
 
 .pillLabel {
@@ -82,7 +82,7 @@
   font-size: 15px;
   font-weight: var(--fw-bold);
   letter-spacing: -0.01em;
-  color: var(--paper);
+  color: white;
 }
 
 .pillBlue {
