@@ -39,7 +39,7 @@
 
 .text {
   max-width: var(--text-max);
-  
+  color: white;
   margin-top: var(--space-2);
 }
 
