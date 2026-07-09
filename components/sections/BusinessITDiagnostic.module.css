@@ -172,7 +172,7 @@
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: var(--fw-medium);
-  color: var(--text-body);
+  color: black;
 }
 
 .afterItem:not(:last-child)::after {

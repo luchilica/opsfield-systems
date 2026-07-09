@@ -24,8 +24,8 @@ const REVIEW = [
 
 // Compact post-submit steps (condensed labels, per conversion-friction pass).
 const POST_SUBMIT = [
-  "We review your submission",
-  "Senior advisor confirms fit",
+  "Review your submission",
+  "Advisor confirms fit",
   "Fixed-scope proposal before commitment",
 ];
 
