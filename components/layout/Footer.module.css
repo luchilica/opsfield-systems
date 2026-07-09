@@ -55,7 +55,7 @@
 .positioning {
   margin-top: var(--space-5);
   max-width: var(--text-max);
-  color: var(--footer-muted);
+  color: white;
 }
 
 /* ----- Link groups ----- */
@@ -117,7 +117,7 @@
 }
 
 .copyright {
-  color: var(--footer-muted);
+  color: white;
   font-family: var(--font-mono-fallback);
   font-size: 12px;
 }
