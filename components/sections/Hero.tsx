@@ -10,7 +10,7 @@ export default function Hero() {
         <p className={styles.eyebrow}>B2B IT &amp; Operations Advisory</p>
 
         <h1 className={styles.headline}>
-          Diagnostic-First \nIT &amp; Business{" "}
+          Diagnostic-First  IT &amp; Business{" "}
           <span className={styles.accentWord}>Development</span>
         </h1>
 
