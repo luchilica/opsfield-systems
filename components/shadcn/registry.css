@@ -1,0 +1,14 @@
+/* ==========================================================================
+   shadcnblocks staging — DO NOT ship to production.
+
+   This project uses plain CSS + CSS Modules and a design system synced from
+   claude.ai/design (see app/globals.css). shadcnblocks blocks are Tailwind +
+   shadcn/ui and are used ONLY as REFERENCE: fetch a block, then hand-port it
+   to Block.tsx + Block.module.css using the project's design tokens
+   (--blue-*, 2px ink borders, hard shadow, + motif).
+
+   components.json points its `tailwind.css` here (not at app/globals.css) so
+   that `npx shadcn add` can never inject shadcn theme variables into the real,
+   DesignSync-managed globals.css. Anything shadcn writes lands under
+   components/shadcn/ and is a scratch/reference artifact, not app code.
+   ========================================================================== */
