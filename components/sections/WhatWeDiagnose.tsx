@@ -52,7 +52,7 @@ export default function WhatWeDiagnose() {
 
       <div className={styles.grid}>
         {AREAS.map(({ title, Icon, tone, description }) => (
-          <Card key={title} tone={tone} hardShadow>
+          <Card key={title} tone={tone} soft>
             <div className={styles.card}>
               <span className={styles.cardIcon}>
                 <Icon size={30} aria-hidden="true" />

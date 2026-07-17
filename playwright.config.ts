@@ -10,6 +10,11 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:3000",
   },
+  // Visual-regression tolerance (tests/visual). Small ratio absorbs sub-pixel
+  // font-rendering jitter without hiding real layout/colour regressions.
+  expect: {
+    toHaveScreenshot: { maxDiffPixelRatio: 0.01, animations: "disabled" },
+  },
   webServer: {
     command: "npm run build && npx next start",
     port: 3000,

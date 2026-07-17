@@ -18,8 +18,8 @@
   }
 }
 
-/* Service card inner layout — icon, then title/desc immediately below (tight;
-   no space-between, no min-height). */
+/* Service card inner layout — block visual style (services7 reference): icon in
+   a soft-rounded tile on the left, title/desc on the right at desktop. */
 .card {
   display: flex;
   flex-direction: column;
@@ -27,15 +27,23 @@
   height: 100%;
 }
 
-/* Contained icon tile — same feature/services-block treatment as ProblemSection,
-   giving both content sections one iconography rhythm. blue-50 chip tint. */
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+}
+
+/* Contained icon tile — larger radius muted tile (block style), brand icon. */
 .cardIcon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   width: 52px;
   height: 52px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   background: var(--accent-tint);
   color: var(--accent);
 }
@@ -55,7 +63,7 @@
   font-weight: var(--fw-medium);
 }
 
-/* "You receive" output bar — bordered block + mono outline badges. */
+/* "You receive" output bar — block style: soft muted panel, hairline border. */
 .output {
   margin-top: var(--space-3);
   display: flex;
@@ -63,8 +71,9 @@
   align-items: center;
   gap: 10px;
   padding: 22px 26px;
-  border: var(--border-heavy) solid var(--ink-900);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-lg);
+  background: var(--surface-sunken);
 }
 
 .outputLabel {
@@ -86,9 +95,10 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 11px;
-  border: 1.5px solid var(--ink-900);
-  border-radius: var(--radius-xs);
+  padding: 6px 12px;
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 500;
@@ -97,13 +107,13 @@
   color: black;
 }
 
-/* O-1 secondary service — bordered panel, dark tile + paper body. */
+/* O-1 secondary service — block style: soft panel, hairline border. */
 .o1 {
   margin-top: var(--space-3);
   display: grid;
   grid-template-columns: 1fr;
-  border: var(--border-heavy) solid var(--ink-900);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-lg);
   overflow: hidden;
 }
 
@@ -156,9 +166,10 @@
 .o1Badge {
   display: inline-flex;
   align-items: center;
-  padding: 4px 9px;
-  border: 1.5px solid var(--ink-900);
-  border-radius: var(--radius-xs);
+  padding: 4px 11px;
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
   font-family: var(--font-mono-fallback);
   font-size: 10px;
   font-weight: 500;

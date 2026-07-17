@@ -10,6 +10,8 @@
     "check": "npm run lint && npx tsc --noEmit && npm run build",
     "test:contracts": "npx playwright test tests/contracts/",
     "test:e2e": "npx playwright test tests/e2e/",
+    "test:visual": "npx playwright test tests/visual/",
+    "test:visual:update": "npx playwright test tests/visual/ --update-snapshots",
     "test": "npm run test:contracts && npm run test:e2e"
   },
   "dependencies": {
