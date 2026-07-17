@@ -1,0 +1,92 @@
+1 шаг установка  python и node.js для коннектора 
+нажимаем win+r пишем там cmd , копируем и  вставляем нижние команды 
+
+python 3.12.10 
+
+$ProgressPreference = 'SilentlyContinue'
+$py = "$env:TEMP\python-3.12.10-amd64.exe"
+Invoke-WebRequest "https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe" -OutFile $py
+Start-Process $py -ArgumentList "/quiet InstallAllUsers=0 PrependPath=1 Include_launcher=1" -Wait
+Write-Host "Python 3.12 установлен"
+
+после скачаивания проверяем в новом окне Должна появиться строка с 3.12( команда для проверки ниже)
+py -0 
+
+после  устанавливаем node.js
+
+$ProgressPreference = 'SilentlyContinue'
+$node = "$env:TEMP\node-lts-x64.msi"
+Invoke-WebRequest "https://nodejs.org/dist/v24.18.0/node-v24.18.0-x64.msi" -OutFile $node
+Start-Process msiexec.exe -ArgumentList "/i `"$node`" /quiet /norestart" -Wait
+Write-Host "Node.js установлен"
+
+после скачаивания проверяем в новом окне Должна появиться версия, например v24.18.0.( команда для проверки ниже)
+node -v
+
+
+
+2 шаг установка конекторов 
+Создаём отдельную папку 
+нажимаем win+r пишем там cmd , копируем и  вставляем нижние команды
+
+mkdir C:\crawl4ai-mcp
+cd C:\crawl4ai-mcp
+
+
+далее создаем папку venv 
+
+py -3.12 -m venv venv
+
+
+далее проверка  Должно вывести Python 3.12.x
+
+venv\Scripts\python.exe --version
+
+
+обновляем установщик пакетов
+
+venv\Scripts\python.exe -m pip install --upgrade pip
+
+
+установка crawl4ai
+
+venv\Scripts\python.exe -m pip install crawl4ai fastmcp
+
+Дождитесь строки Successfully installed ... — это значит, всё встало
+
+
+Докачиваем браузер для crawl4ai
+
+venv\Scripts\crawl4ai-setup.exe
+
+
+проверка 
+
+venv\Scripts\python.exe -c "import crawl4ai; print(crawl4ai.__version__)"
+
+Если вывелась версия (какие-то цифры) — значит crawl4ai установлен правильно.
+
+
+Добавляем файл с помощью которого claude будет запускать коннкетор 
+
+Скачайте файл mcp_wrapper.py и положите его в папку C:\crawl4ai-mcp\ — рядом с папкой venv, а не внутрь неё.
+Правильно должно выглядеть так:
+C:\crawl4ai-mcp\
+├── venv\             ← папка
+└── mcp_wrapper.py    ← файл здесь, рядом с venv
+
+
+проверяем стал ли файл на место 
+
+dir C:\crawl4ai-mcp\mcp_wrapper.py
+
+Если показывает файл  — всё верно.
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+Перед началом Нужен Python 3.12. Проверьте:
+нажимаем win+r пишем cmd 
+
+py -0
+
+Если в списке есть строка с 3.12 — можно продолжать.
+
+1 шаг устанавливаем scrapling 
+
+py -3.12 -m pip install "scrapling[ai]"
+
+
+Докачиваем браузер для Scrapling
+
+"C:\Users\user\AppData\Local\Programs\Python\Python312\Scripts\scrapling.exe" install
+
+Находим точный путь к программе
+
+dir "C:\Users\user\AppData\Local\Programs\Python\Python312\Scripts\scrapling.exe"
+
+Если показывает файл — путь правильный.

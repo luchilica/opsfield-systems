@@ -1,0 +1,40 @@
+Перед началом: версия Node
+win+r пишем cmd
+
+node -v
+
+У тебя v24.18.0 — подходит с запасом. Если у кого-то меньше 22.12 — сначала обновить Node
+
+
+Шаг 1. Скачиваем стелс-браузер (загрузка может сбрасываться)
+
+npx -y cloakbrowser install
+
+
+Проверяем через встроенный «доктор»
+
+npx -y cloakbrowser-mcp@latest doctor
+
+Смотрите на строку про cloakbrowser-binary — должно быть installed
+
+
+
+
+
+
+
+
+если при запуске claude вылазит ошибка именно этого коннектора  вот фикс
+
+
+обязательно закрываем claude через диспетчер задач 
+
+октрываем win+r пишем cmd 
+
+taskkill /PID 4824 /F
+
+далее 
+
+rmdir /s /q "C:\Users\user\AppData\Local\ms-playwright\cloak-profile-main"
+
+заходим и проверяем 

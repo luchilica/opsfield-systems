@@ -1,0 +1,76 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--user-data-dir",
+        "C:\\Users\\user\\AppData\\Local\\ms-playwright\\mcp-profile-main",
+        "--output-dir",
+        "C:\\Users\\user\\Claude\\playwright-artifacts"
+      ],
+      "cwd": "C:\\Users\\user\\Claude"
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-d0637c609edd44f4ae190c7e02a39b49"
+      }
+    },
+    "crawl4ai": {
+      "command": "C:\\crawl4ai-mcp\\venv\\Scripts\\python.exe",
+      "args": [
+        "-X",
+        "utf8",
+        "-u",
+        "C:\\crawl4ai-mcp\\mcp_wrapper.py"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR",
+        "PYTHONUNBUFFERED": "1",
+        "CRAWL4AI_VERBOSE": "0",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUTF8": "1",
+        "PYTHONLEGACYWINDOWSSTDIO": "utf-8"
+      }
+    },
+    "jina-reader": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "jina-ai-mcp-server"
+      ],
+      "env": {
+        "JINA_API_KEY": "jina_c898b4d8a834491699402dbfd21f4fb7DCdB-C362Fb9e533UoQgFY34x8YH"
+      }
+    },
+    "ScraplingServer": {
+      "command": "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\scrapling.exe",
+      "args": [
+        "mcp"
+      ],
+      "env": {
+        "PYTHONIOENCODING": "utf-8"
+      }
+    },
+    "cloakbrowser": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "cloakbrowser-mcp@latest"
+      ],
+      "cwd": "C:\\Users\\user\\Claude",
+      "env": {
+        "PLAYWRIGHT_MCP_HEADLESS": "false",
+        "PLAYWRIGHT_MCP_OUTPUT_DIR": "C:\\Users\\user\\Claude\\cloakbrowser-artifacts",
+        "PLAYWRIGHT_MCP_USER_DATA_DIR": "C:\\Users\\user\\AppData\\Local\\ms-playwright\\cloak-profile-main"
+      }
+    }
+  },
+  "coworkUserFilesPath": "C:\\Users\\user\\Claude"
+}
