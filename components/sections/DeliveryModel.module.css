@@ -81,10 +81,19 @@
   color: var(--paper);
 }
 
+/* Role subtitle as a mono outline pill — "department badge" structure borrowed
+   from the team references, rebuilt in the project's own pill language (matches
+   .o1Badge / env tags), not the imported look. */
 .roleSub {
-  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 8px;
+  padding: 4px 9px;
+  border: 1.5px solid var(--ink-900);
+  border-radius: var(--radius-xs);
   font-family: var(--font-mono-fallback);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -92,7 +101,8 @@
 }
 
 .roleSubOnDark {
-  color: var(--text-on-brand-muted);
+  border-color: var(--border-on-brand);
+  color: var(--text-on-brand);
 }
 
 /* Divider label above the responsibility list. */
