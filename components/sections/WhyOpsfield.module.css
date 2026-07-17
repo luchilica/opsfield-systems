@@ -72,6 +72,10 @@
 }
 
 .cellOpsfield {
+  /* Tinted "winning" column — comparison-table convention borrowed from the
+     compare references: the Opsfield column reads as the answer (blue-500
+     header → blue-50 body = one cohesive column). */
+  background: var(--accent-tint);
   color: var(--ink-900);
   font-family: var(--font-display);
   font-size: 16px;
