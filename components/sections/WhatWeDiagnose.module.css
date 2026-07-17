@@ -27,8 +27,16 @@
   height: 100%;
 }
 
+/* Contained icon tile — same feature/services-block treatment as ProblemSection,
+   giving both content sections one iconography rhythm. blue-50 chip tint. */
 .cardIcon {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-tint);
   color: var(--accent);
 }
 

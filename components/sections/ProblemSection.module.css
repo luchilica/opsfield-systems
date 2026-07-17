@@ -98,9 +98,17 @@
   box-shadow: var(--shadow-hard);
 }
 
+/* Contained icon tile — feature/services-block convention (icon in a tinted
+   square) borrowed as structure; blue-50 tile is the sanctioned chip tint. */
 .causeIcon {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-tint);
   color: var(--accent);
 }
 
