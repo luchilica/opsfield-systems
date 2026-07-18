@@ -1,6 +1,6 @@
-/* Problem Section — v2 full-fill brand block. White text on brand blue, corner
-   + motifs, and a paper causes card. Section bg/color set by #problem-section in
-   globals.css. Copy from docs/texts.md. No Tailwind. */
+/* Problem — shadcnblocks monochrome. Light section (default neutral even-band),
+   dark semibold heading, muted body, and white cause cards with muted circular
+   icon tiles (blue glyphs = the single accent). Copy from docs/texts.md. */
 
 .grid {
   position: relative;
@@ -13,7 +13,7 @@
 
 @media (min-width: 1024px) {
   .grid {
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1.1fr 1fr;
     gap: var(--space-6);
   }
 }
@@ -26,42 +26,48 @@
   max-width: 560px;
 }
 
-/* On-brand badge chip — translucent white pill on the blue fill. */
+/* Outline badge with a blue accent dot (matches the Hero badge). */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 13px 6px 10px;
+  gap: 8px;
+  padding: 5px 13px;
+  border: 1px solid var(--stone-200);
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: var(--paper);
+  box-shadow: var(--shadow-xs);
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--paper);
+  color: var(--stone-600);
 }
 
 .eyebrow::before {
-  content: "+";
-  font-family: var(--font-display);
-  font-weight: var(--fw-black);
-  font-size: 13px;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.85);
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue-500);
+}
+
+.heading {
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--ink-900);
 }
 
 .text {
-  color: var(--text-on-brand);
+  color: var(--stone-500);
 }
 
 .cta {
   margin-top: var(--space-1);
 }
 
-/* Symptom / root-cause items — five standalone paper cards, each with a 2px ink
-   border + hard shadow. Grid: 2-up desktop / single column mobile. */
+/* Root-cause items — white cards, hairline border, soft shadow, hover lift. */
 .causes {
   display: flex;
   flex-direction: column;
@@ -71,18 +77,17 @@
 .causesHead {
   font-family: var(--font-mono-fallback);
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: var(--ls-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--paper);
+  color: var(--stone-400);
 }
 
 .causeGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3);
-  /* room so the 8px hard shadow never clips against the section edge */
-  padding: 2px 10px 10px 2px;
+  padding: 2px;
 }
 
 @media (min-width: 560px) {
@@ -94,65 +99,38 @@
 .causeCard {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 18px 20px;
+  gap: 14px;
+  padding: 20px;
   background: var(--paper);
-  border: 1px solid var(--border-hair);
+  border: 1px solid var(--stone-200);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-hard);
+  box-shadow: var(--shadow-sm);
   transition: transform var(--dur-med) var(--ease-out),
     box-shadow var(--dur-med) var(--ease-out);
 }
 
 .causeCard:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
 
-/* Contained icon tile — feature/services-block convention (icon in a tinted
-   square) borrowed as structure; blue-50 tile is the sanctioned chip tint. */
+/* Muted circular icon tile (shadcn: rounded-full bg-accent) with a blue glyph. */
 .causeIcon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
-  background: var(--accent-tint);
-  color: var(--accent);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--stone-100);
+  color: var(--blue-600);
 }
 
 .causeName {
   font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: var(--fw-bold);
-  letter-spacing: -0.015em;
+  font-size: 16px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
   color: var(--ink-900);
-}
-
-/* Decorative corner + motifs. */
-.plusTop,
-.plusBottom {
-  position: absolute;
-  z-index: 0;
-  color: rgba(255, 255, 255, 0.13);
-  pointer-events: none;
-}
-
-.plusTop {
-  top: -30px;
-  right: 5%;
-}
-
-.plusBottom {
-  bottom: 10px;
-  left: 3%;
-}
-
-@media (max-width: 767px) {
-  .plusTop,
-  .plusBottom {
-    display: none;
-  }
 }

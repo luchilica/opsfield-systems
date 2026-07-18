@@ -1,6 +1,5 @@
 import { GitBranch, Database, BarChart3, Workflow, Layers } from "lucide-react";
 import Button from "@/components/ui/Button";
-import PlusMark from "@/components/ui/PlusMark";
 import styles from "./ProblemSection.module.css";
 
 // Copy from docs/texts.md → "Problem Section". Full-fill brand block (v2). The
@@ -17,20 +16,19 @@ const CAUSES = [
 export default function ProblemSection() {
   return (
     <div className="container">
-      <PlusMark size={140} className={styles.plusTop} />
-      <PlusMark size={80} className={styles.plusBottom} />
-
       <div className={styles.grid}>
         <div className={styles.block}>
           <p className={styles.eyebrow}>THE PROBLEM</p>
-          <h2>Your business may not have a technology problem first.</h2>
+          <h2 className={styles.heading}>
+            Your business may not have a technology problem first.
+          </h2>
           <p className={`lead ${styles.text}`}>
             Growth often slows because processes, data, ownership, and systems no
             longer work together.
           </p>
           <Button
             href="#diagnostic-request-form"
-            variant="on-brand"
+            variant="primary"
             icon
             className={styles.cta}
             data-request-type="Business & IT Diagnostic"

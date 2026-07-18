@@ -1,39 +1,39 @@
-/* AI & Process Automation — v2 ink block. Section bg/color set by
-   #ai-process-automation in globals.css. Restrained, no AI-hype. No Tailwind. */
+/* AI & Process Automation — shadcnblocks monochrome DARK block. Section bg/color
+   set by #ai-process-automation in globals.css. White foreground, muted-white
+   body, translucent surfaces, blue as the single accent. No Tailwind. */
 
 .inner {
   position: relative;
   z-index: 1;
 }
 
-/* On-dark badge chip — translucent pill on the near-black fill, blue + mark. */
+/* Outline badge on dark — translucent, blue accent dot. */
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   margin-bottom: var(--space-3);
-  padding: 6px 13px 6px 10px;
+  padding: 5px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-pill);
-  background: rgba(37, 81, 210, 0.16);
-  border: 1px solid rgba(116, 146, 231, 0.34);
+  background: rgba(255, 255, 255, 0.04);
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--blue-200);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .badge::before {
-  content: "+";
-  font-family: var(--font-display);
-  font-weight: var(--fw-black);
-  font-size: 13px;
-  line-height: 1;
-  color: var(--blue-300);
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue-400, #4f7ce8);
 }
 
-/* Decorative corner + motifs (behind content) — matches the ink Delivery block. */
+/* Decorative corner + motifs (behind content). */
 .plusTop,
 .plusBottom {
   position: absolute;
@@ -44,13 +44,13 @@
 .plusTop {
   top: -40px;
   right: -20px;
-  color: rgba(37, 81, 210, 0.28);
+  color: rgba(37, 81, 210, 0.22);
 }
 
 .plusBottom {
   bottom: 40px;
   left: 3%;
-  color: rgba(37, 81, 210, 0.18);
+  color: rgba(37, 81, 210, 0.14);
 }
 
 @media (max-width: 767px) {
@@ -62,15 +62,21 @@
 
 .heading {
   max-width: var(--text-max);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--paper);
 }
 
 .text {
   max-width: var(--text-max);
-  color: white;
+  color: rgba(255, 255, 255, 0.66);
+  font-weight: var(--fw-regular);
   margin-top: var(--space-2);
 }
 
-/* Process-to-automation flow — three step pills (blue → ink → green). */
+/* Process-to-automation flow — three uniform dark step cards. The step number
+   carries the blue accent; the sequence reads left → right. */
 .flow {
   margin-top: var(--space-4);
   display: grid;
@@ -89,56 +95,50 @@
 .pill {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  padding: 16px 18px;
-  border: 1px solid transparent;
+  gap: 8px;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
   transition: transform var(--dur-med) var(--ease-out),
-    box-shadow var(--dur-med) var(--ease-out);
+    border-color var(--dur-med) var(--ease-out);
 }
 
 .pill:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .pillStep {
   font-family: var(--font-mono-fallback);
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: var(--ls-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color:white;
+  color: var(--blue-300);
 }
 
 .pillLabel {
   font-family: var(--font-display);
   font-size: 15px;
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.01em;
-  color: white;
+  color: var(--paper);
 }
 
-.pillBlue {
-  background: linear-gradient(158deg, var(--blue-500) 0%, var(--blue-600) 100%);
-}
-
-.pillDark {
-  background: var(--ink-800);
-  border-color: var(--border-on-dark);
-}
-
+/* All three step cards share the monochrome dark surface (de-rainbowed). */
+.pillBlue,
+.pillDark,
 .pillGreen {
-  background: linear-gradient(158deg, var(--evergreen-500) 0%, #0F8A58 100%);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-/* Scope box — ink-800 panel with a paper border. */
+/* Scope box — darker translucent panel with a hairline border. */
 .scopeBox {
   margin-top: var(--space-4);
   padding: 30px;
-  background: var(--ink-800);
-  border: 1px solid var(--border-on-dark);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-lg);
 }
 
@@ -153,10 +153,10 @@
   margin-right: 6px;
   font-family: var(--font-mono-fallback);
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: var(--ls-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: white;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .scope {
@@ -168,26 +168,25 @@
   display: inline-flex;
   align-items: center;
   padding: 6px 13px;
-  border: 1px solid var(--border-on-dark);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius-pill);
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--paper);
+  color: rgba(255, 255, 255, 0.82);
 }
 
-/* Principle — restrained blocky emphasis. */
 .principle {
   margin: 24px 0 0;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   font-family: var(--font-display);
   font-size: 22px;
-  font-weight: var(--fw-extrabold);
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.25;
   color: var(--paper);
 }
 

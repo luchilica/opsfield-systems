@@ -1,36 +1,41 @@
-/* What We Diagnose — v2 block edition. Two area cards (hard shadow), a
-   "You receive" output bar, and the O-1 ink panel. Copy from docs/texts.md. */
+/* What We Diagnose — shadcnblocks monochrome. Outline badge, semibold heading,
+   two feature cards (circular muted icon tiles, blue glyphs), a muted "You
+   receive" spec bar, and the O-1 secondary-service panel. Copy from texts.md. */
 
-/* Refined badge eyebrow — soft tinted pill (matches Hero / Problem chips). */
+/* Outline badge with a blue accent dot. */
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   margin-bottom: var(--space-3);
-  padding: 6px 13px 6px 10px;
+  padding: 5px 13px;
+  border: 1px solid var(--stone-200);
   border-radius: var(--radius-pill);
-  background: var(--blue-50);
-  border: 1px solid var(--blue-100);
+  background: var(--paper);
+  box-shadow: var(--shadow-xs);
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--blue-600);
+  color: var(--stone-600);
 }
 
 .badge::before {
-  content: "+";
-  font-family: var(--font-display);
-  font-weight: var(--fw-black);
-  font-size: 13px;
-  line-height: 1;
-  color: var(--blue-500);
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue-500);
 }
 
 .intro {
   max-width: var(--text-max);
   margin-bottom: var(--space-5);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--ink-900);
 }
 
 .grid {
@@ -45,8 +50,7 @@
   }
 }
 
-/* Service card inner layout — block visual style (services7 reference): icon in
-   a soft-rounded tile on the left, title/desc on the right at desktop. */
+/* Feature card inner layout — circular icon tile left, title/desc right. */
 .card {
   display: flex;
   flex-direction: column;
@@ -62,35 +66,35 @@
   }
 }
 
-/* Contained icon tile — larger radius muted tile (block style), brand icon. */
+/* Circular muted icon tile (shadcn: rounded-full bg-accent) with a blue glyph. */
 .cardIcon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-lg);
-  background: var(--accent-tint);
-  color: var(--accent);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--stone-100);
+  color: var(--blue-600);
 }
 
 .cardTitle {
   margin: 0 0 10px;
   font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: var(--fw-black);
+  font-size: 22px;
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.02em;
   color: var(--ink-900);
 }
 
 .cardDesc {
   margin: 0;
-  color: var(--text-body);
-  font-weight: var(--fw-medium);
+  color: var(--stone-500);
+  font-weight: var(--fw-regular);
 }
 
-/* "You receive" output bar — block style: soft muted panel, hairline border. */
+/* "You receive" spec bar — muted panel, hairline border, outline pills. */
 .output {
   margin-top: var(--space-3);
   display: flex;
@@ -98,19 +102,19 @@
   align-items: center;
   gap: 10px;
   padding: 22px 26px;
-  border: 1px solid var(--border-hair);
+  border: 1px solid var(--stone-200);
   border-radius: var(--radius-lg);
-  background: var(--surface-sunken);
+  background: var(--stone-50);
 }
 
 .outputLabel {
   margin-right: 6px;
   font-family: var(--font-mono-fallback);
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: var(--ls-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: black;
+  color: var(--stone-400);
 }
 
 .outputList {
@@ -123,7 +127,7 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  border: 1px solid var(--border-hair);
+  border: 1px solid var(--stone-200);
   border-radius: var(--radius-pill);
   background: var(--paper);
   font-family: var(--font-mono-fallback);
@@ -131,17 +135,22 @@
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: black;
+  color: var(--stone-600);
 }
 
-/* O-1 secondary service — block style: soft panel, hairline border. */
+.outputBadge svg {
+  color: var(--blue-500);
+}
+
+/* O-1 secondary service — hairline panel; black tile is monochrome anchor. */
 .o1 {
   margin-top: var(--space-3);
   display: grid;
   grid-template-columns: 1fr;
-  border: 1px solid var(--border-hair);
+  border: 1px solid var(--stone-200);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  background: var(--paper);
 }
 
 @media (min-width: 640px) {
@@ -160,7 +169,7 @@
   color: var(--paper);
   font-family: var(--font-display);
   font-size: 40px;
-  font-weight: var(--fw-black);
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.03em;
 }
 
@@ -178,38 +187,39 @@
 
 .o1Icon {
   display: inline-flex;
-  color: var(--accent);
+  color: var(--blue-600);
 }
 
 .o1Title {
   margin: 0;
   font-family: var(--font-display);
   font-size: 20px;
-  font-weight: var(--fw-black);
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.02em;
-  color: black;
+  color: var(--ink-900);
 }
 
 .o1Badge {
   display: inline-flex;
   align-items: center;
   padding: 4px 11px;
-  border: 1px solid var(--border-hair);
+  border: 1px solid var(--stone-200);
   border-radius: var(--radius-pill);
-  background: var(--surface-sunken);
+  background: var(--stone-50);
   font-family: var(--font-mono-fallback);
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-900);
+  color: var(--stone-500);
 }
 
 .o1Desc {
   margin: 0;
   font-size: 15px;
-  font-weight: var(--fw-medium);
-  color: black;
+  font-weight: var(--fw-regular);
+  line-height: 1.6;
+  color: var(--stone-500);
 }
 
 /* Text-link CTA (per texts.md the CTA is a text link, not a button). */
@@ -223,8 +233,8 @@
   gap: var(--space-1);
   min-height: 44px;
   font-family: var(--font-sans);
-  font-weight: var(--fw-bold);
-  color: var(--accent);
+  font-weight: var(--fw-semibold);
+  color: var(--blue-600);
   text-decoration: none;
 }
 

@@ -1,57 +1,55 @@
-/* Hero diagnostic-summary card — v2 blocky brand-blue panel. Mirrors the
-   scenario report (Situation / Diagnostic found / Delivered) plus two headline
-   metrics. Illustrative composite — not a verified case. Tokens from globals.css. */
+/* Hero product panel — shadcnblocks monochrome: a white app-surface card with a
+   hairline border and soft shadow (reads as a real product screenshot). Blue is
+   used only as the metric/icon accent. Tokens from globals.css. */
 
 .panel {
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--blue-500);
-  color: var(--paper);
-  border: 1px solid var(--blue-600);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-brand-hard);
+  background: var(--paper);
+  color: var(--text-body);
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
   padding: 28px;
   overflow: hidden;
 }
 
+/* The blue corner + motif is dropped for the clean monochrome surface. */
 .cornerPlus {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  color: var(--paper);
-  opacity: 0.85;
-  pointer-events: none;
+  display: none;
 }
 
 .label {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--stone-400);
 }
 
 .client {
   margin-top: 6px;
   font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: var(--fw-black);
+  font-size: 20px;
+  font-weight: var(--fw-bold);
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.15;
+  color: var(--ink-900);
 }
 
 .rows {
-  margin-top: 22px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
 }
 
 .row {
-  padding: 18px 0;
-  border-top: 1px solid var(--border-on-brand);
+  padding: 16px 0;
+  border-top: 1px solid var(--stone-200);
 }
 
 .row:first-child {
@@ -64,46 +62,40 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono-fallback);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--stone-500);
 }
 
 .rowIcon {
   flex-shrink: 0;
-  color: var(--paper);
+  color: var(--blue-500);
 }
 
 .rowText {
   margin-top: 8px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 1.5;
-  color: var(--paper);
+  color: var(--ink-900);
 }
 
 .metrics {
-  /* Sit directly below the rows. The panel is sized to its content (Hero
-     .visual centers it), so there's no empty band above the metrics. */
   padding-top: 20px;
-  border-top: 1px solid var(--border-on-brand);
+  border-top: 1px solid var(--stone-200);
   display: flex;
   gap: 36px;
 }
 
-/* Space above the metric block when it bottom-aligns. */
-.rows {
-  margin-bottom: 20px;
-}
-
 .metricNum {
   font-family: var(--font-display);
-  font-size: 34px;
-  font-weight: var(--fw-black);
+  font-size: 32px;
+  font-weight: var(--fw-bold);
   letter-spacing: -0.02em;
   line-height: 1;
+  color: var(--blue-600);
 }
 
 .metricCap {
@@ -113,5 +105,5 @@
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-on-brand-muted);
+  color: var(--stone-400);
 }
