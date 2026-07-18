@@ -425,16 +425,18 @@ main > section:nth-of-type(even) {
   height: 150%;
   background-image: repeating-linear-gradient(
     100deg,
-    var(--blue-100) 0%,
-    var(--blue-300) 9%,
-    transparent 14%,
-    transparent 21%,
-    var(--blue-200) 28%
+    transparent 0%,
+    transparent 6%,
+    var(--blue-300) 11%,
+    var(--blue-200) 14%,
+    var(--blue-300) 17%,
+    transparent 22%,
+    transparent 32%
   );
-  background-size: 220% 220%;
+  background-size: 200% 200%;
   background-position: 50% 50%;
-  filter: blur(46px);
-  opacity: 0.48;
+  filter: blur(22px);
+  opacity: 0.6;
   mix-blend-mode: multiply;
   -webkit-mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
   mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
