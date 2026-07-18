@@ -4,6 +4,9 @@
 
 .intro {
   margin-bottom: var(--space-5);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
 }
 
 /* Full-width accordion (matches the DS образец): rows span the whole container;
@@ -36,7 +39,7 @@
   text-align: left;
   font-family: var(--font-display);
   font-size: 19px;
-  font-weight: var(--fw-extrabold);
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.015em;
   color: var(--ink-900);
 }
@@ -59,12 +62,12 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: 1px solid var(--border-hair);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-md);
   background: var(--paper);
   color: var(--ink-900);
   font-family: var(--font-sans);
-  font-weight: var(--fw-black);
+  font-weight: var(--fw-bold);
   font-size: 18px;
   line-height: 1;
   transition: transform var(--dur-med) var(--ease-out),
@@ -110,13 +113,13 @@
 .fitIcon {
   flex-shrink: 0;
   margin-top: 2px;
-  color: var(--evergreen-500);
+  color: var(--blue-600);
 }
 
 .notFitIcon {
   flex-shrink: 0;
   margin-top: 2px;
-  color: var(--clay-500);
+  color: var(--stone-400);
 }
 
 .closing {

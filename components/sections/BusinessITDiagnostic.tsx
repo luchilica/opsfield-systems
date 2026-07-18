@@ -34,7 +34,7 @@ export default function BusinessITDiagnostic() {
 
   return (
     <div className="container">
-      <p className="kicker">THE DIAGNOSTIC</p>
+      <p className={styles.badge}>THE DIAGNOSTIC</p>
       <h2 className={styles.intro}>
         A structured first step before another tool, hire, or implementation
         project.

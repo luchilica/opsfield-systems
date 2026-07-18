@@ -475,7 +475,11 @@ main > section:nth-of-type(even) {
 #final-cta {
   position: relative;
   overflow: hidden;
-  background: var(--blue-500);
+  /* Brand-blue finale with a subtle gradient + bloom for depth (matches the
+     Problem / AI blocks). The one deliberate colour moment at the page end. */
+  background:
+    radial-gradient(80% 90% at 15% 0%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 55%),
+    linear-gradient(158deg, var(--blue-500) 0%, var(--blue-600) 100%);
   color: var(--text-on-brand);
 }
 #final-cta h2 {

@@ -3,12 +3,43 @@
    paper "After you submit" card + bordered form (ink +header). Copy from
    docs/texts.md. Only #diagnostic-request-form is an anchor. No Tailwind. */
 
+/* Outline badge with a blue accent dot (shadcnblocks monochrome). */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--space-3);
+  padding: 5px 13px;
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  box-shadow: var(--shadow-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone-600);
+}
+
+.badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue-500);
+}
+
 .intro {
   max-width: var(--text-max);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--ink-900);
 }
 
 .lead {
-  color: black;
+  color: var(--stone-500);
   max-width: var(--text-max);
   margin-top: var(--space-2);
   margin-bottom: var(--space-5);
@@ -95,14 +126,14 @@
   margin: 0 0 8px;
   font-family: var(--font-display);
   font-size: 20px;
-  font-weight: var(--fw-black);
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.02em;
   color: var(--ink-900);
 }
 
 .muted {
   margin: 0;
-  color: black;
+  color: var(--stone-500);
   font-size: 14px;
   line-height: 1.5;
 }
@@ -172,7 +203,7 @@
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: var(--fw-medium);
-  color: black;
+  color: var(--ink-900);
 }
 
 .afterItem:not(:last-child)::after {
@@ -233,9 +264,9 @@
 .formPanel {
   scroll-margin-top: 96px;
   background: var(--paper);
-  border: 1px solid var(--border-hair);
+  border: 1px solid var(--stone-200);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-hard);
+  box-shadow: var(--shadow-md);
   overflow: hidden;
 }
 
@@ -256,7 +287,7 @@
   gap: 12px;
   font-family: var(--font-display);
   font-size: 22px;
-  font-weight: var(--fw-black);
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.02em;
 }
 
