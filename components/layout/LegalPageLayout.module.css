@@ -1,10 +1,16 @@
-/* Legal page shell — v2 block/brand-first language to match the site.
-   Source: docs/design.md (Typography, Radii/Borders, 720px text column).
-   Mono eyebrow + readout, 2px ink divider, blue `+` section markers. */
+/* Legal page shell — full-width, expensive-SaaS document layout (matches the
+   site re-skin). A sticky sidebar (title + meta) sits beside a wide content
+   column, so the page spans the full screen while staying readable. Soft,
+   hairline, no blocky rules. Copy is unchanged. */
+
+.page {
+  width: 100%;
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: var(--edge-padding);
+}
 
 .wrapper {
-  max-width: var(--text-max); /* 720px */
-  margin-inline: auto;
   padding-block: var(--space-6);
   scroll-margin-top: 96px; /* matches sticky-header offset in globals.css */
 }
@@ -12,6 +18,26 @@
 @media (min-width: 1024px) {
   .wrapper {
     padding-block: var(--space-7);
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: start;
+  }
+}
+
+/* Sidebar — title + meta; sticks below the header on desktop. */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .side {
+    position: sticky;
+    top: 96px;
+    margin-bottom: 0;
   }
 }
 
@@ -32,12 +58,12 @@
   color: var(--accent-hover);
 }
 
-/* Header — mono eyebrow, Mulish-900 title, mono readout, signature 2px ink rule. */
 .header {
+  margin-top: var(--space-1);
+}
+
+.title {
   margin-top: var(--space-2);
-  margin-bottom: var(--space-5);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--border-hair);
 }
 
 .updated {
@@ -50,9 +76,10 @@
   color: var(--text-muted);
 }
 
-/* Content rhythm — margin-top only (avoids margin-collapse surprises).
-   h2 → section gap; h3 → subsection gap; p/ul/ol → paragraph gap. */
+/* Content — wide but comfortable measure inside the full-width column.
+   margin-top rhythm only (avoids margin-collapse surprises). */
 .content {
+  max-width: 860px;
   color: var(--text-body);
 }
 
@@ -60,8 +87,8 @@
   margin-top: 0;
 }
 
-/* Section heading — Mulish extrabold at the H3 token size (doc-scaled), with
-   the brand `+` marker echoing the site eyebrow. */
+/* Section heading — Mulish extrabold at the H3 token size, with the brand `+`
+   marker echoing the site eyebrow. */
 .content h2 {
   margin-top: var(--space-5);
   font-size: var(--fs-h3);
@@ -100,7 +127,6 @@
   padding-left: var(--space-3);
 }
 
-/* Brand-blue list markers — subtle v2 accent on otherwise plain legal copy. */
 .content li {
   margin-top: var(--space-1);
 }
@@ -122,5 +148,5 @@
   color: var(--blue-700);
   background: var(--accent-tint);
   border: 1px solid var(--blue-100);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
 }

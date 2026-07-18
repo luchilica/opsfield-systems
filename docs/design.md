@@ -16,6 +16,33 @@
 **Стиль:** clean B2B technology advisory + restrained enterprise SaaS + structured consulting methodology  
 **Позиционирование:** diagnostic-first, senior-led, vendor-neutral, practical, no AI hype
 
+### Visual language — v3 (soft / expensive-SaaS)
+
+> **This supersedes the "blocky / brutalist v2" treatment throughout this file.**
+> On 2026-07-18 the site was re-skinned to an expensive-SaaS aesthetic (owner
+> directive; copy unchanged). Wherever a section below says **2px ink border**,
+> **hard shadow / 8px offset**, **blocky / near-brutalist / near-square corners**,
+> or the **shared 2px ink section rule**, read the v3 equivalent:
+>
+> - **Borders:** 1px hairline (`--border-hair` / `--stone-200`). Solid ink/brand
+>   fills keep a same-colour edge. No 2px ink outlines anywhere.
+> - **Elevation:** soft ambient shadow (`--shadow-hard` is now redefined to a soft
+>   token, so all former hard shadows softened at once). No 8px offset, no −3/−3
+>   hover press — cards lift on shadow only.
+> - **Corners:** rounded — cards/panels `--radius-lg`; buttons `8px`; chips, tags
+>   and pills `--radius-pill`.
+> - **Section separation:** whitespace + the paper / stone / brand / ink background
+>   rhythm and the full-fill colour blocks. The global 2px ink divider between
+>   `<main>` sections is removed.
+>
+> Palette, type scale, layout, and content rules are unchanged. The core sections
+> (Radii/Borders, Тени, Buttons, Color Rules) are rewritten in place below; the
+> per-component blurbs inherit the mapping above.
+>
+> **Durability:** `app/globals.css` is DesignSync-managed (mirrors claude.ai/design,
+> still blocky). Reflect the soft tokens at that source or a re-sync can regress
+> the re-skin.
+
 ### Quick lookup — internal
 
 | Задача | Раздел |
@@ -54,8 +81,8 @@ v2 palette (block/brand-first). Deep-ultramarine dominates; near-black ink is th
 
 ### Color Rules (v2)
 
-- Brand blue dominates as a **full-fill surface** (hero panel, Problem, Final CTA, form accents). Near-black ink is the structural pair: 2px borders, `dark` buttons, ink-full sections, footer.
-- Backgrounds are **solid fills, never gradients**. Sections alternate between four surfaces only: paper, stone band, ink, brand.
+- Brand blue dominates as a **full-fill surface** (hero panel, Problem, Final CTA, form accents). Near-black ink is the structural pair: `dark` buttons, ink-full sections, footer, and the darkest text. (v3: ink is no longer a 2px outline colour — borders are hairline stone.)
+- Backgrounds are **solid fills, never gradients**. Sections alternate between four surfaces only: paper, stone band, ink, brand — and it is this rhythm (plus whitespace), not divider rules, that separates blocks.
 - The analytical set (evergreen / amber / clay) is reserved for diagnostics (matrix quadrants, process-map flags, delivered rows) plus two sanctioned outcome accents: the AI flow **Roadmap / limited scope** step pill (evergreen) and the comparison-table `X` (clay). Green = validated outcome / roadmap; Amber = effort/dependency; Clay/red = risk/error.
 - Не использовать цвет как единственный способ передать статус.
 - Visited links: `var(--accent-hover)` for text links; single-page anchor nav may keep `var(--accent)`. Do not rely on browser default purple.
@@ -177,15 +204,15 @@ Once a pattern is chosen, maintain it consistently.
 
 | Component | Radius |
 |---|---:|
-| Input | `4px` (`--radius-sm`) |
-| Button | `4px` (`--radius-sm`) |
-| Card | `6px` (`--radius-md`) |
-| Panel / featured block | `10px` (`--radius-lg`) |
+| Input | `8px` |
+| Button | `8px` |
+| Card / panel / featured block | `10px` (`--radius-lg`) |
+| Chip / tag / pill | `--radius-pill` |
 
-- Structural border (v2): `2px solid var(--border-strong)` (`--ink-900`) on every block — the primary divider.
-- Hairline for internal divisions: `1px solid var(--border-hair)` (`--stone-200`).
+- Default border (v3): **`1px solid var(--border-hair)`** (`--stone-200`) — a soft hairline. This is the standard edge on cards, panels, form, header, footer, and dividers.
+- Solid ink/brand surfaces keep a **same-colour edge** (no contrasting outline). On dark/brand surfaces use the on-dark/on-brand hairline (`rgba(255,255,255,.16–.28)`).
 - Focus border: `var(--focus-ring)`.
-- v2 is **border-led and blocky** — near-brutalist tight corners; section dividers use the shared 2px ink rule (this reverses v1, which avoided borders as the main divider).
+- v3 is **soft and surface-led** — rounded corners, hairline edges, and soft ambient shadow define blocks; there are **no 2px ink borders and no ink section dividers** (the former blocky/brutalist treatment is retired).
 
 ---
 
@@ -193,17 +220,17 @@ Once a pattern is chosen, maintain it consistently.
 
 | Уровень | CSS | Использование |
 |---|---|---|
-| `sm` | `0 2px 4px rgba(10,10,15,0.06)` | subtle rest |
+| `sm` | `0 2px 4px rgba(10,10,15,0.06)` | card rest state |
 | `md` | `0 8px 20px rgba(10,10,15,0.10)` | hover, dropdown, sticky header (when scrolled) |
-| `lg` | `0 24px 44px rgba(10,10,15,0.16)` | modal / dialog |
-| `hard` | `8px 8px 0 var(--ink-900)` | **signature** block shadow — headline cards |
-| `brand-hard` | `8px 8px 0 var(--blue-500)` | signature block shadow on a brand block |
+| `lg` | `0 24px 44px rgba(10,10,15,0.16)` | modal / dialog / drawer |
+| `hard` | soft ambient (`0 1px 2px + 0 6px 20px` at low alpha) | headline cards, form, scenario report, hero panel |
+| `brand-hard` | soft brand-tinted ambient | elevated brand card (hero summary) |
 
-### Shadow Rules (v2)
+### Shadow Rules (v3)
 
-- The signature elevation is the **hard 8px ink offset** (no blur, no spread) — block-print. Reserve for headline cards (hero panel, How-it-works columns, form, scenario report).
-- Interactive block cards translate **−3/−3px** on hover, extending the hard shadow (the signature press). No scale-down.
-- Soft ambient shadows (`md`/`lg`) are secondary — hovers only; on paper prefer **2px border + hard shadow** to atmospheric depth.
+- Elevation is a **soft ambient shadow** — the `--shadow-hard` / `--shadow-brand-hard` tokens keep their names but now resolve to soft values, so every former "hard" surface reads soft. No 8px offset, no block-print.
+- Interactive cards **lift on shadow only** (rest `sm` → hover `md`). No −3/−3 press, no scale.
+- Depth comes from **hairline border + soft shadow**, not from a hard outline. Keep shadows restrained — premium-SaaS, not heavy.
 
 ---
 
@@ -337,8 +364,8 @@ resolves to the loaded face, so mono readouts render in the brand mono.
   4. Supporting text
   5. Primary and secondary CTA (blocky)
   6. Trust stats row (3 block numerals + mono captions)
-- Right: **brand-blue diagnostic-summary card** (`HeroSummary`) — 2px ink border, hard shadow, corner `+` mark; an illustrative diagnostic report (Situation → Diagnostic found → Delivered) plus two headline metrics (`$180K+` revenue at risk, `30-day` cleanup). Figures are illustrative and estimate-framed, mirroring Scenario 01 — not verified Opsfield results.
-- Section divided from the next by the shared 2px ink rule.
+- Right: **brand-blue diagnostic-summary card** (`HeroSummary`) — subtle 1px edge, soft brand shadow, rounded, corner `+` mark; an illustrative diagnostic report (Situation → Diagnostic found → Delivered) plus two headline metrics (`$180K+` revenue at risk, `30-day` cleanup). Figures are illustrative and estimate-framed, mirroring Scenario 01 — not verified Opsfield results.
+- Sections separate by whitespace + the background rhythm — no divider rule.
 - Primary CTA remains the strongest visual action.
 
 ### Tablet
@@ -359,7 +386,7 @@ resolves to the loaded face, so mono readouts render in the brand mono.
 
 Replaces the earlier ICP chip + trust-line paragraph. Three stats, each a block
 Mulish-900 numeral + mono uppercase caption, separated from the CTA group by the
-signature 2px ink rule:
+signature hairline rule:
 
 - `4–6` — Active clients at a time
 - `50–250` — Employees · best fit (carries the ICP qualifier; see ICP Qualifier)
@@ -367,13 +394,13 @@ signature 2px ink rule:
 
 ### Hero Diagnostic Summary — visual specification (v2)
 
-Type: blocky **brand-blue summary card** (`components/ui/HeroSummary.tsx`) — an
+Type: **brand-blue summary card** (`components/ui/HeroSummary.tsx`) — an
 illustrative diagnostic report (the scenario triad + two headline metrics), not a
 node-and-connection diagram.
 
 Panel:
 - Background: `var(--blue-500)` solid fill; paper text
-- Border: `2px solid var(--ink-900)`; radius `--radius-md`; shadow `--shadow-hard`
+- Border: `1px solid var(--blue-600)` (subtle same-family edge); radius `--radius-lg`; soft brand shadow (`--shadow-brand-hard`)
 - Corner `+` mark (`PlusMark`), paper, top-right
 - Fills the hero brand column (`width: 100%`)
 
@@ -419,7 +446,7 @@ Structure:
 
 Rules (v2):
 
-- Blocky `Card`: 2px ink border, `--radius-md`, **hard shadow** on the area cards
+- Soft `Card`: 1px hairline border, `--radius-lg`, soft ambient shadow on the area cards; icon in a rounded blue-50 tile; row layout (icon left) on desktop
 - Tones: `paper` + `blueTint` area cards; the O-1 secondary service is an **ink tile + paper body** panel
 - Grid: 2 columns desktop / 1 mobile (area cards)
 - Icon is supporting, never the only label; no technology logo as primary visual
@@ -439,7 +466,7 @@ Structure:
 
 Rules (v2):
 
-- Blocky column: 2px ink border, `--radius-md`, **hard shadow**
+- Soft column: 1px hairline border, `--radius-lg`, soft shadow; brand-blue chevron connectors in the desktop gutters read 01→02→03 as a flow
 - Middle/featured column filled brand blue (`--blue-500`)
 - Step number visually prominent
 - 3-column grid on desktop / stacked on mobile
@@ -461,9 +488,9 @@ Structure:
 
 Rules (v2):
 
-- Report card: `paper` surface, 2px ink border, `--radius-md`, **hard shadow**
-- Brand-blue header: `Scenario · 0N` + client + environment mono tags
-- Three stacked rows — Situation (ink) / Diagnostic found (blue) / Delivered (evergreen) — each with a triad-colored Lucide icon (`Info` / `Search` / `CheckCircle2`) + mono num + label + text, divided by the 2px ink rule
+- Report card: `paper` surface, 1px hairline border, `--radius-lg`, soft shadow
+- Brand-blue header: `Scenario · 0N` + client + environment pill tags (`--radius-pill`)
+- Three stacked rows — Situation (ink) / Diagnostic found (blue) / Delivered (evergreen) — each with a triad-colored Lucide icon (`Info` / `Search` / `CheckCircle2`) + mono num + label + text, divided by a hairline rule
 - One-column stacked layout
 - Do not invent names, logos or testimonials.
 - A real anonymized case must be supported by an internal source record and approval.
@@ -484,7 +511,7 @@ Structure:
 
 Rules (v2):
 
-- Bordered table (2px ink border, `--radius-md`, **hard shadow**), two columns on desktop
+- Bordered table (1px hairline border, `--radius-lg`, soft shadow), two columns on desktop; the winning Opsfield column carries a `--blue-50` tint
 - Ink header `What others do first` | brand header `What Opsfield does first`
 - Others rows: `X` (`--clay-500`) + muted text; Opsfield rows: `Check` (`--blue-500`) + Mulish-800 ink text
 - Do not make competitors look deceptive; compare operating approaches
@@ -508,7 +535,7 @@ Structure:
 
 Rules (v2):
 
-- Ink block: two role cards — card 1 `brand` (blue), card 2 `paper`, both hard-shadow
+- Ink block: two role cards — card 1 `brand` (blue), card 2 `paper`, both soft (hairline + soft shadow, rounded); role subtitle + environments as `--radius-pill` tags
 - Maximum 2 cards for MVP
 - Do not present unverified real clients, real metrics, certifications, awards, logos, reviews, names, years, or Fortune 500 claims.
 - No stock or fictional portrait placeholders. Identity is an **initials tile** (`MP` / `SA` — dark on the brand card, blue on the paper card), the role name, and a short role subtitle; responsibilities use functional Lucide icon bullets. No real photos or invented credentials.
@@ -613,7 +640,7 @@ Structure:
 
 Rules:
 
-- Divider: `2px solid var(--border-strong)` (v2 shared ink rule — reverses the v1 1px hairline)
+- Divider: `1px solid var(--border-hair)` (soft hairline between items); the +/× toggle box is a rounded hairline square
 - Padding: `24px 0`
 - Full question is a button
 - Entire trigger has minimum `44px` touch height
@@ -625,20 +652,20 @@ Rules:
 
 ## Buttons and CTA
 
-Buttons are blocky (v2): Mulish `700`, `15px`, near-square corners, `2px` borders.
+Buttons (v3): Mulish `700`, `15px`, softly rounded (`8px`), `1.5px` borders.
 
 ### Primary Button
 
-- Background: `var(--accent)`; Text: `var(--accent-on)`; Border: `2px solid var(--accent)`
+- Background: `var(--accent)`; Text: `var(--accent-on)`; Border: `1.5px solid var(--accent)`
 - Hover: `var(--accent-hover)` (fill + border)
-- Radius: `4px` (`--radius-sm`); Minimum height: `44px`; Padding: `14px 22px`
+- Radius: `8px`; Minimum height: `44px`; Padding: `14px 22px`
 - Optional trailing icon: ArrowRight, `20px`
 
 ### Secondary Button (outline)
 
-- Background: transparent; Text: `var(--ink-900)`; Border: `2px solid var(--ink-900)`
+- Background: transparent; Text: `var(--ink-900)`; Border: `1.5px solid var(--ink-900)`
 - Hover: **invert to filled ink** — background `var(--ink-900)`, text `var(--paper)`
-- Radius: `4px`; Minimum height: `44px`
+- Radius: `8px`; Minimum height: `44px`
 
 ### Additional variants (v2)
 
@@ -700,8 +727,8 @@ On submit click:
 
 ### Form Panel
 
-- Bordered form panel (v2): 2px ink border, `--radius-md`, **hard shadow**, ink `+`-header (title + fit-review badge).
-- Inputs: 2px ink border, `--radius-xs`, `≥16px` font (no iOS zoom); mono uppercase labels.
+- Soft form panel (v3): 1px hairline border, `--radius-lg`, soft shadow, ink `+`-header (title + fit-review pill badge).
+- Inputs: 1px border (`--stone-300`), `8px` radius, `≥16px` font (no iOS zoom); mono uppercase labels; blue focus ring.
 - Composite layout: ink diagnostic-output panel + "Before You Commit" card on the left; "After you submit" steps + the form on the right.
 - Show the 4 required fields first: Name, Work Email, Company, Main Challenge.
 - Place an accessible disclosure control after the required fields: `Add more context (optional)`.
@@ -770,7 +797,7 @@ Style on `:focus`:
 
 ### Desktop (v2)
 
-- Sticky; **2px ink bottom rule**; `shadow-md` when scrolled. Height `76px`.
+- Sticky; **1px hairline bottom rule**; `shadow-md` when scrolled. Height `76px`.
 - Logo left: Mulish-900 wordmark + solid **`OS` tile** (blue fill, paper text).
 - Navigation right (Mulish `700`): Services / How It Works / Results / FAQ.
 - Primary CTA right (blocky): `Request Diagnostic`.
@@ -778,14 +805,14 @@ Style on `:focus`:
 ### Mobile (v2)
 
 - Logo left; menu trigger right = **solid ink square** (paper icon).
-- Drawer (2px ink left border) contains the same links; primary CTA near the top.
+- Drawer (1px hairline left border) contains the same links; primary CTA near the top.
 - Touch targets: minimum `44px`. No mega menu.
 
 ---
 
 ## Footer
 
-- v2: full **ink** surface (`--ink-900`), 2px ink top rule, mono uppercase group labels, paper links.
+- v3: full **ink** surface (`--ink-900`), faint hairline top rule, mono uppercase group labels, paper links.
 - Three groups: Company / Get Started / Legal (Privacy Policy / Terms of Use / Cookie Policy).
 - Footer CTA panel appears above the links. Do not create a large link directory.
 
