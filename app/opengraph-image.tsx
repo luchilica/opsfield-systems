@@ -29,7 +29,8 @@ export default function Image() {
           padding: "0 96px",
         }}
       >
-        {/* Brand reticle mark (see components/ui/Logomark) */}
+        {/* Brand mark — Signet O (see components/ui/Logomark). Blue segment
+            drawn as an explicit arc path for satori/next-og compatibility. */}
         <svg
           width={120}
           height={120}
@@ -37,9 +38,13 @@ export default function Image() {
           fill="none"
           style={{ marginBottom: 32 }}
         >
-          <circle cx="16" cy="16" r="12.6" stroke="#0B1220" strokeWidth="2.3" />
-          <rect x="14.3" y="9.6" width="3.4" height="12.8" rx="0.5" fill="#2551D2" />
-          <rect x="9.6" y="14.3" width="12.8" height="3.4" rx="0.5" fill="#2551D2" />
+          <circle cx="16" cy="16" r="11.5" stroke="#0B1220" strokeWidth="3.6" />
+          <path
+            d="M16 4.5 A11.5 11.5 0 0 1 27.32 14"
+            stroke="#2551D2"
+            strokeWidth="3.6"
+            strokeLinecap="round"
+          />
         </svg>
         <div
           style={{
