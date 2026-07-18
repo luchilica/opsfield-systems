@@ -431,16 +431,16 @@ main > section:nth-of-type(even) {
     var(--blue-200) 14%,
     var(--blue-300) 17%,
     transparent 22%,
-    transparent 32%
+    transparent 30%
   );
   background-size: 200% 200%;
   background-position: 50% 50%;
-  filter: blur(22px);
+  filter: blur(15px);
   opacity: 0.6;
   mix-blend-mode: multiply;
   -webkit-mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
   mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
-  animation: opsfield-aurora 60s linear infinite;
+  animation: opsfield-aurora 50s linear infinite;
   pointer-events: none;
   will-change: background-position;
 }
