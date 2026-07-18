@@ -71,10 +71,10 @@ export default function Logomark({
       <ellipse
         cx="9.6"
         cy="8"
-        rx="2.7"
-        ry="1.5"
+        rx="3.1"
+        ry="1.7"
         fill="#ffffff"
-        opacity="0.5"
+        opacity="0.72"
         filter="url(#opsfieldSoft)"
         transform="rotate(-42 9.6 8)"
       />
