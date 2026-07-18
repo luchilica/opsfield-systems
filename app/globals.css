@@ -406,10 +406,59 @@ main > section:nth-of-type(even) {
 /* Hero — soft product glow (expensive-SaaS): a faint blue radial anchored top-
    right behind the summary panel, over paper. No hard edges. */
 #hero {
+  position: relative;
+  overflow: hidden;
   background:
     radial-gradient(85% 75% at 92% -12%, var(--blue-100) 0%, rgba(219, 227, 248, 0) 55%),
     radial-gradient(65% 70% at -5% 108%, var(--blue-50) 0%, rgba(237, 241, 252, 0) 52%),
     var(--paper);
+}
+
+/* Aurora — slow blue light streaks, heavily blurred and masked into the top-
+   right bloom so the left-column text stays crisp. Hand-ported from the Tailwind
+   "aurora" pattern to plain CSS (no Tailwind) and recoloured to the single blue
+   accent, over paper. */
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: -25% -15% auto -15%;
+  height: 150%;
+  background-image: repeating-linear-gradient(
+    100deg,
+    var(--blue-100) 0%,
+    var(--blue-300) 9%,
+    transparent 14%,
+    transparent 21%,
+    var(--blue-200) 28%
+  );
+  background-size: 220% 220%;
+  background-position: 50% 50%;
+  filter: blur(46px);
+  opacity: 0.48;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
+  mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
+  animation: opsfield-aurora 60s linear infinite;
+  pointer-events: none;
+  will-change: background-position;
+}
+/* Hero content sits above the aurora layer. */
+#hero > * {
+  position: relative;
+  z-index: 1;
+}
+@keyframes opsfield-aurora {
+  from {
+    background-position: 50% 50%;
+  }
+  to {
+    background-position: 350% 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #hero::before {
+    animation: none;
+  }
 }
 
 /* Full-fill brand block (v2) — overrides the even-band rhythm by id.
