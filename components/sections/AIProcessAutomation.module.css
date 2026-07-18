@@ -6,6 +6,33 @@
   z-index: 1;
 }
 
+/* On-dark badge chip — translucent pill on the near-black fill, blue + mark. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: var(--space-3);
+  padding: 6px 13px 6px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(37, 81, 210, 0.16);
+  border: 1px solid rgba(116, 146, 231, 0.34);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-200);
+}
+
+.badge::before {
+  content: "+";
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--blue-300);
+}
+
 /* Decorative corner + motifs (behind content) — matches the ink Delivery block. */
 .plusTop,
 .plusBottom {
@@ -66,6 +93,14 @@
   padding: 16px 18px;
   border: 1px solid transparent;
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
+}
+
+.pill:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .pillStep {
@@ -86,7 +121,7 @@
 }
 
 .pillBlue {
-  background: var(--blue-500);
+  background: linear-gradient(158deg, var(--blue-500) 0%, var(--blue-600) 100%);
 }
 
 .pillDark {
@@ -95,7 +130,7 @@
 }
 
 .pillGreen {
-  background: var(--evergreen-500);
+  background: linear-gradient(158deg, var(--evergreen-500) 0%, #0F8A58 100%);
 }
 
 /* Scope box — ink-800 panel with a paper border. */

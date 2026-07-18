@@ -28,7 +28,7 @@ export default function AIProcessAutomation() {
       <PlusMark size={120} className={styles.plusBottom} />
 
       <div className={styles.inner}>
-        <p className="kicker">AI &amp; AUTOMATION</p>
+        <p className={styles.badge}>AI &amp; AUTOMATION</p>
         <h2 className={styles.heading}>
           From diagnostic to implementation: AI &amp; Process Automation.
         </h2>

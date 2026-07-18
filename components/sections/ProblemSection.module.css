@@ -26,15 +26,19 @@
   max-width: 560px;
 }
 
-/* On-brand + mono eyebrow (white on blue). */
+/* On-brand badge chip — translucent white pill on the blue fill. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
+  padding: 6px 13px 6px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   font-family: var(--font-mono-fallback);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: var(--ls-eyebrow);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--paper);
 }
@@ -43,9 +47,9 @@
   content: "+";
   font-family: var(--font-display);
   font-weight: var(--fw-black);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1;
-  color: var(--paper);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .text {
@@ -96,6 +100,13 @@
   border: 1px solid var(--border-hair);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-hard);
+  transition: transform var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
+}
+
+.causeCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 /* Contained icon tile — feature/services-block convention (icon in a tinted
@@ -107,7 +118,7 @@
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   background: var(--accent-tint);
   color: var(--accent);
 }

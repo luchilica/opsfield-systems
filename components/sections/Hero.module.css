@@ -15,26 +15,32 @@
   gap: var(--space-3);
 }
 
+/* Refined badge eyebrow — soft tinted pill (expensive-SaaS), replacing the raw
+   inline mono kicker. The brand + mark lives inside the chip. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
+  padding: 6px 13px 6px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--blue-50);
+  border: 1px solid var(--blue-100);
   font-family: var(--font-mono-fallback);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: var(--ls-eyebrow);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--blue-600);
 }
 
-/* Signature + glyph prefix — the brand plus/cross motif at eyebrow scale. */
+/* Signature + glyph prefix — the brand plus/cross motif, now inside the chip. */
 .eyebrow::before {
   content: "+";
   font-family: var(--font-display);
   font-weight: var(--fw-black);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1;
-  color: var(--accent);
+  color: var(--blue-500);
 }
 
 /* Mega blocky display headline. */
@@ -103,6 +109,25 @@
   position: relative;
   display: flex;
   width: 100%;
+}
+
+/* Layered backdrop — a faint offset panel so the summary card reads as a
+   floating product surface (expensive-SaaS depth), not a flat inline box. */
+.visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translate(16px, 20px);
+  border-radius: var(--radius-lg);
+  background: var(--blue-50);
+  border: 1px solid var(--blue-100);
+  z-index: 0;
+}
+
+/* Lift the actual panel above its backdrop. */
+.visual > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* ----- Mobile (< 768px) ----- */

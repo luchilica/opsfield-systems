@@ -403,6 +403,14 @@ main > section:nth-of-type(even) {
    are separated by whitespace + the paper/stone background rhythm and the
    full-fill brand/ink blocks — no hard rules between blocks. */
 
+/* Hero — soft product glow (expensive-SaaS): a faint blue radial anchored top-
+   right behind the summary panel, over paper. No hard edges. */
+#hero {
+  background:
+    radial-gradient(115% 90% at 88% -15%, var(--blue-50) 0%, rgba(237, 241, 252, 0) 58%),
+    var(--paper);
+}
+
 /* Full-fill brand block (v2) — overrides the even-band rhythm by id.
    Positioned + clipped so the decorative + motifs anchor to the section and
    clip at its edges (same as #delivery-model / #final-cta).
@@ -410,7 +418,11 @@ main > section:nth-of-type(even) {
 #problem-section {
   position: relative;
   overflow: hidden;
-  background: var(--blue-500);
+  /* Gradient depth (expensive-SaaS) instead of a flat fill, with a faint lighter
+     bloom top-left so the block has a light source. */
+  background:
+    radial-gradient(90% 120% at 12% 0%, var(--blue-500) 0%, rgba(37, 81, 210, 0) 60%),
+    linear-gradient(158deg, var(--blue-500) 0%, var(--blue-600) 100%);
   color: var(--text-on-brand);
 }
 #problem-section :is(h1, h2, h3, h4) {
@@ -422,7 +434,11 @@ main > section:nth-of-type(even) {
 #ai-process-automation {
   position: relative;
   overflow: hidden;
-  background: var(--ink-900);
+  /* Near-black with a faint brand-blue bloom top-right for depth (expensive-
+     SaaS), instead of a flat ink fill. */
+  background:
+    radial-gradient(85% 120% at 100% 0%, rgba(37, 81, 210, 0.22) 0%, rgba(37, 81, 210, 0) 55%),
+    linear-gradient(180deg, #101223 0%, var(--ink-900) 62%);
   color: var(--text-on-dark);
 }
 #ai-process-automation :is(h1, h2, h3, h4) {
