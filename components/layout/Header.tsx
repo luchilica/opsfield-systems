@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
+import Logomark from "@/components/ui/Logomark";
 import styles from "./Header.module.css";
 
 // Labels + targets from docs/texts.md and docs/sitemap.md → "Header".
@@ -97,10 +98,8 @@ export default function Header() {
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={`container ${styles.inner}`}>
-        <Link href="/" className={styles.logo}>
-          <span className={styles.logoTile} aria-hidden="true">
-            OS
-          </span>
+        <Link href="/" className={styles.logo} aria-label="Opsfield Systems — home">
+          <Logomark size={32} className={styles.logoMark} />
           Opsfield Systems
         </Link>
 

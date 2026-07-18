@@ -29,6 +29,18 @@ export default function Image() {
           padding: "0 96px",
         }}
       >
+        {/* Brand reticle mark (see components/ui/Logomark) */}
+        <svg
+          width={120}
+          height={120}
+          viewBox="0 0 32 32"
+          fill="none"
+          style={{ marginBottom: 32 }}
+        >
+          <circle cx="16" cy="16" r="12.6" stroke="#0B1220" strokeWidth="2.3" />
+          <rect x="14.3" y="9.6" width="3.4" height="12.8" rx="0.5" fill="#2551D2" />
+          <rect x="9.6" y="14.3" width="12.8" height="3.4" rx="0.5" fill="#2551D2" />
+        </svg>
         <div
           style={{
             fontSize: 96,

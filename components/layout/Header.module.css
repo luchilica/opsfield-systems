@@ -1,4 +1,4 @@
-/* Header — sticky site header, v2 blocky. 2px ink bottom rule, OS tile wordmark.
+/* Header — sticky site header. Hairline bottom rule, reticle logomark + wordmark.
    Breakpoint: 768px splits mobile drawer / desktop nav. No Tailwind. */
 
 .header {
@@ -44,19 +44,10 @@
   color: var(--ink-900);
 }
 
-.logoTile {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: var(--blue-500);
-  color: var(--paper);
-  border-radius: var(--radius-xs);
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: var(--fw-black);
-  letter-spacing: -0.5px;
+/* Brand mark — ring inherits ink via the logo's currentColor; plus is blue. */
+.logoMark {
+  flex: none;
+  color: var(--ink-900);
 }
 
 /* ----- Desktop navigation ----- */
