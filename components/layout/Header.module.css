@@ -6,7 +6,7 @@
   top: 0;
   z-index: 100;
   background: var(--paper);
-  border-bottom: var(--border-heavy) solid var(--ink-900);
+  border-bottom: 1px solid var(--border-hair);
   transition: box-shadow var(--dur-med) var(--ease-out);
 }
 
@@ -160,7 +160,7 @@
   height: 100dvh;
   padding: var(--space-4) var(--space-3);
   background: var(--paper);
-  border-left: var(--border-heavy) solid var(--ink-900);
+  border-left: 1px solid var(--border-hair);
   box-shadow: var(--shadow-lg);
   transform: translateX(100%);
   /* Hidden when closed so its links are not keyboard-focusable. */

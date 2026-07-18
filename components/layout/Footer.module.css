@@ -11,7 +11,7 @@
 
   background: var(--footer-bg);
   color: var(--footer-text);
-  border-top: var(--border-heavy) solid var(--ink-900);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .inner {

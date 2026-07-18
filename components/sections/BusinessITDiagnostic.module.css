@@ -39,8 +39,8 @@
 .outputPanel {
   background: var(--ink-900);
   color: var(--paper);
-  border: var(--border-heavy) solid var(--ink-900);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--ink-900);
+  border-radius: var(--radius-lg);
   padding: 26px;
 }
 
@@ -86,8 +86,8 @@
 /* ----- Paper cards ----- */
 .card {
   background: var(--paper);
-  border: var(--border-heavy) solid var(--ink-900);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-lg);
   padding: 26px;
 }
 
@@ -132,9 +132,9 @@
 
 .chip {
   display: inline-flex;
-  padding: 6px 11px;
-  border: 1.5px solid var(--ink-900);
-  border-radius: var(--radius-xs);
+  padding: 6px 12px;
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-pill);
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 500;
@@ -233,8 +233,8 @@
 .formPanel {
   scroll-margin-top: 96px;
   background: var(--paper);
-  border: var(--border-heavy) solid var(--ink-900);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-hard);
   overflow: hidden;
 }
@@ -266,10 +266,10 @@
 
 .formBadge {
   display: inline-flex;
-  padding: 6px 11px;
+  padding: 6px 12px;
   background: var(--paper);
   color: var(--ink-900);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-pill);
   font-family: var(--font-mono-fallback);
   font-size: 10px;
   font-weight: 700;

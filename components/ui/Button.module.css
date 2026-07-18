@@ -8,8 +8,8 @@
   gap: 10px;
   min-height: 44px; /* required touch target — accessibility */
   padding: 14px 22px;
-  border: var(--border-heavy) solid transparent;
-  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  border-radius: 8px;
   font-family: var(--font-sans);
   font-size: 15px;
   font-weight: var(--fw-bold);

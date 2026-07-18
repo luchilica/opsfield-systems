@@ -11,11 +11,11 @@
 .list {
   display: flex;
   flex-direction: column;
-  border-bottom: var(--border-heavy) solid var(--ink-900);
+  border-bottom: 1px solid var(--border-hair);
 }
 
 .item {
-  border-top: var(--border-heavy) solid var(--ink-900);
+  border-top: 1px solid var(--border-hair);
 }
 
 .heading {
@@ -59,7 +59,8 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: var(--border-heavy) solid var(--ink-900);
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-sm);
   background: var(--paper);
   color: var(--ink-900);
   font-family: var(--font-sans);

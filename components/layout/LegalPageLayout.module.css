@@ -37,7 +37,7 @@
   margin-top: var(--space-2);
   margin-bottom: var(--space-5);
   padding-bottom: var(--space-4);
-  border-bottom: var(--border-heavy) solid var(--ink-900);
+  border-bottom: 1px solid var(--border-hair);
 }
 
 .updated {

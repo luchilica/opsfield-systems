@@ -7,8 +7,11 @@
   position: relative;
   background: var(--surface-card);
   color: var(--text-body);
-  border: var(--border-heavy) solid var(--border-strong);
-  border-radius: var(--radius-md);
+  /* Re-skin (expensive-SaaS) default: hairline border, larger radius, soft
+     ambient shadow — the blocky 2px-ink + hard offset is retired. */
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   padding: 24px; /* mobile */
   overflow: hidden;
   transition: transform var(--dur-med) var(--ease-out),
@@ -46,7 +49,7 @@
 .blueTint {
   background: var(--blue-50);
   color: var(--ink-900);
-  border-color: var(--border-strong);
+  border-color: var(--border-hair);
 }
 
 /* Signature 8px offset ink shadow — headline cards only. */
@@ -64,17 +67,13 @@
   box-shadow: var(--shadow-sm);
 }
 
-/* Interactive hover — the block press: shift −3/−3, extend the shadow. */
+/* Interactive hover — soft lift (shadow only, no blocky press). */
 .hover:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: var(--shadow-lg);
+  transform: none;
+  box-shadow: var(--shadow-md);
 }
 
-.hover.hard:hover {
-  box-shadow: 11px 11px 0 var(--ink-900);
-}
-
-/* Soft cards lift on shadow only (no blocky press). */
+.hover.hard:hover,
 .hover.soft:hover {
   transform: none;
   box-shadow: var(--shadow-md);

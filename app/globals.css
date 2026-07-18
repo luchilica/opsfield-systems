@@ -158,8 +158,12 @@
   --shadow-sm: 0 2px 4px rgba(10, 10, 15, 0.06);
   --shadow-md: 0 8px 20px rgba(10, 10, 15, 0.10);
   --shadow-lg: 0 24px 44px rgba(10, 10, 15, 0.16);
-  --shadow-hard: 8px 8px 0 var(--ink-900);
-  --shadow-brand-hard: 8px 8px 0 var(--blue-500);
+  /* Re-skin (expensive-SaaS): the former signature 8px hard offset is now a
+     soft ambient shadow. The token name is kept so every `var(--shadow-hard)`
+     usage across the site softens in one place (cards, form, scenario report,
+     hero summary, Problem). */
+  --shadow-hard: 0 1px 2px rgba(10, 10, 15, 0.04), 0 6px 20px rgba(10, 10, 15, 0.08);
+  --shadow-brand-hard: 0 1px 2px rgba(12, 40, 131, 0.10), 0 10px 28px rgba(12, 40, 131, 0.16);
   --shadow-report: 0 2px 0 var(--stone-200), 0 12px 24px rgba(10, 10, 15, 0.06);
 
   --ring: 0 0 0 3px rgba(30, 58, 255, 0.32);
@@ -395,10 +399,9 @@ main > section:nth-of-type(even) {
   background: var(--bg-band);
 }
 
-/* v2 blocky dividers — every block is separated by the shared 2px ink rule. */
-main > section {
-  border-bottom: var(--border-heavy) solid var(--ink-900);
-}
+/* Re-skin (expensive-SaaS): the blocky 2px ink dividers are removed. Sections
+   are separated by whitespace + the paper/stone background rhythm and the
+   full-fill brand/ink blocks — no hard rules between blocks. */
 
 /* Full-fill brand block (v2) — overrides the even-band rhythm by id.
    Positioned + clipped so the decorative + motifs anchor to the section and

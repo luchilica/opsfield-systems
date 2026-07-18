@@ -9,9 +9,9 @@
   flex-direction: column;
   background: var(--blue-500);
   color: var(--paper);
-  border: var(--border-heavy) solid var(--ink-900);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-hard);
+  border: 1px solid var(--blue-600);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-brand-hard);
   padding: 28px;
   overflow: hidden;
 }
@@ -88,7 +88,7 @@
   /* Sit directly below the rows. The panel is sized to its content (Hero
      .visual centers it), so there's no empty band above the metrics. */
   padding-top: 20px;
-  border-top: var(--border-heavy) solid var(--paper);
+  border-top: 1px solid var(--border-on-brand);
   display: flex;
   gap: 36px;
 }

@@ -14,19 +14,17 @@
 
 .scenario {
   background: var(--paper);
-  border: var(--border-heavy) solid var(--ink-900);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-hard);
   overflow: hidden;
-  /* Signature press — matches the shared Card interaction (reduced-motion is
-     handled globally in globals.css). */
   transition: transform var(--dur-med) var(--ease-out),
     box-shadow var(--dur-med) var(--ease-out);
 }
 
 .scenario:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 11px 11px 0 var(--ink-900);
+  transform: none;
+  box-shadow: var(--shadow-md);
 }
 
 /* Report header — brand blue. */
@@ -67,9 +65,9 @@
 }
 
 .env {
-  padding: 5px 9px;
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
-  border-radius: var(--radius-xs);
+  padding: 5px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-pill);
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 500;
@@ -96,7 +94,7 @@
   grid-template-columns: 108px 1fr;
   gap: 20px;
   padding: 22px 26px;
-  border-top: var(--border-heavy) solid var(--ink-900);
+  border-top: 1px solid var(--border-hair);
 }
 
 .rowLabel {
@@ -161,7 +159,7 @@
   padding: 16px 26px;
   background: none;
   border: none;
-  border-top: var(--border-heavy) solid var(--ink-900);
+  border-top: 1px solid var(--border-hair);
   cursor: pointer;
   text-align: left;
   font-family: var(--font-sans);
