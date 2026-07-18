@@ -8,16 +8,15 @@
   gap: 8px;
   margin-bottom: var(--space-3);
   padding: 5px 13px;
-  border: 1px solid var(--stone-200);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: var(--radius-pill);
-  background: var(--paper);
-  box-shadow: var(--shadow-xs);
+  background: rgba(255, 255, 255, 0.12);
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--stone-600);
+  color: var(--paper);
 }
 
 .badge::before {
@@ -25,16 +24,16 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--blue-500);
+  background: var(--paper);
 }
 
 .intro {
   max-width: var(--text-max);
   margin-bottom: var(--space-5);
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-extrabold);
   letter-spacing: -0.02em;
   line-height: 1.12;
-  color: var(--ink-900);
+  color: var(--paper);
 }
 
 .list {
@@ -67,8 +66,8 @@
   align-items: flex-end;
   justify-content: space-between;
   padding: 22px 26px;
-  background: var(--stone-50);
-  border-bottom: 1px solid var(--stone-200);
+  background: var(--blue-50);
+  border-bottom: 1px solid var(--blue-100);
   color: var(--ink-900);
 }
 
@@ -85,7 +84,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: 22px;
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-bold);
   letter-spacing: -0.02em;
   line-height: 1.1;
   color: var(--ink-900);

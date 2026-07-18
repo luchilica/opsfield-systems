@@ -407,7 +407,8 @@ main > section:nth-of-type(even) {
    right behind the summary panel, over paper. No hard edges. */
 #hero {
   background:
-    radial-gradient(115% 90% at 88% -15%, var(--blue-50) 0%, rgba(237, 241, 252, 0) 58%),
+    radial-gradient(85% 75% at 92% -12%, var(--blue-100) 0%, rgba(219, 227, 248, 0) 55%),
+    radial-gradient(65% 70% at -5% 108%, var(--blue-50) 0%, rgba(237, 241, 252, 0) 52%),
     var(--paper);
 }
 
@@ -428,6 +429,17 @@ main > section:nth-of-type(even) {
 }
 #problem-section :is(h1, h2, h3, h4) {
   color: var(--text-on-brand);
+}
+
+/* Diagnostic Scenarios — same blue→white transition as Problem (owner request:
+   more colour). Full-fill gradient fading into the next (white) section. The
+   section heading (.intro) is whitened in the module; card <h3> stay dark. */
+#proof-examples {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(80% 90% at 12% 0%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 55%),
+    linear-gradient(180deg, var(--blue-600) 0%, var(--blue-500) 40%, var(--blue-300) 74%, var(--blue-100) 90%, var(--paper) 100%);
 }
 
 /* Full-fill ink block (v2) — AI & Process Automation. Positioned + clipped for

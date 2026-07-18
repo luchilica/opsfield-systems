@@ -35,7 +35,7 @@
 
 .intro {
   max-width: var(--text-max);
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-extrabold);
   letter-spacing: -0.02em;
   line-height: 1.12;
 }
@@ -83,7 +83,7 @@
   border-radius: var(--radius-md);
   font-family: var(--font-display); /* Mulish */
   font-size: 20px;
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-bold);
   letter-spacing: 0.04em;
 }
 
@@ -101,7 +101,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: 22px;
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-bold);
   letter-spacing: -0.02em;
   color: var(--ink-900);
 }

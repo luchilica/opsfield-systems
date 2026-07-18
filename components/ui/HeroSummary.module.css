@@ -10,6 +10,7 @@
   background: var(--paper);
   color: var(--text-body);
   border: 1px solid var(--stone-200);
+  border-top: 3px solid var(--blue-500);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);
   padding: 28px;
@@ -83,7 +84,9 @@
 }
 
 .metrics {
-  padding-top: 20px;
+  margin: 0 -28px -28px;
+  padding: 22px 28px 26px;
+  background: var(--blue-50);
   border-top: 1px solid var(--stone-200);
   display: flex;
   gap: 36px;

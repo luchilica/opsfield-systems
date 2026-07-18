@@ -4,7 +4,7 @@
 
 .intro {
   margin-bottom: var(--space-5);
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-extrabold);
   letter-spacing: -0.02em;
   color: var(--ink-900);
 }
@@ -39,7 +39,7 @@
   text-align: left;
   font-family: var(--font-display);
   font-size: 19px;
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-bold);
   letter-spacing: -0.015em;
   color: var(--ink-900);
 }

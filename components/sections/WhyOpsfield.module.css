@@ -32,7 +32,7 @@
 .intro {
   max-width: var(--text-max);
   margin-bottom: var(--space-2);
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-extrabold);
   letter-spacing: -0.02em;
   line-height: 1.12;
   color: var(--ink-900);
@@ -109,7 +109,7 @@
   color: var(--ink-900);
   font-family: var(--font-display);
   font-size: 16px;
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-bold);
   letter-spacing: -0.015em;
 }
 
