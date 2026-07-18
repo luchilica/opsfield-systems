@@ -29,8 +29,8 @@ export default function Image() {
           padding: "0 96px",
         }}
       >
-        {/* Brand mark — Signet O (see components/ui/Logomark). Blue segment
-            drawn as an explicit arc path for satori/next-og compatibility. */}
+        {/* Brand mark — Signet O (see components/ui/Logomark). Gradient stroke
+            only; next-og/satori does not render SVG filters. */}
         <svg
           width={120}
           height={120}
@@ -38,12 +38,20 @@ export default function Image() {
           fill="none"
           style={{ marginBottom: 32 }}
         >
-          <circle cx="16" cy="16" r="11.5" stroke="#0B1220" strokeWidth="3.6" />
-          <path
-            d="M16 4.5 A11.5 11.5 0 0 1 27.32 14"
-            stroke="#2551D2"
+          <defs>
+            <linearGradient id="ogRing" x1="1" y1="0" x2="0.25" y2="0.9">
+              <stop offset="0" stopColor="#5C86FF" />
+              <stop offset="0.22" stopColor="#2551D2" />
+              <stop offset="0.46" stopColor="#0B1220" />
+              <stop offset="1" stopColor="#0B1220" />
+            </linearGradient>
+          </defs>
+          <circle
+            cx="16"
+            cy="16"
+            r="11.5"
+            stroke="url(#ogRing)"
             strokeWidth="3.6"
-            strokeLinecap="round"
           />
         </svg>
         <div
