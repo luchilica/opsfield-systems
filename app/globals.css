@@ -457,7 +457,10 @@ main > section:nth-of-type(even) {
 #delivery-model {
   position: relative;
   overflow: hidden;
-  background: var(--ink-900);
+  /* Near-black with a faint brand-blue bloom top-right, matching the AI block. */
+  background:
+    radial-gradient(85% 120% at 100% 0%, rgba(37, 81, 210, 0.2) 0%, rgba(37, 81, 210, 0) 55%),
+    linear-gradient(180deg, #101223 0%, var(--ink-900) 62%);
   color: var(--text-on-dark);
 }
 #delivery-model h2 {

@@ -23,7 +23,7 @@ const ROLES = [
     title: "Managing Partner",
     initials: "MP",
     subtitle: "Operating model & diagnostic lead",
-    tone: "brand",
+    tone: "paper",
     responsibilities: [
       { Icon: Boxes, text: "Operating model design" },
       { Icon: Workflow, text: "Diagnostic methodology" },
@@ -66,7 +66,7 @@ export default function DeliveryModel() {
       <PlusMark size={120} className={styles.plusBottom} />
 
       <div className={styles.inner}>
-        <p className="kicker">DELIVERY MODEL</p>
+        <p className={styles.badge}>DELIVERY MODEL</p>
         <h2 className={styles.intro}>Senior attention without a handoff chain.</h2>
         <p className={`lead ${styles.text}`}>
           Opsfield Systems works with 4–6 active clients at a time so senior
@@ -80,47 +80,22 @@ export default function DeliveryModel() {
               <div className={styles.role}>
                 <div className={styles.roleHead}>
                   <span
-                    className={`${styles.avatar} ${
-                      tone === "brand" ? styles.avatarOnBrand : styles.avatarOnPaper
-                    }`}
+                    className={`${styles.avatar} ${styles.avatarOnPaper}`}
                     aria-hidden="true"
                   >
                     {initials}
                   </span>
                   <div>
-                    <h3
-                      className={`${styles.roleTitle} ${
-                        tone === "brand" ? styles.onDark : ""
-                      }`}
-                    >
-                      {title}
-                    </h3>
-                    <p
-                      className={`${styles.roleSub} ${
-                        tone === "brand" ? styles.roleSubOnDark : ""
-                      }`}
-                    >
-                      {subtitle}
-                    </p>
+                    <h3 className={styles.roleTitle}>{title}</h3>
+                    <p className={styles.roleSub}>{subtitle}</p>
                   </div>
                 </div>
 
-                <p
-                  className={`${styles.engLabel} ${
-                    tone === "brand" ? styles.engLabelOnDark : ""
-                  }`}
-                >
-              
-                </p>
+                <p className={styles.engLabel} />
 
                 <ul className={styles.respList}>
                   {responsibilities.map(({ Icon, text }) => (
-                    <li
-                      key={text}
-                      className={`${styles.resp} ${
-                        tone === "brand" ? styles.respOnDark : ""
-                      }`}
-                    >
+                    <li key={text} className={styles.resp}>
                       <Icon
                         size={16}
                         className={styles.respIcon}

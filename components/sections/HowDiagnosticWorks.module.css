@@ -1,9 +1,40 @@
 /* How the Diagnostic Works — v2 numbered step columns. Hard-shadow blocks,
    big Mulish numbers, step 2 featured in brand blue. Copy from docs/texts.md. */
 
+/* Outline badge with a blue accent dot (shadcnblocks monochrome). */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--space-3);
+  padding: 5px 13px;
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  box-shadow: var(--shadow-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone-600);
+}
+
+.badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue-500);
+}
+
 .intro {
   max-width: var(--text-max);
   margin-bottom: var(--space-5);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--ink-900);
 }
 
 .steps {
@@ -81,8 +112,8 @@
 
 .number {
   font-family: var(--font-display);
-  font-size: 56px;
-  font-weight: var(--fw-black);
+  font-size: 44px;
+  font-weight: var(--fw-bold);
   letter-spacing: -0.03em;
   line-height: 0.95;
   color: var(--blue-500);
@@ -105,7 +136,7 @@
   margin: 18px 0 8px;
   font-family: var(--font-display);
   font-size: 18px;
-  font-weight: var(--fw-extrabold);
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.01em;
   color: var(--ink-900);
 }
@@ -117,9 +148,9 @@
 .stepText {
   margin: 0;
   font-size: 15px;
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-regular);
   line-height: 1.55;
-  color: var(--text-body);
+  color: var(--stone-500);
 }
 
 .stepFeatured .stepText {

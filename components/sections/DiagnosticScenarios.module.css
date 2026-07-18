@@ -1,9 +1,40 @@
 /* Diagnostic Scenarios — v2 report cards. Brand-blue header + Situation /
    Diagnostic found / Delivered rows. Anonymized + illustrative. No Tailwind. */
 
+/* Outline badge with a blue accent dot (shadcnblocks monochrome). */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--space-3);
+  padding: 5px 13px;
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  box-shadow: var(--shadow-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone-600);
+}
+
+.badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue-500);
+}
+
 .intro {
   max-width: var(--text-max);
   margin-bottom: var(--space-5);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--ink-900);
 }
 
 .list {
@@ -14,29 +45,31 @@
 
 .scenario {
   background: var(--paper);
-  border: 1px solid var(--border-hair);
+  border: 1px solid var(--stone-200);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-hard);
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
   transition: transform var(--dur-med) var(--ease-out),
     box-shadow var(--dur-med) var(--ease-out);
 }
 
 .scenario:hover {
-  transform: none;
+  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
-/* Report header — brand blue. */
+/* Report header — neutral (monochrome): paper with a hairline base, dark client
+   name, muted label, outline environment pills. */
 .header {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 20px 26px;
-  background: var(--blue-500);
-  color: var(--paper);
+  padding: 22px 26px;
+  background: var(--stone-50);
+  border-bottom: 1px solid var(--stone-200);
+  color: var(--ink-900);
 }
 
 .scenarioNum {
@@ -45,17 +78,17 @@
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-on-brand-muted);
+  color: var(--stone-400);
 }
 
 .client {
   margin: 0;
   font-family: var(--font-display);
   font-size: 22px;
-  font-weight: var(--fw-black);
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.02em;
   line-height: 1.1;
-  color: var(--paper);
+  color: var(--ink-900);
 }
 
 .envs {
@@ -66,13 +99,14 @@
 
 .env {
   padding: 5px 11px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--stone-200);
   border-radius: var(--radius-pill);
+  background: var(--paper);
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 500;
   line-height: 1;
-  color: var(--paper);
+  color: var(--stone-600);
 }
 
 /* Collapsible triad wrapper (cards 2–3). Content stays in the DOM when
@@ -123,17 +157,17 @@
 .situation .rowNum,
 .situation .rowName,
 .situation .rowIcon {
-  color: var(--ink-900);
+  color: var(--stone-500);
 }
 .found .rowNum,
 .found .rowName,
 .found .rowIcon {
-  color: var(--blue-500);
+  color: var(--blue-600);
 }
 .delivered .rowNum,
 .delivered .rowName,
 .delivered .rowIcon {
-  color: var(--evergreen-500);
+  color: var(--ink-900);
 }
 
 .rowText {
@@ -148,8 +182,8 @@
    diverges from design.md 471–472 + the образец, which keep these as body text). */
 .metric {
   font-family: var(--font-display);
-  font-weight: var(--fw-black); /* Mulish 900 */
-  color: var(--evergreen-500); /* #17A26A */
+  font-weight: var(--fw-bold);
+  color: var(--blue-600);
 }
 
 /* Progressive-disclosure toggle (cards 2–3) — text-link styled button. */

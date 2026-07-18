@@ -2,14 +2,45 @@
    ink header vs brand header; X (clay) vs Check (blue). Stacks on mobile.
    Copy from docs/texts.md. No Tailwind. */
 
+/* Outline badge with a blue accent dot (shadcnblocks monochrome). */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--space-3);
+  padding: 5px 13px;
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  box-shadow: var(--shadow-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone-600);
+}
+
+.badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue-500);
+}
+
 .intro {
   max-width: var(--text-max);
   margin-bottom: var(--space-2);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--ink-900);
 }
 
 .text {
   max-width: var(--text-max);
-  color: black;
+  color: var(--stone-500);
   margin-bottom: var(--space-5);
 }
 
@@ -78,14 +109,14 @@
   color: var(--ink-900);
   font-family: var(--font-display);
   font-size: 16px;
-  font-weight: var(--fw-extrabold);
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.015em;
 }
 
 .iconX {
   flex-shrink: 0;
   margin-top: 1px;
-  color: var(--clay-500);
+  color: var(--stone-400);
 }
 
 .iconCheck {
