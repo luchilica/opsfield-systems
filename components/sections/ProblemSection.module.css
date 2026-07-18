@@ -26,22 +26,21 @@
   max-width: 560px;
 }
 
-/* Outline badge with a blue accent dot (matches the Hero badge). */
+/* Outline badge on the blue fill — translucent white pill, white accent dot. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 5px 13px;
-  border: 1px solid var(--stone-200);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: var(--radius-pill);
-  background: var(--paper);
-  box-shadow: var(--shadow-xs);
+  background: rgba(255, 255, 255, 0.12);
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--stone-600);
+  color: var(--paper);
 }
 
 .eyebrow::before {
@@ -49,18 +48,17 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--blue-500);
+  background: var(--paper);
 }
 
 .heading {
   font-weight: var(--fw-semibold);
   letter-spacing: -0.02em;
   line-height: 1.1;
-  color: var(--ink-900);
 }
 
 .text {
-  color: var(--stone-500);
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .cta {
@@ -80,7 +78,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--stone-400);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .causeGrid {
@@ -123,7 +121,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--stone-100);
+  background: var(--blue-50);
   color: var(--blue-600);
 }
 
@@ -133,4 +131,21 @@
   font-weight: var(--fw-semibold);
   letter-spacing: -0.01em;
   color: var(--ink-900);
+}
+
+/* Decorative corner + motif (behind content), echoing the AI block. Anchored in
+   the blue upper zone so it doesn't land on the white fade. */
+.plusTop {
+  position: absolute;
+  z-index: 0;
+  top: -30px;
+  right: 5%;
+  color: rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .plusTop {
+    display: none;
+  }
 }

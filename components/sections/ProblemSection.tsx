@@ -1,5 +1,6 @@
 import { GitBranch, Database, BarChart3, Workflow, Layers } from "lucide-react";
 import Button from "@/components/ui/Button";
+import PlusMark from "@/components/ui/PlusMark";
 import styles from "./ProblemSection.module.css";
 
 // Copy from docs/texts.md → "Problem Section". Full-fill brand block (v2). The
@@ -16,6 +17,8 @@ const CAUSES = [
 export default function ProblemSection() {
   return (
     <div className="container">
+      <PlusMark size={140} className={styles.plusTop} />
+
       <div className={styles.grid}>
         <div className={styles.block}>
           <p className={styles.eyebrow}>THE PROBLEM</p>
@@ -28,7 +31,7 @@ export default function ProblemSection() {
           </p>
           <Button
             href="#diagnostic-request-form"
-            variant="primary"
+            variant="on-brand"
             icon
             className={styles.cta}
             data-request-type="Business & IT Diagnostic"

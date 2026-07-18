@@ -415,9 +415,20 @@ main > section:nth-of-type(even) {
    Positioned + clipped so the decorative + motifs anchor to the section and
    clip at its edges (same as #delivery-model / #final-cta).
    Headings on brand/ink surfaces invert to white (base heading color is ink). */
-/* Problem — monochrome (shadcnblocks reference): no full-fill; it takes the
-   default neutral even-band (--bg-band) with dark text. Blue survives only as
-   the accent on the badge dot, icon glyphs, and the primary CTA. */
+/* Problem — full-fill block like #ai-process-automation, but the fill runs
+   blue -> white top-to-bottom, fading into the (white) next section. Content
+   sits in the blue zone (white text); the white cause cards read on both. */
+#problem-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(80% 90% at 12% 0%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 55%),
+    linear-gradient(180deg, var(--blue-600) 0%, var(--blue-500) 38%, var(--blue-300) 72%, var(--blue-100) 90%, var(--paper) 100%);
+  color: var(--text-on-brand);
+}
+#problem-section :is(h1, h2, h3, h4) {
+  color: var(--text-on-brand);
+}
 
 /* Full-fill ink block (v2) — AI & Process Automation. Positioned + clipped for
    the decorative + motifs. */
