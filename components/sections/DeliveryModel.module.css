@@ -89,9 +89,9 @@
   align-items: center;
   width: fit-content;
   margin-top: 8px;
-  padding: 4px 9px;
-  border: 1.5px solid var(--ink-900);
-  border-radius: var(--radius-xs);
+  padding: 4px 11px;
+  border: 1px solid var(--ink-900);
+  border-radius: var(--radius-pill);
   font-family: var(--font-mono-fallback);
   font-size: 10px;
   font-weight: 500;
@@ -183,9 +183,9 @@
 .envItem {
   display: inline-flex;
   align-items: center;
-  padding: 8px 14px;
-  border: 1.5px solid var(--border-on-dark);
-  border-radius: var(--radius-xs);
+  padding: 8px 15px;
+  border: 1px solid var(--border-on-dark);
+  border-radius: var(--radius-pill);
   font-family: var(--font-mono-fallback);
   font-size: 12px;
   font-weight: 500;

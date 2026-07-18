@@ -76,7 +76,7 @@ export default function DeliveryModel() {
 
         <div className={styles.roles}>
           {ROLES.map(({ title, initials, subtitle, tone, responsibilities }) => (
-            <Card key={title} tone={tone} hardShadow hover={false}>
+            <Card key={title} tone={tone} soft hover={false}>
               <div className={styles.role}>
                 <div className={styles.roleHead}>
                   <span

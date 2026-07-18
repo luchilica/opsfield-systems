@@ -30,11 +30,11 @@
   padding: 32px;
   background: var(--paper);
   color: var(--ink-900);
-  border: var(--border-heavy) solid var(--ink-900);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-hard);
-  /* Signature press — matches the shared Card interaction (reduced-motion is
-     handled globally in globals.css). */
+  /* Block visual style (services/feature reference): hairline border, larger
+     radius, soft shadow — not the blocky 2px-ink + hard offset. */
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   transition: transform var(--dur-med) var(--ease-out),
     box-shadow var(--dur-med) var(--ease-out);
 }
@@ -62,13 +62,14 @@
 }
 
 .step:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 11px 11px 0 var(--ink-900);
+  transform: none;
+  box-shadow: var(--shadow-md);
 }
 
 .stepFeatured {
   background: var(--blue-500);
   color: var(--paper);
+  border-color: var(--blue-500);
 }
 
 /* Top row — big number left, functional icon right. */
