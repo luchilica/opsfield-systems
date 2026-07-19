@@ -9,6 +9,7 @@ export type Dict = Partial<Record<Locale, Record<string, string>>>;
 
 export const dictionary: Dict = {
   "es-US": {
+    "Questions or issues?": "¿Preguntas o problemas?",
     "Services": "Servicios",
     "How It Works": "Cómo funciona",
     "Results": "Resultados",
@@ -256,6 +257,7 @@ export const dictionary: Dict = {
     "Request a Diagnostic for Your Team": "Solicite un diagnóstico para su equipo"
   },
   "ru-US": {
+    "Questions or issues?": "Вопросы или проблемы?",
     "Services": "Услуги",
     "How It Works": "Как это работает",
     "Results": "Результаты",
@@ -503,6 +505,7 @@ export const dictionary: Dict = {
     "Request a Diagnostic for Your Team": "Запросить диагностику для вашей команды"
   },
   "zh-Hans": {
+    "Questions or issues?": "有疑问或遇到问题？",
     "Services": "服务",
     "How It Works": "运作方式",
     "Results": "成效",

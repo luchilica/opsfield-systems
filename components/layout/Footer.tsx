@@ -92,10 +92,16 @@ export default async function Footer() {
           />
         </div>
 
-        {/* Copyright */}
+        {/* Copyright + direct contact */}
         <div className={styles.bottom}>
           <p className={styles.copyright}>
             © 2026 Opsfield Systems. California, USA.
+          </p>
+          <p className={styles.contact}>
+            {t("Questions or issues?")}{" "}
+            <a href="mailto:opsfieldsystems@gmail.com" className={styles.contactLink}>
+              opsfieldsystems@gmail.com
+            </a>
           </p>
         </div>
       </div>
