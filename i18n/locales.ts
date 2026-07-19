@@ -8,8 +8,10 @@ export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = "en-US";
 
 export interface LocaleMeta {
-  /** Native label for the language switcher. */
+  /** Native label for the language switcher menu. */
   label: string;
+  /** Short code shown inside the circular switcher toggle. */
+  short: string;
   /** BCP-47 tag for <html lang> and hreflang. */
   htmlLang: string;
   /** Open Graph locale (underscored). */
@@ -25,6 +27,7 @@ export interface LocaleMeta {
 export const LOCALE_META: Record<Locale, LocaleMeta> = {
   "en-US": {
     label: "English",
+    short: "EN",
     htmlLang: "en-US",
     ogLocale: "en_US",
     prefix: "",
@@ -33,6 +36,7 @@ export const LOCALE_META: Record<Locale, LocaleMeta> = {
   },
   "es-US": {
     label: "Español",
+    short: "ES",
     htmlLang: "es-US",
     ogLocale: "es_US",
     prefix: "/es",
@@ -41,19 +45,21 @@ export const LOCALE_META: Record<Locale, LocaleMeta> = {
   },
   "ru-US": {
     label: "Русский",
+    short: "RU",
     htmlLang: "ru-US",
     ogLocale: "ru_RU",
     prefix: "/ru",
     indexable: false,
-    enabled: false,
+    enabled: true,
   },
   "zh-Hans": {
     label: "简体中文",
+    short: "中",
     htmlLang: "zh-Hans",
     ogLocale: "zh_CN",
     prefix: "/zh-hans",
     indexable: false,
-    enabled: false,
+    enabled: true,
   },
 };
 
