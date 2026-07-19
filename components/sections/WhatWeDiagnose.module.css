@@ -66,7 +66,7 @@
   }
 }
 
-/* Circular muted icon tile (shadcn: rounded-full bg-accent) with a blue glyph. */
+/* Circular blue-tinted icon tile with a blue glyph. */
 .cardIcon {
   display: inline-flex;
   align-items: center;
@@ -75,7 +75,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--stone-100);
+  background: var(--blue-50);
   color: var(--blue-600);
 }
 
@@ -94,86 +94,104 @@
   font-weight: var(--fw-regular);
 }
 
-/* "You receive" spec bar — muted panel, hairline border, outline pills. */
+/* "What you receive" — a grid of equal deliverable tiles (icon chip + label). */
 .output {
-  margin-top: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.outputLabel {
+  margin-bottom: 14px;
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--stone-400);
+}
+
+.outputGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .outputGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.outputCard {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  padding: 22px 26px;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
+}
+
+.outputCard:hover {
+  border-color: var(--blue-200);
+  box-shadow: var(--shadow-sm);
+}
+
+.outputIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--blue-50);
+  color: var(--blue-600);
+}
+
+.outputName {
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+  color: var(--ink-900);
+}
+
+/* O-1 secondary service — a quiet, muted panel (it must read as secondary, so
+   no heavy black block): a small inline O-1 chip beside the copy. */
+.o1 {
+  margin-top: var(--space-4);
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 22px 24px;
   border: 1px solid var(--stone-200);
   border-radius: var(--radius-lg);
   background: var(--stone-50);
 }
 
-.outputLabel {
-  margin-right: 6px;
-  font-family: var(--font-mono-fallback);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--stone-400);
-}
-
-.outputList {
-  display: contents;
-  list-style: none;
-}
-
-.outputBadge {
+.o1Tile {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border: 1px solid var(--stone-200);
-  border-radius: var(--radius-pill);
-  background: var(--paper);
-  font-family: var(--font-mono-fallback);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--stone-600);
-}
-
-.outputBadge svg {
-  color: var(--blue-500);
-}
-
-/* O-1 secondary service — hairline panel; black tile is monochrome anchor. */
-.o1 {
-  margin-top: var(--space-3);
-  display: grid;
-  grid-template-columns: 1fr;
-  border: 1px solid var(--stone-200);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--paper);
-}
-
-@media (min-width: 640px) {
-  .o1 {
-    grid-template-columns: auto 1fr;
-  }
-}
-
-.o1Tile {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  min-width: 150px;
-  padding: 24px 28px;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
   background: var(--ink-900);
   color: var(--paper);
   font-family: var(--font-display);
-  font-size: 40px;
+  font-size: 20px;
   font-weight: var(--fw-semibold);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 .o1Body {
-  padding: 22px 26px;
+  flex: 1;
 }
 
 .o1Head {

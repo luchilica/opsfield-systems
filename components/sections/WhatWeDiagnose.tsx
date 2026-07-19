@@ -67,25 +67,27 @@ export default function WhatWeDiagnose() {
       </div>
 
       <div className={styles.output}>
-        <span className={styles.outputLabel}>You receive</span>
-        <ul className={styles.outputList}>
+        <p className={styles.outputLabel}>What you receive</p>
+        <ul className={styles.outputGrid}>
           {OUTPUTS.map(({ label, Icon }) => (
-            <li key={label} className={styles.outputBadge}>
-              <Icon size={13} aria-hidden="true" />
-              {label}
+            <li key={label} className={styles.outputCard}>
+              <span className={styles.outputIcon}>
+                <Icon size={17} aria-hidden="true" />
+              </span>
+              <span className={styles.outputName}>{label}</span>
             </li>
           ))}
         </ul>
       </div>
 
       <div className={styles.o1}>
-        <div className={styles.o1Tile} aria-hidden="true">
+        <span className={styles.o1Tile} aria-hidden="true">
           O-1
-        </div>
+        </span>
         <div className={styles.o1Body}>
           <div className={styles.o1Head}>
             <span className={styles.o1Icon}>
-              <Award size={22} aria-hidden="true" />
+              <Award size={18} aria-hidden="true" />
             </span>
             <h3 className={styles.o1Title}>O-1 Readiness Support</h3>
             <span className={styles.o1Badge}>Secondary service</span>
