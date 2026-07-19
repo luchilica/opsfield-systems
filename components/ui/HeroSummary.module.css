@@ -1,28 +1,32 @@
-/* Hero product panel — shadcnblocks monochrome: a white app-surface card with a
-   hairline border and soft shadow (reads as a real product screenshot). Blue is
-   used only as the metric/icon accent. Tokens from globals.css. */
+/* Hero product panel — an "expensive SaaS" diagnostic card. White app-surface
+   with a faint top-down sheen and a soft float; the Situation → Found →
+   Delivered rows are a vertical timeline with circular blue-glyph nodes (the
+   last one filled = completed). Blue is the single accent. Tokens from
+   globals.css. No Tailwind. */
 
 .panel {
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--paper);
+  background: linear-gradient(180deg, var(--paper) 0%, var(--stone-50) 100%);
   color: var(--text-body);
   border: 1px solid var(--stone-200);
-  border-top: 3px solid var(--blue-500);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-md);
-  padding: 28px;
+  box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  padding: 26px 28px;
   overflow: hidden;
 }
 
-/* The blue corner + motif is dropped for the clean monochrome surface. */
-.cornerPlus {
-  display: none;
+/* ----- Header: title left, outline tag right ----- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.label {
+.eyebrow {
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 500;
@@ -31,8 +35,34 @@
   color: var(--stone-400);
 }
 
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  box-shadow: var(--shadow-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone-500);
+  white-space: nowrap;
+}
+
+.tag::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--blue-500);
+}
+
 .client {
-  margin-top: 6px;
+  margin-top: 14px;
   font-family: var(--font-display);
   font-size: 20px;
   font-weight: var(--fw-semibold);
@@ -41,27 +71,66 @@
   color: var(--ink-900);
 }
 
-.rows {
-  margin-top: 20px;
-  margin-bottom: 20px;
+/* ----- Timeline ----- */
+.timeline {
+  margin: 24px 0 4px;
+  list-style: none;
   display: flex;
   flex-direction: column;
 }
 
-.row {
-  padding: 16px 0;
-  border-top: 1px solid var(--stone-200);
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 14px;
+  padding-bottom: 22px;
 }
 
-.row:first-child {
-  border-top: none;
-  padding-top: 0;
+.step:last-child {
+  padding-bottom: 0;
 }
 
-.rowLabel {
-  display: flex;
+/* Connector rail between nodes. */
+.step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 38px;
+  bottom: 4px;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--stone-200);
+}
+
+.node {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  background: var(--blue-50);
+  color: var(--blue-600);
+  border: 1px solid var(--blue-100);
+  box-shadow: 0 0 0 4px rgba(37, 81, 210, 0.04);
+  z-index: 1;
+}
+
+/* Final step reads as "done" — a solid blue node with a white glyph. */
+.step:last-child .node {
+  background: var(--blue-500);
+  color: var(--paper);
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 4px rgba(37, 81, 210, 0.1);
+}
+
+.stepBody {
+  padding-top: 1px;
+}
+
+.stepLabel {
+  display: block;
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 600;
@@ -70,26 +139,30 @@
   color: var(--stone-500);
 }
 
-.rowIcon {
-  flex-shrink: 0;
-  color: var(--blue-500);
-}
-
-.rowText {
-  margin-top: 8px;
+.stepText {
+  margin-top: 5px;
   font-size: 15px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--ink-900);
 }
 
+/* ----- Metrics footer (full-bleed, tinted) ----- */
 .metrics {
-  margin: 0 -28px -28px;
-  padding: 22px 28px 26px;
+  margin: 24px -28px -26px;
+  padding: 20px 28px 24px;
   background: var(--blue-50);
   border-top: 1px solid var(--stone-200);
   display: flex;
-  gap: 36px;
+}
+
+.metric {
+  flex: 1;
+}
+
+.metric + .metric {
+  padding-left: 28px;
+  border-left: 1px solid var(--blue-100);
 }
 
 .metricNum {

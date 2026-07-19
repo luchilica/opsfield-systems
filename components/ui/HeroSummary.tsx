@@ -1,10 +1,10 @@
 import { Info, Search, CheckCircle2 } from "lucide-react";
-import PlusMark from "./PlusMark";
 import styles from "./HeroSummary.module.css";
 
 // Hero brand panel — an illustrative diagnostic summary (mirrors Scenario 01).
-// Situation / Diagnostic found / Delivered rows + two headline metrics. The
-// figures are illustrative, estimate-framed — not a verified Opsfield result.
+// Situation / Diagnostic found / Delivered read as a timeline (the diagnostic
+// process), capped by two headline metrics. The figures are illustrative,
+// estimate-framed — not a verified Opsfield result.
 const ROWS = [
   {
     label: "01 · Situation",
@@ -30,29 +30,32 @@ export default function HeroSummary() {
       role="img"
       aria-label="Illustrative diagnostic summary: a B2B services firm where leads dropped between marketing and sales; the diagnostic found four undocumented handoff points and delivered a single owner per lead stage, with an estimated $180K+ in revenue at risk addressed on a 30-day cleanup."
     >
-      <PlusMark size={44} className={styles.cornerPlus} />
-
-      <p className={styles.label}>Diagnostic summary · representative scenario</p>
+      <div className={styles.header}>
+        <p className={styles.eyebrow}>Diagnostic summary</p>
+        <span className={styles.tag}>Representative scenario</span>
+      </div>
       <p className={styles.client}>B2B services firm · ~80 employees</p>
 
-      <div className={styles.rows}>
+      <ol className={styles.timeline}>
         {ROWS.map((r) => (
-          <div key={r.label} className={styles.row}>
-            <div className={styles.rowLabel}>
-              <r.Icon size={18} className={styles.rowIcon} aria-hidden="true" />
-              <span>{r.label}</span>
+          <li key={r.label} className={styles.step}>
+            <span className={styles.node}>
+              <r.Icon size={17} aria-hidden="true" />
+            </span>
+            <div className={styles.stepBody}>
+              <span className={styles.stepLabel}>{r.label}</span>
+              <p className={styles.stepText}>{r.text}</p>
             </div>
-            <p className={styles.rowText}>{r.text}</p>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
 
       <div className={styles.metrics}>
-        <div>
+        <div className={styles.metric}>
           <p className={styles.metricNum}>$180K+</p>
           <p className={styles.metricCap}>Revenue at risk (est.)</p>
         </div>
-        <div>
+        <div className={styles.metric}>
           <p className={styles.metricNum}>30-day</p>
           <p className={styles.metricCap}>Cleanup priority</p>
         </div>
