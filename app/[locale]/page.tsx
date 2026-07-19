@@ -3,7 +3,10 @@
 // the form body itself arrives in the next Stage 4 prompt.
 
 import type { Metadata } from "next";
-import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
+import { setRequestLocale } from "next-intl/server";
+import { siteConfig } from "@/lib/site-config";
+import { LOCALE_META, type Locale } from "@/i18n/locales";
+import { alternatesFor, robotsFor, localizedUrl } from "@/lib/i18n";
 import JsonLd from "@/components/seo/JsonLd";
 import Hero from "@/components/sections/Hero";
 import ProblemSection from "@/components/sections/ProblemSection";
@@ -24,29 +27,41 @@ const TITLE = "Diagnostic-First IT & Business Development | Opsfield Systems";
 const DESCRIPTION =
   "B2B companies with 50–250 employees use Opsfield Systems to diagnose process, CRM, data, and IT bottlenecks before committing to tools, hires, or implementation.";
 
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: getCanonicalUrl("/") },
-  robots: siteConfig.isPreview
-    ? { index: false, follow: false }
-    : { index: true, follow: true },
-  openGraph: {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const loc = locale as Locale;
+  return {
     title: TITLE,
     description: DESCRIPTION,
-    url: getCanonicalUrl("/"),
-    type: "website",
-    siteName: siteConfig.name,
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: TITLE,
-    description: DESCRIPTION,
-  },
-};
+    alternates: alternatesFor(loc, "/"),
+    robots: robotsFor(loc),
+    openGraph: {
+      title: TITLE,
+      description: DESCRIPTION,
+      url: localizedUrl(loc, "/"),
+      type: "website",
+      siteName: siteConfig.name,
+      locale: LOCALE_META[loc].ogLocale,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: TITLE,
+      description: DESCRIPTION,
+    },
+  };
+}
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <>
       <JsonLd />

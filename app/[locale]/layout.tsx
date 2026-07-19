@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { Mulish, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import SkipLink from "@/components/layout/SkipLink";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -8,6 +11,8 @@ import CookieConsent from "@/components/analytics/CookieConsent";
 import AnalyticsProvider from "@/components/analytics/AnalyticsProvider";
 import AnalyticsClickTracker from "@/components/analytics/AnalyticsClickTracker";
 import { siteConfig } from "@/lib/site-config";
+import { routing } from "@/i18n/routing";
+import { LOCALE_META, type Locale } from "@/i18n/locales";
 
 // v2 brand face — Mulish, weight-driven hierarchy (900 display/wordmark, 800
 // sub-heads, 700 UI, 600 emphasis, 400–500 body). Self-hosted by next/font
@@ -37,21 +42,34 @@ export const metadata: Metadata = {
   description: "Diagnostic-first IT & business consulting.",
 };
 
-export default function RootLayout({
+// Statically render all known locales.
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function LocaleLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+
   return (
-    <html lang="en-US">
+    <html lang={LOCALE_META[locale as Locale].htmlLang}>
       <body className={`${mulish.variable} ${jetbrainsMono.variable}`}>
-        <SkipLink />
-        <Header />
-        <main id="main-content">{children}</main>
-        <Footer />
-        <CookieConsent />
-        <AnalyticsProvider />
-        <AnalyticsClickTracker />
+        <NextIntlClientProvider>
+          <SkipLink />
+          <Header />
+          <main id="main-content">{children}</main>
+          <Footer />
+          <CookieConsent />
+          <AnalyticsProvider />
+          <AnalyticsClickTracker />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

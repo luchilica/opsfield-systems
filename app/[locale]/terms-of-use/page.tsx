@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPageLayout from "@/components/layout/LegalPageLayout";
+import { setRequestLocale } from "next-intl/server";
 import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
 
 // Content is reproduced verbatim from docs/texts.md → "Page: Terms of Use".
@@ -16,7 +17,13 @@ export const metadata: Metadata = {
     : { index: false, follow: true },
 };
 
-export default function TermsOfUse() {
+export default async function TermsOfUse({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <LegalPageLayout title="Terms of Use" lastUpdated="June 13, 2026">
       <p>

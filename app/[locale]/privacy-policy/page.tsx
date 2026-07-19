@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPageLayout from "@/components/layout/LegalPageLayout";
+import { setRequestLocale } from "next-intl/server";
 import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
 
 // Content is reproduced verbatim from docs/texts.md → "Page: Privacy Policy".
@@ -16,7 +17,13 @@ export const metadata: Metadata = {
     : { index: false, follow: true },
 };
 
-export default function PrivacyPolicy() {
+export default async function PrivacyPolicy({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <LegalPageLayout title="Privacy Policy" lastUpdated="June 13, 2026">
       <p>
