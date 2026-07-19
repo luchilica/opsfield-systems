@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-US">
       <body className={`${mulish.variable} ${jetbrainsMono.variable}`}>
         <SkipLink />
         <Header />
