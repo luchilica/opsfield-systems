@@ -6,10 +6,11 @@ import { ArrowRight, Info, Search, CheckCircle2 } from "lucide-react";
 import styles from "./DiagnosticScenarios.module.css";
 
 // Copy from docs/texts.md → "Diagnostic Scenarios". Anonymized + illustrative.
-// v2 report cards: brand header + Situation / Diagnostic found / Delivered rows.
+// Presented as an interactive switcher: a scenario list on the left, a detailed
+// Situation → Diagnostic found → Delivered panel on the right. Every panel is
+// rendered (inactive ones visually hidden, never display:none) so all scenario
+// copy stays in the served HTML for crawlers.
 // Do not present as verified case studies, metrics, logos or testimonials.
-// Cards 2–3 collapse the triad rows behind a toggle; content stays in the DOM
-// (max-height:0 + overflow:hidden, never display:none) for crawlability.
 type Scenario = {
   client: string;
   environment: string[];
@@ -72,89 +73,101 @@ const SCENARIOS: Scenario[] = [
 ];
 
 const ROWS = [
-  { key: "situation", label: "Situation", num: "01", Icon: Info },
-  { key: "found", label: "Diagnostic found", num: "02", Icon: Search },
-  { key: "delivered", label: "Delivered", num: "03", Icon: CheckCircle2 },
+  { key: "situation", label: "Situation", Icon: Info },
+  { key: "found", label: "Diagnostic found", Icon: Search },
+  { key: "delivered", label: "Delivered", Icon: CheckCircle2 },
 ] as const;
 
-function ScenarioCard({
-  scenario,
-  index,
-  collapsible,
-}: {
-  scenario: Scenario;
-  index: number;
-  collapsible: boolean;
-}) {
-  const [open, setOpen] = useState(false);
-  const collapsed = collapsible && !open;
-  const rowsId = `scenario-${index + 1}-rows`;
-
-  return (
-    <article className={styles.scenario}>
-      <div className={styles.header}>
-        <div>
-          <p className={styles.scenarioNum}>
-            Scenario · {String(index + 1).padStart(2, "0")}
-          </p>
-          <h3 className={styles.client}>{scenario.client}</h3>
-        </div>
-        <div className={styles.envs}>
-          {scenario.environment.map((e) => (
-            <span key={e} className={styles.env}>
-              {e}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Triad rows. Collapsed via max-height:0 (still in the DOM for crawlers). */}
-      <div
-        id={rowsId}
-        className={`${styles.rows} ${collapsed ? styles.rowsCollapsed : ""}`}
-      >
-        {ROWS.map((r) => (
-          <div key={r.key} className={`${styles.rowGrid} ${styles[r.key]}`}>
-            <div className={styles.rowLabel}>
-              <r.Icon
-                size={24}
-                strokeWidth={1.5}
-                className={styles.rowIcon}
-                aria-hidden="true"
-              />
-              <span className={styles.rowNum}>{r.num}</span>
-              <span className={styles.rowName}>{r.label}</span>
-            </div>
-            <p className={styles.rowText}>{scenario[r.key]}</p>
-          </div>
-        ))}
-      </div>
-
-      {collapsible && (
-        <button
-          type="button"
-          className={styles.toggle}
-          aria-expanded={open}
-          aria-controls={rowsId}
-          onClick={() => setOpen((o) => !o)}
-        >
-          {open ? "Collapse scenario" : "View full scenario →"}
-        </button>
-      )}
-    </article>
-  );
-}
+const pad = (i: number) => String(i + 1).padStart(2, "0");
 
 export default function DiagnosticScenarios() {
+  const [active, setActive] = useState(0);
+
   return (
     <div className="container">
       <p className={styles.badge}>DIAGNOSTIC SCENARIOS</p>
       <h2 className={styles.intro}>Representative diagnostic scenarios.</h2>
 
-      <div className={styles.list}>
-        {SCENARIOS.map((s, i) => (
-          <ScenarioCard key={i} scenario={s} index={i} collapsible={i > 0} />
-        ))}
+      <div className={styles.switcher}>
+        {/* Selector list */}
+        <div
+          className={styles.tabs}
+          role="tablist"
+          aria-label="Diagnostic scenarios"
+        >
+          {SCENARIOS.map((s, i) => {
+            const selected = i === active;
+            return (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                id={`scenario-tab-${i}`}
+                aria-selected={selected}
+                aria-controls={`scenario-panel-${i}`}
+                className={`${styles.tab} ${selected ? styles.tabActive : ""}`}
+                onClick={() => setActive(i)}
+              >
+                <span className={styles.tabNum}>Scenario · {pad(i)}</span>
+                <span className={styles.tabClient}>{s.client}</span>
+                <span className={styles.tabEnvs}>
+                  {s.environment.map((e) => (
+                    <span key={e} className={styles.tabEnv}>
+                      {e}
+                    </span>
+                  ))}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Panels — all rendered; inactive ones visually hidden (in DOM for SEO). */}
+        <div className={styles.panels}>
+          {SCENARIOS.map((s, i) => {
+            const selected = i === active;
+            return (
+              <article
+                key={i}
+                role="tabpanel"
+                id={`scenario-panel-${i}`}
+                aria-labelledby={`scenario-tab-${i}`}
+                aria-hidden={!selected}
+                className={`${styles.panel} ${selected ? styles.panelActive : ""}`}
+              >
+                <span className={styles.ghostNum} aria-hidden="true">
+                  {pad(i)}
+                </span>
+
+                <div className={styles.panelHead}>
+                  <p className={styles.panelNum}>Scenario · {pad(i)}</p>
+                  <h3 className={styles.panelClient}>{s.client}</h3>
+                  <div className={styles.envs}>
+                    {s.environment.map((e) => (
+                      <span key={e} className={styles.env}>
+                        {e}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <ol className={styles.timeline}>
+                  {ROWS.map((r) => (
+                    <li key={r.key} className={`${styles.step} ${styles[r.key]}`}>
+                      <span className={styles.node}>
+                        <r.Icon size={16} aria-hidden="true" />
+                      </span>
+                      <div className={styles.stepBody}>
+                        <span className={styles.stepLabel}>{r.label}</span>
+                        <p className={styles.stepText}>{s[r.key]}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </article>
+            );
+          })}
+        </div>
       </div>
 
       <p className={styles.note}>
