@@ -1,5 +1,6 @@
-/* Why Opsfield Systems — v2 comparison table. Bordered block + hard shadow;
-   ink header vs brand header; X (clay) vs Check (blue). Stacks on mobile.
+/* Why Opsfield Systems — comparison table. Premium surface (hairline + soft
+   shadow); muted "others" column vs bold blue "Opsfield" column. Circular icon
+   nodes: red X (clay) vs solid-blue Check. Stacks on mobile.
    Copy from docs/texts.md. No Tailwind. */
 
 /* Outline badge with a blue accent dot (shadcnblocks monochrome). */
@@ -47,17 +48,15 @@
 .table {
   display: grid;
   grid-template-columns: 1fr;
-  /* Block visual style: hairline border, larger radius, soft shadow. */
+  /* Premium surface: hairline border, larger radius, soft shadow. */
   border: 1px solid var(--border-hair);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  transition: transform var(--dur-med) var(--ease-out),
-    box-shadow var(--dur-med) var(--ease-out);
+  transition: box-shadow var(--dur-med) var(--ease-out);
 }
 
 .table:hover {
-  transform: none;
   box-shadow: var(--shadow-md);
 }
 
@@ -77,8 +76,11 @@
   color: var(--paper);
 }
 
+/* The "others" side is de-emphasised (muted), so the blue Opsfield column
+   reads as the answer. */
 .headOthers {
-  background: var(--ink-900);
+  background: var(--stone-100);
+  color: var(--stone-600);
 }
 
 .headOpsfield {
@@ -113,22 +115,33 @@
   letter-spacing: -0.015em;
 }
 
-.iconX {
+/* Circular icon nodes — red X for "others", solid-blue check for Opsfield. */
+.nodeX,
+.nodeCheck {
   flex-shrink: 0;
   margin-top: 1px;
-  color: var(--stone-400);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.iconCheck {
-  flex-shrink: 0;
-  margin-top: 1px;
-  color: var(--blue-500);
+.nodeX {
+  background: var(--clay-50);
+  color: var(--clay-500);
+}
+
+.nodeCheck {
+  background: var(--blue-500);
+  color: var(--paper);
 }
 
 /* Desktop: vertical divider between the two columns. */
 @media (min-width: 768px) {
   .headOthers {
-    border-right: 1px solid rgba(255, 255, 255, 0.16);
+    border-right: 1px solid var(--stone-200);
   }
   .cellOthers {
     border-right: 1px solid var(--border-hair);
