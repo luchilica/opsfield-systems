@@ -118,8 +118,11 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          <LanguageSwitcher />
         </nav>
+
+        <div className={styles.desktopLang}>
+          <LanguageSwitcher />
+        </div>
 
         <Button
           href={CTA_HREF}

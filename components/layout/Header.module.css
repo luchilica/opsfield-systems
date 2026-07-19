@@ -59,12 +59,22 @@
   display: none;
 }
 
+.desktopLang {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .desktopNav {
     display: flex;
     align-items: center;
     margin-left: auto;
-    margin-right: var(--space-3);
+  }
+
+  /* Language control — its own slot between the nav and the CTA, spaced by the
+     header's flex gap (desktop only; mobile uses the drawer). */
+  .desktopLang {
+    display: inline-flex;
+    align-items: center;
   }
 
   .desktopCta {
