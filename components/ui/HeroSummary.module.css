@@ -18,14 +18,7 @@
   overflow: hidden;
 }
 
-/* ----- Header: title left, outline tag right ----- */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
+/* ----- Header ----- */
 .eyebrow {
   font-family: var(--font-mono-fallback);
   font-size: 11px;
@@ -33,32 +26,6 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--stone-400);
-}
-
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border: 1px solid var(--stone-200);
-  border-radius: var(--radius-pill);
-  background: var(--paper);
-  box-shadow: var(--shadow-xs);
-  font-family: var(--font-mono-fallback);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--stone-500);
-  white-space: nowrap;
-}
-
-.tag::before {
-  content: "";
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--blue-500);
 }
 
 .client {

@@ -150,7 +150,10 @@
     justify-content: center;
   }
 
+  /* Top-align the card and nudge it down to sit level with the headline
+     (past the eyebrow badge), instead of floating centred in the row. */
   .visual {
-    align-items: center;
+    align-items: flex-start;
+    margin-top: var(--space-5);
   }
 }

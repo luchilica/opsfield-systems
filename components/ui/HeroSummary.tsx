@@ -30,10 +30,7 @@ export default function HeroSummary() {
       role="img"
       aria-label="Illustrative diagnostic summary: a B2B services firm where leads dropped between marketing and sales; the diagnostic found four undocumented handoff points and delivered a single owner per lead stage, with an estimated $180K+ in revenue at risk addressed on a 30-day cleanup."
     >
-      <div className={styles.header}>
-        <p className={styles.eyebrow}>Diagnostic summary</p>
-        <span className={styles.tag}>Representative scenario</span>
-      </div>
+      <p className={styles.eyebrow}>Diagnostic summary</p>
       <p className={styles.client}>B2B services firm · ~80 employees</p>
 
       <ol className={styles.timeline}>
