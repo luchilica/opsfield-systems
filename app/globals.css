@@ -444,6 +444,33 @@ main > section:nth-of-type(even) {
   pointer-events: none;
   will-change: background-position;
 }
+/* Second aurora ray — a lighter sky-blue streak at a different angle, drifting
+   the opposite way so the two rays cross over time for a richer aurora. */
+#hero::after {
+  content: "";
+  position: absolute;
+  inset: -25% -15% auto -15%;
+  height: 150%;
+  background-image: repeating-linear-gradient(
+    128deg,
+    transparent 0%,
+    transparent 8%,
+    #6EB8F0 13%,
+    #8ECBF5 16%,
+    transparent 21%,
+    transparent 36%
+  );
+  background-size: 200% 200%;
+  background-position: 50% 50%;
+  filter: blur(6px);
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
+  mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
+  animation: opsfield-aurora-2 42s linear infinite;
+  pointer-events: none;
+  will-change: background-position;
+}
 /* Hero content sits above the aurora layer. */
 #hero > * {
   position: relative;
@@ -457,8 +484,17 @@ main > section:nth-of-type(even) {
     background-position: 350% 50%;
   }
 }
+@keyframes opsfield-aurora-2 {
+  from {
+    background-position: 50% 50%;
+  }
+  to {
+    background-position: -250% 50%;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  #hero::before {
+  #hero::before,
+  #hero::after {
     animation: none;
   }
 }
