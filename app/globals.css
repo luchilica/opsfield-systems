@@ -444,30 +444,33 @@ main > section:nth-of-type(even) {
   pointer-events: none;
   will-change: background-position;
 }
-/* Second aurora ray — a lighter sky-blue streak at a different angle, drifting
-   the opposite way so the two rays cross over time for a richer aurora. */
+/* Second aurora ray — a turquoise ribbon running parallel to the first (same
+   100deg angle) but phase-shifted ~7% so it trails just behind it, and moving
+   with the same animation so the small gap stays constant. Two parallel bands
+   of shifting colour read as a real aurora. */
 #hero::after {
   content: "";
   position: absolute;
   inset: -25% -15% auto -15%;
   height: 150%;
   background-image: repeating-linear-gradient(
-    128deg,
+    100deg,
     transparent 0%,
-    transparent 8%,
-    #6EB8F0 13%,
-    #8ECBF5 16%,
-    transparent 21%,
-    transparent 36%
+    transparent 13%,
+    #35C6C4 18%,
+    #4FD9CC 21%,
+    #35C6C4 24%,
+    transparent 29%,
+    transparent 30%
   );
   background-size: 200% 200%;
   background-position: 50% 50%;
-  filter: blur(6px);
-  opacity: 0.6;
+  filter: blur(5px);
+  opacity: 0.7;
   mix-blend-mode: multiply;
   -webkit-mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
   mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
-  animation: opsfield-aurora-2 42s linear infinite;
+  animation: opsfield-aurora 50s linear infinite;
   pointer-events: none;
   will-change: background-position;
 }
@@ -482,14 +485,6 @@ main > section:nth-of-type(even) {
   }
   to {
     background-position: 350% 50%;
-  }
-}
-@keyframes opsfield-aurora-2 {
-  from {
-    background-position: 50% 50%;
-  }
-  to {
-    background-position: -250% 50%;
   }
 }
 @media (prefers-reduced-motion: reduce) {
