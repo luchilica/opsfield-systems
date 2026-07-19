@@ -9,6 +9,7 @@ import {
 } from "react";
 import { ChevronDown, ChevronUp, ArrowRight, CheckCircle2 } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { useLocale } from "next-intl";
 import { trackEvent } from "@/lib/analytics";
 import { useT } from "@/i18n/useT";
 import styles from "./DiagnosticForm.module.css";
@@ -34,8 +35,9 @@ const COMPANY_SIZE_OPTIONS = ["1–25", "26–50", "51–100", "101–250", "251
 
 const TIMELINE_OPTIONS = ["ASAP", "This month", "1–3 months", "3–6 months", "Researching"];
 
-// Working-brand placeholder — replace once the production domain is confirmed.
-const FALLBACK_EMAIL = "general@opsfieldsystems.com";
+// Fallback contact shown if the form request fails. Real monitored inbox until
+// a domain + hello@ address is set up.
+const FALLBACK_EMAIL = "opsfieldsystems@gmail.com";
 
 const CHALLENGE_MAX = 500;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -59,6 +61,7 @@ type Status = "idle" | "loading" | "success" | "error";
 
 export default function DiagnosticForm() {
   const t = useT();
+  const locale = useLocale();
   const [values, setValues] = useState<Values>(INITIAL);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<Status>("idle");
@@ -142,6 +145,7 @@ export default function DiagnosticForm() {
     try {
       const params = new URLSearchParams(window.location.search);
       const context = {
+        locale,
         page_url: window.location.href,
         page_section: "business-it-diagnostic",
         cta_text: lastCtaRef.current,
