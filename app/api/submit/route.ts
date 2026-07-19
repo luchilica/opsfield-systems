@@ -113,11 +113,17 @@ export async function POST(request: Request) {
     return json({ ok: false, errors }, 422);
   }
 
-  // No real inbox before the sending domain is verified: accept + validate but
-  // do not attempt delivery. The client still shows success.
-  const apiKey = process.env.RESEND_API_KEY;
-  if (siteConfig.isPreview || !apiKey) {
+  // Preview has no real inbox — accept + validate, send nothing.
+  if (siteConfig.isPreview) {
     return json({ ok: true, delivered: false });
+  }
+
+  // Production must never claim success without actually delivering. A missing
+  // key is a misconfiguration — surface it as an error so the client shows the
+  // email fallback instead of a false "received" screen (silent lead loss).
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    return json({ ok: false, error: "not_configured" }, 500);
   }
 
   try {
