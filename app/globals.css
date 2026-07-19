@@ -444,10 +444,10 @@ main > section:nth-of-type(even) {
   pointer-events: none;
   will-change: background-position;
 }
-/* Second aurora ray — a turquoise ribbon running parallel to the first (same
-   100deg angle) but phase-shifted ~7% so it trails just behind it, and moving
-   with the same animation so the small gap stays constant. Two parallel bands
-   of shifting colour read as a real aurora. */
+/* Second aurora ray — a light-blue ribbon (site palette) running parallel to
+   the first (same 100deg angle) but phase-shifted ~7% so it trails just behind
+   it, and moving with the same animation so the small gap stays constant. Two
+   parallel bands read as a real aurora. */
 #hero::after {
   content: "";
   position: absolute;
@@ -457,9 +457,9 @@ main > section:nth-of-type(even) {
     100deg,
     transparent 0%,
     transparent 13%,
-    #35C6C4 18%,
-    #4FD9CC 21%,
-    #35C6C4 24%,
+    var(--blue-200) 18%,
+    var(--blue-300) 21%,
+    var(--blue-200) 24%,
     transparent 29%,
     transparent 30%
   );
