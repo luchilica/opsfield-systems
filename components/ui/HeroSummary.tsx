@@ -54,7 +54,7 @@ export default async function HeroSummary() {
           <p className={styles.metricCap}>{t("Revenue at risk (est.)")}</p>
         </div>
         <div className={styles.metric}>
-          <p className={styles.metricNum}>30-day</p>
+          <p className={styles.metricNum}>{t("30-day")}</p>
           <p className={styles.metricCap}>{t("Cleanup priority")}</p>
         </div>
       </div>

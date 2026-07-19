@@ -50,7 +50,7 @@ const SCENARIOS: Scenario[] = [
         {t(
           "Unified reporting definitions document covering 7 previously inconsistent metrics. Data-source consolidation plan projected to remove",
         )}{" "}
-        <span className={styles.metric}>40+ hours/month</span>{" "}
+        <span className={styles.metric}>{t("40+ hours/month")}</span>{" "}
         {t(
           "of manual reconciliation. BI roadmap prioritized by stakeholder impact with 90-day execution timeline.",
         )}

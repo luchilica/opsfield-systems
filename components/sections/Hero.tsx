@@ -52,7 +52,7 @@ export default async function Hero() {
             <p className={styles.statCap}>{t("Employees · best fit")}</p>
           </div>
           <div className={styles.stat}>
-            <p className={styles.statNum}>5+ yrs</p>
+            <p className={styles.statNum}>{t("5+ yrs")}</p>
             <p className={styles.statCap}>{t("Boutique advisory")}</p>
           </div>
         </div>
