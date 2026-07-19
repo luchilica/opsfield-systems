@@ -12,6 +12,7 @@ import {
   Shield,
 } from "lucide-react";
 import Card from "@/components/ui/Card";
+import PlusMark from "@/components/ui/PlusMark";
 import styles from "./DeliveryModel.module.css";
 
 // Copy from docs/texts.md → "Delivery Model". Role-only cards (no names, photos,
@@ -61,6 +62,9 @@ const ENVIRONMENTS = [
 export default function DeliveryModel() {
   return (
     <div className="container">
+      <PlusMark size={220} className={styles.plusTop} />
+      <PlusMark size={120} className={styles.plusBottom} />
+
       <div className={styles.inner}>
         <p className={styles.badge}>DELIVERY MODEL</p>
         <h2 className={styles.intro}>Senior attention without a handoff chain.</h2>

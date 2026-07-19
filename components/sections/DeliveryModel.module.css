@@ -244,3 +244,30 @@
   color: var(--paper);
   text-decoration: underline;
 }
+
+/* Decorative corner + motifs (behind content). */
+.plusTop,
+.plusBottom {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.plusTop {
+  top: -40px;
+  right: -20px;
+  color: rgba(37, 81, 210, 0.28);
+}
+
+.plusBottom {
+  bottom: 40px;
+  left: 3%;
+  color: rgba(37, 81, 210, 0.18);
+}
+
+@media (max-width: 767px) {
+  .plusTop,
+  .plusBottom {
+    display: none;
+  }
+}
