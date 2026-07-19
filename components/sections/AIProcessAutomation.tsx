@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+import { ArrowRight } from "lucide-react";
 import Button from "@/components/ui/Button";
 import PlusMark from "@/components/ui/PlusMark";
 import styles from "./AIProcessAutomation.module.css";
@@ -13,12 +15,12 @@ const SCOPE = [
   "AI readiness",
 ];
 
-// Process-to-automation flow (docs/texts.md → "Flow") as three step pills:
-// Diagnostic (blue) → Automation opportunity (ink) → Roadmap / limited scope (green).
+// Process-to-automation flow (docs/texts.md → "Flow") as a numbered pipeline:
+// Diagnostic → Automation opportunity → Roadmap / limited scope.
 const FLOW = [
-  { n: "01", label: "Diagnostic", tone: "pillBlue" },
-  { n: "02", label: "Automation opportunity", tone: "pillDark" },
-  { n: "03", label: "Roadmap or limited scope", tone: "pillGreen" },
+  { n: "01", label: "Diagnostic" },
+  { n: "02", label: "Automation opportunity" },
+  { n: "03", label: "Roadmap or limited scope" },
 ] as const;
 
 export default function AIProcessAutomation() {
@@ -39,29 +41,35 @@ export default function AIProcessAutomation() {
         </p>
 
         <ol className={styles.flow} aria-label="From diagnostic to automation">
-          {FLOW.map((step) => (
-            <li key={step.n} className={`${styles.pill} ${styles[step.tone]}`}>
-              <span className={styles.pillStep}>Step {step.n}</span>
-              <span className={styles.pillLabel}>{step.label}</span>
-            </li>
+          {FLOW.map((step, i) => (
+            <Fragment key={step.n}>
+              <li className={styles.pill}>
+                <span className={styles.pillNode}>{step.n}</span>
+                <span className={styles.pillLabel}>{step.label}</span>
+              </li>
+              {i < FLOW.length - 1 && (
+                <li className={styles.flowArrow} aria-hidden="true">
+                  <ArrowRight size={20} />
+                </li>
+              )}
+            </Fragment>
           ))}
         </ol>
 
         <div className={styles.scopeBox}>
-          <div className={styles.scopeRow}>
-            <span className={styles.scopeLabel}>Scope</span>
-            <ul className={styles.scope}>
-              {SCOPE.map((item) => (
-                <li key={item} className={styles.scopeItem}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <blockquote className={styles.principle}>
-            We automate the right process, not the loudest request.
-          </blockquote>
+          <p className={styles.scopeLabel}>Scope</p>
+          <ul className={styles.scope}>
+            {SCOPE.map((item) => (
+              <li key={item} className={styles.scopeItem}>
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
+
+        <blockquote className={styles.principle}>
+          We automate the right process, not the loudest request.
+        </blockquote>
 
         <Button
           href="#diagnostic-request-form"
