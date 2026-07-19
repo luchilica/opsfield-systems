@@ -1,4 +1,5 @@
-import { Search, Gauge, Signpost } from "lucide-react";
+import { Fragment } from "react";
+import { Search, Gauge, Signpost, ArrowRight } from "lucide-react";
 import Button from "@/components/ui/Button";
 import styles from "./HowDiagnosticWorks.module.css";
 
@@ -33,19 +34,27 @@ export default function HowDiagnosticWorks() {
 
       <ol className={styles.steps}>
         {STEPS.map(({ title, Icon, text }, i) => (
-          <li
-            key={i}
-            className={`${styles.step} ${i === 1 ? styles.stepFeatured : ""}`}
-          >
-            <div className={styles.stepTop}>
-              <span className={styles.number} aria-hidden="true">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <Icon size={24} className={styles.stepIcon} aria-hidden="true" />
-            </div>
-            <p className={styles.stepTitle}>{title}</p>
-            <p className={styles.stepText}>{text}</p>
-          </li>
+          <Fragment key={i}>
+            <li
+              className={`${styles.step} ${i === 1 ? styles.stepFeatured : ""}`}
+            >
+              <div className={styles.stepTop}>
+                <span className={styles.number} aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className={styles.stepIcon}>
+                  <Icon size={22} aria-hidden="true" />
+                </span>
+              </div>
+              <p className={styles.stepTitle}>{title}</p>
+              <p className={styles.stepText}>{text}</p>
+            </li>
+            {i < STEPS.length - 1 && (
+              <li className={styles.stepArrow} aria-hidden="true">
+                <ArrowRight size={22} />
+              </li>
+            )}
+          </Fragment>
         ))}
       </ol>
 

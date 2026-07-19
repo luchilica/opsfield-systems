@@ -39,30 +39,30 @@
 
 .steps {
   list-style: none;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 @media (min-width: 1024px) {
   .steps {
-    grid-template-columns: repeat(3, 1fr);
-    /* Wider gutter on desktop leaves room for the process-flow connectors
-       (below) to sit clear of each card's hard shadow. */
-    gap: var(--space-4);
+    flex-direction: row;
+    align-items: stretch;
+    gap: 10px;
   }
 }
 
 .step {
   position: relative;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 240px;
-  padding: 32px;
+  min-height: 216px;
+  padding: 28px;
   background: var(--paper);
   color: var(--ink-900);
-  /* Block visual style (services/feature reference): hairline border, larger
-     radius, soft shadow — not the blocky 2px-ink + hard offset. */
   border: 1px solid var(--border-hair);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
@@ -70,44 +70,42 @@
     box-shadow var(--dur-med) var(--ease-out);
 }
 
-/* Process-flow connector — a blocky chevron in the gutter before each step
-   after the first, so the three columns read left→right as one sequence
-   (borrowed structure from the process/timeline references; rebuilt as a
-   CSS-drawn arrowhead in brand blue — no images, no motion library). Desktop
-   only; on stacked mobile the vertical order already carries the sequence. */
-@media (min-width: 1024px) {
-  .step:not(:first-child)::before {
-    content: "";
-    position: absolute;
-    top: 52px;
-    /* Centered in the clear part of the gutter, past the previous card's
-       8px hard shadow. */
-    left: -20px;
-    width: 12px;
-    height: 12px;
-    border-top: 3px solid var(--blue-500);
-    border-right: 3px solid var(--blue-500);
-    transform: rotate(45deg);
-    pointer-events: none;
-  }
-}
-
 .step:hover {
-  transform: none;
   box-shadow: var(--shadow-md);
 }
 
+/* Arrow connector between steps (→ desktop, ↓ mobile). */
+.stepArrow {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-400, #4f7ce8);
+}
+
+@media (max-width: 1023px) {
+  .stepArrow {
+    transform: rotate(90deg);
+  }
+}
+
+/* Step 2 featured — solid brand fill lifted with a soft blue shadow. */
 .stepFeatured {
   background: var(--blue-500);
   color: var(--paper);
   border-color: var(--blue-500);
+  box-shadow: 0 14px 34px rgba(37, 81, 210, 0.3);
 }
 
-/* Top row — big number left, functional icon right. */
+.stepFeatured:hover {
+  box-shadow: 0 18px 40px rgba(37, 81, 210, 0.36);
+}
+
+/* Top row — big number left, icon chip right. */
 .stepTop {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .number {
@@ -123,12 +121,21 @@
   color: var(--paper);
 }
 
+/* Icon chip — rounded blue-tinted tile (translucent white on the featured card). */
 .stepIcon {
-  margin-top: 10px;
-  color: var(--blue-500);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--blue-50);
+  color: var(--blue-600);
 }
 
 .stepFeatured .stepIcon {
+  background: rgba(255, 255, 255, 0.16);
   color: var(--paper);
 }
 
