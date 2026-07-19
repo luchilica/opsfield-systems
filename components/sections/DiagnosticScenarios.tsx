@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { ArrowRight, Info, Search, CheckCircle2 } from "lucide-react";
 import styles from "./DiagnosticScenarios.module.css";
@@ -82,6 +82,21 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
 
 export default function DiagnosticScenarios() {
   const [active, setActive] = useState(0);
+  const panelsRef = useRef<HTMLDivElement>(null);
+
+  // On mobile the panel sits below the selector list — bring it into view when
+  // a scenario is picked (offset for the sticky header). Desktop shows the panel
+  // beside the list, so no scroll there.
+  const selectScenario = (i: number) => {
+    setActive(i);
+    if (typeof window === "undefined") return;
+    if (!window.matchMedia("(max-width: 1023px)").matches) return;
+    const el = panelsRef.current;
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const y = el.getBoundingClientRect().top + window.scrollY - 84;
+    window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" });
+  };
 
   return (
     <div className="container">
@@ -106,7 +121,7 @@ export default function DiagnosticScenarios() {
                 aria-selected={selected}
                 aria-controls={`scenario-panel-${i}`}
                 className={`${styles.tab} ${selected ? styles.tabActive : ""}`}
-                onClick={() => setActive(i)}
+                onClick={() => selectScenario(i)}
               >
                 <span className={styles.tabNum}>Scenario · {pad(i)}</span>
                 <span className={styles.tabClient}>{s.client}</span>
@@ -123,7 +138,7 @@ export default function DiagnosticScenarios() {
         </div>
 
         {/* Panels — all rendered; inactive ones visually hidden (in DOM for SEO). */}
-        <div className={styles.panels}>
+        <div className={styles.panels} ref={panelsRef}>
           {SCENARIOS.map((s, i) => {
             const selected = i === active;
             return (
