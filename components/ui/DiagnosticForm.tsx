@@ -10,6 +10,7 @@ import {
 import { ChevronDown, ChevronUp, ArrowRight, CheckCircle2 } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { trackEvent } from "@/lib/analytics";
+import { useT } from "@/i18n/useT";
 import styles from "./DiagnosticForm.module.css";
 
 // Copy from docs/texts.md → "Diagnostic Request Form".
@@ -57,6 +58,7 @@ type FieldErrors = Partial<Record<"name" | "email" | "company" | "challenge", st
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function DiagnosticForm() {
+  const t = useT();
   const [values, setValues] = useState<Values>(INITIAL);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<Status>("idle");
@@ -89,17 +91,20 @@ export default function DiagnosticForm() {
     return () => document.removeEventListener("click", onClick);
   }, []);
 
-  const validate = useCallback((v: Values): FieldErrors => {
-    const e: FieldErrors = {};
-    if (!v.name.trim()) e.name = "Please enter your name.";
-    if (!v.email.trim()) e.email = "Please enter your work email.";
-    else if (!EMAIL_RE.test(v.email.trim()))
-      e.email = "Please enter a valid email address.";
-    if (!v.company.trim()) e.company = "Please enter your company.";
-    if (!v.challenge.trim())
-      e.challenge = "Please describe your main operational challenge.";
-    return e;
-  }, []);
+  const validate = useCallback(
+    (v: Values): FieldErrors => {
+      const e: FieldErrors = {};
+      if (!v.name.trim()) e.name = t("Please enter your name.");
+      if (!v.email.trim()) e.email = t("Please enter your work email.");
+      else if (!EMAIL_RE.test(v.email.trim()))
+        e.email = t("Please enter a valid email address.");
+      if (!v.company.trim()) e.company = t("Please enter your company.");
+      if (!v.challenge.trim())
+        e.challenge = t("Please describe your main operational challenge.");
+      return e;
+    },
+    [t]
+  );
 
   const focusFirstError = (e: FieldErrors) => {
     if (e.name) nameRef.current?.focus();
@@ -188,13 +193,14 @@ export default function DiagnosticForm() {
           size={32}
           aria-hidden="true"
         />
-        <h4 className={styles.successTitle}>Request received.</h4>
+        <h4 className={styles.successTitle}>{t("Request received.")}</h4>
         <p>
-          Thank you. A senior advisor will review your submission, confirm fit,
-          and respond with the safest next step.
+          {t(
+            "Thank you. A senior advisor will review your submission, confirm fit, and respond with the safest next step."
+          )}
         </p>
         <a href="#how-the-diagnostic-works" className={styles.textLink}>
-          See How the Diagnostic Works
+          {t("See How the Diagnostic Works")}
           <ArrowRight size={20} aria-hidden="true" />
         </a>
       </div>
@@ -235,7 +241,7 @@ export default function DiagnosticForm() {
           {/* 1 — Name */}
           <div className={styles.field}>
             <label className={styles.label} htmlFor="df-name">
-              Name <span className={styles.req}>(required)</span>
+              {t("Name")} <span className={styles.req}>{t("(required)")}</span>
             </label>
             <input
               ref={nameRef}
@@ -260,7 +266,8 @@ export default function DiagnosticForm() {
           {/* 2 — Work Email */}
           <div className={styles.field}>
             <label className={styles.label} htmlFor="df-email">
-              Work Email <span className={styles.req}>(required)</span>
+              {t("Work Email")}{" "}
+              <span className={styles.req}>{t("(required)")}</span>
             </label>
             <input
               ref={emailRef}
@@ -285,7 +292,8 @@ export default function DiagnosticForm() {
           {/* 3 — Company */}
           <div className={styles.field}>
             <label className={styles.label} htmlFor="df-company">
-              Company <span className={styles.req}>(required)</span>
+              {t("Company")}{" "}
+              <span className={styles.req}>{t("(required)")}</span>
             </label>
             <input
               ref={companyRef}
@@ -310,8 +318,8 @@ export default function DiagnosticForm() {
           {/* 4 — Main challenge */}
           <div className={styles.field}>
             <label className={styles.label} htmlFor="df-challenge">
-              What&apos;s your biggest operational challenge right now?{" "}
-              <span className={styles.req}>(required)</span>
+              {t("What's your biggest operational challenge right now?")}{" "}
+              <span className={styles.req}>{t("(required)")}</span>
             </label>
             <textarea
               ref={challengeRef}
@@ -330,7 +338,7 @@ export default function DiagnosticForm() {
               }
             />
             <span id="df-challenge-counter" className={`xsmall ${styles.counter}`}>
-              {remaining} characters remaining
+              {remaining} {t("characters remaining")}
             </span>
             {errors.challenge && (
               <p id="df-challenge-error" className={`small ${styles.error}`}>
@@ -347,7 +355,9 @@ export default function DiagnosticForm() {
             aria-controls="df-optional"
             onClick={() => setShowOptional((s) => !s)}
           >
-            {showOptional ? "Hide optional fields" : "Add more context (optional)"}
+            {showOptional
+              ? t("Hide optional fields")
+              : t("Add more context (optional)")}
             {showOptional ? (
               <ChevronUp size={16} aria-hidden="true" />
             ) : (
@@ -360,7 +370,8 @@ export default function DiagnosticForm() {
               {/* Request Type — single select, may be prefilled by CTA routing */}
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="df-request-type">
-                  Request Type <span className={styles.req}>(optional)</span>
+                  {t("Request Type")}{" "}
+                  <span className={styles.req}>{t("(optional)")}</span>
                 </label>
                 <select
                   id="df-request-type"
@@ -369,10 +380,12 @@ export default function DiagnosticForm() {
                   value={values.requestType}
                   onChange={(e) => set("requestType", e.target.value)}
                 >
-                  <option value="">Select a request type (optional)</option>
+                  <option value="">
+                    {t("Select a request type (optional)")}
+                  </option>
                   {REQUEST_TYPE_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>
-                      {opt}
+                      {t(opt)}
                     </option>
                   ))}
                 </select>
@@ -381,7 +394,8 @@ export default function DiagnosticForm() {
               {/* Company Website */}
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="df-website-url">
-                  Company Website <span className={styles.req}>(optional)</span>
+                  {t("Company Website")}{" "}
+                  <span className={styles.req}>{t("(optional)")}</span>
                 </label>
                 <input
                   id="df-website-url"
@@ -397,7 +411,8 @@ export default function DiagnosticForm() {
               {/* Role */}
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="df-role">
-                  Role <span className={styles.req}>(optional)</span>
+                  {t("Role")}{" "}
+                  <span className={styles.req}>{t("(optional)")}</span>
                 </label>
                 <input
                   id="df-role"
@@ -413,7 +428,8 @@ export default function DiagnosticForm() {
               {/* Company Size — no preselected value, no ICP highlighting */}
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="df-company-size">
-                  Company Size <span className={styles.req}>(optional)</span>
+                  {t("Company Size")}{" "}
+                  <span className={styles.req}>{t("(optional)")}</span>
                 </label>
                 <select
                   id="df-company-size"
@@ -422,7 +438,7 @@ export default function DiagnosticForm() {
                   value={values.companySize}
                   onChange={(e) => set("companySize", e.target.value)}
                 >
-                  <option value="">Select company size (optional)</option>
+                  <option value="">{t("Select company size (optional)")}</option>
                   {COMPANY_SIZE_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>
                       {opt}
@@ -434,7 +450,8 @@ export default function DiagnosticForm() {
               {/* Timeline */}
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="df-timeline">
-                  Timeline <span className={styles.req}>(optional)</span>
+                  {t("Timeline")}{" "}
+                  <span className={styles.req}>{t("(optional)")}</span>
                 </label>
                 <select
                   id="df-timeline"
@@ -443,10 +460,10 @@ export default function DiagnosticForm() {
                   value={values.timeline}
                   onChange={(e) => set("timeline", e.target.value)}
                 >
-                  <option value="">Select a timeline (optional)</option>
+                  <option value="">{t("Select a timeline (optional)")}</option>
                   {TIMELINE_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>
-                      {opt}
+                      {t(opt)}
                     </option>
                   ))}
                 </select>
@@ -457,19 +474,22 @@ export default function DiagnosticForm() {
 
         {/* Privacy notice — directly before submit */}
         <p className={`small ${styles.privacy}`}>
-          By submitting this form, you acknowledge our{" "}
-          <a href="/privacy-policy">Privacy Policy</a>. We use your information to
-          evaluate fit and contact you about your diagnostic request.
+          {t("By submitting this form, you acknowledge our")}{" "}
+          <a href="/privacy-policy">Privacy Policy</a>
+          {t(
+            ". We use your information to evaluate fit and contact you about your diagnostic request."
+          )}
         </p>
 
         {status === "error" && (
           <div className={styles.formError} role="alert">
             <p className={styles.error}>
-              Something went wrong and your request was not submitted. Please try
-              again.
+              {t(
+                "Something went wrong and your request was not submitted. Please try again."
+              )}
             </p>
             <p className="small">
-              You can also email us at{" "}
+              {t("You can also email us at")}{" "}
               <a href={`mailto:${FALLBACK_EMAIL}`}>{FALLBACK_EMAIL}</a>.
             </p>
           </div>
@@ -478,17 +498,18 @@ export default function DiagnosticForm() {
         {/* Reassurance microcopy — kept next to the submit control per
             docs/design.md → Form Panel ("near submit"). */}
         <p className={styles.microcopy}>
-          Four required fields. Additional context is optional. No full system
-          access is required for the first fit review.
+          {t(
+            "Four required fields. Additional context is optional. No full system access is required for the first fit review."
+          )}
         </p>
 
         <div className={styles.submitRow}>
           <Button type="submit" variant="primary" disabled={loading}>
-            {loading ? "Submitting..." : "Submit Diagnostic Request"}
+            {loading ? t("Submitting...") : t("Submit Diagnostic Request")}
           </Button>
           {loading && slow && (
             <p className={`small ${styles.processing}`} aria-live="polite">
-              Still processing...
+              {t("Still processing...")}
             </p>
           )}
         </div>

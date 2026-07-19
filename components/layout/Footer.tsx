@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Button from "@/components/ui/Button";
 import CookieConsentReopener from "@/components/analytics/CookieConsentReopener";
+import { getT } from "@/i18n/t";
 import styles from "./Footer.module.css";
 
 // Copy, labels and targets from docs/texts.md + docs/sitemap.md → "Footer".
@@ -29,19 +30,21 @@ function LinkGroup({
   title,
   links,
   extra,
+  t,
 }: {
   title: string;
   links: { label: string; href: string }[];
   extra?: ReactNode;
+  t: (en: string) => string;
 }) {
   return (
     <div>
-      <h2 className={styles.groupTitle}>{title}</h2>
+      <h2 className={styles.groupTitle}>{t(title)}</h2>
       <ul className={styles.linkList}>
         {links.map((link) => (
           <li key={link.href + link.label}>
             <a href={link.href} className={styles.link}>
-              {link.label}
+              {t(link.label)}
             </a>
           </li>
         ))}
@@ -51,38 +54,41 @@ function LinkGroup({
   );
 }
 
-export default function Footer() {
+export default async function Footer() {
+  const t = await getT();
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         {/* CTA panel */}
         <div className={`${styles.ctaPanel} print-hide`}>
           <p className={styles.ctaText}>
-            Start with clarity before investing in tools or implementation.
+            {t("Start with clarity before investing in tools or implementation.")}
           </p>
           <Button
             href="#diagnostic-request-form"
             variant="on-brand"
             data-request-type="Business & IT Diagnostic"
           >
-            Request Diagnostic
+            {t("Request Diagnostic")}
           </Button>
         </div>
 
         {/* Positioning */}
         <p className={styles.positioning}>
-          Opsfield Systems — senior-led IT and business advisory for B2B
-          companies facing process, data, and system complexity.
+          {t(
+            "Opsfield Systems — senior-led IT and business advisory for B2B companies facing process, data, and system complexity."
+          )}
         </p>
 
         {/* Link groups */}
         <div className={styles.columns}>
-          <LinkGroup title="Company" links={COMPANY_LINKS} />
-          <LinkGroup title="Get Started" links={GET_STARTED_LINKS} />
+          <LinkGroup title="Company" links={COMPANY_LINKS} t={t} />
+          <LinkGroup title="Get Started" links={GET_STARTED_LINKS} t={t} />
           <LinkGroup
             title="Legal"
             links={LEGAL_LINKS}
             extra={<CookieConsentReopener className={styles.link} />}
+            t={t}
           />
         </div>
 

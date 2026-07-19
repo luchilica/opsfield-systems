@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Search, Gauge, Signpost, ArrowRight } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { getT } from "@/i18n/t";
 import styles from "./HowDiagnosticWorks.module.css";
 
 // Copy from docs/texts.md → "How the Diagnostic Works". v2 numbered step columns
@@ -24,12 +25,13 @@ const STEPS = [
   },
 ];
 
-export default function HowDiagnosticWorks() {
+export default async function HowDiagnosticWorks() {
+  const t = await getT();
   return (
     <div className="container">
-      <p className={styles.badge}>HOW IT WORKS</p>
+      <p className={styles.badge}>{t("HOW IT WORKS")}</p>
       <h2 className={styles.intro}>
-        From operating symptoms to a clear next step.
+        {t("From operating symptoms to a clear next step.")}
       </h2>
 
       <ol className={styles.steps}>
@@ -46,8 +48,8 @@ export default function HowDiagnosticWorks() {
                   <Icon size={22} aria-hidden="true" />
                 </span>
               </div>
-              <p className={styles.stepTitle}>{title}</p>
-              <p className={styles.stepText}>{text}</p>
+              <p className={styles.stepTitle}>{t(title)}</p>
+              <p className={styles.stepText}>{t(text)}</p>
             </li>
             {i < STEPS.length - 1 && (
               <li className={styles.stepArrow} aria-hidden="true">
@@ -64,7 +66,7 @@ export default function HowDiagnosticWorks() {
         icon
         className={styles.cta}
       >
-        Start With a Diagnostic
+        {t("Start With a Diagnostic")}
       </Button>
     </div>
   );

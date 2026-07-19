@@ -10,6 +10,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Card from "@/components/ui/Card";
+import { getT } from "@/i18n/t";
 import styles from "./WhatWeDiagnose.module.css";
 
 // Copy from docs/texts.md → "What We Diagnose": two diagnostic areas + the shared
@@ -41,13 +42,15 @@ const OUTPUTS = [
   { label: "Roadmap recommendation", Icon: Compass },
 ];
 
-export default function WhatWeDiagnose() {
+export default async function WhatWeDiagnose() {
+  const t = await getT();
   return (
     <div className="container">
-      <p className={styles.badge}>WHAT WE DIAGNOSE</p>
+      <p className={styles.badge}>{t("WHAT WE DIAGNOSE")}</p>
       <h2 className={styles.intro}>
-        We diagnose the gaps between how your business works and how your systems
-        support it.
+        {t(
+          "We diagnose the gaps between how your business works and how your systems support it.",
+        )}
       </h2>
 
       <div className={styles.top}>
@@ -59,8 +62,8 @@ export default function WhatWeDiagnose() {
                   <Icon size={26} aria-hidden="true" />
                 </span>
                 <div>
-                  <h3 className={styles.cardTitle}>{title}</h3>
-                  <p className={styles.cardDesc}>{description}</p>
+                  <h3 className={styles.cardTitle}>{t(title)}</h3>
+                  <p className={styles.cardDesc}>{t(description)}</p>
                 </div>
               </div>
             </Card>
@@ -68,14 +71,14 @@ export default function WhatWeDiagnose() {
         </div>
 
         <div className={styles.output}>
-          <p className={styles.outputLabel}>What you receive</p>
+          <p className={styles.outputLabel}>{t("What you receive")}</p>
           <ul className={styles.outputGrid}>
             {OUTPUTS.map(({ label, Icon }) => (
               <li key={label} className={styles.outputCard}>
                 <span className={styles.outputIcon}>
                   <Icon size={16} aria-hidden="true" />
                 </span>
-                <span className={styles.outputName}>{label}</span>
+                <span className={styles.outputName}>{t(label)}</span>
               </li>
             ))}
           </ul>
@@ -91,22 +94,20 @@ export default function WhatWeDiagnose() {
             <span className={styles.o1Icon}>
               <Award size={18} aria-hidden="true" />
             </span>
-            <h3 className={styles.o1Title}>O-1 Readiness Support</h3>
-            <span className={styles.o1Badge}>Secondary service</span>
+            <h3 className={styles.o1Title}>{t("O-1 Readiness Support")}</h3>
+            <span className={styles.o1Badge}>{t("Secondary service")}</span>
           </div>
           <p className={styles.o1Desc}>
-            For IT professionals and founders exploring the O-1 visa path, we help
-            structure evidence of extraordinary ability: publication strategy,
-            portfolio architecture, recommendation coordination, and expert
-            profile positioning. We work alongside qualified immigration counsel —
-            we do not provide legal advice or file petitions.
+            {t(
+              "For IT professionals and founders exploring the O-1 visa path, we help structure evidence of extraordinary ability: publication strategy, portfolio architecture, recommendation coordination, and expert profile positioning. We work alongside qualified immigration counsel — we do not provide legal advice or file petitions.",
+            )}
           </p>
         </div>
       </div>
 
       <div className={styles.cta}>
         <a href="#how-the-diagnostic-works" className={styles.textLink}>
-          See How the Diagnostic Works
+          {t("See How the Diagnostic Works")}
           <ArrowRight size={20} aria-hidden="true" />
         </a>
       </div>

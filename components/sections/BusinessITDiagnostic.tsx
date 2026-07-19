@@ -3,6 +3,7 @@
 import { useState } from "react";
 import DiagnosticForm from "@/components/ui/DiagnosticForm";
 import PlusMark from "@/components/ui/PlusMark";
+import { useT } from "@/i18n/useT";
 import styles from "./BusinessITDiagnostic.module.css";
 
 // Copy from docs/texts.md → "Business & IT Diagnostic" (Offer, Before You Commit,
@@ -30,57 +31,60 @@ const POST_SUBMIT = [
 ];
 
 export default function BusinessITDiagnostic() {
+  const t = useT();
   const [detailsOpen, setDetailsOpen] = useState(false);
 
   return (
     <div className="container">
-      <p className={styles.badge}>THE DIAGNOSTIC</p>
+      <p className={styles.badge}>{t("THE DIAGNOSTIC")}</p>
       <h2 className={styles.intro}>
-        A structured first step before another tool, hire, or implementation
-        project.
+        {t(
+          "A structured first step before another tool, hire, or implementation project."
+        )}
       </h2>
       <p className={`lead ${styles.lead}`}>
-        The first diagnostic conversation is a complimentary 30–45 minute fit
-        review to frame the problem and identify likely bottleneck areas. Paid
-        engagements begin only after a separate written proposal with defined
-        scope and pricing.
+        {t(
+          "The first diagnostic conversation is a complimentary 30–45 minute fit review to frame the problem and identify likely bottleneck areas. Paid engagements begin only after a separate written proposal with defined scope and pricing."
+        )}
       </p>
 
       <div className={styles.grid}>
         {/* Left column — context sidebar (sticky on desktop) */}
         <div className={styles.aside}>
           <div className={styles.outputPanel}>
-            <p className={styles.outputLabel}>Diagnostic output</p>
+            <p className={styles.outputLabel}>{t("Diagnostic output")}</p>
             <ul className={styles.outputList}>
               {OUTPUT.map((o, i) => (
                 <li key={o} className={styles.outputItem}>
                   <span className={styles.outputNum}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span>{o}</span>
+                  <span>{t(o)}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           <div className={styles.card}>
-            <p className={styles.stepsLabel}>What happens after you submit</p>
+            <p className={styles.stepsLabel}>
+              {t("What happens after you submit")}
+            </p>
             <ol className={styles.afterList}>
               {POST_SUBMIT.map((text, i) => (
                 <li key={i} className={styles.afterItem}>
                   <span className={styles.afterNum} aria-hidden="true">
                     {i + 1}
                   </span>
-                  <span>{text}</span>
+                  <span>{t(text)}</span>
                 </li>
               ))}
             </ol>
           </div>
 
           <div className={styles.card}>
-            <h3 className={styles.cardTitle}>Before You Commit</h3>
+            <h3 className={styles.cardTitle}>{t("Before You Commit")}</h3>
             <p className={styles.muted}>
-              Evaluate the approach before any paid engagement.
+              {t("Evaluate the approach before any paid engagement.")}
             </p>
             <button
               type="button"
@@ -89,7 +93,7 @@ export default function BusinessITDiagnostic() {
               aria-controls="before-you-commit-details"
               onClick={() => setDetailsOpen((o) => !o)}
             >
-              {detailsOpen ? "Hide details" : "See review details →"}
+              {detailsOpen ? t("Hide details") : t("See review details →")}
             </button>
 
             {/* Collapsed by default — stays in the DOM (max-height:0) for SEO. */}
@@ -99,26 +103,28 @@ export default function BusinessITDiagnostic() {
                 detailsOpen ? "" : styles.collapseClosed
               }`}
             >
-              <p className={styles.reviewLabel}>Review assets</p>
+              <p className={styles.reviewLabel}>{t("Review assets")}</p>
               <ul className={styles.chips}>
                 {REVIEW.map((r) => (
                   <li key={r} className={styles.chip}>
-                    {r}
+                    {t(r)}
                   </li>
                 ))}
               </ul>
               <p className={styles.muted}>
-                No full system access is required for the initial fit review.
-                Deeper access starts only after scope and NDA are agreed.
+                {t(
+                  "No full system access is required for the initial fit review. Deeper access starts only after scope and NDA are agreed."
+                )}
               </p>
               {/* Privacy note — verbatim from docs/texts.md → "Before You Commit";
                   Risk-Reduction Panel spec requires a privacy notice + Privacy
                   Policy link inside the panel. */}
               <p className={`${styles.muted} ${styles.privacyNote}`}>
-                By submitting the form, you acknowledge our{" "}
-                <a href="/privacy-policy">Privacy Policy</a>. We use your
-                information to evaluate fit and contact you about your diagnostic
-                request.
+                {t("By submitting the form, you acknowledge our")}{" "}
+                <a href="/privacy-policy">Privacy Policy</a>
+                {t(
+                  ". We use your information to evaluate fit and contact you about your diagnostic request."
+                )}
               </p>
             </div>
           </div>
@@ -130,10 +136,10 @@ export default function BusinessITDiagnostic() {
             <div className={styles.formHeader}>
               <span className={styles.formHeaderTitle}>
                 <PlusMark size={20} className={styles.formPlus} />
-                Diagnostic Request
+                {t("Diagnostic Request")}
               </span>
               <span className={styles.formBadge}>
-                Complimentary 30–45 min fit review
+                {t("Complimentary 30–45 min fit review")}
               </span>
             </div>
             <div className={styles.formBody}>

@@ -37,7 +37,7 @@ export const LOCALE_META: Record<Locale, LocaleMeta> = {
     ogLocale: "es_US",
     prefix: "/es",
     indexable: false,
-    enabled: false,
+    enabled: true,
   },
   "ru-US": {
     label: "Русский",

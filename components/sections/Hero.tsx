@@ -1,23 +1,26 @@
 import Button from "@/components/ui/Button";
 import HeroSummary from "@/components/ui/HeroSummary";
+import { getT } from "@/i18n/t";
 import styles from "./Hero.module.css";
 
 // All copy from docs/texts.md → "Hero". Do not alter wording.
-export default function Hero() {
+export default async function Hero() {
+  const t = await getT();
   return (
     <div className={`container ${styles.hero}`}>
       <div className={styles.content}>
-        <p className={styles.eyebrow}>B2B IT &amp; Operations Advisory</p>
+        <p className={styles.eyebrow}>{t("B2B IT & Operations Advisory")}</p>
 
         <h1 className={styles.headline}>
-          Diagnostic-First  IT &amp; Business{" "}
-          <span className={styles.accentWord}>Development</span>
+          {t("Diagnostic-First  IT & Business")}{" "}
+          <span className={styles.accentWord}>{t("Development")}</span>
         </h1>
 
         {/* Semantically a paragraph, visually a lead. */}
         <p className={`lead ${styles.subtitle}`}>
-          Opsfield Systems helps B2B teams find where operations, CRM, data
-          flow, automation, and IT systems are slowing execution.
+          {t(
+            "Opsfield Systems helps B2B teams find where operations, CRM, data flow, automation, and IT systems are slowing execution."
+          )}
         </p>
 
         <p className={styles.supporting}>
@@ -31,10 +34,10 @@ export default function Hero() {
             icon
             data-request-type="Business & IT Diagnostic"
           >
-            Request a Business &amp; IT Diagnostic
+            {t("Request a Business & IT Diagnostic")}
           </Button>
           <Button href="#how-the-diagnostic-works" variant="secondary">
-            See How the Diagnostic Works
+            {t("See How the Diagnostic Works")}
           </Button>
         </div>
 
@@ -42,15 +45,15 @@ export default function Hero() {
         <div className={styles.stats}>
           <div className={styles.stat}>
             <p className={styles.statNum}>4–6</p>
-            <p className={styles.statCap}>Active clients at a time</p>
+            <p className={styles.statCap}>{t("Active clients at a time")}</p>
           </div>
           <div className={styles.stat}>
             <p className={styles.statNum}>50–250</p>
-            <p className={styles.statCap}>Employees · best fit</p>
+            <p className={styles.statCap}>{t("Employees · best fit")}</p>
           </div>
           <div className={styles.stat}>
             <p className={styles.statNum}>5+ yrs</p>
-            <p className={styles.statCap}>Boutique advisory</p>
+            <p className={styles.statCap}>{t("Boutique advisory")}</p>
           </div>
         </div>
       </div>

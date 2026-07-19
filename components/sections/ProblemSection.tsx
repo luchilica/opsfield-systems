@@ -1,6 +1,7 @@
 import { GitBranch, Database, BarChart3, Workflow, Layers } from "lucide-react";
 import Button from "@/components/ui/Button";
 import PlusMark from "@/components/ui/PlusMark";
+import { getT } from "@/i18n/t";
 import styles from "./ProblemSection.module.css";
 
 // Copy from docs/texts.md → "Problem Section". Full-fill brand block (v2). The
@@ -14,20 +15,22 @@ const CAUSES = [
   { title: "Tool sprawl", Icon: Layers },
 ];
 
-export default function ProblemSection() {
+export default async function ProblemSection() {
+  const t = await getT();
   return (
     <div className="container">
       <PlusMark size={140} className={styles.plusTop} />
 
       <div className={styles.grid}>
         <div className={styles.block}>
-          <p className={styles.eyebrow}>THE PROBLEM</p>
+          <p className={styles.eyebrow}>{t("THE PROBLEM")}</p>
           <h2 className={styles.heading}>
-            Your business may not have a technology problem first.
+            {t("Your business may not have a technology problem first.")}
           </h2>
           <p className={`lead ${styles.text}`}>
-            Growth often slows because processes, data, ownership, and systems no
-            longer work together.
+            {t(
+              "Growth often slows because processes, data, ownership, and systems no longer work together."
+            )}
           </p>
           <Button
             href="#diagnostic-request-form"
@@ -36,19 +39,19 @@ export default function ProblemSection() {
             className={styles.cta}
             data-request-type="Business & IT Diagnostic"
           >
-            Diagnose the Operating Bottleneck
+            {t("Diagnose the Operating Bottleneck")}
           </Button>
         </div>
 
         <div className={styles.causes}>
-          <p className={styles.causesHead}>Where root causes appear</p>
+          <p className={styles.causesHead}>{t("Where root causes appear")}</p>
           <div className={styles.causeGrid}>
             {CAUSES.map(({ title, Icon }) => (
               <div key={title} className={styles.causeCard}>
                 <span className={styles.causeIcon}>
                   <Icon size={24} aria-hidden="true" />
                 </span>
-                <span className={styles.causeName}>{title}</span>
+                <span className={styles.causeName}>{t(title)}</span>
               </div>
             ))}
           </div>

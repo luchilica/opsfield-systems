@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { ArrowRight, Info, Search, CheckCircle2 } from "lucide-react";
+import { useT } from "@/i18n/useT";
 import styles from "./DiagnosticScenarios.module.css";
 
 // Copy from docs/texts.md → "Diagnostic Scenarios". Anonymized + illustrative.
@@ -16,7 +17,7 @@ type Scenario = {
   environment: string[];
   situation: string;
   found: string;
-  delivered: ReactNode;
+  delivered: (t: (s: string) => string) => ReactNode;
 };
 
 const SCENARIOS: Scenario[] = [
@@ -27,12 +28,13 @@ const SCENARIOS: Scenario[] = [
       "Inbound leads were falling between marketing and sales — no defined handoff owner, no SLA, and 3 duplicate CRM fields creating confusion.",
     found:
       "4 undocumented handoff points across 2 teams with no shared visibility.",
-    delivered: (
+    delivered: (t) => (
       <>
-        Handoff process reduced from 5 steps to 2. Single ownership assigned per
-        lead stage. Estimated revenue at risk from dropped handoffs:{" "}
-        <span className={styles.metric}>$180K–$240K</span> annually. 30-day
-        cleanup priority list adopted by both teams.
+        {t(
+          "Handoff process reduced from 5 steps to 2. Single ownership assigned per lead stage. Estimated revenue at risk from dropped handoffs:",
+        )}{" "}
+        <span className={styles.metric}>$180K–$240K</span>{" "}
+        {t("annually. 30-day cleanup priority list adopted by both teams.")}
       </>
     ),
   },
@@ -43,13 +45,15 @@ const SCENARIOS: Scenario[] = [
       "Leadership did not trust dashboard numbers — 3 departments used different definitions for the same metrics.",
     found:
       "7 inconsistent metric definitions and 2 disconnected data sources feeding the same dashboard.",
-    delivered: (
+    delivered: (t) => (
       <>
-        Unified reporting definitions document covering 7 previously inconsistent
-        metrics. Data-source consolidation plan projected to remove{" "}
-        <span className={styles.metric}>40+ hours/month</span> of manual
-        reconciliation. BI roadmap prioritized by stakeholder impact with 90-day
-        execution timeline.
+        {t(
+          "Unified reporting definitions document covering 7 previously inconsistent metrics. Data-source consolidation plan projected to remove",
+        )}{" "}
+        <span className={styles.metric}>40+ hours/month</span>{" "}
+        {t(
+          "of manual reconciliation. BI roadmap prioritized by stakeholder impact with 90-day execution timeline.",
+        )}
       </>
     ),
   },
@@ -60,13 +64,13 @@ const SCENARIOS: Scenario[] = [
       "4 locations running different approval workflows with 6 overlapping tools and no shared process documentation.",
     found:
       "11 manual approval steps that could be reduced to 4 with workflow consolidation.",
-    delivered: (
+    delivered: (t) => (
       <>
-        Bottleneck map identified an estimated{" "}
-        <span className={styles.metric}>$320K</span> in annual labor cost tied to
-        manual approvals. Automation backlog ranked by effort and impact. 90-day
-        roadmap adopted by operations leadership with projected 60% reduction in
-        approval cycle time.
+        {t("Bottleneck map identified an estimated")}{" "}
+        <span className={styles.metric}>$320K</span>{" "}
+        {t(
+          "in annual labor cost tied to manual approvals. Automation backlog ranked by effort and impact. 90-day roadmap adopted by operations leadership with projected 60% reduction in approval cycle time.",
+        )}
       </>
     ),
   },
@@ -81,6 +85,7 @@ const ROWS = [
 const pad = (i: number) => String(i + 1).padStart(2, "0");
 
 export default function DiagnosticScenarios() {
+  const t = useT();
   const [active, setActive] = useState(0);
   const panelsRef = useRef<HTMLDivElement>(null);
 
@@ -100,15 +105,17 @@ export default function DiagnosticScenarios() {
 
   return (
     <div className="container">
-      <p className={styles.badge}>DIAGNOSTIC SCENARIOS</p>
-      <h2 className={styles.intro}>Representative diagnostic scenarios.</h2>
+      <p className={styles.badge}>{t("DIAGNOSTIC SCENARIOS")}</p>
+      <h2 className={styles.intro}>
+        {t("Representative diagnostic scenarios.")}
+      </h2>
 
       <div className={styles.switcher}>
         {/* Selector list */}
         <div
           className={styles.tabs}
           role="tablist"
-          aria-label="Diagnostic scenarios"
+          aria-label={t("Diagnostic scenarios")}
         >
           {SCENARIOS.map((s, i) => {
             const selected = i === active;
@@ -123,8 +130,10 @@ export default function DiagnosticScenarios() {
                 className={`${styles.tab} ${selected ? styles.tabActive : ""}`}
                 onClick={() => selectScenario(i)}
               >
-                <span className={styles.tabNum}>Scenario · {pad(i)}</span>
-                <span className={styles.tabClient}>{s.client}</span>
+                <span className={styles.tabNum}>
+                  {t("Scenario")} · {pad(i)}
+                </span>
+                <span className={styles.tabClient}>{t(s.client)}</span>
                 <span className={styles.tabEnvs}>
                   {s.environment.map((e) => (
                     <span key={e} className={styles.tabEnv}>
@@ -155,8 +164,10 @@ export default function DiagnosticScenarios() {
                 </span>
 
                 <div className={styles.panelHead}>
-                  <p className={styles.panelNum}>Scenario · {pad(i)}</p>
-                  <h3 className={styles.panelClient}>{s.client}</h3>
+                  <p className={styles.panelNum}>
+                    {t("Scenario")} · {pad(i)}
+                  </p>
+                  <h3 className={styles.panelClient}>{t(s.client)}</h3>
                   <div className={styles.envs}>
                     {s.environment.map((e) => (
                       <span key={e} className={styles.env}>
@@ -173,8 +184,12 @@ export default function DiagnosticScenarios() {
                         <r.Icon size={16} aria-hidden="true" />
                       </span>
                       <div className={styles.stepBody}>
-                        <span className={styles.stepLabel}>{r.label}</span>
-                        <p className={styles.stepText}>{s[r.key]}</p>
+                        <span className={styles.stepLabel}>{t(r.label)}</span>
+                        <p className={styles.stepText}>
+                          {r.key === "delivered"
+                            ? s.delivered(t)
+                            : t(s[r.key])}
+                        </p>
                       </div>
                     </li>
                   ))}
@@ -186,13 +201,14 @@ export default function DiagnosticScenarios() {
       </div>
 
       <p className={styles.note}>
-        Scenarios are anonymized composites. Figures are illustrative and reflect
-        the type of impact diagnostic work typically identifies.
+        {t(
+          "Scenarios are anonymized composites. Figures are illustrative and reflect the type of impact diagnostic work typically identifies.",
+        )}
       </p>
 
       <div className={styles.cta}>
         <a href="#diagnostic-request-form" className={styles.textLink}>
-          Request a Diagnostic for Your Team
+          {t("Request a Diagnostic for Your Team")}
           <ArrowRight size={20} aria-hidden="true" />
         </a>
       </div>

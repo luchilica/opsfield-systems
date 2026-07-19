@@ -1,10 +1,12 @@
 import Button from "@/components/ui/Button";
 import PlusMark from "@/components/ui/PlusMark";
+import { getT } from "@/i18n/t";
 import styles from "./FinalCTA.module.css";
 
 // Copy from docs/texts.md → "Final CTA". v2 full-fill brand block with + motifs.
 // CTA routing from docs/sitemap.md. Does not repeat the Hero positioning.
-export default function FinalCTA() {
+export default async function FinalCTA() {
+  const t = await getT();
   return (
     <div className="container">
       <PlusMark size={260} className={styles.plusTop} />
@@ -12,10 +14,10 @@ export default function FinalCTA() {
 
       <div className={styles.inner}>
         <h2 className={styles.heading}>
-          From uncertainty to a scoped next step.
+          {t("From uncertainty to a scoped next step.")}
         </h2>
         <p className={`lead ${styles.text}`}>
-          Clarify the bottleneck and risk level before committing budget.
+          {t("Clarify the bottleneck and risk level before committing budget.")}
         </p>
 
         <div className={styles.actions}>
@@ -25,13 +27,13 @@ export default function FinalCTA() {
             icon
             data-request-type="Business & IT Diagnostic"
           >
-            Request a Business &amp; IT Diagnostic
+            {t("Request a Business & IT Diagnostic")}
           </Button>
           <Button
             href="#how-the-diagnostic-works"
             variant="on-brand-outline"
           >
-            See How the Diagnostic Works
+            {t("See How the Diagnostic Works")}
           </Button>
         </div>
       </div>

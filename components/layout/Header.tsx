@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Logomark from "@/components/ui/Logomark";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useT } from "@/i18n/useT";
 import styles from "./Header.module.css";
 
 // Labels + targets from docs/texts.md and docs/sitemap.md → "Header".
@@ -95,6 +97,8 @@ export default function Header() {
     };
   }, [open, closeDrawer]);
 
+  const t = useT();
+
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={`container ${styles.inner}`}>
@@ -109,11 +113,12 @@ export default function Header() {
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a href={link.href} className={styles.navLink}>
-                  {link.label}
+                  {t(link.label)}
                 </a>
               </li>
             ))}
           </ul>
+          <LanguageSwitcher />
         </nav>
 
         <Button
@@ -122,7 +127,7 @@ export default function Header() {
           className={styles.desktopCta}
           data-request-type="Business & IT Diagnostic"
         >
-          {CTA_LABEL}
+          {t(CTA_LABEL)}
         </Button>
 
         {/* Mobile menu trigger */}
@@ -130,7 +135,7 @@ export default function Header() {
           ref={menuButtonRef}
           type="button"
           className={styles.menuButton}
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? t("Close menu") : t("Open menu")}
           aria-expanded={open}
           aria-controls={DRAWER_ID}
           onClick={() => setOpen((v) => !v)}
@@ -155,13 +160,13 @@ export default function Header() {
         className={`${styles.drawer} ${open ? styles.drawerOpen : ""}`}
         role="dialog"
         aria-modal="true"
-        aria-label="Site navigation"
+        aria-label={t("Site navigation")}
       >
         <div className={styles.drawerHeader}>
           <button
             type="button"
             className={styles.menuButton}
-            aria-label="Close menu"
+            aria-label={t("Close menu")}
             onClick={closeDrawer}
           >
             <X size={24} aria-hidden="true" />
@@ -176,7 +181,7 @@ export default function Header() {
           data-request-type="Business & IT Diagnostic"
           onClick={closeDrawer}
         >
-          {CTA_LABEL}
+          {t(CTA_LABEL)}
         </Button>
 
         <nav aria-label="Mobile primary">
@@ -188,12 +193,14 @@ export default function Header() {
                   className={styles.drawerLink}
                   onClick={closeDrawer}
                 >
-                  {link.label}
+                  {t(link.label)}
                 </a>
               </li>
             ))}
           </ul>
         </nav>
+
+        <LanguageSwitcher />
       </div>
     </header>
   );

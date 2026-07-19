@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Card from "@/components/ui/Card";
 import PlusMark from "@/components/ui/PlusMark";
+import { getT } from "@/i18n/t";
 import styles from "./DeliveryModel.module.css";
 
 // Copy from docs/texts.md → "Delivery Model". Role-only cards (no names, photos,
@@ -59,19 +60,20 @@ const ENVIRONMENTS = [
   "Make",
 ];
 
-export default function DeliveryModel() {
+export default async function DeliveryModel() {
+  const t = await getT();
   return (
     <div className="container">
       <PlusMark size={220} className={styles.plusTop} />
       <PlusMark size={120} className={styles.plusBottom} />
 
       <div className={styles.inner}>
-        <p className={styles.badge}>DELIVERY MODEL</p>
-        <h2 className={styles.intro}>Senior attention without a handoff chain.</h2>
+        <p className={styles.badge}>{t("DELIVERY MODEL")}</p>
+        <h2 className={styles.intro}>{t("Senior attention without a handoff chain.")}</h2>
         <p className={`lead ${styles.text}`}>
-          Opsfield Systems works with 4–6 active clients at a time so senior
-          advisors remain involved from problem framing through scope and
-          delivery.
+          {t(
+            "Opsfield Systems works with 4–6 active clients at a time so senior advisors remain involved from problem framing through scope and delivery."
+          )}
         </p>
 
         <div className={styles.roles}>
@@ -83,13 +85,13 @@ export default function DeliveryModel() {
                     {initials}
                   </span>
                   <div>
-                    <h3 className={styles.roleTitle}>{title}</h3>
-                    <p className={styles.roleSub}>{subtitle}</p>
+                    <h3 className={styles.roleTitle}>{t(title)}</h3>
+                    <p className={styles.roleSub}>{t(subtitle)}</p>
                   </div>
                 </div>
 
                 <div className={styles.respDivider}>
-                  <span className={styles.respLabel}>Focus</span>
+                  <span className={styles.respLabel}>{t("Focus")}</span>
                 </div>
 
                 <ul className={styles.respList}>
@@ -98,7 +100,7 @@ export default function DeliveryModel() {
                       <span className={styles.respIcon}>
                         <Icon size={15} aria-hidden="true" />
                       </span>
-                      <span>{text}</span>
+                      <span>{t(text)}</span>
                     </li>
                   ))}
                 </ul>
@@ -108,7 +110,7 @@ export default function DeliveryModel() {
         </div>
 
         <div className={styles.envBlock}>
-          <p className={styles.envLabel}>Relevant environments</p>
+          <p className={styles.envLabel}>{t("Relevant environments")}</p>
           <ul className={styles.envList}>
             {ENVIRONMENTS.map((e) => (
               <li key={e} className={styles.envItem}>
@@ -120,7 +122,7 @@ export default function DeliveryModel() {
 
         <div className={styles.cta}>
           <a href="#diagnostic-request-form" className={styles.textLink}>
-            Work With Senior Advisors
+            {t("Work With Senior Advisors")}
             <ArrowRight size={20} aria-hidden="true" />
           </a>
         </div>

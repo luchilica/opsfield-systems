@@ -1,4 +1,5 @@
 import { Info, Search, CheckCircle2 } from "lucide-react";
+import { getT } from "@/i18n/t";
 import styles from "./HeroSummary.module.css";
 
 // Hero brand panel — an illustrative diagnostic summary (mirrors Scenario 01).
@@ -23,15 +24,18 @@ const ROWS = [
   },
 ] as const;
 
-export default function HeroSummary() {
+export default async function HeroSummary() {
+  const t = await getT();
   return (
     <div
       className={styles.panel}
       role="img"
-      aria-label="Illustrative diagnostic summary: a B2B services firm where leads dropped between marketing and sales; the diagnostic found four undocumented handoff points and delivered a single owner per lead stage, with an estimated $180K+ in revenue at risk addressed on a 30-day cleanup."
+      aria-label={t(
+        "Illustrative diagnostic summary: a B2B services firm where leads dropped between marketing and sales; the diagnostic found four undocumented handoff points and delivered a single owner per lead stage, with an estimated $180K+ in revenue at risk addressed on a 30-day cleanup."
+      )}
     >
-      <p className={styles.eyebrow}>Diagnostic summary</p>
-      <p className={styles.client}>B2B services firm · ~80 employees</p>
+      <p className={styles.eyebrow}>{t("Diagnostic summary")}</p>
+      <p className={styles.client}>{t("B2B services firm · ~80 employees")}</p>
 
       <ol className={styles.timeline}>
         {ROWS.map((r) => (
@@ -39,7 +43,7 @@ export default function HeroSummary() {
             <span className={styles.node}>
               <r.Icon size={16} aria-hidden="true" />
             </span>
-            <p className={styles.stepText}>{r.text}</p>
+            <p className={styles.stepText}>{t(r.text)}</p>
           </li>
         ))}
       </ol>
@@ -47,11 +51,11 @@ export default function HeroSummary() {
       <div className={styles.metrics}>
         <div className={styles.metric}>
           <p className={styles.metricNum}>$180K+</p>
-          <p className={styles.metricCap}>Revenue at risk (est.)</p>
+          <p className={styles.metricCap}>{t("Revenue at risk (est.)")}</p>
         </div>
         <div className={styles.metric}>
           <p className={styles.metricNum}>30-day</p>
-          <p className={styles.metricCap}>Cleanup priority</p>
+          <p className={styles.metricCap}>{t("Cleanup priority")}</p>
         </div>
       </div>
     </div>

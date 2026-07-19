@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { FAQ_ITEMS } from "./faqData";
 import { trackEvent } from "@/lib/analytics";
+import { useT } from "@/i18n/useT";
 import styles from "./FAQ.module.css";
 
 // Q&A content lives in ./faqData (shared with the FAQPage JSON-LD so schema and
@@ -11,12 +12,13 @@ import styles from "./FAQ.module.css";
 // per docs/optimization.md → "Fit / Not Fit implementation".
 
 export default function FAQ() {
+  const t = useT();
   // First item open by default; single-open accordion.
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <div className="container">
-      <h2 className={styles.intro}>FAQ</h2>
+      <h2 className={styles.intro}>{t("FAQ")}</h2>
 
       <div className={styles.list}>
         {FAQ_ITEMS.map((item, i) => {
@@ -40,7 +42,7 @@ export default function FAQ() {
                     setOpenIndex(isOpen ? -1 : i);
                   }}
                 >
-                  <span>{item.q}</span>
+                  <span>{t(item.q)}</span>
                   <span
                     aria-hidden="true"
                     className={`${styles.toggle} ${
@@ -60,12 +62,12 @@ export default function FAQ() {
                 hidden={!isOpen}
               >
                 {item.type === "text" && (
-                  <p className={styles.answer}>{item.a}</p>
+                  <p className={styles.answer}>{t(item.a)}</p>
                 )}
 
                 {item.type === "fit" && (
                   <>
-                    <p className={styles.answer}>{item.intro}</p>
+                    <p className={styles.answer}>{t(item.intro)}</p>
                     <ul className={styles.criteria}>
                       {item.items.map((c) => (
                         <li key={c} className={styles.criterion}>
@@ -74,7 +76,7 @@ export default function FAQ() {
                             aria-hidden="true"
                             className={styles.fitIcon}
                           />
-                          <span>{c}</span>
+                          <span>{t(c)}</span>
                         </li>
                       ))}
                     </ul>
@@ -83,7 +85,7 @@ export default function FAQ() {
 
                 {item.type === "notfit" && (
                   <>
-                    <p className={styles.answer}>{item.intro}</p>
+                    <p className={styles.answer}>{t(item.intro)}</p>
                     <ul className={styles.criteria}>
                       {item.items.map((c) => (
                         <li key={c} className={styles.criterion}>
@@ -92,12 +94,12 @@ export default function FAQ() {
                             aria-hidden="true"
                             className={styles.notFitIcon}
                           />
-                          <span>{c}</span>
+                          <span>{t(c)}</span>
                         </li>
                       ))}
                     </ul>
                     <p className={`${styles.answer} ${styles.closing}`}>
-                      {item.closing}
+                      {t(item.closing)}
                     </p>
                   </>
                 )}
