@@ -47,7 +47,7 @@ export default function BusinessITDiagnostic() {
       </p>
 
       <div className={styles.grid}>
-        {/* Left column — diagnostic output + before you commit */}
+        {/* Left column — context sidebar (sticky on desktop) */}
         <div className={styles.aside}>
           <div className={styles.outputPanel}>
             <p className={styles.outputLabel}>Diagnostic output</p>
@@ -61,6 +61,20 @@ export default function BusinessITDiagnostic() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          <div className={styles.card}>
+            <p className={styles.stepsLabel}>What happens after you submit</p>
+            <ol className={styles.afterList}>
+              {POST_SUBMIT.map((text, i) => (
+                <li key={i} className={styles.afterItem}>
+                  <span className={styles.afterNum} aria-hidden="true">
+                    {i + 1}
+                  </span>
+                  <span>{text}</span>
+                </li>
+              ))}
+            </ol>
           </div>
 
           <div className={styles.card}>
@@ -110,22 +124,8 @@ export default function BusinessITDiagnostic() {
           </div>
         </div>
 
-        {/* Right column — after you submit + form */}
+        {/* Right column — the form */}
         <div className={styles.main}>
-          <div className={styles.card}>
-            <p className={styles.stepsLabel}>What happens after you submit</p>
-            <ol className={styles.afterInline}>
-              {POST_SUBMIT.map((text, i) => (
-                <li key={i} className={styles.afterItem}>
-                  <span className={styles.afterNum} aria-hidden="true">
-                    {i + 1}
-                  </span>
-                  {text}
-                </li>
-              ))}
-            </ol>
-          </div>
-
           <div id="diagnostic-request-form" className={styles.formPanel}>
             <div className={styles.formHeader}>
               <span className={styles.formHeaderTitle}>

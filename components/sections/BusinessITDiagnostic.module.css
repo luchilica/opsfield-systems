@@ -66,11 +66,27 @@
   gap: var(--space-3);
 }
 
-/* ----- Ink diagnostic-output panel ----- */
+/* Sticky context sidebar keeps the columns visually aligned against the tall
+   form instead of leaving a void below the shorter column. */
+@media (min-width: 1024px) {
+  .aside {
+    position: sticky;
+    top: 96px;
+    align-self: start;
+  }
+}
+
+/* ----- Ink diagnostic-output panel — gradient + blue bloom (matches the other
+   dark blocks) instead of a flat black box. ----- */
 .outputPanel {
-  background: var(--ink-900);
+  background: radial-gradient(
+      85% 120% at 100% 0%,
+      rgba(37, 81, 210, 0.24) 0%,
+      rgba(37, 81, 210, 0) 55%
+    ),
+    linear-gradient(180deg, #101223 0%, var(--ink-900) 62%);
   color: var(--paper);
-  border: 1px solid var(--ink-900);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
   padding: 26px;
 }
@@ -184,46 +200,56 @@
   color: var(--ink-900);
 }
 
-/* Post-submit steps — compact inline numbered list (was 3 chip cards).
-   One flowing line: (1) … → (2) … → (3) …. Wraps on mobile. */
-.afterInline {
+/* Post-submit steps — a compact vertical stepper with blue numbered nodes
+   linked by a hairline rail. */
+.afterList {
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
   margin: 0;
   padding: 0;
 }
 
 .afterItem {
-  display: inline-flex;
+  position: relative;
+  display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  padding-bottom: 16px;
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: var(--fw-medium);
   color: var(--ink-900);
 }
 
-.afterItem:not(:last-child)::after {
-  content: "→";
-  margin-left: 2px;
-  color: var(--text-muted);
+.afterItem:last-child {
+  padding-bottom: 0;
+}
+
+/* Connector rail between nodes. */
+.afterItem:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 26px;
+  bottom: 2px;
+  width: 1px;
+  transform: translateX(-50%);
+  background: var(--stone-200);
 }
 
 .afterNum {
+  position: relative;
+  z-index: 1;
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: var(--ink-900);
+  background: var(--blue-500);
   color: var(--paper);
   font-family: var(--font-display);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: var(--fw-semibold);
   line-height: 1;
 }
