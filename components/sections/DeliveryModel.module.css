@@ -1,6 +1,7 @@
-/* Delivery Model — v2 ink block. Two role cards (brand + paper) with bullet
-   responsibilities, environment tags, and decorative + motifs. Section bg/color
-   set by #delivery-model in globals.css. Copy from docs/texts.md. No Tailwind. */
+/* Delivery Model — ink section. Two role cards (paper) with a gradient initials
+   avatar, a "Focus" divider, and a two-column grid of icon-chip responsibilities,
+   then environment tags. Section bg/color set by #delivery-model in globals.css.
+   Copy from docs/texts.md. No Tailwind. */
 
 .inner {
   position: relative;
@@ -47,6 +48,7 @@
   margin-bottom: var(--space-5);
 }
 
+/* ----- Role cards ----- */
 .roles {
   display: grid;
   grid-template-columns: 1fr;
@@ -62,15 +64,14 @@
 .role {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
   height: 100%;
 }
 
-/* Head — initials tile + title + role subtitle. */
+/* Head — gradient initials avatar + title + role pill. */
 .roleHead {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 15px;
 }
 
 .avatar {
@@ -78,41 +79,29 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-md);
-  font-family: var(--font-display); /* Mulish */
-  font-size: 20px;
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(140deg, var(--blue-500) 0%, var(--blue-600) 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(37, 81, 210, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  font-family: var(--font-display);
+  font-size: 19px;
   font-weight: var(--fw-semibold);
   letter-spacing: 0.04em;
-}
-
-.avatarOnBrand {
-  background: var(--blue-500);
-  color: #ffffff;
-}
-
-.avatarOnPaper {
-  background: var(--blue-500);
-  color: #ffffff;
 }
 
 .roleTitle {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 21px;
   font-weight: var(--fw-semibold);
   letter-spacing: -0.02em;
   color: var(--ink-900);
 }
 
-.onDark {
-  color: var(--paper);
-}
-
-/* Role subtitle as a mono outline pill — "department badge" structure borrowed
-   from the team references, rebuilt in the project's own pill language (matches
-   .o1Badge / env tags), not the imported look. */
+/* Role subtitle as a mono outline pill. */
 .roleSub {
   display: inline-flex;
   align-items: center;
@@ -129,63 +118,69 @@
   color: var(--stone-500);
 }
 
-.roleSubOnDark {
-  border-color: var(--border-on-brand);
-  color: var(--text-on-brand);
+/* "Focus" labelled divider above the responsibility grid. */
+.respDivider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: var(--space-3);
 }
 
-/* Divider label above the responsibility list. */
-.engLabel {
-  margin-top: 6px;
-  padding-top: var(--space-2);
-  border-top: 1px solid var(--border-hair);
+.respDivider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--stone-200);
+}
+
+.respLabel {
   font-family: var(--font-mono-fallback);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: var(--ls-eyebrow);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--stone-400);
 }
 
-.engLabelOnDark {
-  color: var(--text-on-brand-muted);
-  border-top-color: var(--border-on-brand);
-}
-
+/* Two-column grid of icon-chip responsibilities. */
 .respList {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 0;
+  margin: 18px 0 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px 18px;
 }
 
-/* Each responsibility prefixed with a functional icon. */
+@media (min-width: 768px) {
+  .respList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .resp {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 15px;
+  align-items: center;
+  gap: 11px;
+  font-size: 14.5px;
   font-weight: var(--fw-medium);
+  line-height: 1.3;
   color: var(--ink-900);
 }
 
 .respIcon {
   flex-shrink: 0;
-  margin-top: 2px;
-  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background: var(--blue-50);
+  color: var(--blue-600);
 }
 
-.respOnDark {
-  color: var(--text-on-brand);
-}
-
-.respOnDark .respIcon {
-  color: var(--paper);
-}
-
-/* Relevant environments — mono tags, never tool logos. */
+/* ----- Relevant environments — mono tags, never tool logos. ----- */
 .envBlock {
   margin-top: var(--space-5);
 }
@@ -215,10 +210,18 @@
   padding: 8px 15px;
   border: 1px solid var(--border-on-dark);
   border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.05);
   font-family: var(--font-mono-fallback);
   font-size: 12px;
   font-weight: 500;
   color: white;
+  transition: background var(--dur-med) var(--ease-out),
+    border-color var(--dur-med) var(--ease-out);
+}
+
+.envItem:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.32);
 }
 
 .cta {
@@ -240,31 +243,4 @@
 .textLink:focus-visible {
   color: var(--paper);
   text-decoration: underline;
-}
-
-/* Decorative corner + motifs (behind content). */
-.plusTop,
-.plusBottom {
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.plusTop {
-  top: -40px;
-  right: -20px;
-  color: rgba(37, 81, 210, 0.28);
-}
-
-.plusBottom {
-  bottom: 40px;
-  left: 3%;
-  color: rgba(37, 81, 210, 0.18);
-}
-
-@media (max-width: 767px) {
-  .plusTop,
-  .plusBottom {
-    display: none;
-  }
 }

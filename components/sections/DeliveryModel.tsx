@@ -12,7 +12,6 @@ import {
   Shield,
 } from "lucide-react";
 import Card from "@/components/ui/Card";
-import PlusMark from "@/components/ui/PlusMark";
 import styles from "./DeliveryModel.module.css";
 
 // Copy from docs/texts.md → "Delivery Model". Role-only cards (no names, photos,
@@ -62,9 +61,6 @@ const ENVIRONMENTS = [
 export default function DeliveryModel() {
   return (
     <div className="container">
-      <PlusMark size={220} className={styles.plusTop} />
-      <PlusMark size={120} className={styles.plusBottom} />
-
       <div className={styles.inner}>
         <p className={styles.badge}>DELIVERY MODEL</p>
         <h2 className={styles.intro}>Senior attention without a handoff chain.</h2>
@@ -75,14 +71,11 @@ export default function DeliveryModel() {
         </p>
 
         <div className={styles.roles}>
-          {ROLES.map(({ title, initials, subtitle, tone, responsibilities }) => (
-            <Card key={title} tone={tone} soft hover={false}>
+          {ROLES.map(({ title, initials, subtitle, responsibilities }) => (
+            <Card key={title} tone="paper" soft hover={false}>
               <div className={styles.role}>
                 <div className={styles.roleHead}>
-                  <span
-                    className={`${styles.avatar} ${styles.avatarOnPaper}`}
-                    aria-hidden="true"
-                  >
+                  <span className={styles.avatar} aria-hidden="true">
                     {initials}
                   </span>
                   <div>
@@ -91,16 +84,16 @@ export default function DeliveryModel() {
                   </div>
                 </div>
 
-                <p className={styles.engLabel} />
+                <div className={styles.respDivider}>
+                  <span className={styles.respLabel}>Focus</span>
+                </div>
 
                 <ul className={styles.respList}>
                   {responsibilities.map(({ Icon, text }) => (
                     <li key={text} className={styles.resp}>
-                      <Icon
-                        size={16}
-                        className={styles.respIcon}
-                        aria-hidden="true"
-                      />
+                      <span className={styles.respIcon}>
+                        <Icon size={15} aria-hidden="true" />
+                      </span>
                       <span>{text}</span>
                     </li>
                   ))}
