@@ -50,34 +50,36 @@ export default function WhatWeDiagnose() {
         support it.
       </h2>
 
-      <div className={styles.grid}>
-        {AREAS.map(({ title, Icon, tone, description }) => (
-          <Card key={title} tone={tone} soft>
-            <div className={styles.card}>
-              <span className={styles.cardIcon}>
-                <Icon size={30} aria-hidden="true" />
-              </span>
-              <div>
-                <h3 className={styles.cardTitle}>{title}</h3>
-                <p className={styles.cardDesc}>{description}</p>
+      <div className={styles.top}>
+        <div className={styles.areas}>
+          {AREAS.map(({ title, Icon, tone, description }) => (
+            <Card key={title} tone={tone} soft>
+              <div className={styles.card}>
+                <span className={styles.cardIcon}>
+                  <Icon size={26} aria-hidden="true" />
+                </span>
+                <div>
+                  <h3 className={styles.cardTitle}>{title}</h3>
+                  <p className={styles.cardDesc}>{description}</p>
+                </div>
               </div>
-            </div>
-          </Card>
-        ))}
-      </div>
-
-      <div className={styles.output}>
-        <p className={styles.outputLabel}>What you receive</p>
-        <ul className={styles.outputGrid}>
-          {OUTPUTS.map(({ label, Icon }) => (
-            <li key={label} className={styles.outputCard}>
-              <span className={styles.outputIcon}>
-                <Icon size={17} aria-hidden="true" />
-              </span>
-              <span className={styles.outputName}>{label}</span>
-            </li>
+            </Card>
           ))}
-        </ul>
+        </div>
+
+        <div className={styles.output}>
+          <p className={styles.outputLabel}>What you receive</p>
+          <ul className={styles.outputGrid}>
+            {OUTPUTS.map(({ label, Icon }) => (
+              <li key={label} className={styles.outputCard}>
+                <span className={styles.outputIcon}>
+                  <Icon size={16} aria-hidden="true" />
+                </span>
+                <span className={styles.outputName}>{label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div className={styles.o1}>
