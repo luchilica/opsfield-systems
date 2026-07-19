@@ -40,12 +40,9 @@ export default function HeroSummary() {
         {ROWS.map((r) => (
           <li key={r.label} className={styles.step}>
             <span className={styles.node}>
-              <r.Icon size={17} aria-hidden="true" />
+              <r.Icon size={16} aria-hidden="true" />
             </span>
-            <div className={styles.stepBody}>
-              <span className={styles.stepLabel}>{r.label}</span>
-              <p className={styles.stepText}>{r.text}</p>
-            </div>
+            <p className={styles.stepText}>{r.text}</p>
           </li>
         ))}
       </ol>
