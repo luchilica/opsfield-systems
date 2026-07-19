@@ -435,8 +435,8 @@ main > section:nth-of-type(even) {
   );
   background-size: 200% 200%;
   background-position: 50% 50%;
-  filter: blur(5px);
-  opacity: 0.8;
+  filter: blur(10px);
+  opacity: 0.6;
   mix-blend-mode: multiply;
   -webkit-mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
   mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 66%);
