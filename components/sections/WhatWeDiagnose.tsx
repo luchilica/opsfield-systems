@@ -1,7 +1,6 @@
 import {
   GitBranch,
   Layers,
-  Award,
   Workflow,
   FileText,
   Shield,
@@ -91,9 +90,6 @@ export default async function WhatWeDiagnose() {
         </span>
         <div className={styles.o1Body}>
           <div className={styles.o1Head}>
-            <span className={styles.o1Icon}>
-              <Award size={18} aria-hidden="true" />
-            </span>
             <h3 className={styles.o1Title}>{t("O-1 Readiness Support")}</h3>
             <span className={styles.o1Badge}>{t("Secondary service")}</span>
           </div>

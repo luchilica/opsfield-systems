@@ -115,7 +115,7 @@ const SERVICES: Service[] = [
     ],
     result: "A go / no-go, live on the call",
     timeline: "30–45 minutes",
-    cta: "Book the free diagnostic",
+    cta: "Take the diagnostic",
   },
   {
     id: "advisory-power-hour",
@@ -419,7 +419,11 @@ function ServiceCard({
             </p>
           )}
 
-          <a href={FORM_HREF} className={styles.cardCta}>
+          <a
+            href={FORM_HREF}
+            className={styles.cardCta}
+            data-request-type={service.free ? undefined : service.title}
+          >
             {t(service.cta)}
             <ArrowRight size={18} aria-hidden="true" />
           </a>

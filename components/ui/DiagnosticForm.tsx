@@ -19,14 +19,16 @@ import styles from "./DiagnosticForm.module.css";
 // (The optional set is the documented one: Company Website, Role, Company Size,
 //  Timeline, Request Type — no undocumented fields are collected.)
 
-const REQUEST_TYPE_OPTIONS = [
-  "Business & IT Diagnostic",
-  "AI & Process Automation Review",
-  "Business Process Audit",
-  "CRM / RevOps Audit",
-  "IT Stack Assessment",
-  "AI Readiness Assessment",
-  "90-Day Roadmap",
+// Services a lead can flag interest in — values match the Areas of Work cards
+// (and their CTA data-request-type), so clicking a card checks the right chip.
+const SERVICE_OPTIONS = [
+  "Process & Operations",
+  "RevOps: CRM, Data & Reporting",
+  "AI & Process Automation",
+  "IT Risk & Security",
+  "Extended Diagnostic",
+  "Advisory Power Hour",
+  "Add-on Tool Build",
   "O-1 Readiness Support",
   "Not sure yet",
 ];
@@ -47,7 +49,7 @@ const INITIAL = {
   email: "",
   company: "",
   challenge: "",
-  requestType: "",
+  services: [] as string[],
   companyWebsite: "",
   role: "",
   companySize: "",
@@ -75,20 +77,31 @@ export default function DiagnosticForm() {
   const startedRef = useRef(false); // fire form_start only once per session
   const lastCtaRef = useRef(""); // text of the last CTA that opened/prefilled the form
 
-  const set = (key: keyof Values, value: string) =>
+  const set = (key: Exclude<keyof Values, "services">, value: string) =>
     setValues((v) => ({ ...v, [key]: value }));
 
-  // CTA routing: any click on a [data-request-type] element prefills the (single)
-  // Request Type select and opens the optional block. One field, stays editable.
+  const toggleService = (svc: string) =>
+    setValues((v) => ({
+      ...v,
+      services: v.services.includes(svc)
+        ? v.services.filter((s) => s !== svc)
+        : [...v.services, svc],
+    }));
+
+  // CTA routing: any click on a [data-request-type] element checks the matching
+  // service chip (chips are visible, so nothing needs to be expanded).
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       const el = (e.target as Element | null)?.closest("[data-request-type]");
       if (!el) return;
       const value = el.getAttribute("data-request-type") || "";
-      if (!REQUEST_TYPE_OPTIONS.includes(value)) return;
+      if (!SERVICE_OPTIONS.includes(value)) return;
       lastCtaRef.current = (el.textContent || "").trim().replace(/\s+/g, " ");
-      setValues((v) => ({ ...v, requestType: value }));
-      setShowOptional(true);
+      setValues((v) =>
+        v.services.includes(value)
+          ? v
+          : { ...v, services: [...v.services, value] },
+      );
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
@@ -165,7 +178,7 @@ export default function DiagnosticForm() {
           email: values.email,
           company: values.company,
           challenge: values.challenge,
-          requestType: values.requestType,
+          requestType: values.services.join(", "),
           companyWebsite: values.companyWebsite,
           role: values.role,
           companySize: values.companySize,
@@ -178,7 +191,7 @@ export default function DiagnosticForm() {
       if (!res.ok || !data.ok) throw new Error("submit_failed");
       setStatus("success");
       trackEvent("form_submit_success", {
-        request_type: values.requestType || "not_specified",
+        request_type: values.services.join(", ") || "not_specified",
       });
     } catch {
       setStatus("error");
@@ -319,6 +332,64 @@ export default function DiagnosticForm() {
             )}
           </div>
 
+          {/* Services — visible multi-select chips (which areas the lead wants).
+              Prefilled by clicking an Areas of Work card. */}
+          <div className={styles.field}>
+            <span className={styles.label} id="df-services-label">
+              {t("What are you interested in?")}{" "}
+              <span className={styles.req}>{t("(optional)")}</span>
+            </span>
+            <p className={styles.groupHint}>{t("Select all that apply")}</p>
+            <div
+              className={styles.chipGroup}
+              role="group"
+              aria-labelledby="df-services-label"
+            >
+              {SERVICE_OPTIONS.map((svc) => {
+                const active = values.services.includes(svc);
+                return (
+                  <button
+                    key={svc}
+                    type="button"
+                    className={`${styles.chip} ${active ? styles.chipActive : ""}`}
+                    aria-pressed={active}
+                    onClick={() => toggleService(svc)}
+                  >
+                    {t(svc)}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Team size — visible single-select chips */}
+          <div className={styles.field}>
+            <span className={styles.label} id="df-size-label">
+              {t("How big is your team?")}{" "}
+              <span className={styles.req}>{t("(optional)")}</span>
+            </span>
+            <div
+              className={styles.chipGroup}
+              role="group"
+              aria-labelledby="df-size-label"
+            >
+              {COMPANY_SIZE_OPTIONS.map((size) => {
+                const active = values.companySize === size;
+                return (
+                  <button
+                    key={size}
+                    type="button"
+                    className={`${styles.chip} ${active ? styles.chipActive : ""}`}
+                    aria-pressed={active}
+                    onClick={() => set("companySize", active ? "" : size)}
+                  >
+                    {size}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           {/* 4 — Main challenge */}
           <div className={styles.field}>
             <label className={styles.label} htmlFor="df-challenge">
@@ -371,30 +442,6 @@ export default function DiagnosticForm() {
 
           {showOptional && (
             <div id="df-optional" className={styles.optional}>
-              {/* Request Type — single select, may be prefilled by CTA routing */}
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="df-request-type">
-                  {t("Request Type")}{" "}
-                  <span className={styles.req}>{t("(optional)")}</span>
-                </label>
-                <select
-                  id="df-request-type"
-                  name="request_type"
-                  className={styles.select}
-                  value={values.requestType}
-                  onChange={(e) => set("requestType", e.target.value)}
-                >
-                  <option value="">
-                    {t("Select a request type (optional)")}
-                  </option>
-                  {REQUEST_TYPE_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {t(opt)}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
               {/* Company Website */}
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="df-website-url">
@@ -427,28 +474,6 @@ export default function DiagnosticForm() {
                   value={values.role}
                   onChange={(e) => set("role", e.target.value)}
                 />
-              </div>
-
-              {/* Company Size — no preselected value, no ICP highlighting */}
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="df-company-size">
-                  {t("Company Size")}{" "}
-                  <span className={styles.req}>{t("(optional)")}</span>
-                </label>
-                <select
-                  id="df-company-size"
-                  name="company_size"
-                  className={styles.select}
-                  value={values.companySize}
-                  onChange={(e) => set("companySize", e.target.value)}
-                >
-                  <option value="">{t("Select company size (optional)")}</option>
-                  {COMPANY_SIZE_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
-                </select>
               </div>
 
               {/* Timeline */}

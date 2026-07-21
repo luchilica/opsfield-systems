@@ -9,6 +9,10 @@ export type Dict = Partial<Record<Locale, Record<string, string>>>;
 
 export const dictionary: Dict = {
   "es-US": {
+    "Take the diagnostic": "Realizar el diagnóstico",
+    "What are you interested in?": "¿Qué le interesa?",
+    "Select all that apply": "Marque todo lo que corresponda",
+    "How big is your team?": "¿Cuál es el tamaño de su equipo?",
     "The primary diagnostic is a complimentary fit call: we frame the problem, surface the likely bottlenecks, and tell you whether a paid engagement fits — no obligation. The deeper, documented diagnosis is a separate paid step.": "El diagnóstico principal es una llamada de compatibilidad sin costo: enmarcamos el problema, identificamos los probables cuellos de botella y le decimos si un servicio pagado tiene sentido — sin compromiso. El diagnóstico más profundo y documentado es un paso pagado aparte.",
     "A go / no-go, live on the call": "Una decisión de sí o no, en vivo durante la llamada",
     "Extended Diagnostic": "Diagnóstico ampliado",
@@ -364,6 +368,10 @@ export const dictionary: Dict = {
     "Request a Diagnostic for Your Team": "Solicite un diagnóstico para su equipo"
   },
   "ru-US": {
+    "Take the diagnostic": "Пройти диагностику",
+    "What are you interested in?": "Что вас интересует?",
+    "Select all that apply": "Отметьте всё подходящее",
+    "How big is your team?": "Какой размер вашей команды?",
     "The primary diagnostic is a complimentary fit call: we frame the problem, surface the likely bottlenecks, and tell you whether a paid engagement fits — no obligation. The deeper, documented diagnosis is a separate paid step.": "Основная диагностика — это бесплатный ознакомительный звонок: мы формулируем проблему, выявляем вероятные узкие места и говорим, подойдёт ли вам платное сотрудничество, — без обязательств. Более глубокая, задокументированная диагностика — это отдельный платный этап.",
     "A go / no-go, live on the call": "Решение «да / нет» прямо во время звонка",
     "Extended Diagnostic": "Расширенная диагностика",
@@ -719,6 +727,10 @@ export const dictionary: Dict = {
     "Request a Diagnostic for Your Team": "Запросить диагностику для вашей команды"
   },
   "zh-Hans": {
+    "Take the diagnostic": "开始诊断",
+    "What are you interested in?": "您对什么感兴趣？",
+    "Select all that apply": "可多选",
+    "How big is your team?": "您的团队规模有多大？",
     "The primary diagnostic is a complimentary fit call: we frame the problem, surface the likely bottlenecks, and tell you whether a paid engagement fits — no obligation. The deeper, documented diagnosis is a separate paid step.": "初步诊断是一次免费的匹配沟通：我们厘清问题、找出可能的瓶颈，并告诉您付费合作是否合适——没有任何义务。更深入、有书面记录的诊断则是单独的付费环节。",
     "A go / no-go, live on the call": "在通话中当场给出「是否合作」的结论",
     "Extended Diagnostic": "深度诊断",

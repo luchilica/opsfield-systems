@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { ArrowRight } from "lucide-react";
 import Button from "@/components/ui/Button";
 import PlusMark from "@/components/ui/PlusMark";
 import { getT } from "@/i18n/t";
@@ -16,12 +15,12 @@ const SCOPE = [
   "AI readiness",
 ];
 
-// Process-to-automation flow (docs/texts.md → "Flow") as a numbered pipeline:
-// Diagnostic → Automation opportunity → Roadmap / limited scope.
+// Process-to-automation flow (docs/texts.md → "Flow") as a connected-dot pathway
+// (deliberately NOT the numbered step cards used by "How It Works").
 const FLOW = [
-  { n: "01", label: "Diagnostic" },
-  { n: "02", label: "Automation opportunity" },
-  { n: "03", label: "Roadmap or limited scope" },
+  "Diagnostic",
+  "Automation opportunity",
+  "Roadmap or limited scope",
 ] as const;
 
 export default async function AIProcessAutomation() {
@@ -45,16 +44,14 @@ export default async function AIProcessAutomation() {
         </p>
 
         <ol className={styles.flow} aria-label={t("From diagnostic to automation")}>
-          {FLOW.map((step, i) => (
-            <Fragment key={step.n}>
-              <li className={styles.pill}>
-                <span className={styles.pillNode}>{step.n}</span>
-                <span className={styles.pillLabel}>{t(step.label)}</span>
+          {FLOW.map((label, i) => (
+            <Fragment key={label}>
+              <li className={styles.stage}>
+                <span className={styles.stageDot} aria-hidden="true" />
+                <span className={styles.stageLabel}>{t(label)}</span>
               </li>
               {i < FLOW.length - 1 && (
-                <li className={styles.flowArrow} aria-hidden="true">
-                  <ArrowRight size={20} />
-                </li>
+                <li className={styles.connector} aria-hidden="true" />
               )}
             </Fragment>
           ))}
@@ -80,7 +77,7 @@ export default async function AIProcessAutomation() {
           variant="on-brand"
           icon
           className={styles.cta}
-          data-request-type="AI & Process Automation Review"
+          data-request-type="AI & Process Automation"
         >
           {t("Assess Automation Opportunities")}
         </Button>
