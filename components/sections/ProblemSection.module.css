@@ -148,3 +148,17 @@
     display: none;
   }
 }
+
+/* Phones (single column) — lay the cause cards out horizontally (icon beside
+   label) so each is compact instead of a tall icon-over-one-word block. */
+@media (max-width: 559px) {
+  .causeCard {
+    flex-direction: row;
+    align-items: center;
+    padding: 14px 16px;
+  }
+
+  .causeGrid {
+    gap: var(--space-2);
+  }
+}
