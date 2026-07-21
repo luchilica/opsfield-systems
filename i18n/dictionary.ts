@@ -9,6 +9,10 @@ export type Dict = Partial<Record<Locale, Record<string, string>>>;
 
 export const dictionary: Dict = {
   "es-US": {
+    "Estimate by team size": "Estimación según el tamaño del equipo",
+    "employees": "empleados",
+    "Estimate": "Estimación",
+    "Prices update live with team size. The exact sum is set by the free diagnostic.": "Los precios se actualizan en vivo según el tamaño del equipo. La suma exacta la define el diagnóstico gratuito.",
     "AREAS OF WORK": "ÁREAS DE TRABAJO",
     "From diagnostic to implementation.": "Del diagnóstico a la implementación.",
     "Start free with a primary diagnostic, then move into focused implementation. Prices below are floors for a lean 25–50-person team; exact scope is set by the diagnostic.": "Comience gratis con un diagnóstico inicial y luego pase a una implementación enfocada. Los precios a continuación son mínimos para un equipo reducido de 25–50 personas; el alcance exacto lo define el diagnóstico.",
@@ -323,6 +327,10 @@ export const dictionary: Dict = {
     "Request a Diagnostic for Your Team": "Solicite un diagnóstico para su equipo"
   },
   "ru-US": {
+    "Estimate by team size": "Оценка по размеру команды",
+    "employees": "сотрудников",
+    "Estimate": "Оценка",
+    "Prices update live with team size. The exact sum is set by the free diagnostic.": "Цены пересчитываются вживую по размеру команды. Точная сумма определяется по итогам бесплатной диагностики.",
     "AREAS OF WORK": "НАПРАВЛЕНИЯ РАБОТЫ",
     "From diagnostic to implementation.": "От диагностики до внедрения.",
     "Start free with a primary diagnostic, then move into focused implementation. Prices below are floors for a lean 25–50-person team; exact scope is set by the diagnostic.": "Начните бесплатно с первичной диагностики, затем переходите к целенаправленному внедрению. Указанные ниже цены — это минимальные ставки для компактной команды из 25–50 человек; точный объём работ определяется по итогам диагностики.",
@@ -637,6 +645,10 @@ export const dictionary: Dict = {
     "Request a Diagnostic for Your Team": "Запросить диагностику для вашей команды"
   },
   "zh-Hans": {
+    "Estimate by team size": "按团队规模预估",
+    "employees": "人",
+    "Estimate": "预估",
+    "Prices update live with team size. The exact sum is set by the free diagnostic.": "价格随团队规模实时更新。具体金额由免费诊断确定。",
     "AREAS OF WORK": "业务领域",
     "From diagnostic to implementation.": "从诊断到落地实施。",
     "Start free with a primary diagnostic, then move into focused implementation. Prices below are floors for a lean 25–50-person team; exact scope is set by the diagnostic.": "先从免费的初步诊断开始，再进入有针对性的落地实施。以下价格为 25–50 人精简团队的起步下限；具体范围由诊断确定。",

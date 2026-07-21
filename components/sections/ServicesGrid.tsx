@@ -6,24 +6,79 @@
 // same form. Photos are illustrative (decorative alt) and duotone-treated in CSS
 // to stay on the monochrome + blue system. Expand pattern mirrors FAQ.tsx
 // (button + aria-expanded + hidden panel, content stays in HTML for SEO).
-// Prices are floors for a lean 25–50-person team; exact scope set by diagnostic.
+//
+// Prices are floors for a lean 25–50-person team. A team-size calculator scales
+// each floor live: factor = clamp(1 + (employees − 25) × 0.02, 1, 2.5) — rounded
+// to the nearest $100. The exact sum is always deferred to the free diagnostic.
 
 import { useState } from "react";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 import { Plus, ArrowRight, Award, Check } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { useT } from "@/i18n/useT";
+import type { Locale } from "@/i18n/locales";
 import styles from "./ServicesGrid.module.css";
 
 const FORM_HREF = "#diagnostic-request-form";
+
+const EMP_MIN = 25;
+const EMP_MAX = 100;
+const EMP_STEP = 5;
+
+// Team-size multiplier: 1.0 at ≤25 people, +2%/person, capped at 2.5 (≈100).
+function sizeFactor(employees: number): number {
+  return Math.min(2.5, Math.max(1, 1 + (employees - EMP_MIN) * 0.02));
+}
+
+function scaled(base: number, employees: number): number {
+  return Math.round((base * sizeFactor(employees)) / 100) * 100;
+}
+
+function estimateRange(base: number, employees: number): [number, number] {
+  const mid = base * sizeFactor(employees);
+  const low = Math.round((mid * 0.85) / 100) * 100;
+  const high = Math.round((mid * 1.15) / 100) * 100;
+  return [low, high];
+}
+
+// Locale-correct number grouping: ru uses a space, others use a comma.
+const GROUPING: Record<Locale, string> = {
+  "en-US": "en-US",
+  "es-US": "en-US",
+  "ru-US": "ru-RU",
+  "zh-Hans": "zh-CN",
+};
+
+function money(locale: Locale, n: number): string {
+  return `$${new Intl.NumberFormat(GROUPING[locale] ?? "en-US").format(n)}`;
+}
+
+// "from $X" with the prefix/suffix each locale actually uses (zh is a suffix).
+function fromLabel(locale: Locale, n: number): string {
+  const m = money(locale, n);
+  switch (locale) {
+    case "ru-US":
+      return `от ${m}`;
+    case "es-US":
+      return `desde ${m}`;
+    case "zh-Hans":
+      return `${m} 起`;
+    default:
+      return `from ${m}`;
+  }
+}
+
+function rangeLabel(locale: Locale, low: number, high: number): string {
+  return `${money(locale, low)}–${money(locale, high)}`;
+}
 
 type Service = {
   id: string;
   image: string;
   category: string;
   title: string;
-  price: string;
-  priceNote?: string;
+  base?: number; // floor price at ≤25 people; omitted for the free diagnostic
   free?: boolean;
   lede: string;
   context: string;
@@ -39,7 +94,6 @@ const SERVICES: Service[] = [
     image: "/services/diagnostic.jpg",
     category: "Start here",
     title: "Primary Diagnostic",
-    price: "Free",
     free: true,
     lede: "A structured first look at where your processes and systems drift apart.",
     context:
@@ -59,8 +113,7 @@ const SERVICES: Service[] = [
     image: "/services/process.jpg",
     category: "Implementation",
     title: "Process & Operations",
-    price: "from $3,500",
-    priceNote: "scope set after the diagnostic",
+    base: 3500,
     lede: "Redesign the handoffs, approvals, and ownership that slow a growing team down.",
     context:
       "We turn the diagnostic's process map into a working operating model: clarified ownership, documented workflows, and removed duplication — sized for a 25–50-person team, not an enterprise rollout.",
@@ -79,8 +132,7 @@ const SERVICES: Service[] = [
     image: "/services/revops.jpg",
     category: "Implementation",
     title: "RevOps: CRM, Data & Reporting",
-    price: "from $4,900",
-    priceNote: "scope set after the diagnostic",
+    base: 4900,
     lede: "Make your CRM, pipeline, and reporting tell the truth again.",
     context:
       "We clean up CRM structure, reporting rules, and revenue data flow so your numbers are trustworthy and your team stops working around the system.",
@@ -99,8 +151,7 @@ const SERVICES: Service[] = [
     image: "/services/automation.jpg",
     category: "Implementation",
     title: "AI & Process Automation",
-    price: "from $3,900",
-    priceNote: "scope set after the diagnostic",
+    base: 3900,
     lede: "Remove the manual, repetitive work — but only where it actually pays off.",
     context:
       "Starting from the diagnostic, we automate the workflows with real payback: connecting your tools, adding decision logic, and keeping a human where judgment matters.",
@@ -119,8 +170,7 @@ const SERVICES: Service[] = [
     image: "/services/security.jpg",
     category: "Implementation",
     title: "IT Risk & Security",
-    price: "from $1,900",
-    priceNote: "scope set after the diagnostic",
+    base: 1900,
     lede: "See where your data, access, and systems put the business at risk.",
     context:
       "A focused review of accounts, access, data handling, and single points of failure — with plain-language findings and a prioritized fix list, scaled to a small company.",
@@ -136,22 +186,71 @@ const SERVICES: Service[] = [
   },
 ];
 
+function Calculator({
+  employees,
+  onChange,
+}: {
+  employees: number;
+  onChange: (n: number) => void;
+}) {
+  const t = useT();
+  const shown = `${employees}${employees >= EMP_MAX ? "+" : ""} ${t("employees")}`;
+
+  return (
+    <div className={styles.calc}>
+      <div className={styles.calcHead}>
+        <label htmlFor="svc-employees" className={styles.calcLabel}>
+          {t("Estimate by team size")}
+        </label>
+        <span className={styles.calcValue}>{shown}</span>
+      </div>
+      <input
+        id="svc-employees"
+        type="range"
+        min={EMP_MIN}
+        max={EMP_MAX}
+        step={EMP_STEP}
+        value={employees}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className={styles.calcRange}
+        aria-valuetext={shown}
+      />
+      <div className={styles.calcTicks} aria-hidden="true">
+        <span>{EMP_MIN}</span>
+        <span>{EMP_MAX}+</span>
+      </div>
+      <p className={styles.calcNote}>
+        {t(
+          "Prices update live with team size. The exact sum is set by the free diagnostic.",
+        )}
+      </p>
+    </div>
+  );
+}
+
 function ServiceCard({
   service,
   priority,
+  employees,
 }: {
   service: Service;
   priority: boolean;
+  employees: number;
 }) {
   const t = useT();
+  const locale = useLocale() as Locale;
   const [open, setOpen] = useState(false);
   const triggerId = `svc-trigger-${service.id}`;
   const panelId = `svc-panel-${service.id}`;
 
+  const priceLabel = service.free
+    ? t("Free")
+    : service.base != null
+      ? fromLabel(locale, scaled(service.base, employees))
+      : t("On request");
+
   return (
-    <article
-      className={`${styles.card} ${service.free ? styles.cardFree : ""}`}
-    >
+    <article className={`${styles.card} ${service.free ? styles.cardFree : ""}`}>
       <div className={styles.media}>
         <Image
           src={service.image}
@@ -170,7 +269,7 @@ function ServiceCard({
           <span
             className={`${styles.price} ${service.free ? styles.priceFree : ""}`}
           >
-            {t(service.price)}
+            {priceLabel}
           </span>
         </div>
         <p className={styles.lede}>{t(service.lede)}</p>
@@ -231,9 +330,11 @@ function ServiceCard({
             </div>
           </dl>
 
-          {service.priceNote && (
+          {service.base != null && (
             <p className={styles.priceNote}>
-              {t(service.price)} · {t(service.priceNote)}
+              {t("Estimate")}:{" "}
+              {rangeLabel(locale, ...estimateRange(service.base, employees))} ·{" "}
+              {t("scope set after the diagnostic")}
             </p>
           )}
 
@@ -249,6 +350,7 @@ function ServiceCard({
 
 export default function ServicesGrid() {
   const t = useT();
+  const [employees, setEmployees] = useState(35);
 
   return (
     <div className="container">
@@ -260,9 +362,16 @@ export default function ServicesGrid() {
         )}
       </p>
 
+      <Calculator employees={employees} onChange={setEmployees} />
+
       <div className={styles.grid}>
         {SERVICES.map((service, i) => (
-          <ServiceCard key={service.id} service={service} priority={i === 0} />
+          <ServiceCard
+            key={service.id}
+            service={service}
+            priority={i === 0}
+            employees={employees}
+          />
         ))}
       </div>
 
