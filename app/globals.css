@@ -208,10 +208,14 @@
     --fs-h3: 1.2rem; /* ~19 (was 24) */
     --fs-h4: 1.0625rem; /* 17 (was 20) */
     --fs-lead: 1.0625rem; /* 17 (was 20) */
-    --space-5: 32px; /* was 48 */
-    --space-6: 40px; /* was 64 — section rhythm on mobile */
-    --space-7: 56px; /* was 96 */
-    --space-8: 60px; /* was 104 */
+    /* Spacing squeezed hard on phones — the site had too much vertical air.
+       These cascade site-wide (space-4/5 are used ~23× each), so every section
+       tightens together and stays cohesive. */
+    --space-4: 22px; /* was 32 */
+    --space-5: 26px; /* was 48 */
+    --space-6: 28px; /* section rhythm — was 64 */
+    --space-7: 38px; /* was 96 */
+    --space-8: 42px; /* was 104 */
   }
 }
 

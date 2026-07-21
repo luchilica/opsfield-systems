@@ -125,3 +125,15 @@
 .closing {
   margin-top: var(--space-2);
 }
+
+/* Mobile — ~11 rows, so the 24px trigger padding added up to a lot of air.
+   Tighten the row rhythm and question size on phones. */
+@media (max-width: 767px) {
+  .trigger {
+    padding: 15px 4px;
+    font-size: 17px;
+  }
+  .panel {
+    padding-bottom: 18px;
+  }
+}

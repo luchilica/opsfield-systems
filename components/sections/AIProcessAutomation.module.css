@@ -227,3 +227,24 @@
 .cta {
   margin-top: var(--space-4);
 }
+
+/* Mobile — squeeze the airy dark panels: shorter flow connectors and tighter
+   Scope / Principle boxes. Placed at file end so these win over the base rules
+   above in the cascade. */
+@media (max-width: 767px) {
+  .stage {
+    padding: 5px 2px;
+  }
+  .connector {
+    height: 12px;
+  }
+  .scopeBox {
+    padding: 18px;
+  }
+  .scopeLabel {
+    margin-bottom: 12px;
+  }
+  .principle {
+    padding: 16px 18px;
+  }
+}
