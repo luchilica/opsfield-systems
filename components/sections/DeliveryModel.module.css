@@ -270,4 +270,49 @@
   .plusBottom {
     display: none;
   }
+
+  /* Compacted harder than the rest: tighter lead, smaller avatar/title, and the
+     Focus list runs in two columns so short responsibilities don't stack tall. */
+  .text {
+    margin-bottom: var(--space-4);
+  }
+  .roles {
+    gap: var(--space-2);
+  }
+  .roleHead {
+    gap: 12px;
+  }
+  .avatar {
+    width: 46px;
+    height: 46px;
+    font-size: 17px;
+  }
+  .roleTitle {
+    font-size: 18px;
+  }
+  .respDivider {
+    margin-top: var(--space-2);
+  }
+  .respList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 12px;
+    gap: 10px 12px;
+  }
+  .resp {
+    gap: 9px;
+    font-size: 13px;
+  }
+  .respIcon {
+    width: 26px;
+    height: 26px;
+  }
+  .envBlock {
+    margin-top: var(--space-4);
+  }
+  .envLabel {
+    margin-bottom: 10px;
+  }
+  .cta {
+    margin-top: var(--space-4);
+  }
 }

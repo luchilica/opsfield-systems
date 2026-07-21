@@ -261,3 +261,71 @@
 .textLink:focus-visible {
   text-decoration: underline;
 }
+
+/* Mobile — compacted harder than the rest: smaller icon tiles, tighter deliverable
+   grid, and a condensed O-1 panel so the section reads in fewer screens. */
+@media (max-width: 767px) {
+  .intro {
+    margin-bottom: var(--space-3);
+  }
+  .top {
+    gap: var(--space-2);
+  }
+  .areas {
+    gap: var(--space-2);
+  }
+  .card {
+    gap: 13px;
+  }
+  .cardIcon {
+    width: 42px;
+    height: 42px;
+  }
+  .cardTitle {
+    font-size: 17px;
+  }
+  .cardDesc {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .output {
+    padding: 16px;
+  }
+  .outputLabel {
+    margin-bottom: 11px;
+  }
+  .outputGrid {
+    gap: 8px;
+  }
+  .outputCard {
+    gap: 8px;
+    padding: 9px 10px;
+  }
+  .outputIcon {
+    width: 28px;
+    height: 28px;
+  }
+  .outputName {
+    font-size: 12.5px;
+  }
+  .o1 {
+    margin-top: var(--space-2);
+    gap: 13px;
+    padding: 15px 16px;
+  }
+  .o1Tile {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+  }
+  .o1Title {
+    font-size: 17px;
+  }
+  .o1Desc {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .cta {
+    margin-top: var(--space-2);
+  }
+}

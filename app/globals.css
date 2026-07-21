@@ -633,6 +633,17 @@ main > section:nth-of-type(even) {
   padding-top: 128px;
 }
 
+/* On phones the 128px pause is dead space — collapse it to the normal section
+   rhythm so Delivery Model doesn't trail into a long empty gap. */
+@media (max-width: 767px) {
+  #delivery-model {
+    padding-bottom: var(--space-6);
+  }
+  #business-it-diagnostic {
+    padding-top: var(--space-6);
+  }
+}
+
 /* --------------------------------------------------------------------------
    Focus styles
    -------------------------------------------------------------------------- */
