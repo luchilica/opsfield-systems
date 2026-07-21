@@ -151,6 +151,10 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3);
+  /* Top-align cards so expanding one does NOT stretch its row-mates (which made
+     neighbours balloon and their "Show details" trigger drop to the bottom).
+     Each card grows to its own content height on click. */
+  align-items: start;
 }
 
 @media (min-width: 640px) {
