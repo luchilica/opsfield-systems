@@ -34,6 +34,7 @@ export type AnalyticsEvent =
   | "cta_click"
   | "nav_anchor_click"
   | "faq_item_open"
+  | "service_card_open"
   | "form_start"
   | "form_submit_attempt"
   | "form_validation_error"

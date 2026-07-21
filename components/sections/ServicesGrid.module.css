@@ -1,0 +1,478 @@
+/* Areas of Work — priced service cards with a duotone photo, expandable detail
+   (FAQ-style: button + hidden panel, content stays in HTML for SEO), and a muted
+   O-1 secondary strip. Monochrome + blue system: hairline borders, soft shadows,
+   circular/blue accents. Photos are grayscaled + blue-multiplied in CSS so six
+   stock images read as one branded set. No Tailwind. */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--space-3);
+  padding: 5px 13px;
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  box-shadow: var(--shadow-xs);
+  font-family: var(--font-mono-fallback);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone-600);
+}
+
+.badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue-500);
+}
+
+.intro {
+  max-width: var(--text-max);
+  margin-bottom: var(--space-2);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--ink-900);
+}
+
+.lead {
+  max-width: var(--text-max);
+  margin-bottom: var(--space-5);
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--stone-500);
+}
+
+/* Responsive card grid: 1 → 2 → 3 columns. */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  /* Cards keep their natural height — an expanded card grows without stretching
+     its row-mates and leaving them with empty space. */
+  align-items: start;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+/* Card — paper surface, hairline, soft shadow, clipped media corners. */
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out),
+    border-color var(--dur-med) var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue-200);
+}
+
+/* The free primary diagnostic reads as the entry point — blue accent frame. */
+.cardFree {
+  border-color: var(--blue-200);
+  box-shadow: var(--ring), var(--shadow-sm);
+}
+
+/* Duotone media: grayscale image + blue multiply overlay, isolated so the blend
+   only affects the photo. A soft bottom gradient keeps the category chip legible. */
+.media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--ink-900);
+}
+
+.img {
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.04) brightness(0.98);
+  transition: filter var(--dur-med) var(--ease-out);
+}
+
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--blue-600);
+  mix-blend-mode: multiply;
+  opacity: 0.82;
+  transition: opacity var(--dur-med) var(--ease-out);
+}
+
+.media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 15, 0) 55%,
+    rgba(10, 10, 15, 0.34) 100%
+  );
+}
+
+/* On hover let a little colour and light back in. */
+.card:hover .img {
+  filter: grayscale(0.45) contrast(1.02) brightness(1);
+}
+
+.card:hover .media::after {
+  opacity: 0.66;
+}
+
+.category {
+  position: absolute;
+  z-index: 3;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  font-family: var(--font-mono-fallback);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-900);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 22px 22px;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--ink-900);
+}
+
+.price {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.01em;
+  color: var(--ink-900);
+  white-space: nowrap;
+}
+
+.priceFree {
+  color: var(--blue-600);
+}
+
+.lede {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--stone-500);
+}
+
+/* Show/Hide details trigger. */
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  min-height: 44px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  color: var(--blue-600);
+}
+
+.trigger:hover {
+  color: var(--blue-700);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--blue-600);
+  transition: transform var(--dur-med) var(--ease-out),
+    background var(--dur-med) var(--ease-out),
+    color var(--dur-med) var(--ease-out);
+}
+
+.toggleOpen {
+  transform: rotate(45deg);
+  background: var(--blue-500);
+  color: var(--paper);
+  border-color: var(--blue-500);
+}
+
+/* Expanded detail panel. */
+.panel {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-hair);
+}
+
+.context {
+  margin: 0 0 14px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--stone-600);
+}
+
+.metaLabel {
+  margin: 0 0 10px;
+  font-family: var(--font-mono-fallback);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue-600);
+}
+
+.includes {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.include {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink-900);
+}
+
+.checkIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--blue-600);
+}
+
+.facts {
+  margin: 0 0 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.factKey {
+  font-family: var(--font-mono-fallback);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stone-500);
+}
+
+.factVal {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink-900);
+}
+
+.priceNote {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--stone-500);
+}
+
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  color: var(--blue-600);
+  text-decoration: none;
+}
+
+.cardCta:hover,
+.cardCta:focus-visible {
+  text-decoration: underline;
+}
+
+/* O-1 secondary service — a quiet, muted strip so it reads as secondary. */
+.o1 {
+  margin-top: var(--space-4);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px;
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-lg);
+  background: var(--stone-50);
+}
+
+.o1Tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-md);
+  background: var(--ink-900);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+}
+
+.o1Body {
+  flex: 1;
+}
+
+.o1Head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.o1Icon {
+  display: inline-flex;
+  color: var(--blue-600);
+}
+
+.o1Title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
+}
+
+.o1Badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border: 1px solid var(--stone-200);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  font-family: var(--font-mono-fallback);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone-500);
+}
+
+.o1Price {
+  margin-left: auto;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  color: var(--stone-600);
+  white-space: nowrap;
+}
+
+.o1Desc {
+  margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--stone-500);
+}
+
+.o1Cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+  font-size: 14px;
+  color: var(--blue-600);
+  text-decoration: none;
+}
+
+.o1Cta:hover,
+.o1Cta:focus-visible {
+  text-decoration: underline;
+}
+
+.footnote {
+  margin: var(--space-3) 0 0;
+  max-width: var(--text-max);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--stone-500);
+}
+
+@media (max-width: 520px) {
+  .o1 {
+    flex-direction: column;
+  }
+  .o1Price {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .img,
+  .media::after,
+  .toggle {
+    transition: none;
+  }
+}

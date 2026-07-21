@@ -11,6 +11,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import Hero from "@/components/sections/Hero";
 import ProblemSection from "@/components/sections/ProblemSection";
 import WhatWeDiagnose from "@/components/sections/WhatWeDiagnose";
+import ServicesGrid from "@/components/sections/ServicesGrid";
 import AIProcessAutomation from "@/components/sections/AIProcessAutomation";
 import HowDiagnosticWorks from "@/components/sections/HowDiagnosticWorks";
 import DiagnosticScenarios from "@/components/sections/DiagnosticScenarios";
@@ -79,6 +80,11 @@ export default async function Home({
       {/* 3 */}
       <section id="what-we-diagnose" className="section">
         <WhatWeDiagnose />
+      </section>
+
+      {/* 3b — priced areas of work; funnels back to the diagnostic form */}
+      <section id="areas-of-work" className="section">
+        <ServicesGrid />
       </section>
 
       {/* 4 */}
