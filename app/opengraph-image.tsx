@@ -2,26 +2,32 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-// Open Graph / social share card (1200×630) — the preview shown when the site
-// link is pasted into Slack, iMessage, LinkedIn, etc. Dark brand composition:
-// Signet-O logo + name + tagline on the left, a duotone team-at-work photo
-// bleeding in from the right. The blue duotone is baked into public/og/team.jpg
-// (satori's CSS filters are unreliable). Applies site-wide via the file
-// convention; Next injects og:image / twitter:image tags. Twitter card re-exports
-// this from twitter-image.tsx so both stay in sync.
+// Open Graph / social share card (1200×630) — the "business card" preview shown
+// when the site link is pasted into Telegram, WhatsApp, Slack, LinkedIn, etc.
+// Business-card composition: logo + wordmark, category eyebrow, a selling hook,
+// a supporting line, a blue rule, and the domain footer — with a duotone photo
+// bleeding in from the right. Duotone is baked into the /og asset (satori's CSS
+// filters are unreliable). Twitter card re-exports this from twitter-image.tsx.
+
+// --- Tunables ---------------------------------------------------------------
+// Which right-panel image to use: "glass" (abstract, brand-premium) or "people".
+const VARIANT: "people" | "glass" = "glass";
+// Footer line: no domain yet (site still on *.vercel.app), so we show the ICP
+// instead of printing an unowned domain. Swap to the real domain once acquired.
+const FOOTER = "For B2B teams — 50–250 employees";
+const IMG = VARIANT === "glass" ? "public/og/glass.jpg" : "public/og/team-people.jpg";
+// ----------------------------------------------------------------------------
 
 export const alt =
-  "Opsfield Systems — Diagnostic-First IT & Business Development";
+  "Opsfield Systems — Diagnostic-First IT & Business Advisory";
 
 export const size = { width: 1200, height: 630 };
 
 export const contentType = "image/png";
 
 export default async function Image() {
-  // process.cwd() is the Next.js project root. Inlined as a data URI so the
-  // asset is bundled into the ImageResponse (well under the 500KB budget: ~38KB).
-  const teamData = await readFile(join(process.cwd(), "public/og/team.jpg"));
-  const teamSrc = `data:image/jpeg;base64,${teamData.toString("base64")}`;
+  const imgData = await readFile(join(process.cwd(), IMG));
+  const imgSrc = `data:image/jpeg;base64,${imgData.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -36,36 +42,35 @@ export default async function Image() {
           fontFamily: "sans-serif",
         }}
       >
-        {/* Brand-blue bloom, top-right (matches the site's dark sections). */}
+        {/* Brand-blue bloom, top-right. */}
         <div
           style={{
             position: "absolute",
-            top: -220,
-            right: -160,
-            width: 680,
-            height: 680,
-            borderRadius: 680,
+            top: -240,
+            right: -180,
+            width: 720,
+            height: 720,
+            borderRadius: 720,
             display: "flex",
             background:
-              "radial-gradient(closest-side, rgba(37,81,210,0.38), rgba(37,81,210,0))",
+              "radial-gradient(closest-side, rgba(37,81,210,0.42), rgba(37,81,210,0))",
           }}
         />
 
-        {/* Team-at-work photo, bleeding in from the right. */}
+        {/* Right image panel, bleeding in and fading into the dark card. */}
         <img
-          src={teamSrc}
-          width={540}
+          src={imgSrc}
+          width={500}
           height={630}
           style={{
             position: "absolute",
             right: 0,
             top: 0,
-            width: 540,
+            width: 500,
             height: 630,
             objectFit: "cover",
           }}
         />
-        {/* Fade the photo's left edge into the dark background. */}
         <div
           style={{
             position: "absolute",
@@ -75,32 +80,27 @@ export default async function Image() {
             height: 630,
             display: "flex",
             background:
-              "linear-gradient(90deg, #0B1220 0%, rgba(11,18,32,0.72) 26%, rgba(11,18,32,0) 58%)",
+              "linear-gradient(90deg, #0B1220 0%, rgba(11,18,32,0.74) 30%, rgba(11,18,32,0) 62%)",
           }}
         />
 
-        {/* Left content column. */}
+        {/* Left content column (business-card face). */}
         <div
           style={{
             position: "relative",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            width: 720,
+            width: 740,
             height: 630,
-            padding: "0 76px",
+            padding: "0 74px",
           }}
         >
-          {/* Logo lockup: Signet-O ring (blue arc → white on dark) + wordmark. */}
+          {/* Logo lockup. */}
           <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 20,
-              marginBottom: 40,
-            }}
+            style={{ display: "flex", alignItems: "center", gap: 18, marginBottom: 30 }}
           >
-            <svg width={72} height={72} viewBox="0 0 32 32" fill="none">
+            <svg width={60} height={60} viewBox="0 0 32 32" fill="none">
               <defs>
                 <linearGradient id="ogRing" x1="1" y1="0" x2="0.25" y2="0.9">
                   <stop offset="0" stopColor="#8FB0F5" />
@@ -109,17 +109,11 @@ export default async function Image() {
                   <stop offset="1" stopColor="#FFFFFF" />
                 </linearGradient>
               </defs>
-              <circle
-                cx="16"
-                cy="16"
-                r="11.5"
-                stroke="url(#ogRing)"
-                strokeWidth="3.6"
-              />
+              <circle cx="16" cy="16" r="11.5" stroke="url(#ogRing)" strokeWidth="3.6" />
             </svg>
             <div
               style={{
-                fontSize: 40,
+                fontSize: 34,
                 fontWeight: 700,
                 color: "#FFFFFF",
                 letterSpacing: "-0.01em",
@@ -129,41 +123,54 @@ export default async function Image() {
             </div>
           </div>
 
+          {/* Category eyebrow. */}
           <div
             style={{
-              fontSize: 21,
+              fontSize: 19,
               fontWeight: 600,
-              letterSpacing: "0.16em",
+              letterSpacing: "0.18em",
               textTransform: "uppercase",
               color: "#8FB0F5",
-              marginBottom: 22,
+              marginBottom: 20,
             }}
           >
-            B2B IT & Operations Advisory
+            B2B IT &amp; Operations Advisory
           </div>
 
+          {/* Selling hook (hero line). */}
           <div
             style={{
-              fontSize: 62,
+              fontSize: 58,
               fontWeight: 700,
               lineHeight: 1.04,
               letterSpacing: "-0.022em",
               color: "#FFFFFF",
             }}
           >
-            Diagnostic-First IT & Business Development
+            Find the bottleneck before you commit budget.
           </div>
 
+          {/* Supporting line. */}
           <div
             style={{
-              marginTop: 26,
-              fontSize: 27,
+              marginTop: 22,
+              fontSize: 24,
               fontWeight: 400,
               lineHeight: 1.3,
               color: "#9AA7BD",
             }}
           >
-            Find the bottleneck before you commit budget.
+            Diagnostic-first IT, CRM, data &amp; automation advisory.
+          </div>
+
+          {/* Blue rule + footer (ICP, since there's no custom domain yet). */}
+          <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 34 }}>
+            <div
+              style={{ width: 40, height: 4, borderRadius: 2, background: "#2551D2", display: "flex" }}
+            />
+            <div style={{ fontSize: 22, fontWeight: 600, color: "#C7D2E5", letterSpacing: "0.01em" }}>
+              {FOOTER}
+            </div>
           </div>
         </div>
       </div>
