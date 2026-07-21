@@ -11,7 +11,6 @@ import {
   Cpu,
   Shield,
 } from "lucide-react";
-import Image from "next/image";
 import Card from "@/components/ui/Card";
 import PlusMark from "@/components/ui/PlusMark";
 import { getT } from "@/i18n/t";
@@ -76,18 +75,6 @@ export default async function DeliveryModel() {
             "Opsfield Systems works with 4–6 active clients at a time so senior advisors remain involved from problem framing through scope and delivery."
           )}
         </p>
-
-        {/* Environmental band — a working session (no identifiable faces / names,
-            per the role-only ethos), duotone-treated to sit in the ink section. */}
-        <figure className={styles.figure}>
-          <Image
-            src="/photos/delivery.jpg"
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 1120px, 100vw"
-            className={styles.figureImg}
-          />
-        </figure>
 
         <div className={styles.roles}>
           {ROLES.map(({ title, initials, subtitle, responsibilities }) => (
