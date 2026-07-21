@@ -144,7 +144,9 @@
 }
 
 /* Responsive card grid: 1 → 2 → 3 columns. align-items:start so an expanded card
-   grows alone, without stretching its row-mates into empty space. */
+   grows alone without stretching its row-mates. Collapsed cards stay even because
+   the title (2 lines) and lede (3 lines) each reserve a fixed height, so the full
+   lede shows in every language without the grid going ragged. */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -214,7 +216,7 @@
   z-index: 1;
   background: var(--blue-500);
   mix-blend-mode: multiply;
-  opacity: 0.46;
+  opacity: 0.23;
   transition: opacity var(--dur-med) var(--ease-out);
 }
 
@@ -236,7 +238,7 @@
 }
 
 .card:hover .media::after {
-  opacity: 0.32;
+  opacity: 0.16;
 }
 
 .category {
@@ -303,14 +305,11 @@
   color: var(--blue-600);
 }
 
-/* Lede reserves two lines for the same reason. */
+/* Lede shows in full (no truncation) and reserves 3 lines so cards stay even in
+   every language; a longer lede simply grows past the reserve. */
 .lede {
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  min-height: 3em;
+  min-height: 4.5em;
   font-size: 14.5px;
   line-height: 1.5;
   color: var(--stone-500);
@@ -319,6 +318,7 @@
 /* Show/Hide details trigger. */
 .trigger {
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   gap: 8px;
   margin-top: 16px;
