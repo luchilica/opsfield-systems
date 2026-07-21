@@ -40,6 +40,18 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: "Opsfield Systems",
   description: "Diagnostic-first IT & business consulting.",
+  // Sitewide share-preview image. Declared explicitly (not left to the
+  // opengraph-image.tsx file convention alone) because pages that set their own
+  // `openGraph`/`twitter` in generateMetadata were shipping HTML with no
+  // og:image tag — so Telegram/Slack/LinkedIn had nothing to render. metadataBase
+  // resolves "/opengraph-image" to an absolute HTTPS URL.
+  openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/opengraph-image"],
+  },
 };
 
 // Statically render all known locales.
