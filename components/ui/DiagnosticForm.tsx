@@ -33,7 +33,43 @@ const SERVICE_OPTIONS = [
   "Not sure yet",
 ];
 
-const COMPANY_SIZE_OPTIONS = ["1–25", "26–50", "51–100", "101–250", "251–500", "500+"];
+const COMPANY_SIZE_OPTIONS = [
+  "1–10",
+  "11–25",
+  "26–50",
+  "51–75",
+  "76–100",
+  "101–150",
+  "151–200",
+  "200+",
+];
+
+// Current stack — brand names pass through t() unchanged; only the last option
+// ("Other / none") is translated.
+const TOOLS_OPTIONS = [
+  "HubSpot",
+  "Salesforce",
+  "Pipedrive",
+  "Zoho CRM",
+  "Notion",
+  "Airtable",
+  "Google Workspace",
+  "Microsoft 365",
+  "Slack",
+  "Zapier / Make",
+  "Other / none",
+];
+
+const PAINS_OPTIONS = [
+  "Manual, repetitive work",
+  "Messy CRM or data",
+  "Unclear processes / ownership",
+  "Poor reporting / visibility",
+  "Too many disconnected tools",
+  "Scaling the team",
+  "Security / access risk",
+  "Something else",
+];
 
 const TIMELINE_OPTIONS = ["ASAP", "This month", "1–3 months", "3–6 months", "Researching"];
 
@@ -50,6 +86,9 @@ const INITIAL = {
   company: "",
   challenge: "",
   services: [] as string[],
+  tools: [] as string[],
+  pains: [] as string[],
+  alreadyTried: "",
   companyWebsite: "",
   role: "",
   companySize: "",
@@ -77,15 +116,17 @@ export default function DiagnosticForm() {
   const startedRef = useRef(false); // fire form_start only once per session
   const lastCtaRef = useRef(""); // text of the last CTA that opened/prefilled the form
 
-  const set = (key: Exclude<keyof Values, "services">, value: string) =>
-    setValues((v) => ({ ...v, [key]: value }));
+  const set = (
+    key: Exclude<keyof Values, "services" | "tools" | "pains">,
+    value: string,
+  ) => setValues((v) => ({ ...v, [key]: value }));
 
-  const toggleService = (svc: string) =>
+  const toggleMulti = (key: "services" | "tools" | "pains", val: string) =>
     setValues((v) => ({
       ...v,
-      services: v.services.includes(svc)
-        ? v.services.filter((s) => s !== svc)
-        : [...v.services, svc],
+      [key]: v[key].includes(val)
+        ? v[key].filter((x) => x !== val)
+        : [...v[key], val],
     }));
 
   // CTA routing: any click on a [data-request-type] element checks the matching
@@ -179,6 +220,9 @@ export default function DiagnosticForm() {
           company: values.company,
           challenge: values.challenge,
           requestType: values.services.join(", "),
+          tools: values.tools.join(", "),
+          pains: values.pains.join(", "),
+          alreadyTried: values.alreadyTried,
           companyWebsite: values.companyWebsite,
           role: values.role,
           companySize: values.companySize,
@@ -353,7 +397,7 @@ export default function DiagnosticForm() {
                     type="button"
                     className={`${styles.chip} ${active ? styles.chipActive : ""}`}
                     aria-pressed={active}
-                    onClick={() => toggleService(svc)}
+                    onClick={() => toggleMulti("services", svc)}
                   >
                     {t(svc)}
                   </button>
@@ -384,6 +428,64 @@ export default function DiagnosticForm() {
                     onClick={() => set("companySize", active ? "" : size)}
                   >
                     {size}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Tools / stack — visible multi-select */}
+          <div className={styles.field}>
+            <span className={styles.label} id="df-tools-label">
+              {t("Which tools do you use?")}{" "}
+              <span className={styles.req}>{t("(optional)")}</span>
+            </span>
+            <p className={styles.groupHint}>{t("Select all that apply")}</p>
+            <div
+              className={styles.chipGroup}
+              role="group"
+              aria-labelledby="df-tools-label"
+            >
+              {TOOLS_OPTIONS.map((tool) => {
+                const active = values.tools.includes(tool);
+                return (
+                  <button
+                    key={tool}
+                    type="button"
+                    className={`${styles.chip} ${active ? styles.chipActive : ""}`}
+                    aria-pressed={active}
+                    onClick={() => toggleMulti("tools", tool)}
+                  >
+                    {t(tool)}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Pains / priorities — visible multi-select */}
+          <div className={styles.field}>
+            <span className={styles.label} id="df-pains-label">
+              {t("What's slowing you down most?")}{" "}
+              <span className={styles.req}>{t("(optional)")}</span>
+            </span>
+            <p className={styles.groupHint}>{t("Select all that apply")}</p>
+            <div
+              className={styles.chipGroup}
+              role="group"
+              aria-labelledby="df-pains-label"
+            >
+              {PAINS_OPTIONS.map((pain) => {
+                const active = values.pains.includes(pain);
+                return (
+                  <button
+                    key={pain}
+                    type="button"
+                    className={`${styles.chip} ${active ? styles.chipActive : ""}`}
+                    aria-pressed={active}
+                    onClick={() => toggleMulti("pains", pain)}
+                  >
+                    {t(pain)}
                   </button>
                 );
               })}
@@ -496,6 +598,21 @@ export default function DiagnosticForm() {
                     </option>
                   ))}
                 </select>
+              </div>
+
+              {/* Already tried — optional open question */}
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor="df-tried">
+                  {t("What have you already tried to fix it?")}{" "}
+                  <span className={styles.req}>{t("(optional)")}</span>
+                </label>
+                <textarea
+                  id="df-tried"
+                  name="already_tried"
+                  className={styles.textarea}
+                  value={values.alreadyTried}
+                  onChange={(e) => set("alreadyTried", e.target.value)}
+                />
               </div>
             </div>
           )}

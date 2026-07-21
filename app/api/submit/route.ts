@@ -98,6 +98,9 @@ interface SubmitBody {
   company?: unknown;
   challenge?: unknown;
   requestType?: unknown;
+  tools?: unknown;
+  pains?: unknown;
+  alreadyTried?: unknown;
   companyWebsite?: unknown;
   role?: unknown;
   companySize?: unknown;
@@ -117,6 +120,9 @@ function notificationText(b: SubmitBody): string {
     line("Work email", b.email),
     line("Company", b.company),
     line("Request type", b.requestType),
+    line("Tools", b.tools),
+    line("Slowing them down", b.pains),
+    line("Already tried", b.alreadyTried),
     line("Company website", b.companyWebsite),
     line("Role", b.role),
     line("Company size", b.companySize),
