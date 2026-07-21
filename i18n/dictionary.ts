@@ -9,6 +9,14 @@ export type Dict = Partial<Record<Locale, Record<string, string>>>;
 
 export const dictionary: Dict = {
   "es-US": {
+    "Start free with a primary diagnostic, then move into focused implementation.": "Comience gratis con un diagnóstico inicial y luego pase a una implementación enfocada.",
+    "Structure the evidence behind an O-1 extraordinary-ability case — the right way.": "Estructure la evidencia de un caso O-1 de habilidad extraordinaria, de la forma correcta.",
+    "Evidence & criteria mapping": "Mapeo de evidencia y criterios",
+    "Publication & visibility strategy": "Estrategia de publicaciones y visibilidad",
+    "Portfolio & profile architecture": "Arquitectura de portafolio y perfil",
+    "Recommendation coordination": "Coordinación de recomendaciones",
+    "An organized evidence package for counsel": "Un paquete de evidencia organizado para el abogado",
+    "Ongoing, case-dependent": "Continuo, según el caso",
     "Estimate by team size": "Estimación según el tamaño del equipo",
     "employees": "empleados",
     "Estimate": "Estimación",
@@ -327,6 +335,14 @@ export const dictionary: Dict = {
     "Request a Diagnostic for Your Team": "Solicite un diagnóstico para su equipo"
   },
   "ru-US": {
+    "Start free with a primary diagnostic, then move into focused implementation.": "Начните бесплатно с первичной диагностики, затем переходите к целенаправленному внедрению.",
+    "Structure the evidence behind an O-1 extraordinary-ability case — the right way.": "Грамотно структурируем доказательную базу для кейса O-1 о выдающихся способностях.",
+    "Evidence & criteria mapping": "Сопоставление доказательств с критериями",
+    "Publication & visibility strategy": "Стратегия публикаций и видимости",
+    "Portfolio & profile architecture": "Архитектура портфолио и профиля",
+    "Recommendation coordination": "Координация рекомендаций",
+    "An organized evidence package for counsel": "Упорядоченный пакет доказательств для юриста",
+    "Ongoing, case-dependent": "Индивидуально, зависит от кейса",
     "Estimate by team size": "Оценка по размеру команды",
     "employees": "сотрудников",
     "Estimate": "Оценка",
@@ -645,6 +661,14 @@ export const dictionary: Dict = {
     "Request a Diagnostic for Your Team": "Запросить диагностику для вашей команды"
   },
   "zh-Hans": {
+    "Start free with a primary diagnostic, then move into focused implementation.": "先从免费的初步诊断开始，再进入有针对性的落地实施。",
+    "Structure the evidence behind an O-1 extraordinary-ability case — the right way.": "以正确的方式，为 O-1 杰出能力申请梳理证据材料。",
+    "Evidence & criteria mapping": "证据与标准对应梳理",
+    "Publication & visibility strategy": "发表与曝光策略",
+    "Portfolio & profile architecture": "作品集与个人档案架构",
+    "Recommendation coordination": "推荐信协调",
+    "An organized evidence package for counsel": "为律师整理好的证据材料包",
+    "Ongoing, case-dependent": "持续进行，视个案而定",
     "Estimate by team size": "按团队规模预估",
     "employees": "人",
     "Estimate": "预估",

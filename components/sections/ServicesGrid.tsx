@@ -3,18 +3,21 @@
 // Areas of Work — the priced "what we implement after the diagnostic" section.
 // Diagnostic-first funnel is preserved: the hero card is the FREE primary
 // diagnostic (→ #diagnostic-request-form) and every paid card routes back to the
-// same form. Photos are illustrative (decorative alt) and duotone-treated in CSS
-// to stay on the monochrome + blue system. Expand pattern mirrors FAQ.tsx
-// (button + aria-expanded + hidden panel, content stays in HTML for SEO).
+// same form. Six uniform cards (O-1 Readiness Support is a full card too, not a
+// strip). Only the free diagnostic carries a category badge. Photos are
+// illustrative (decorative alt) and lightly duotone-treated in CSS. Expand
+// pattern mirrors FAQ.tsx (button + aria-expanded + hidden panel, content stays
+// in HTML for SEO).
 //
-// Prices are floors for a lean 25–50-person team. A team-size calculator scales
-// each floor live: factor = clamp(1 + (employees − 25) × 0.02, 1, 2.5) — rounded
-// to the nearest $100. The exact sum is always deferred to the free diagnostic.
+// Implementation prices are floors for a lean 25–50-person team; a team-size
+// calculator scales them live: factor = clamp(1 + (employees − 25) × 0.02, 1,
+// 2.5), rounded to $100. O-1 has a fixed price (per-case, not headcount-based).
+// The exact sum is always deferred to the free diagnostic.
 
 import { useState } from "react";
 import Image from "next/image";
 import { useLocale } from "next-intl";
-import { Plus, ArrowRight, Award, Check } from "lucide-react";
+import { Plus, ArrowRight, Check } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { useT } from "@/i18n/useT";
 import type { Locale } from "@/i18n/locales";
@@ -76,9 +79,10 @@ function rangeLabel(locale: Locale, low: number, high: number): string {
 type Service = {
   id: string;
   image: string;
-  category: string;
+  badge?: string; // top-left pill; only the free diagnostic carries one
   title: string;
-  base?: number; // floor price at ≤25 people; omitted for the free diagnostic
+  base?: number; // floor price at ≤25 people, scales with the calculator
+  fixed?: number; // per-case price, does not scale (O-1)
   free?: boolean;
   lede: string;
   context: string;
@@ -92,7 +96,7 @@ const SERVICES: Service[] = [
   {
     id: "primary-diagnostic",
     image: "/services/diagnostic.jpg",
-    category: "Start here",
+    badge: "Start here",
     title: "Primary Diagnostic",
     free: true,
     lede: "A structured first look at where your processes and systems drift apart.",
@@ -111,7 +115,6 @@ const SERVICES: Service[] = [
   {
     id: "process-operations",
     image: "/services/process.jpg",
-    category: "Implementation",
     title: "Process & Operations",
     base: 3500,
     lede: "Redesign the handoffs, approvals, and ownership that slow a growing team down.",
@@ -130,7 +133,6 @@ const SERVICES: Service[] = [
   {
     id: "revops",
     image: "/services/revops.jpg",
-    category: "Implementation",
     title: "RevOps: CRM, Data & Reporting",
     base: 4900,
     lede: "Make your CRM, pipeline, and reporting tell the truth again.",
@@ -149,7 +151,6 @@ const SERVICES: Service[] = [
   {
     id: "automation",
     image: "/services/automation.jpg",
-    category: "Implementation",
     title: "AI & Process Automation",
     base: 3900,
     lede: "Remove the manual, repetitive work — but only where it actually pays off.",
@@ -168,7 +169,6 @@ const SERVICES: Service[] = [
   {
     id: "it-risk",
     image: "/services/security.jpg",
-    category: "Implementation",
     title: "IT Risk & Security",
     base: 1900,
     lede: "See where your data, access, and systems put the business at risk.",
@@ -183,6 +183,24 @@ const SERVICES: Service[] = [
     result: "A prioritized risk & fix report",
     timeline: "1–3 weeks",
     cta: "Discuss this in your diagnostic",
+  },
+  {
+    id: "o1-readiness",
+    image: "/services/o1.jpg",
+    title: "O-1 Readiness Support",
+    fixed: 2500,
+    lede: "Structure the evidence behind an O-1 extraordinary-ability case — the right way.",
+    context:
+      "For IT professionals and founders exploring the O-1 visa path, we help structure evidence of extraordinary ability: publication strategy, portfolio architecture, recommendation coordination, and expert profile positioning. We work alongside qualified immigration counsel — we do not provide legal advice or file petitions.",
+    includes: [
+      "Evidence & criteria mapping",
+      "Publication & visibility strategy",
+      "Portfolio & profile architecture",
+      "Recommendation coordination",
+    ],
+    result: "An organized evidence package for counsel",
+    timeline: "Ongoing, case-dependent",
+    cta: "Ask about O-1 readiness",
   },
 ];
 
@@ -247,7 +265,9 @@ function ServiceCard({
     ? t("Free")
     : service.base != null
       ? fromLabel(locale, scaled(service.base, employees))
-      : t("On request");
+      : service.fixed != null
+        ? fromLabel(locale, service.fixed)
+        : t("On request");
 
   return (
     <article className={`${styles.card} ${service.free ? styles.cardFree : ""}`}>
@@ -260,7 +280,9 @@ function ServiceCard({
           className={styles.img}
           priority={priority}
         />
-        <span className={styles.category}>{t(service.category)}</span>
+        {service.badge && (
+          <span className={styles.category}>{t(service.badge)}</span>
+        )}
       </div>
 
       <div className={styles.body}>
@@ -358,7 +380,10 @@ export default function ServicesGrid() {
       <h2 className={styles.intro}>{t("From diagnostic to implementation.")}</h2>
       <p className={styles.lead}>
         {t(
-          "Start free with a primary diagnostic, then move into focused implementation. Prices below are floors for a lean 25–50-person team; exact scope is set by the diagnostic.",
+          "Start free with a primary diagnostic, then move into focused implementation.",
+        )}{" "}
+        {t(
+          "Every paid engagement starts from the free diagnostic — you only pay once scope is agreed in writing.",
         )}
       </p>
 
@@ -374,38 +399,6 @@ export default function ServicesGrid() {
           />
         ))}
       </div>
-
-      {/* O-1 secondary service — quiet, muted strip; must read as secondary. */}
-      <div className={styles.o1}>
-        <span className={styles.o1Tile} aria-hidden="true">
-          O-1
-        </span>
-        <div className={styles.o1Body}>
-          <div className={styles.o1Head}>
-            <span className={styles.o1Icon}>
-              <Award size={18} aria-hidden="true" />
-            </span>
-            <h3 className={styles.o1Title}>{t("O-1 Readiness Support")}</h3>
-            <span className={styles.o1Badge}>{t("Secondary service")}</span>
-            <span className={styles.o1Price}>{t("On request")}</span>
-          </div>
-          <p className={styles.o1Desc}>
-            {t(
-              "For IT professionals and founders exploring the O-1 visa path, we help structure evidence of extraordinary ability: publication strategy, portfolio architecture, recommendation coordination, and expert profile positioning. We work alongside qualified immigration counsel — we do not provide legal advice or file petitions.",
-            )}
-          </p>
-          <a href={FORM_HREF} className={styles.o1Cta}>
-            {t("Ask about O-1 readiness")}
-            <ArrowRight size={18} aria-hidden="true" />
-          </a>
-        </div>
-      </div>
-
-      <p className={styles.footnote}>
-        {t(
-          "Every paid engagement starts from the free diagnostic — you only pay once scope is agreed in writing.",
-        )}
-      </p>
     </div>
   );
 }

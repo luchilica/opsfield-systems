@@ -1,8 +1,9 @@
-/* Areas of Work — priced service cards with a duotone photo, expandable detail
-   (FAQ-style: button + hidden panel, content stays in HTML for SEO), and a muted
-   O-1 secondary strip. Monochrome + blue system: hairline borders, soft shadows,
-   circular/blue accents. Photos are grayscaled + blue-multiplied in CSS so six
-   stock images read as one branded set. No Tailwind. */
+/* Areas of Work — priced service cards with a light duotone photo, expandable
+   detail (FAQ-style: button + hidden panel, content stays in HTML for SEO), and
+   a live team-size calculator. Monochrome + blue system: hairline borders, soft
+   shadows, blue accents. Cards are uniform height in every language (title and
+   lede reserve a fixed number of lines) so the grid stays even; an expanded card
+   grows without stretching its row-mates (align-items: start). No Tailwind. */
 
 .badge {
   display: inline-flex;
@@ -142,13 +143,12 @@
   color: var(--stone-600);
 }
 
-/* Responsive card grid: 1 → 2 → 3 columns. */
+/* Responsive card grid: 1 → 2 → 3 columns. align-items:start so an expanded card
+   grows alone, without stretching its row-mates into empty space. */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3);
-  /* Cards keep their natural height — an expanded card grows without stretching
-     its row-mates and leaving them with empty space. */
   align-items: start;
 }
 
@@ -191,19 +191,19 @@
   box-shadow: var(--ring), var(--shadow-sm);
 }
 
-/* Duotone media: grayscale image + blue multiply overlay, isolated so the blend
-   only affects the photo. A soft bottom gradient keeps the category chip legible. */
+/* Light duotone media: grayscale + brightened image, thin blue wash. Isolated so
+   the blend only touches the photo; a soft bottom gradient keeps the pill legible. */
 .media {
   position: relative;
   aspect-ratio: 3 / 2;
   overflow: hidden;
   isolation: isolate;
-  background: var(--ink-900);
+  background: var(--stone-100);
 }
 
 .img {
   object-fit: cover;
-  filter: grayscale(1) contrast(1.04) brightness(0.98);
+  filter: grayscale(1) contrast(0.98) brightness(1.12);
   transition: filter var(--dur-med) var(--ease-out);
 }
 
@@ -212,9 +212,9 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: var(--blue-600);
+  background: var(--blue-500);
   mix-blend-mode: multiply;
-  opacity: 0.82;
+  opacity: 0.46;
   transition: opacity var(--dur-med) var(--ease-out);
 }
 
@@ -225,18 +225,18 @@
   z-index: 2;
   background: linear-gradient(
     180deg,
-    rgba(10, 10, 15, 0) 55%,
-    rgba(10, 10, 15, 0.34) 100%
+    rgba(10, 10, 15, 0) 62%,
+    rgba(10, 10, 15, 0.24) 100%
   );
 }
 
-/* On hover let a little colour and light back in. */
+/* On hover let a little more colour and light through. */
 .card:hover .img {
-  filter: grayscale(0.45) contrast(1.02) brightness(1);
+  filter: grayscale(0.35) contrast(0.98) brightness(1.14);
 }
 
 .card:hover .media::after {
-  opacity: 0.66;
+  opacity: 0.32;
 }
 
 .category {
@@ -265,14 +265,21 @@
 
 .head {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 8px;
 }
 
+/* Title reserves two lines so 1- and 2-line titles (and every language) keep the
+   same card height. */
 .title {
   margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.4em;
   font-family: var(--font-display);
   font-size: 18px;
   font-weight: var(--fw-semibold);
@@ -283,6 +290,7 @@
 
 .price {
   flex-shrink: 0;
+  margin-top: 1px;
   font-family: var(--font-display);
   font-size: 15px;
   font-weight: var(--fw-bold);
@@ -295,8 +303,14 @@
   color: var(--blue-600);
 }
 
+/* Lede reserves two lines for the same reason. */
 .lede {
   margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3em;
   font-size: 14.5px;
   line-height: 1.5;
   color: var(--stone-500);
@@ -442,125 +456,6 @@
 .cardCta:hover,
 .cardCta:focus-visible {
   text-decoration: underline;
-}
-
-/* O-1 secondary service — a quiet, muted strip so it reads as secondary. */
-.o1 {
-  margin-top: var(--space-4);
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 20px 22px;
-  border: 1px solid var(--stone-200);
-  border-radius: var(--radius-lg);
-  background: var(--stone-50);
-}
-
-.o1Tile {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 46px;
-  height: 46px;
-  border-radius: var(--radius-md);
-  background: var(--ink-900);
-  color: var(--paper);
-  font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: var(--fw-semibold);
-  letter-spacing: -0.02em;
-}
-
-.o1Body {
-  flex: 1;
-}
-
-.o1Head {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.o1Icon {
-  display: inline-flex;
-  color: var(--blue-600);
-}
-
-.o1Title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: var(--fw-semibold);
-  letter-spacing: -0.02em;
-  color: var(--ink-900);
-}
-
-.o1Badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 11px;
-  border: 1px solid var(--stone-200);
-  border-radius: var(--radius-pill);
-  background: var(--paper);
-  font-family: var(--font-mono-fallback);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--stone-500);
-}
-
-.o1Price {
-  margin-left: auto;
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: var(--fw-semibold);
-  color: var(--stone-600);
-  white-space: nowrap;
-}
-
-.o1Desc {
-  margin: 0 0 12px;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--stone-500);
-}
-
-.o1Cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  font-family: var(--font-body);
-  font-weight: var(--fw-semibold);
-  font-size: 14px;
-  color: var(--blue-600);
-  text-decoration: none;
-}
-
-.o1Cta:hover,
-.o1Cta:focus-visible {
-  text-decoration: underline;
-}
-
-.footnote {
-  margin: var(--space-3) 0 0;
-  max-width: var(--text-max);
-  font-size: 13.5px;
-  line-height: 1.55;
-  color: var(--stone-500);
-}
-
-@media (max-width: 520px) {
-  .o1 {
-    flex-direction: column;
-  }
-  .o1Price {
-    margin-left: 0;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
