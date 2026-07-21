@@ -467,3 +467,18 @@
     transition: none;
   }
 }
+
+/* Mobile compaction — shorter card media, no forced lede reserve (single column
+   needs no equal-height), tighter body padding. */
+@media (max-width: 767px) {
+  .media {
+    aspect-ratio: 16 / 9;
+  }
+  .lede {
+    min-height: 0;
+    margin-bottom: 12px;
+  }
+  .body {
+    padding: 16px 18px 18px;
+  }
+}

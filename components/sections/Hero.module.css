@@ -125,6 +125,16 @@
   .visual {
     display: none;
   }
+
+  /* Compact the hero on phones — smaller headline + stats. */
+  .headline {
+    font-size: 2.1rem;
+    line-height: 1.08;
+  }
+
+  .statNum {
+    font-size: 26px;
+  }
 }
 
 /* ----- Tablet (768px–1023px) ----- */

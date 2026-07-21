@@ -195,6 +195,26 @@
   --edge-padding: 20px;
 }
 
+/* Mobile compaction — headings and section rhythm are noticeably smaller on
+   phones so blocks don't take several screens to scroll. Systemic: only the
+   design tokens change (body text stays 16px for readability / no iOS zoom),
+   so every section shrinks together and stays cohesive. */
+@media (max-width: 767px) {
+  :root {
+    --fs-mega: 2.5rem; /* 40 (was 56) */
+    --fs-display: 2rem; /* 32 (was 44) */
+    --fs-h1: 1.8rem; /* ~29 (was 36) */
+    --fs-h2: 1.45rem; /* ~23 (was 28) */
+    --fs-h3: 1.2rem; /* ~19 (was 24) */
+    --fs-h4: 1.0625rem; /* 17 (was 20) */
+    --fs-lead: 1.0625rem; /* 17 (was 20) */
+    --space-5: 32px; /* was 48 */
+    --space-6: 40px; /* was 64 — section rhythm on mobile */
+    --space-7: 56px; /* was 96 */
+    --space-8: 60px; /* was 104 */
+  }
+}
+
 /* --------------------------------------------------------------------------
    Minimal reset
    -------------------------------------------------------------------------- */
