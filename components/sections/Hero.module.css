@@ -112,6 +112,31 @@
   width: 100%;
 }
 
+/* Faint architectural backdrop behind the summary card — adds depth without
+   competing with the headline. Radial mask softens the edges; low opacity keeps
+   it a texture, not a picture. Desktop only (.visual is display:none on phones). */
+.heroArt {
+  position: absolute;
+  inset: -6% -12% -6% -4%;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  opacity: 0.14;
+  -webkit-mask-image: radial-gradient(115% 100% at 68% 32%, #000 28%, transparent 76%);
+  mask-image: radial-gradient(115% 100% at 68% 32%, #000 28%, transparent 76%);
+}
+
+.heroArtImg {
+  object-fit: cover;
+}
+
+.visualCard {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+}
+
 /* The summary card stands on its own (border + blue top-accent + soft shadow) —
    the offset grey backdrop was removed for a cleaner, more restrained surface. */
 

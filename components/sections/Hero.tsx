@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 import HeroSummary from "@/components/ui/HeroSummary";
 import { getT } from "@/i18n/t";
@@ -59,7 +60,20 @@ export default async function Hero() {
       </div>
 
       <div className={styles.visual}>
-        <HeroSummary />
+        {/* Faint architectural backdrop behind the summary card (desktop only —
+            .visual is hidden on phones). Decorative, lazy-loaded to protect LCP. */}
+        <div className={styles.heroArt} aria-hidden="true">
+          <Image
+            src="/photos/hero-bg.jpg"
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 480px, 1px"
+            className={styles.heroArtImg}
+          />
+        </div>
+        <div className={styles.visualCard}>
+          <HeroSummary />
+        </div>
       </div>
     </div>
   );

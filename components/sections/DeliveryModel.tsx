@@ -11,6 +11,7 @@ import {
   Cpu,
   Shield,
 } from "lucide-react";
+import Image from "next/image";
 import Card from "@/components/ui/Card";
 import PlusMark from "@/components/ui/PlusMark";
 import { getT } from "@/i18n/t";
@@ -25,6 +26,7 @@ const ROLES = [
     initials: "MP",
     subtitle: "Operating model & diagnostic lead",
     tone: "paper",
+    art: "/photos/role-mp.jpg",
     responsibilities: [
       { Icon: Boxes, text: "Operating model design" },
       { Icon: Workflow, text: "Diagnostic methodology" },
@@ -37,6 +39,7 @@ const ROLES = [
     initials: "SA",
     subtitle: "CRM / RevOps & data flow",
     tone: "paper",
+    art: "/photos/role-sa.jpg",
     responsibilities: [
       { Icon: Database, text: "CRM architecture" },
       { Icon: GitBranch, text: "RevOps pipeline design" },
@@ -77,8 +80,19 @@ export default async function DeliveryModel() {
         </p>
 
         <div className={styles.roles}>
-          {ROLES.map(({ title, initials, subtitle, responsibilities }) => (
+          {ROLES.map(({ title, initials, subtitle, responsibilities, art }) => (
             <Card key={title} tone="paper" soft hover={false}>
+              {/* Duotone corner watermark — abstract, no faces (role-only ethos):
+                  MP = structure/architecture, SA = data/systems. */}
+              <span className={styles.cardArt} aria-hidden="true">
+                <Image
+                  src={art}
+                  alt=""
+                  fill
+                  sizes="(min-width: 768px) 300px, 60vw"
+                  className={styles.cardArtImg}
+                />
+              </span>
               <div className={styles.role}>
                 <div className={styles.roleHead}>
                   <span className={styles.avatar} aria-hidden="true">
