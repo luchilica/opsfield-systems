@@ -232,11 +232,38 @@
    Scope / Principle boxes. Placed at file end so these win over the base rules
    above in the cascade. */
 @media (max-width: 767px) {
+  /* Flow: keep the three stages horizontal (in a row) on phones too — dot over a
+     small wrapping label, thin connectors between the dots. */
+  .flow {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+  }
   .stage {
-    padding: 5px 2px;
+    flex: 1 1 0;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 7px;
+    padding: 0;
+  }
+  .stageLabel {
+    font-size: 11.5px;
+    line-height: 1.2;
   }
   .connector {
-    height: 12px;
+    flex: 0 0 auto;
+    align-self: flex-start;
+    width: 12px;
+    min-width: 0;
+    height: 2px;
+    margin: 6px 2px 0;
+    background: linear-gradient(
+      90deg,
+      rgba(79, 124, 232, 0.5),
+      rgba(79, 124, 232, 0.5)
+    );
   }
   .scopeBox {
     padding: 18px;

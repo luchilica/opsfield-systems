@@ -95,7 +95,7 @@ export default async function WhatWeDiagnose() {
           </div>
           <p className={styles.o1Desc}>
             {t(
-              "For IT professionals and founders exploring the O-1 visa path, we help structure evidence of extraordinary ability: publication strategy, portfolio architecture, recommendation coordination, and expert profile positioning. We work alongside qualified immigration counsel — we do not provide legal advice or file petitions.",
+              "For founders and IT professionals pursuing the O-1 visa, we structure the evidence of extraordinary ability — working alongside your immigration counsel, not replacing it.",
             )}
           </p>
         </div>

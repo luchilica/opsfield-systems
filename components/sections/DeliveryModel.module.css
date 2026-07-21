@@ -80,7 +80,7 @@
   height: 60%;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.16;
+  opacity: 0.3;
   -webkit-mask-image: linear-gradient(
     to bottom left,
     #000 0%,
@@ -100,9 +100,8 @@
 }
 
 @media (max-width: 767px) {
-  /* Keep it even quieter on phones so it never competes with the dense text. */
   .cardArt {
-    opacity: 0.12;
+    opacity: 0.24;
     width: 58%;
     height: 52%;
   }

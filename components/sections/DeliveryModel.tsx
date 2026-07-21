@@ -135,8 +135,8 @@ export default async function DeliveryModel() {
         </div>
 
         <div className={styles.cta}>
-          <a href="#diagnostic-request-form" className={styles.textLink}>
-            {t("Work With Senior Advisors")}
+          <a href="#areas-of-work" className={styles.textLink}>
+            {t("Book a Senior Advisory Session")}
             <ArrowRight size={20} aria-hidden="true" />
           </a>
         </div>

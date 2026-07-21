@@ -164,9 +164,6 @@ export default function DiagnosticScenarios() {
                 </span>
 
                 <div className={styles.panelHead}>
-                  <p className={styles.panelNum}>
-                    {t("Scenario")} · {pad(i)}
-                  </p>
                   <h3 className={styles.panelClient}>{t(s.client)}</h3>
                   <div className={styles.envs}>
                     {s.environment.map((e) => (

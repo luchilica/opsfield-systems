@@ -256,11 +256,32 @@
   color: var(--accent);
 }
 
-/* Mobile — tighter vertical rhythm between fields. */
+/* Mobile — tighter vertical rhythm so the form is quicker to scroll. Tap targets
+   (input min-height 44px, chip 40px) are deliberately NOT shrunk. */
 @media (max-width: 767px) {
-  .form,
-  .fields,
+  .form {
+    gap: var(--space-2);
+  }
+  .fields {
+    gap: 14px;
+  }
+  .field {
+    gap: 6px;
+  }
+  .textarea {
+    min-height: 110px;
+  }
+  .chipGroup {
+    gap: 6px;
+  }
+  .groupHint {
+    margin: 2px 0 5px;
+  }
+  .microcopy {
+    margin-bottom: var(--space-2);
+  }
   .optional {
     gap: var(--space-2);
+    padding-top: var(--space-2);
   }
 }

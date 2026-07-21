@@ -148,6 +148,31 @@
   }
 }
 
+/* Mobile — slightly smaller table so it doesn't dominate the phone scroll. */
+@media (max-width: 767px) {
+  .head {
+    padding: 13px 16px;
+  }
+  .cell {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+  .cellOthers {
+    font-size: 14px;
+  }
+  .cellOpsfield {
+    font-size: 15px;
+  }
+  .nodeX,
+  .nodeCheck {
+    width: 22px;
+    height: 22px;
+  }
+  .text {
+    margin-bottom: var(--space-4);
+  }
+}
+
 .cta {
   margin-top: var(--space-5);
 }
