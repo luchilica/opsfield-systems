@@ -36,8 +36,8 @@ export default async function Hero() {
           >
             {t("Request a Business & IT Diagnostic")}
           </Button>
-          <Button href="#how-the-diagnostic-works" variant="secondary">
-            {t("See How the Diagnostic Works")}
+          <Button href="#areas-of-work" variant="secondary">
+            {t("See our services")}
           </Button>
         </div>
 

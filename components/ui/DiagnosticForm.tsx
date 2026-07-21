@@ -88,7 +88,9 @@ const INITIAL = {
   services: [] as string[],
   servicesOther: "",
   tools: [] as string[],
+  toolsOther: "",
   pains: [] as string[],
+  painsOther: "",
   alreadyTried: "",
   companyWebsite: "",
   role: "",
@@ -226,8 +228,16 @@ export default function DiagnosticForm() {
             values.servicesOther.trim()
               ? ` (${values.servicesOther.trim()})`
               : ""),
-          tools: values.tools.join(", "),
-          pains: values.pains.join(", "),
+          tools:
+            values.tools.join(", ") +
+            (values.tools.includes("Other / none") && values.toolsOther.trim()
+              ? ` (${values.toolsOther.trim()})`
+              : ""),
+          pains:
+            values.pains.join(", ") +
+            (values.pains.includes("Something else") && values.painsOther.trim()
+              ? ` (${values.painsOther.trim()})`
+              : ""),
           alreadyTried: values.alreadyTried,
           companyWebsite: values.companyWebsite,
           role: values.role,
@@ -450,6 +460,34 @@ export default function DiagnosticForm() {
             </div>
           </div>
 
+          {/* Timeline — visible single-select */}
+          <div className={styles.field}>
+            <span className={styles.label} id="df-timeline-label">
+              {t("When do you want to start?")}{" "}
+              <span className={styles.req}>{t("(optional)")}</span>
+            </span>
+            <div
+              className={styles.chipGroup}
+              role="group"
+              aria-labelledby="df-timeline-label"
+            >
+              {TIMELINE_OPTIONS.map((tl) => {
+                const active = values.timeline === tl;
+                return (
+                  <button
+                    key={tl}
+                    type="button"
+                    className={`${styles.chip} ${active ? styles.chipActive : ""}`}
+                    aria-pressed={active}
+                    onClick={() => set("timeline", active ? "" : tl)}
+                  >
+                    {t(tl)}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           {/* Tools / stack — visible multi-select */}
           <div className={styles.field}>
             <span className={styles.label} id="df-tools-label">
@@ -477,6 +515,16 @@ export default function DiagnosticForm() {
                 );
               })}
             </div>
+            {values.tools.includes("Other / none") && (
+              <input
+                type="text"
+                className={`${styles.input} ${styles.otherInput}`}
+                placeholder={t("Which tools?")}
+                aria-label={t("Which tools?")}
+                value={values.toolsOther}
+                onChange={(e) => set("toolsOther", e.target.value)}
+              />
+            )}
           </div>
 
           {/* Pains / priorities — visible multi-select */}
@@ -506,6 +554,16 @@ export default function DiagnosticForm() {
                 );
               })}
             </div>
+            {values.pains.includes("Something else") && (
+              <input
+                type="text"
+                className={`${styles.input} ${styles.otherInput}`}
+                placeholder={t("Tell us more")}
+                aria-label={t("Tell us more")}
+                value={values.painsOther}
+                onChange={(e) => set("painsOther", e.target.value)}
+              />
+            )}
           </div>
 
           {/* 4 — Main challenge */}
@@ -592,28 +650,6 @@ export default function DiagnosticForm() {
                   value={values.role}
                   onChange={(e) => set("role", e.target.value)}
                 />
-              </div>
-
-              {/* Timeline */}
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="df-timeline">
-                  {t("Timeline")}{" "}
-                  <span className={styles.req}>{t("(optional)")}</span>
-                </label>
-                <select
-                  id="df-timeline"
-                  name="timeline"
-                  className={styles.select}
-                  value={values.timeline}
-                  onChange={(e) => set("timeline", e.target.value)}
-                >
-                  <option value="">{t("Select a timeline (optional)")}</option>
-                  {TIMELINE_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {t(opt)}
-                    </option>
-                  ))}
-                </select>
               </div>
 
               {/* Already tried — optional open question */}
