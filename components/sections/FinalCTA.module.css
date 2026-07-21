@@ -7,6 +7,59 @@
   max-width: 780px;
 }
 
+/* Full-bleed atmospheric photo behind the CTA. Anchored right, blended into the
+   brand blue (luminosity) at low opacity, with a left→right scrim so the heading
+   and buttons keep full contrast. The 100vw trick escapes the container padding
+   so the band runs edge-to-edge under the blue section. */
+.bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bgImg {
+  object-fit: cover;
+  object-position: right center;
+  filter: grayscale(0.5) contrast(1.05) brightness(0.95);
+  opacity: 0.3;
+  mix-blend-mode: luminosity;
+}
+
+/* Scrim: opaque blue on the left (text zone) fading to clear on the right. */
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--blue-600) 0%,
+    rgba(37, 81, 210, 0.72) 42%,
+    rgba(37, 81, 210, 0) 78%
+  );
+}
+
+@media (max-width: 767px) {
+  .bgImg {
+    object-position: 72% center;
+    opacity: 0.22;
+  }
+  /* Stronger, taller fade on phones so stacked buttons stay readable. */
+  .bg::after {
+    background: linear-gradient(
+      90deg,
+      var(--blue-600) 0%,
+      rgba(37, 81, 210, 0.8) 55%,
+      rgba(37, 81, 210, 0.35) 100%
+    );
+  }
+}
+
 .heading {
   color: var(--paper);
   font-size: clamp(2.2rem, 1.6rem + 2vw, 3.4rem);

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 import PlusMark from "@/components/ui/PlusMark";
 import { getT } from "@/i18n/t";
@@ -9,6 +10,18 @@ export default async function FinalCTA() {
   const t = await getT();
   return (
     <div className="container">
+      {/* Atmospheric silhouette band, faded into the brand blue on the text side
+          so the heading stays high-contrast. Decorative (alt=""). */}
+      <div className={styles.bg} aria-hidden="true">
+        <Image
+          src="/photos/final-cta.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className={styles.bgImg}
+        />
+      </div>
+
       <PlusMark size={260} className={styles.plusTop} />
       <PlusMark size={140} className={styles.plusBottom} />
 
