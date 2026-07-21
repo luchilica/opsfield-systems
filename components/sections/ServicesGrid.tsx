@@ -92,6 +92,11 @@ type Service = {
   cta: string;
 };
 
+// Ordered as a journey: understand & advise (free → power hour → extended
+// diagnostic), then build & implement ascending in price (add-on → IT risk →
+// process → automation → RevOps), then O-1 as the special case at the very end.
+// The free diagnostic is deliberately a light fit call; the deep, documented
+// diagnosis is the paid Extended Diagnostic so the team never gives it away free.
 const SERVICES: Service[] = [
   {
     id: "primary-diagnostic",
@@ -101,16 +106,88 @@ const SERVICES: Service[] = [
     free: true,
     lede: "A structured first look at where your processes and systems drift apart.",
     context:
-      "The primary diagnostic is a complimentary fit review: we frame the problem, surface likely bottlenecks, and tell you whether a paid engagement is even warranted — with no obligation.",
+      "The primary diagnostic is a complimentary fit call: we frame the problem, surface the likely bottlenecks, and tell you whether a paid engagement fits — no obligation. The deeper, documented diagnosis is a separate paid step.",
     includes: [
       "Problem framing",
       "Likely bottleneck areas",
       "Fit / no-fit decision",
       "Recommended next step",
     ],
-    result: "A written next-step recommendation",
+    result: "A go / no-go, live on the call",
     timeline: "30–45 minutes",
     cta: "Book the free diagnostic",
+  },
+  {
+    id: "advisory-power-hour",
+    image: "/services/advisory.jpg",
+    title: "Advisory Power Hour",
+    fixed: 200,
+    lede: "Bring one concrete problem — leave with a clear, expert answer in 60 minutes.",
+    context:
+      "A focused, paid working session with a senior advisor on one specific decision or problem — CRM, process, automation, or IT. No scoping, no wait: practical direction you can act on the same day.",
+    includes: [
+      "One focused problem",
+      "Senior advisor, live",
+      "Concrete recommendations",
+      "Session notes",
+    ],
+    result: "Clear direction you can act on",
+    timeline: "60 minutes",
+    cta: "Book a session",
+  },
+  {
+    id: "extended-diagnostic",
+    image: "/services/extended.jpg",
+    title: "Extended Diagnostic",
+    base: 1200,
+    lede: "Go deeper — a documented diagnosis for when you need to be sure before you invest.",
+    context:
+      "For teams that want more certainty before committing budget: a structured, documented diagnosis of your processes, systems, and risks — the full picture the free fit call only points at.",
+    includes: [
+      "Documented process & systems map",
+      "Prioritized bottleneck list",
+      "Risk & priority matrix",
+      "Written roadmap",
+    ],
+    result: "A written diagnostic report and roadmap",
+    timeline: "1–2 weeks",
+    cta: "Discuss this in your diagnostic",
+  },
+  {
+    id: "addon-tool",
+    image: "/services/addon.jpg",
+    title: "Add-on Tool Build",
+    base: 900,
+    lede: "Pick one quick win — a Telegram bot, a landing page, or an email campaign — and we build it.",
+    context:
+      "A single, focused build to get a concrete result fast: choose a Telegram bot, a landing page, or an email flow. Scoped small, shipped quickly — a low-risk way to start working together.",
+    includes: [
+      "Your choice: bot, landing, or email",
+      "Design & build",
+      "Launch & handover",
+      "Basic analytics",
+    ],
+    result: "One tool, live and handed over",
+    timeline: "1–2 weeks",
+    cta: "Discuss this in your diagnostic",
+  },
+  {
+    id: "it-risk",
+    image: "/services/security.jpg",
+    title: "IT Risk & Security",
+    base: 1900,
+    lede: "See where your data, access, and systems put the business at risk.",
+    context:
+      "A focused review of accounts, access, data handling, and single points of failure — with plain-language findings and a prioritized fix list, scaled to a small company.",
+    includes: [
+      "Access & account review",
+      "Data-handling risks",
+      "Single points of failure",
+      "Prioritized fix list",
+    ],
+    result: "A prioritized risk & fix report",
+    timeline: "1–3 weeks",
+    cta: "Discuss this in your diagnostic",
   },
   {
     id: "process-operations",
@@ -128,24 +205,6 @@ const SERVICES: Service[] = [
     ],
     result: "An operating model your team actually follows",
     timeline: "2–4 weeks",
-    cta: "Discuss this in your diagnostic",
-  },
-  {
-    id: "revops",
-    image: "/services/revops.jpg",
-    title: "RevOps: CRM, Data & Reporting",
-    base: 4900,
-    lede: "Make your CRM, pipeline, and reporting tell the truth again.",
-    context:
-      "We clean up CRM structure, reporting rules, and revenue data flow so your numbers are trustworthy and your team stops working around the system.",
-    includes: [
-      "CRM structure cleanup",
-      "Reporting & dashboard rules",
-      "Pipeline & data-flow fixes",
-      "Core integrations",
-    ],
-    result: "A CRM and reporting setup you can trust",
-    timeline: "3–6 weeks",
     cta: "Discuss this in your diagnostic",
   },
   {
@@ -167,21 +226,21 @@ const SERVICES: Service[] = [
     cta: "Discuss this in your diagnostic",
   },
   {
-    id: "it-risk",
-    image: "/services/security.jpg",
-    title: "IT Risk & Security",
-    base: 1900,
-    lede: "See where your data, access, and systems put the business at risk.",
+    id: "revops",
+    image: "/services/revops.jpg",
+    title: "RevOps: CRM, Data & Reporting",
+    base: 4900,
+    lede: "Make your CRM, pipeline, and reporting tell the truth again.",
     context:
-      "A focused review of accounts, access, data handling, and single points of failure — with plain-language findings and a prioritized fix list, scaled to a small company.",
+      "We clean up CRM structure, reporting rules, and revenue data flow so your numbers are trustworthy and your team stops working around the system.",
     includes: [
-      "Access & account review",
-      "Data-handling risks",
-      "Single points of failure",
-      "Prioritized fix list",
+      "CRM structure cleanup",
+      "Reporting & dashboard rules",
+      "Pipeline & data-flow fixes",
+      "Core integrations",
     ],
-    result: "A prioritized risk & fix report",
-    timeline: "1–3 weeks",
+    result: "A CRM and reporting setup you can trust",
+    timeline: "3–6 weeks",
     cta: "Discuss this in your diagnostic",
   },
   {
