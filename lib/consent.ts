@@ -11,10 +11,17 @@ export const CONSENT_STORAGE_KEY = "opsfield_analytics_consent";
 // the banner (an external-store subscriber) re-read it.
 export const CONSENT_CHANGE_EVENT = "opsfield:consent-change";
 
-// Master switch. While false, no consent UI renders and no analytics loads.
-// Этап 12 flips this to true (or replaces it with an env-var check) at GA4
-// activation. Until then the banner and reopener render nothing.
+// Master switch for ANALYTICS (GA4 loading + event tracking). While false, no
+// analytics loads. Этап 12 flips this to true (or an env-var check) at GA4
+// activation. Kept independent of the consent UI below.
 export const ANALYTICS_ENABLED = false;
+
+// Whether the consent UI (banner + footer reopener) is shown. Decoupled from
+// ANALYTICS_ENABLED on purpose: we capture the visitor's choice now while GA4
+// stays dormant — showing the banner must NOT imply analytics is live. When GA4
+// is activated later (flip ANALYTICS_ENABLED + set the id + production), the
+// already-stored "accepted" choice makes it load; "declined" keeps it off.
+export const CONSENT_UI_ENABLED = true;
 
 export function getConsentPreference(): ConsentPreference {
   if (typeof window === "undefined") return null;
