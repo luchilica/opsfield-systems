@@ -143,15 +143,14 @@
   color: var(--stone-600);
 }
 
-/* Responsive card grid: 1 → 2 → 3 columns. align-items:start so an expanded card
-   grows alone without stretching its row-mates. Collapsed cards stay even because
-   the title (2 lines) and lede (3 lines) each reserve a fixed height, so the full
-   lede shows in every language without the grid going ragged. */
+/* Responsive card grid: 1 → 2 → 3 columns. Default stretch alignment keeps every
+   card in a row the same size — when one card is expanded, its row-mates grow to
+   match (their "Show details" trigger is pinned to the bottom), so open cards line
+   up cleanly. The reserved title/lede heights keep collapsed rows even too. */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3);
-  align-items: start;
 }
 
 @media (min-width: 640px) {
@@ -205,7 +204,7 @@
 
 .img {
   object-fit: cover;
-  filter: grayscale(1) contrast(0.98) brightness(1.12);
+  filter: grayscale(0.25) contrast(1.05) brightness(1.14) saturate(1.05);
   transition: filter var(--dur-med) var(--ease-out);
 }
 
@@ -216,7 +215,7 @@
   z-index: 1;
   background: var(--blue-500);
   mix-blend-mode: multiply;
-  opacity: 0.23;
+  opacity: 0.12;
   transition: opacity var(--dur-med) var(--ease-out);
 }
 
@@ -232,13 +231,13 @@
   );
 }
 
-/* On hover let a little more colour and light through. */
+/* On hover let full colour and a touch more light through. */
 .card:hover .img {
-  filter: grayscale(0.35) contrast(0.98) brightness(1.14);
+  filter: grayscale(0) contrast(1.05) brightness(1.16) saturate(1.08);
 }
 
 .card:hover .media::after {
-  opacity: 0.16;
+  opacity: 0.06;
 }
 
 .category {
@@ -262,6 +261,7 @@
 .body {
   display: flex;
   flex-direction: column;
+  flex: 1 1 auto;
   padding: 20px 22px 22px;
 }
 
@@ -308,7 +308,7 @@
 /* Lede shows in full (no truncation) and reserves 3 lines so cards stay even in
    every language; a longer lede simply grows past the reserve. */
 .lede {
-  margin: 0;
+  margin: 0 0 16px;
   min-height: 4.5em;
   font-size: 14.5px;
   line-height: 1.5;
@@ -316,12 +316,13 @@
 }
 
 /* Show/Hide details trigger. */
+/* Pinned to the bottom of the (stretched) card so triggers line up across a row. */
 .trigger {
   display: inline-flex;
   align-self: flex-start;
   align-items: center;
   gap: 8px;
-  margin-top: 16px;
+  margin-top: auto;
   min-height: 44px;
   padding: 0;
   background: none;
