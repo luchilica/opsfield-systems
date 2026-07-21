@@ -144,6 +144,10 @@
   background: var(--blue-600);
 }
 
+.otherInput {
+  margin-top: 10px;
+}
+
 /* ----- Progressive disclosure ----- */
 .disclosure {
   display: inline-flex;

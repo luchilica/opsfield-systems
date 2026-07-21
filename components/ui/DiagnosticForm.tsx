@@ -86,6 +86,7 @@ const INITIAL = {
   company: "",
   challenge: "",
   services: [] as string[],
+  servicesOther: "",
   tools: [] as string[],
   pains: [] as string[],
   alreadyTried: "",
@@ -219,7 +220,12 @@ export default function DiagnosticForm() {
           email: values.email,
           company: values.company,
           challenge: values.challenge,
-          requestType: values.services.join(", "),
+          requestType:
+            values.services.join(", ") +
+            (values.services.includes("Not sure yet") &&
+            values.servicesOther.trim()
+              ? ` (${values.servicesOther.trim()})`
+              : ""),
           tools: values.tools.join(", "),
           pains: values.pains.join(", "),
           alreadyTried: values.alreadyTried,
@@ -404,6 +410,16 @@ export default function DiagnosticForm() {
                 );
               })}
             </div>
+            {values.services.includes("Not sure yet") && (
+              <input
+                type="text"
+                className={`${styles.input} ${styles.otherInput}`}
+                placeholder={t("Tell us what you're looking for")}
+                aria-label={t("Tell us what you're looking for")}
+                value={values.servicesOther}
+                onChange={(e) => set("servicesOther", e.target.value)}
+              />
+            )}
           </div>
 
           {/* Team size — visible single-select chips */}
