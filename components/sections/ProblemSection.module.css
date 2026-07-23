@@ -1,29 +1,17 @@
-/* Problem — shadcnblocks monochrome. Light section (default neutral even-band),
-   dark semibold heading, muted body, and white cause cards with muted circular
-   icon tiles (blue glyphs = the single accent). Copy from docs/texts.md. */
-
-.grid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-4);
-  align-items: center;
-}
-
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: 1.1fr 1fr;
-    gap: var(--space-6);
-  }
-}
+/* Problem — shadcnblocks monochrome brand band. A single centered problem
+   statement (eyebrow, heading, lead, CTA); the root-cause list moved out to the
+   next section so the two don't repeat. Copy from docs/texts.md. */
 
 .block {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   gap: var(--space-3);
-  max-width: 560px;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 /* Outline badge on the blue fill — translucent white pill, white accent dot. */
@@ -65,74 +53,7 @@
   margin-top: var(--space-1);
 }
 
-/* Root-cause items — white cards, hairline border, soft shadow, hover lift. */
-.causes {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.causesHead {
-  font-family: var(--font-mono-fallback);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.causeGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-3);
-  padding: 2px;
-}
-
-@media (min-width: 560px) {
-  .causeGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.causeCard {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: 20px;
-  background: var(--paper);
-  border: 1px solid var(--stone-200);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--dur-med) var(--ease-out),
-    box-shadow var(--dur-med) var(--ease-out);
-}
-
-.causeCard:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-}
-
-/* Muted circular icon tile (shadcn: rounded-full bg-accent) with a blue glyph. */
-.causeIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--blue-50);
-  color: var(--blue-600);
-}
-
-.causeName {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: var(--fw-semibold);
-  letter-spacing: -0.01em;
-  color: var(--ink-900);
-}
-
-/* Decorative corner + motif (behind content), echoing the AI block. Anchored in
+/* Decorative corner motif (behind content), echoing the AI block. Anchored in
    the blue upper zone so it doesn't land on the white fade. */
 .plusTop {
   position: absolute;
@@ -146,25 +67,5 @@
 @media (max-width: 767px) {
   .plusTop {
     display: none;
-  }
-}
-
-/* Phones (single column) — lay the cause cards out horizontally (icon beside
-   label) so each is compact instead of a tall icon-over-one-word block. */
-@media (max-width: 559px) {
-  .causeCard {
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-    padding: 11px 14px;
-  }
-
-  .causeIcon {
-    width: 38px;
-    height: 38px;
-  }
-
-  .causeGrid {
-    gap: 10px;
   }
 }

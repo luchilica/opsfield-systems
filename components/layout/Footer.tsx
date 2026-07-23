@@ -62,7 +62,7 @@ export default async function Footer() {
         {/* CTA panel */}
         <div className={`${styles.ctaPanel} print-hide`}>
           <p className={styles.ctaText}>
-            {t("Find the bottleneck before you commit budget.")}
+            {t("See what each engagement includes — and what it costs.")}
           </p>
           <Button href="#areas-of-work" variant="on-brand">
             {t("See Our Services")}
