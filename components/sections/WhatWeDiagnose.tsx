@@ -13,8 +13,8 @@ import { getT } from "@/i18n/t";
 import styles from "./WhatWeDiagnose.module.css";
 
 // Copy from docs/texts.md → "What We Diagnose": two diagnostic areas + the shared
-// Output list (as a "You receive" bar) + O-1 Readiness Support as a secondary
-// service panel. v2 block edition. No per-card outputs/CTAs are invented.
+// Output list (as a "You receive" bar). v2 block edition. No per-card outputs/CTAs
+// are invented. (O-1 Readiness Support lives only in Areas of Work / form / FAQ.)
 const AREAS = [
   {
     title: "Processes",
@@ -81,23 +81,6 @@ export default async function WhatWeDiagnose() {
               </li>
             ))}
           </ul>
-        </div>
-      </div>
-
-      <div className={styles.o1}>
-        <span className={styles.o1Tile} aria-hidden="true">
-          O-1
-        </span>
-        <div className={styles.o1Body}>
-          <div className={styles.o1Head}>
-            <h3 className={styles.o1Title}>{t("O-1 Readiness Support")}</h3>
-            <span className={styles.o1Badge}>{t("Secondary service")}</span>
-          </div>
-          <p className={styles.o1Desc}>
-            {t(
-              "For founders and IT professionals pursuing the O-1 visa, we structure the evidence of extraordinary ability — working alongside your immigration counsel, not replacing it.",
-            )}
-          </p>
         </div>
       </div>
 
