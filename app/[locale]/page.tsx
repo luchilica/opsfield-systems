@@ -54,7 +54,7 @@ export async function generateMetadata({
           url: "/opengraph-image",
           width: 1200,
           height: 630,
-          alt: "Opsfield Systems - Diagnostic-First IT & Business Development",
+          alt: "Opsfield Systems – Diagnostic-First IT & Business Development",
         },
       ],
     },

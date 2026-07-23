@@ -14,12 +14,12 @@ import { join } from "node:path";
 const VARIANT: "people" | "glass" = "glass";
 // Footer line: no domain yet (site still on *.vercel.app), so we show the ICP
 // instead of printing an unowned domain. Swap to the real domain once acquired.
-const FOOTER = "For B2B teams - 50–250 employees";
+const FOOTER = "For B2B teams – 50–250 employees";
 const IMG = VARIANT === "glass" ? "public/og/glass.jpg" : "public/og/team-people.jpg";
 // ----------------------------------------------------------------------------
 
 export const alt =
-  "Opsfield Systems - Diagnostic-First IT & Business Advisory";
+  "Opsfield Systems – Diagnostic-First IT & Business Advisory";
 
 export const size = { width: 1200, height: 630 };
 

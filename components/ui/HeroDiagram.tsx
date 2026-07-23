@@ -28,7 +28,7 @@ export default function HeroDiagram() {
     <div
       className={styles.panel}
       role="img"
-      aria-label="Diagnostic system map: Processes, CRM / RevOps, Data, Automation, and IT Systems are reviewed for bottlenecks, gaps, and risks - from diagnostic to roadmap to implementation."
+      aria-label="Diagnostic system map: Processes, CRM / RevOps, Data, Automation, and IT Systems are reviewed for bottlenecks, gaps, and risks – from diagnostic to roadmap to implementation."
     >
       <PlusMark size={44} className={styles.cornerPlus} />
 
