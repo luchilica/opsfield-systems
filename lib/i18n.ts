@@ -32,5 +32,5 @@ export function robotsFor(locale: Locale): Metadata["robots"] {
   if (siteConfig.isPreview) return { index: false, follow: false };
   return LOCALE_META[locale].indexable
     ? { index: true, follow: true }
-    : { index: false, follow: false };
+    : { index: false, follow: true };
 }

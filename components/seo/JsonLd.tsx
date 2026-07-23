@@ -2,9 +2,9 @@ import { siteConfig } from "@/lib/site-config";
 import { FAQ_ITEMS, faqAnswerText } from "@/components/sections/faqData";
 
 // Homepage JSON-LD (@graph). Pure Server Component — renders a single
-// <script type="application/ld+json">. All URLs derive from getCanonicalUrl(),
+// <script type="application/ld+json">. All URLs derive from siteConfig.url,
 // never a hardcoded domain. Templates: docs/optimization.md → "Structured Data".
-// No logo / sameAs / telephone / streetAddress / aggregateRating, and no O-1.
+// No sameAs / telephone / streetAddress / aggregateRating, and no O-1.
 
 // Homepage meta — verbatim from docs/texts.md → "Page: Diagnostic-First IT &
 // Business Consulting" (mirrors app/page.tsx).
@@ -13,8 +13,8 @@ const HOME_DESCRIPTION =
   "B2B companies with 50–250 employees use Opsfield Systems to diagnose process, CRM, data, and IT bottlenecks before committing to tools, hires, or implementation.";
 
 export default function JsonLd() {
-  // No trailing slash — matches the canonical/og:url/sitemap Next emits for the
-  // homepage (siteConfig.url is already slash-normalized).
+  // No trailing slash — matches the canonical/og:url Next actually renders for
+  // the homepage (Next strips the root trailing slash) and the sitemap entry.
   const home = siteConfig.url;
   const organizationId = `${home}#organization`;
   const websiteId = `${home}#website`;
@@ -28,6 +28,7 @@ export default function JsonLd() {
         "@id": organizationId,
         name: siteConfig.name,
         url: home,
+        logo: `${home}/icon.svg`,
         description:
           "Diagnostic-first IT and business consulting for B2B companies.",
         areaServed: { "@type": "Country", name: "United States" },

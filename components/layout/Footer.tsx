@@ -39,7 +39,7 @@ function LinkGroup({
 }) {
   return (
     <div>
-      <h2 className={styles.groupTitle}>{t(title)}</h2>
+      <h3 className={styles.groupTitle}>{t(title)}</h3>
       <ul className={styles.linkList}>
         {links.map((link) => (
           <li key={link.href + link.label}>

@@ -453,11 +453,11 @@ export default function ServicesGrid() {
       <Calculator employees={employees} onChange={setEmployees} />
 
       <div className={styles.grid}>
-        {SERVICES.map((service, i) => (
+        {SERVICES.map((service) => (
           <ServiceCard
             key={service.id}
             service={service}
-            priority={i === 0}
+            priority={false}
             employees={employees}
           />
         ))}
