@@ -1,4 +1,6 @@
-/* Cookie consent — floating rounded card pinned bottom-center, brand/shadcn look.
+/* Cookie consent — floating rounded card pinned bottom-left, brand/shadcn look.
+   Left-aligned (not centered) so the 640px card never sits over the centered
+   content column (pricing cards / diagnostic form) on wide screens.
    z-index 150 sits above the sticky header (100) but below the mobile drawer (200).
    The full-width wrapper is click-through (pointer-events:none); only the card
    catches events, so the banner stays non-modal. No Tailwind. */
@@ -10,7 +12,7 @@
   bottom: var(--edge-padding);
   z-index: 150;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   pointer-events: none;
   animation: slideUp var(--transition-normal);
 }
@@ -18,7 +20,9 @@
 .card {
   pointer-events: auto;
   width: 100%;
-  max-width: 640px;
+  /* Compact corner toast: narrow enough to sit in the bottom-left corner and
+     cover only that corner, not the centered content column / CTAs. */
+  max-width: 440px;
   display: flex;
   flex-direction: column;
   gap: 16px;

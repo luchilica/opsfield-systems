@@ -83,6 +83,7 @@ Note: Section 6 "Diagnostic Scenarios" uses anchor #proof-examples and appears a
 |---|---|---|
 | Logo | Opsfield Systems | `/` |
 | Navigation item | Services | `#what-we-diagnose` |
+| Navigation item | Pricing | `#areas-of-work` |
 | Navigation item | How It Works | `#how-the-diagnostic-works` |
 | Navigation item | Results | `#proof-examples` |
 | Navigation item | FAQ | `#faq` |
@@ -98,7 +99,7 @@ Note: Section 6 "Diagnostic Scenarios" uses anchor #proof-examples and appears a
 
 ### Header rules
 
-- Header items must match `texts.md`: Services / How It Works / Results / FAQ.
+- Header items must match `texts.md`: Services / Pricing / How It Works / Results / FAQ.
 - Primary CTA must match `texts.md`: `Request Diagnostic`.
 - Do not use `Contact Us` as the primary CTA.
 - Mobile header uses the same navigation items in a simple drawer.
@@ -287,7 +288,7 @@ O-1 Readiness Support copy requires review by qualified U.S. immigration counsel
 - All anchor targets in header, footer, and internal links resolve to existing section IDs.
 - #diagnostic-request-form is scrollable from every CTA that references it.
 - FAQ includes explicit Who We Work With Best and Where We Are Not the Right Fit criteria.
-- Header matches `texts.md`: Services / How It Works / Results / FAQ / Request Diagnostic.
+- Header matches `texts.md`: Services / Pricing / How It Works / Results / FAQ / Request Diagnostic.
 - Footer matches `texts.md`: Company / Get Started / Legal, with `Team` linking to `#delivery-model`.
 - Working brand is Opsfield Systems everywhere; production launch requires completed brand, entity, and domain verification.
 - No previous-brand references remain.

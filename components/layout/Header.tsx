@@ -12,6 +12,7 @@ import styles from "./Header.module.css";
 // Labels + targets from docs/texts.md and docs/sitemap.md → "Header".
 const NAV_LINKS = [
   { label: "Services", href: "#what-we-diagnose" },
+  { label: "Pricing", href: "#areas-of-work" },
   { label: "How It Works", href: "#how-the-diagnostic-works" },
   { label: "Results", href: "#proof-examples" },
   { label: "FAQ", href: "#faq" },
