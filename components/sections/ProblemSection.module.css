@@ -1,17 +1,30 @@
-/* Problem — shadcnblocks monochrome brand band. A single centered problem
-   statement (eyebrow, heading, lead, CTA); the root-cause list moved out to the
-   next section so the two don't repeat. Copy from docs/texts.md. */
+/* Problem — shadcnblocks monochrome brand band. Left-aligned problem statement
+   beside a laconic "diagnostic scope" motif (concentric rings + brand plus + a
+   located-anomaly dot). The root-cause list moved to the next section so the two
+   don't repeat. Copy from docs/texts.md. */
 
-.block {
+.grid {
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1.15fr 1fr;
+    gap: var(--space-6);
+  }
+}
+
+.block {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
   gap: var(--space-3);
-  max-width: 640px;
-  margin: 0 auto;
+  max-width: 560px;
 }
 
 /* Outline badge on the blue fill — translucent white pill, white accent dot. */
@@ -53,19 +66,70 @@
   margin-top: var(--space-1);
 }
 
-/* Decorative corner motif (behind content), echoing the AI block. Anchored in
-   the blue upper zone so it doesn't land on the white fade. */
-.plusTop {
-  position: absolute;
-  z-index: 0;
-  top: -30px;
-  right: 5%;
-  color: rgba(255, 255, 255, 0.14);
-  pointer-events: none;
+/* Right column: a laconic "diagnostic scope" emblem — concentric rings that
+   home in on the brand plus, with one located-anomaly dot. Pure geometry in the
+   site's vocabulary (rings, blue/white dot, plus motif); no photo. */
+.visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (max-width: 767px) {
-  .plusTop {
+.scope {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(300px, 60vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0) 64%
+  );
+}
+
+/* Two inner rings, evenly nested. */
+.scope::before,
+.scope::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.scope::before {
+  inset: 17%;
+}
+
+.scope::after {
+  inset: 34%;
+}
+
+.scopePlus {
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* The "found it" marker sitting on the outer ring. */
+.scopeDot {
+  position: absolute;
+  z-index: 2;
+  top: 12%;
+  right: 20%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.16);
+}
+
+/* Below the two-column breakpoint the emblem is decorative-only weight; drop it
+   so the statement leads cleanly on tablet/phone. */
+@media (max-width: 1023px) {
+  .visual {
     display: none;
   }
 }
