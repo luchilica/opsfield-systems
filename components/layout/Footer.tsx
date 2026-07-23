@@ -62,7 +62,7 @@ export default async function Footer() {
         {/* CTA panel */}
         <div className={`${styles.ctaPanel} print-hide`}>
           <p className={styles.ctaText}>
-            {t("See what each engagement includes — and what it costs.")}
+            {t("See what each engagement includes - and what it costs.")}
           </p>
           <Button href="#areas-of-work" variant="on-brand">
             {t("See Our Services")}
@@ -72,7 +72,7 @@ export default async function Footer() {
         {/* Positioning */}
         <p className={styles.positioning}>
           {t(
-            "Opsfield Systems — senior-led IT and business advisory for B2B companies facing process, data, and system complexity."
+            "Opsfield Systems - senior-led IT and business advisory for B2B companies facing process, data, and system complexity."
           )}
         </p>
 

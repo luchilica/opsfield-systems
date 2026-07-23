@@ -103,7 +103,7 @@ export default function Header() {
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={`container ${styles.inner}`}>
-        <Link href="/" className={styles.logo} aria-label="Opsfield Systems — home">
+        <Link href="/" className={styles.logo} aria-label="Opsfield Systems - home">
           <Logomark size={32} className={styles.logoMark} />
           Opsfield Systems
         </Link>

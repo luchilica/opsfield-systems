@@ -106,7 +106,7 @@ const SERVICES: Service[] = [
     free: true,
     lede: "A structured first look at where your processes and systems drift apart.",
     context:
-      "The primary diagnostic is a complimentary fit call: we frame the problem, surface the likely bottlenecks, and tell you whether a paid engagement fits — no obligation. The deeper, documented diagnosis is a separate paid step.",
+      "The primary diagnostic is a complimentary fit call: we frame the problem, surface the likely bottlenecks, and tell you whether a paid engagement fits - no obligation. The deeper, documented diagnosis is a separate paid step.",
     includes: [
       "Problem framing",
       "Likely bottleneck areas",
@@ -122,9 +122,9 @@ const SERVICES: Service[] = [
     image: "/services/advisory.jpg",
     title: "Advisory Power Hour",
     fixed: 200,
-    lede: "Bring one concrete problem — leave with a clear, expert answer in 60 minutes.",
+    lede: "Bring one concrete problem - leave with a clear, expert answer in 60 minutes.",
     context:
-      "A focused, paid working session with a senior advisor on one specific decision or problem — CRM, process, automation, or IT. No scoping, no wait: practical direction you can act on the same day.",
+      "A focused, paid working session with a senior advisor on one specific decision or problem - CRM, process, automation, or IT. No scoping, no wait: practical direction you can act on the same day.",
     includes: [
       "One focused problem",
       "Senior advisor, live",
@@ -140,9 +140,9 @@ const SERVICES: Service[] = [
     image: "/services/extended.jpg",
     title: "Extended Diagnostic",
     base: 1200,
-    lede: "Go deeper — a documented diagnosis for when you need to be sure before you invest.",
+    lede: "Go deeper - a documented diagnosis for when you need to be sure before you invest.",
     context:
-      "For teams that want more certainty before committing budget: a structured, documented diagnosis of your processes, systems, and risks — the full picture the free fit call only points at.",
+      "For teams that want more certainty before committing budget: a structured, documented diagnosis of your processes, systems, and risks - the full picture the free fit call only points at.",
     includes: [
       "Documented process & systems map",
       "Prioritized bottleneck list",
@@ -158,9 +158,9 @@ const SERVICES: Service[] = [
     image: "/services/addon.jpg",
     title: "Add-on Tool Build",
     base: 900,
-    lede: "Pick one quick win — a Telegram bot, a landing page, or an email campaign — and we build it.",
+    lede: "Pick one quick win - a Telegram bot, a landing page, or an email campaign - and we build it.",
     context:
-      "A single, focused build to get a concrete result fast: choose a Telegram bot, a landing page, or an email flow. Scoped small, shipped quickly — a low-risk way to start working together.",
+      "A single, focused build to get a concrete result fast: choose a Telegram bot, a landing page, or an email flow. Scoped small, shipped quickly - a low-risk way to start working together.",
     includes: [
       "Your choice: bot, landing, or email",
       "Design & build",
@@ -178,7 +178,7 @@ const SERVICES: Service[] = [
     base: 1900,
     lede: "See where your data, access, and systems put the business at risk.",
     context:
-      "A focused review of accounts, access, data handling, and single points of failure — with plain-language findings and a prioritized fix list, scaled to a small company.",
+      "A focused review of accounts, access, data handling, and single points of failure - with plain-language findings and a prioritized fix list, scaled to a small company.",
     includes: [
       "Access & account review",
       "Data-handling risks",
@@ -196,7 +196,7 @@ const SERVICES: Service[] = [
     base: 3500,
     lede: "Redesign the handoffs, approvals, and ownership that slow a growing team down.",
     context:
-      "We turn the diagnostic's process map into a working operating model: clarified ownership, documented workflows, and removed duplication — sized for a 25–50-person team, not an enterprise rollout.",
+      "We turn the diagnostic's process map into a working operating model: clarified ownership, documented workflows, and removed duplication - sized for a 25–50-person team, not an enterprise rollout.",
     includes: [
       "Target operating model",
       "Documented core workflows",
@@ -212,7 +212,7 @@ const SERVICES: Service[] = [
     image: "/services/automation.jpg",
     title: "AI & Process Automation",
     base: 3900,
-    lede: "Remove the manual, repetitive work — but only where it actually pays off.",
+    lede: "Remove the manual, repetitive work - but only where it actually pays off.",
     context:
       "Starting from the diagnostic, we automate the workflows with real payback: connecting your tools, adding decision logic, and keeping a human where judgment matters.",
     includes: [
@@ -248,9 +248,9 @@ const SERVICES: Service[] = [
     image: "/services/o1.jpg",
     title: "O-1 Readiness Support",
     fixed: 2500,
-    lede: "Structure the evidence behind an O-1 extraordinary-ability case — the right way.",
+    lede: "Structure the evidence behind an O-1 extraordinary-ability case - the right way.",
     context:
-      "For IT professionals and founders exploring the O-1 visa path, we help structure evidence of extraordinary ability: publication strategy, portfolio architecture, recommendation coordination, and expert profile positioning. We work alongside qualified immigration counsel — we do not provide legal advice or file petitions.",
+      "For IT professionals and founders exploring the O-1 visa path, we help structure evidence of extraordinary ability: publication strategy, portfolio architecture, recommendation coordination, and expert profile positioning. We work alongside qualified immigration counsel - we do not provide legal advice or file petitions.",
     includes: [
       "Evidence & criteria mapping",
       "Publication & visibility strategy",
@@ -446,7 +446,7 @@ export default function ServicesGrid() {
           "Start free with a primary diagnostic, then move into focused implementation.",
         )}{" "}
         {t(
-          "Every paid engagement starts from the free diagnostic — you only pay once scope is agreed in writing.",
+          "Every paid engagement starts from the free diagnostic - you only pay once scope is agreed in writing.",
         )}
       </p>
 

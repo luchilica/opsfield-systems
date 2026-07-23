@@ -25,7 +25,7 @@ const SCENARIOS: Scenario[] = [
     client: "B2B services firm (≈80 employees)",
     environment: ["HubSpot"],
     situation:
-      "Inbound leads were falling between marketing and sales — no defined handoff owner, no SLA, and 3 duplicate CRM fields creating confusion.",
+      "Inbound leads were falling between marketing and sales - no defined handoff owner, no SLA, and 3 duplicate CRM fields creating confusion.",
     found:
       "4 undocumented handoff points across 2 teams with no shared visibility.",
     delivered: (t) => (
@@ -42,7 +42,7 @@ const SCENARIOS: Scenario[] = [
     client: "Scaling SaaS team (≈120 employees)",
     environment: ["Salesforce", "Looker"],
     situation:
-      "Leadership did not trust dashboard numbers — 3 departments used different definitions for the same metrics.",
+      "Leadership did not trust dashboard numbers - 3 departments used different definitions for the same metrics.",
     found:
       "7 inconsistent metric definitions and 2 disconnected data sources feeding the same dashboard.",
     delivered: (t) => (

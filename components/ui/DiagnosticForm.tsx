@@ -243,7 +243,7 @@ export default function DiagnosticForm() {
           role: values.role,
           companySize: values.companySize,
           timeline: values.timeline,
-          website: values.website, // honeypot — server double-checks
+          website: values.website, // honeypot - server double-checks
           context,
         }),
       });

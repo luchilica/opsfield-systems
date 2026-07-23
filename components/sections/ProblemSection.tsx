@@ -31,7 +31,7 @@ export default async function ProblemSection() {
         </h2>
         <p className={`lead ${styles.text}`}>
           {t(
-            "Usually it's the handoffs, ownership, and data flow between teams that slow growth — long before the tools do."
+            "Usually it's the handoffs, ownership, and data flow between teams that slow growth - long before the tools do."
           )}
         </p>
         <Button

@@ -43,7 +43,7 @@ export default function LanguageSwitcher() {
         className={styles.toggle}
         aria-haspopup="menu"
         aria-expanded={open}
-        aria-label={`${LOCALE_META[active].label} — change language`}
+        aria-label={`${LOCALE_META[active].label} - change language`}
         onClick={() => setOpen((o) => !o)}
       >
         {LOCALE_META[active].short}
