@@ -8,7 +8,7 @@ import { FAQ_ITEMS, faqAnswerText } from "@/components/sections/faqData";
 
 // Homepage meta — verbatim from docs/texts.md → "Page: Diagnostic-First IT &
 // Business Consulting" (mirrors app/page.tsx).
-const HOME_TITLE = "Diagnostic-First IT & Business Development | Opsfield Systems";
+const HOME_TITLE = "Diagnostic-First IT & Business Consulting | Opsfield Systems";
 const HOME_DESCRIPTION =
   "B2B companies with 50–250 employees use Opsfield Systems to diagnose process, CRM, data, and IT bottlenecks before committing to tools, hires, or implementation.";
 

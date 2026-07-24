@@ -61,11 +61,6 @@
   max-width: 32em;
 }
 
-.supporting {
-  color: var(--stone-500);
-  max-width: var(--text-max);
-}
-
 /* CTA group */
 .actions {
   display: flex;

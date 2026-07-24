@@ -12,8 +12,8 @@ export default async function Hero() {
         <p className={styles.eyebrow}>{t("B2B IT & Operations Advisory")}</p>
 
         <h1 className={styles.headline}>
-          {t("Diagnostic-First  IT & Business")}{" "}
-          <span className={styles.accentWord}>{t("Development")}</span>
+          {t("Diagnostic-First IT & Business")}{" "}
+          <span className={styles.accentWord}>{t("Consulting")}</span>
         </h1>
 
         {/* Semantically a paragraph, visually a lead. */}
@@ -21,10 +21,6 @@ export default async function Hero() {
           {t(
             "Opsfield Systems helps B2B teams find where operations, CRM, data flow, automation, and IT systems are slowing execution."
           )}
-        </p>
-
-        <p className={styles.supporting}>
-          
         </p>
 
         <div className={styles.actions}>
