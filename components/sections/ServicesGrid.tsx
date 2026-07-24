@@ -333,7 +333,7 @@ function ServiceCard({
       <div className={styles.media}>
         <Image
           src={service.image}
-          alt=""
+          alt={t(service.title)}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           className={styles.img}
