@@ -2,20 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPageLayout from "@/components/layout/LegalPageLayout";
 import { setRequestLocale } from "next-intl/server";
-import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
+import type { Locale } from "@/i18n/locales";
+import { alternatesFor, robotsFor } from "@/lib/i18n";
 
-// Content is reproduced verbatim from docs/texts.md → "Page: Cookie Policy".
-// Do not edit the copy here; corrections belong in texts.md.
-
-export const metadata: Metadata = {
-  title: "Cookie Policy",
-  description:
-    "Learn how Opsfield Systems uses necessary and optional analytics cookies and how website visitors can manage their preferences.",
-  alternates: { canonical: getCanonicalUrl("/cookie-policy") },
-  robots: siteConfig.isPreview
-    ? { index: false, follow: false }
-    : { index: false, follow: true },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const loc = locale as Locale;
+  return {
+    title: "Cookie Policy",
+    description:
+      "Learn how Opsfield Systems uses necessary and optional analytics cookies and how website visitors can manage their preferences.",
+    alternates: alternatesFor(loc, "/cookie-policy"),
+    robots: robotsFor(loc),
+  };
+}
 
 export default async function CookiePolicy({
   params,

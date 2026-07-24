@@ -2,20 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPageLayout from "@/components/layout/LegalPageLayout";
 import { setRequestLocale } from "next-intl/server";
-import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
+import type { Locale } from "@/i18n/locales";
+import { alternatesFor, robotsFor } from "@/lib/i18n";
 
-// Content is reproduced verbatim from docs/texts.md → "Page: Terms of Use".
-// Do not edit the copy here; corrections belong in texts.md.
-
-export const metadata: Metadata = {
-  title: "Terms of Use",
-  description:
-    "Review the terms governing access to the Opsfield Systems website, website content, diagnostic requests, and informational materials.",
-  alternates: { canonical: getCanonicalUrl("/terms-of-use") },
-  robots: siteConfig.isPreview
-    ? { index: false, follow: false }
-    : { index: false, follow: true },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const loc = locale as Locale;
+  return {
+    title: "Terms of Use",
+    description:
+      "Review the terms governing access to the Opsfield Systems website, website content, diagnostic requests, and informational materials.",
+    alternates: alternatesFor(loc, "/terms-of-use"),
+    robots: robotsFor(loc),
+  };
+}
 
 export default async function TermsOfUse({
   params,

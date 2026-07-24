@@ -2,20 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPageLayout from "@/components/layout/LegalPageLayout";
 import { setRequestLocale } from "next-intl/server";
-import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
+import type { Locale } from "@/i18n/locales";
+import { alternatesFor, robotsFor } from "@/lib/i18n";
 
-// Content is reproduced verbatim from docs/texts.md → "Page: Privacy Policy".
-// Do not edit the copy here; corrections belong in texts.md.
-
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description:
-    "Learn how Opsfield Systems collects, uses, protects, and retains personal information submitted through its website and diagnostic request form.",
-  alternates: { canonical: getCanonicalUrl("/privacy-policy") },
-  robots: siteConfig.isPreview
-    ? { index: false, follow: false }
-    : { index: false, follow: true },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const loc = locale as Locale;
+  return {
+    title: "Privacy Policy",
+    description:
+      "Learn how Opsfield Systems collects, uses, protects, and retains personal information submitted through its website and diagnostic request form.",
+    alternates: alternatesFor(loc, "/privacy-policy"),
+    robots: robotsFor(loc),
+  };
+}
 
 export default async function PrivacyPolicy({
   params,
