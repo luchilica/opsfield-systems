@@ -23,12 +23,12 @@
   --blue-600: #183CA5;
   --blue-700: #0C2883;
 
-  /* Ink — near-black */
+  /* Ink — dark charcoal (not pure black; softer on screen) */
   --ink-50: #F2F3F5;
   --ink-100: #E4E6EA;
   --ink-500: #545666;
   --ink-800: #1A1B24;
-  --ink-900: #0A0A0F;
+  --ink-900: #222335;
 
   /* Stone — cool neutrals */
   --stone-50: #FAFAFB;

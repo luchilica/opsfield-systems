@@ -2,7 +2,7 @@
    .footer only. Spec: docs/design.md → "Footer". No Tailwind. */
 
 .footer {
-  --footer-bg: #0A0A0F;
+  --footer-bg: #141522;
   --footer-text: #ffffff;
   --footer-link: #ffffff;
   --footer-link-hover: var(--blue-300);

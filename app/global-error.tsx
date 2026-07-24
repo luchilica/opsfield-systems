@@ -17,7 +17,7 @@ export default function GlobalError({
           justifyContent: "center",
           minHeight: "100vh",
           background: "#FAFAFA",
-          color: "#0A0A0F",
+          color: "#222335",
         }}
       >
         <div style={{ textAlign: "center", padding: "2rem" }}>
