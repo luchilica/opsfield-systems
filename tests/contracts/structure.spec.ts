@@ -6,6 +6,7 @@ const SECTION_IDS = [
   "hero",
   "problem-section",
   "what-we-diagnose",
+  "areas-of-work",
   "ai-process-automation",
   "how-the-diagnostic-works",
   "proof-examples",
@@ -19,9 +20,9 @@ const SECTION_IDS = [
 const LEGAL_PAGES = ["/privacy-policy", "/terms-of-use", "/cookie-policy"];
 
 test.describe("homepage structure", () => {
-  test("has exactly 11 top-level sections", async ({ page }) => {
+  test("has exactly 12 top-level sections", async ({ page }) => {
     await page.goto("/");
-    expect(await page.locator("main > section").count()).toBe(11);
+    expect(await page.locator("main > section").count()).toBe(12);
   });
 
   test("sections have correct IDs in correct order", async ({ page }) => {
