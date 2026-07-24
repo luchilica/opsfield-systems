@@ -217,11 +217,14 @@
     margin-bottom: 11px;
   }
   .outputGrid {
-    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
   }
   .outputCard {
-    gap: 8px;
-    padding: 9px 10px;
+    flex-direction: column;
+    text-align: center;
+    gap: 4px;
+    padding: 8px 4px;
   }
   .outputIcon {
     width: 28px;

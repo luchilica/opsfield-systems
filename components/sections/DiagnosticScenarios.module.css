@@ -173,7 +173,7 @@
   border: 1px solid var(--stone-200);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);
-  padding: 30px 32px;
+  padding: 22px 18px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(6px);
@@ -371,7 +371,7 @@
 
 @media (min-width: 768px) {
   .panel {
-    padding: 32px 36px;
+    padding: 30px 36px;
   }
 
   .panelClient {

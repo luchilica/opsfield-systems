@@ -31,6 +31,9 @@
   border: 1px solid var(--border-hair);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
+  max-height: calc(100vh - 2 * var(--edge-padding));
+  max-height: calc(100dvh - 2 * var(--edge-padding));
+  overflow-y: auto;
 }
 
 /* ----- Header: icon + copy ----- */
@@ -134,7 +137,8 @@
   position: relative;
   width: 40px;
   height: 24px;
-  padding: 0;
+  padding: 10px 0;
+  box-sizing: content-box;
   border: none;
   border-radius: var(--radius-pill);
   background: var(--stone-300);
