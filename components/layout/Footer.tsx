@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
+import { getLocale } from "next-intl/server";
 import Button from "@/components/ui/Button";
 import CookieConsentReopener from "@/components/analytics/CookieConsentReopener";
+import { LOCALE_META, type Locale } from "@/i18n/locales";
 import { getT } from "@/i18n/t";
 import styles from "./Footer.module.css";
 
@@ -31,11 +33,13 @@ function LinkGroup({
   links,
   extra,
   t,
+  hrefPrefix = "",
 }: {
   title: string;
   links: { label: string; href: string }[];
   extra?: ReactNode;
   t: (en: string) => string;
+  hrefPrefix?: string;
 }) {
   return (
     <div>
@@ -43,7 +47,10 @@ function LinkGroup({
       <ul className={styles.linkList}>
         {links.map((link) => (
           <li key={link.href + link.label}>
-            <a href={link.href} className={styles.link}>
+            <a
+              href={link.href.startsWith("#") ? link.href : `${hrefPrefix}${link.href}`}
+              className={styles.link}
+            >
               {t(link.label)}
             </a>
           </li>
@@ -56,6 +63,8 @@ function LinkGroup({
 
 export default async function Footer() {
   const t = await getT();
+  const locale = (await getLocale()) as Locale;
+  const prefix = LOCALE_META[locale].prefix;
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
@@ -85,6 +94,7 @@ export default async function Footer() {
             links={LEGAL_LINKS}
             extra={<CookieConsentReopener className={styles.link} />}
             t={t}
+            hrefPrefix={prefix}
           />
         </div>
 

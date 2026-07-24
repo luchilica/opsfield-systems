@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Logomark from "@/components/ui/Logomark";
@@ -103,7 +103,7 @@ export default function Header() {
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={`container ${styles.inner}`}>
-        <Link href="/" className={styles.logo} aria-label="Opsfield Systems – home">
+        <Link href="/" className={styles.logo} aria-label={t("Opsfield Systems – home")}>
           <Logomark size={32} className={styles.logoMark} />
           Opsfield Systems
         </Link>

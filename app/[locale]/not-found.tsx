@@ -1,22 +1,26 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getLocale } from "next-intl/server";
+import { LOCALE_META, type Locale } from "@/i18n/locales";
+import { getT } from "@/i18n/t";
 
-// Custom 404. Next also auto-injects noindex for 404 responses; this makes the
-// intent explicit (noindex, nofollow). No approved 404 copy exists in texts.md,
-// so the microcopy below is minimal and functional.
 export const metadata: Metadata = {
   title: "Page Not Found | Opsfield Systems",
   robots: { index: false, follow: false },
 };
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getT();
+  const locale = (await getLocale()) as Locale;
+  const prefix = LOCALE_META[locale].prefix;
+
   return (
     <div className="container section">
-      <h1>Page not found</h1>
-      <p>The page you’re looking for doesn’t exist or may have moved.</p>
+      <h1>{t("Page not found")}</h1>
+      <p>{t("The page you're looking for doesn't exist or may have moved.")}</p>
       <p>
-        <Link href="/">Back to Home</Link> or{" "}
-        <Link href="/#diagnostic-request-form">request a diagnostic</Link>.
+        <a href={`${prefix}/`}>{t("Back to Home")}</a>{" "}
+        {t("or")}{" "}
+        <a href={`${prefix}/#diagnostic-request-form`}>{t("request a diagnostic")}</a>.
       </p>
     </div>
   );

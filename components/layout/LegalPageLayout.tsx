@@ -1,14 +1,9 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { getLocale } from "next-intl/server";
+import { LOCALE_META, type Locale } from "@/i18n/locales";
+import { getT } from "@/i18n/t";
 import styles from "./LegalPageLayout.module.css";
-
-// Shared shell for legal pages (Privacy Policy, Terms of Use, Cookie Policy).
-// Pure Server Component — no "use client". Full-width, expensive-SaaS document
-// layout: a sticky sidebar (title + meta) beside a wide content column. The
-// site <main> is provided by app/layout.tsx, so this must NOT render its own
-// <main>. It also does NOT use the global .container — the legal page spans a
-// wider max so it reads full-screen.
 
 interface LegalPageLayoutProps {
   title: string;
@@ -16,24 +11,28 @@ interface LegalPageLayoutProps {
   children: ReactNode;
 }
 
-export default function LegalPageLayout({
+export default async function LegalPageLayout({
   title,
   lastUpdated,
   children,
 }: LegalPageLayoutProps) {
+  const t = await getT();
+  const locale = (await getLocale()) as Locale;
+  const prefix = LOCALE_META[locale].prefix;
+
   return (
     <div className={styles.page}>
       <article className={styles.wrapper}>
         <aside className={styles.side}>
-          <Link href="/" className={styles.back}>
+          <a href={`${prefix}/`} className={styles.back}>
             <ArrowLeft size={16} aria-hidden="true" />
-            Back to Home
-          </Link>
+            {t("Back to Home")}
+          </a>
 
           <header className={styles.header}>
-            <p className="kicker">Legal</p>
+            <p className="kicker">{t("Legal")}</p>
             <h1 className={styles.title}>{title}</h1>
-            <p className={styles.updated}>Last updated · {lastUpdated}</p>
+            <p className={styles.updated}>{t("Last updated")} · {lastUpdated}</p>
           </header>
         </aside>
 
