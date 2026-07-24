@@ -18,6 +18,17 @@ const NAV_LINKS = [
   { label: "FAQ", href: "#faq" },
 ] as const;
 
+const DRAWER_LINKS = [
+  { label: "Services", href: "#what-we-diagnose" },
+  { label: "Pricing", href: "#areas-of-work" },
+  { label: "AI & Automation", href: "#ai-process-automation" },
+  { label: "How It Works", href: "#how-the-diagnostic-works" },
+  { label: "Results", href: "#proof-examples" },
+  { label: "Why Opsfield", href: "#why-opsfield-systems" },
+  { label: "Team", href: "#delivery-model" },
+  { label: "FAQ", href: "#faq" },
+] as const;
+
 const CTA_LABEL = "Request Diagnostic";
 const CTA_HREF = "#diagnostic-request-form";
 const DRAWER_ID = "mobile-nav-drawer";
@@ -190,7 +201,7 @@ export default function Header() {
 
         <nav aria-label="Mobile primary">
           <ul className={styles.drawerNavList}>
-            {NAV_LINKS.map((link) => (
+            {DRAWER_LINKS.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
