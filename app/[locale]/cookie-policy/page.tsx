@@ -8,7 +8,7 @@ import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
 // Do not edit the copy here; corrections belong in texts.md.
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | Opsfield Systems",
+  title: "Cookie Policy",
   description:
     "Learn how Opsfield Systems uses necessary and optional analytics cookies and how website visitors can manage their preferences.",
   alternates: { canonical: getCanonicalUrl("/cookie-policy") },

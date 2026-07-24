@@ -38,7 +38,10 @@ const jetbrainsMono = JetBrains_Mono({
 // these defaults.
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: "Opsfield Systems",
+  title: {
+    default: "Opsfield Systems",
+    template: "%s | Opsfield Systems",
+  },
   description: "Diagnostic-first IT & business consulting.",
   // Sitewide share-preview image. Declared explicitly (not left to the
   // opengraph-image.tsx file convention alone) because pages that set their own

@@ -4,7 +4,7 @@ import { LOCALE_META, type Locale } from "@/i18n/locales";
 import { getT } from "@/i18n/t";
 
 export const metadata: Metadata = {
-  title: "Page Not Found | Opsfield Systems",
+  title: "Page Not Found",
   robots: { index: false, follow: false },
 };
 

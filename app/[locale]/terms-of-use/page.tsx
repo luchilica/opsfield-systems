@@ -8,7 +8,7 @@ import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
 // Do not edit the copy here; corrections belong in texts.md.
 
 export const metadata: Metadata = {
-  title: "Terms of Use | Opsfield Systems",
+  title: "Terms of Use",
   description:
     "Review the terms governing access to the Opsfield Systems website, website content, diagnostic requests, and informational materials.",
   alternates: { canonical: getCanonicalUrl("/terms-of-use") },

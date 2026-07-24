@@ -8,7 +8,7 @@ import { getCanonicalUrl, siteConfig } from "@/lib/site-config";
 // Do not edit the copy here; corrections belong in texts.md.
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Opsfield Systems",
+  title: "Privacy Policy",
   description:
     "Learn how Opsfield Systems collects, uses, protects, and retains personal information submitted through its website and diagnostic request form.",
   alternates: { canonical: getCanonicalUrl("/privacy-policy") },

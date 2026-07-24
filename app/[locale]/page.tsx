@@ -24,7 +24,7 @@ import BusinessITDiagnostic from "@/components/sections/BusinessITDiagnostic";
 // Homepage metadata. Title + description are verbatim from docs/texts.md →
 // "Page: Diagnostic-First IT & Business Consulting". OG/Twitter image tags are
 // supplied by app/opengraph-image.tsx + app/twitter-image.tsx (file convention).
-const TITLE = "Diagnostic-First IT & Business Consulting | Opsfield Systems";
+const TITLE = "Diagnostic-First IT & Business Consulting";
 const DESCRIPTION =
   "B2B companies with 50–250 employees use Opsfield Systems to diagnose process, CRM, data, and IT bottlenecks before committing to tools, hires, or implementation.";
 
