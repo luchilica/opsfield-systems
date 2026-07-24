@@ -28,7 +28,8 @@ export default function JsonLd() {
         "@id": organizationId,
         name: siteConfig.name,
         url: home,
-        logo: `${home}/icon.svg`,
+        logo: `${home}/logo.png`,
+        foundingDate: "2021",
         description:
           "Diagnostic-first IT and business consulting for B2B companies.",
         areaServed: { "@type": "Country", name: "United States" },
