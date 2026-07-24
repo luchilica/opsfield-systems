@@ -19,7 +19,7 @@ export default async function ProblemSection() {
           src="/photos/problem.jpg"
           alt=""
           fill
-          sizes="100vw"
+          sizes="(min-width: 1200px) 1200px, 100vw"
           className={styles.bgImg}
         />
       </div>
@@ -31,7 +31,7 @@ export default async function ProblemSection() {
         </h2>
         <p className={`lead ${styles.text}`}>
           {t(
-            "Usually it's the handoffs, ownership, and data flow between teams that slow growth – long before the tools do."
+            "Usually it's the handoffs, ownership, and data flow between teams that slow growth, long before the tools do."
           )}
         </p>
         <Button

@@ -24,10 +24,10 @@ const LEAD_WEBHOOK_URL = process.env.LEAD_WEBHOOK_URL || "";
 
 // PII-free auto-reply, per locale. Never echoes any submitted field value.
 const AUTO_REPLY_SUBJECT: Record<string, string> = {
-  "en-US": "Diagnostic request received – Opsfield Systems",
-  "es-US": "Solicitud de diagnóstico recibida – Opsfield Systems",
-  "ru-US": "Заявка на диагностику получена – Opsfield Systems",
-  "zh-Hans": "已收到您的诊断请求 – Opsfield Systems",
+  "en-US": "Diagnostic request received | Opsfield Systems",
+  "es-US": "Solicitud de diagnóstico recibida | Opsfield Systems",
+  "ru-US": "Заявка на диагностику получена | Opsfield Systems",
+  "zh-Hans": "已收到您的诊断请求 | Opsfield Systems",
 };
 const AUTO_REPLY_BODY: Record<string, string> = {
   "en-US": `Thank you for your diagnostic request.
@@ -210,7 +210,7 @@ export async function POST(request: Request) {
       from: FROM,
       to: RECIPIENT,
       replyTo: email,
-      subject: `New diagnostic request – ${company}`,
+      subject: `New diagnostic request: ${company}`,
       text: notificationText(body),
     });
 
