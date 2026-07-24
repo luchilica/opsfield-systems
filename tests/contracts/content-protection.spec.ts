@@ -41,7 +41,7 @@ test("O-1 wording is scoped to the service card + FAQ, absent from primary surfa
   );
 
   // O-1 Readiness Support is present only in its allowed places.
-  await expect(page.locator("#what-we-diagnose")).toContainText(
+  await expect(page.locator("#areas-of-work")).toContainText(
     "O-1 Readiness Support",
   );
   await expect(page.locator("#faq")).toContainText(
